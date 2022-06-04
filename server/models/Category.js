@@ -9,9 +9,10 @@ const categorySchema = new Schema({
     trim: true,
   },
   promotion: {
-    type: Number,
-    default: 0,
+    type: Schema.Types.ObjectId,
+    ref: "Promotion",
   },
+  // Promotion price - Maybe a virtual?
 });
 
 const Category = mongoose.model("Category", categorySchema);

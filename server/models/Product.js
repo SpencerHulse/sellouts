@@ -39,11 +39,12 @@ const productSchema = new Schema({
     required: true,
   },
   promotion: {
-    type: Number,
-    default: 0,
+    type: Schema.Types.ObjectId,
+    ref: "Promotion",
   },
   // Reviews - Array - ref another model
   // Stars - Maybe a virtual?
+  // Promotion price - Maybe a virtual?
 });
 
 const Product = mongoose.model("Product", productSchema);
