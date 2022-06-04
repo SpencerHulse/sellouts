@@ -6,6 +6,8 @@ const promotionSchema = new Schema({
     type: Number,
     required: true,
   },
+  // Might be best to use the method in membership
+  // on server side, giving it a dynamic duration
   ends: {
     type: Date,
     required: true,

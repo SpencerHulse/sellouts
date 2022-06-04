@@ -8,11 +8,6 @@ const categorySchema = new Schema({
     unique: true,
     trim: true,
   },
-  promotion: {
-    type: Schema.Types.ObjectId,
-    ref: "Promotion",
-  },
-  // Promotion price - Maybe a virtual?
 });
 
 const Category = mongoose.model("Category", categorySchema);
