@@ -22,7 +22,10 @@ const userSchema = new Schema({
     type: Boolean,
     default: false,
   },
-  // Membership - ref another model
+  membership: {
+    type: Schema.Types.ObjectId,
+    ref: "Membership",
+  },
 });
 
 userSchema.pre("save", async function (next) {
