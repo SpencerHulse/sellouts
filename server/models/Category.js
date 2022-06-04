@@ -8,6 +8,10 @@ const categorySchema = new Schema({
     unique: true,
     trim: true,
   },
+  promotion: {
+    type: Number,
+    default: 0,
+  },
 });
 
 const Category = mongoose.model("Category", categorySchema);

@@ -38,6 +38,10 @@ const productSchema = new Schema({
     ref: "Category",
     required: true,
   },
+  promotion: {
+    type: Number,
+    default: 0,
+  },
   // Reviews - Array - ref another model
   // Stars - Maybe a virtual?
 });
