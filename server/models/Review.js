@@ -12,7 +12,7 @@ const reviewSchema = new Schema({
     type: Date,
     default: Date.now(),
   },
-  score: {
+  rating: {
     type: Number,
     required: true,
     min: 1,
