@@ -12,6 +12,34 @@ const typeDefs = gql`
     name: String
   }
 
+  type Order {
+    _id: ID
+  }
+
+  type Product {
+    _id: ID
+    name: String
+    description: String
+    details: [String]
+    price: Float
+    inventory: Int
+    images: [String]
+    mainImage: String
+    category: Category
+    promotion: Promotion
+    reviews: [Review]
+    promotionPrice: Float
+    rating: Float
+  }
+
+  type Promotion {
+    _id: ID
+  }
+
+  type Review {
+    _id: ID
+  }
+
   type User {
     _id: ID
     username: String
@@ -21,9 +49,8 @@ const typeDefs = gql`
 
   type Query {
     categories: [Category]
-
-    users: [User]
-    user(_id: ID): User
+    products(_id: ID): [Product]
+    users(_id: ID): [User]
   }
 
   type Mutation {

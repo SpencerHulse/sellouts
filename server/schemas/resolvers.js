@@ -11,18 +11,35 @@ const {
 
 const resolvers = {
   Query: {
-    // Category Queries
+    // Category
     categories: async (parent, args) => {
       const categories = await Category.find({});
       return categories;
     },
-    users: async (parent, args) => {
-      const users = await User.find({});
-      return users;
+    // Order
+    // Product
+    products: async (parent, { _id }) => {
+      const params = {};
+
+      if (_id) {
+        params._id = _id;
+      }
+
+      const product = await Product.find(params).populate("category");
+      return product;
     },
-    user: async (parent, { _id }) => {
-      const user = await User.findById(_id);
-      return user;
+    // Promotion
+    // Review
+    // User
+    users: async (parent, { _id }) => {
+      const params = {};
+
+      if (_id) {
+        params._id = _id;
+      }
+
+      const users = await User.find(params);
+      return users;
     },
   },
   Mutation: {
@@ -37,6 +54,11 @@ const resolvers = {
     updateCategory: async (parent, args) => {
       return Category.findByIdAndUpdate(args._id, args, { new: true }).exec();
     },
+    // Order Mutations
+    // Product Mutations
+    // Promotion Mutations
+    // Review Mutations
+    // User Mutations
     addUser: async (parent, args) => {
       let usernameCheck = await User.find({ username: args.username });
       if (usernameCheck.length) {

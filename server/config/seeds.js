@@ -64,5 +64,116 @@ db.once("open", async () => {
 
   console.log("categories seeded");
 
+  await Product.deleteMany();
+
+  const products = await Product.insertMany([
+    {
+      name: "Hat One",
+      description: "A red hat.",
+      details: ["It's red", "It's big", "It's cheap"],
+      price: 9.99,
+      inventory: 100,
+      images: ["hatRed", "hatRedWorn"],
+      mainImage: "hat",
+      category: categories[0],
+    },
+    {
+      name: "Hat Two",
+      description: "A blue hat.",
+      details: ["It's blue", "It's small", "It's quality"],
+      price: 9.99,
+      inventory: 100,
+      images: ["hatBlue", "hatBlueWorn"],
+      mainImage: "hatBlueWorn",
+      category: categories[0],
+    },
+    {
+      name: "Shirt One",
+      description: "A white shirt.",
+      details: ["It's white", "It comes in many sizes", "100% cotton"],
+      price: 19.99,
+      inventory: 100,
+      images: ["shirt"],
+      mainImage: "shirt",
+      category: categories[1],
+    },
+    {
+      name: "Shirt Two",
+      description: "A plaid shirt.",
+      details: ["Cool design", "Soft fabric", "Made in China"],
+      price: 9.99,
+      inventory: 100,
+      images: ["ChinaShirt"],
+      mainImage: "ChinaShirt",
+      category: categories[1],
+    },
+    {
+      name: "Pants One",
+      description: "Jeans.",
+      details: ["Tough", "Comfy", "Pockets"],
+      price: 29.99,
+      inventory: 100,
+      images: ["jeans"],
+      mainImage: "jeans",
+      category: categories[2],
+    },
+    {
+      name: "Pants Two",
+      description: "Dress pants.",
+      details: ["Dressy", "Comfy", "Rip-resistant"],
+      price: 9.99,
+      inventory: 100,
+      images: ["dressy"],
+      mainImage: "dressy",
+      category: categories[2],
+    },
+    {
+      name: "Socks One",
+      description: "Black socks.",
+      details: [
+        "They are black",
+        "They are soft",
+        "They go great in formal settings",
+      ],
+      price: 9.99,
+      inventory: 100,
+      images: ["blackSocks"],
+      mainImage: "blackSocks",
+      category: categories[3],
+    },
+    {
+      name: "Socks Two",
+      description: "Knee-high socks.",
+      details: ["Lots of material", "Great price", "Four pairs in each set"],
+      price: 9.99,
+      inventory: 100,
+      images: ["kneeSocks"],
+      mainImage: "kneeSocks",
+      category: categories[3],
+    },
+    {
+      name: "Shoes One",
+      description: "Some fly shoes.",
+      details: ["Fly", "Arch support", "Steel toes"],
+      price: 69.99,
+      inventory: 100,
+      images: ["flyShoes"],
+      mainImage: "flyShoes",
+      category: categories[4],
+    },
+    {
+      name: "Shoes Two",
+      description: "White shoes.",
+      details: ["All white", "Many sizes", "Made in China"],
+      price: 29.99,
+      inventory: 100,
+      images: ["ChinaShoes"],
+      mainImage: "ChinaShoes",
+      category: categories[4],
+    },
+  ]);
+
+  console.log("products seeded");
+
   process.exit();
 });

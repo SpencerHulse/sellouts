@@ -7,7 +7,7 @@ const productSchema = new Schema(
       type: String,
       required: true,
     },
-    descriptions: {
+    description: {
       type: String,
       required: true,
     },
@@ -56,7 +56,7 @@ const productSchema = new Schema(
 );
 
 productSchema.virtual("promotionPrice").get(function () {
-  return this.price * (this.promotion.percentage / 100);
+  return this.price * (this.promotion?.percentage / 100) || this.price;
 });
 
 productSchema.virtual("rating").get(function () {
@@ -66,7 +66,11 @@ productSchema.virtual("rating").get(function () {
     averageRating = averageRating + review.rating;
   });
   // Divides the summed ratings by the number of ratings
-  averageRating = averageRating / this.review.length;
+  averageRating = averageRating / this.review?.length;
+  // If there is no average (no ratings), return 0
+  if (!averageRating) {
+    return 0;
+  }
   // Returns the average with a fixed two-decimal value
   return averageRating.toFixed(2);
 });

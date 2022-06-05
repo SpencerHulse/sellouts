@@ -10,8 +10,8 @@ export const QUERY_CATEGORIES = gql`
 `;
 
 export const QUERY_USERS = gql`
-  query Users {
-    users {
+  query Users($id: ID) {
+    users(_id: $id) {
       _id
       username
       email
@@ -20,13 +20,29 @@ export const QUERY_USERS = gql`
   }
 `;
 
-export const QUERY_USER = gql`
-  query User($id: ID) {
-    user(_id: $id) {
+export const QUERY_PRODUCTS = gql`
+  query Products($id: ID) {
+    products(_id: $id) {
       _id
-      username
-      email
-      admin
+      name
+      description
+      details
+      price
+      inventory
+      images
+      mainImage
+      category {
+        _id
+        name
+      }
+      promotion {
+        _id
+      }
+      reviews {
+        _id
+      }
+      promotionPrice
+      rating
     }
   }
 `;
