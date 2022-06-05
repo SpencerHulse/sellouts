@@ -5,7 +5,7 @@ const membershipSchema = new Schema(
   {
     tier: {
       type: String,
-      default: free,
+      default: "free",
     },
     ends: {
       type: Date,

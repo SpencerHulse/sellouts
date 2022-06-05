@@ -2,30 +2,43 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const bcrypt = require("bcrypt");
 
-const userSchema = new Schema({
-  username: {
-    type: String,
-    required: true,
-    trim: true,
+const userSchema = new Schema(
+  {
+    username: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    password: {
+      type: String,
+      required: true,
+      minlength: 5,
+    },
+    admin: {
+      type: Boolean,
+      default: false,
+    },
+    membership: {
+      type: Schema.Types.ObjectId,
+      ref: "Membership",
+    },
   },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  password: {
-    type: String,
-    required: true,
-    minlength: 5,
-  },
-  admin: {
-    type: Boolean,
-    default: false,
-  },
-  membership: {
-    type: Schema.Types.ObjectId,
-    ref: "Membership",
-  },
+  {
+    toJSON: { virtual: true },
+  }
+);
+
+userSchema.virtual("activeMembership").get(function () {
+  if (this.membership.tier === "free" || this.membership.end < Date.now()) {
+    return false;
+  } else {
+    return true;
+  }
 });
 
 userSchema.pre("save", async function (next) {
