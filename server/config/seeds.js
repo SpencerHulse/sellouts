@@ -7,7 +7,6 @@ const {
   Review,
   User,
 } = require("../models");
-const { DateTime } = require("luxon");
 
 db.once("open", async () => {
   await User.deleteMany();

@@ -14,6 +14,14 @@ const resolvers = {
       const categories = await Category.find({});
       return categories;
     },
+    users: async (parent, args) => {
+      const users = await User.find({});
+      return users;
+    },
+    user: async (parent, { _id }) => {
+      const user = await User.findById(_id);
+      return user;
+    },
   },
   Mutation: {
     // Category Mutations
