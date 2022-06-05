@@ -23,23 +23,11 @@ const userSchema = new Schema(
       type: Boolean,
       default: false,
     },
-    membership: {
-      type: Schema.Types.ObjectId,
-      ref: "Membership",
-    },
   },
   {
     toJSON: { virtual: true },
   }
 );
-
-userSchema.virtual("activeMembership").get(function () {
-  if (this.membership.tier === "free" || this.membership.end < Date.now()) {
-    return false;
-  } else {
-    return true;
-  }
-});
 
 userSchema.pre("save", async function (next) {
   if (this.isNew || this.isModified("password")) {
