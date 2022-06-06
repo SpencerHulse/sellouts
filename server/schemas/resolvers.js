@@ -57,6 +57,7 @@ const resolvers = {
           path: "reviews",
           populate: "user",
         });
+
       return product;
     },
     // Promotion
@@ -73,7 +74,9 @@ const resolvers = {
     // Review
     reviews: async (parent, { _id }) => {
       const params = {};
-      if (_id) params._id = _id;
+      if (_id) {
+        params._id = _id;
+      }
       const reviews = await Review.find(params).populate("user");
       return reviews;
     },
@@ -147,6 +150,46 @@ const resolvers = {
       return Promotion.findByIdAndUpdate(input._id, input, { new: true });
     },
     // Review Mutations
+    addReview: async (parent, { input }) => {
+      const productId = "629d7fa4215221c7a483c678"; // Placeholder
+      const review = await Review.create(input);
+      const id = review._id.toString();
+      const product = Product.findByIdAndUpdate(
+        { _id: productId },
+        { $push: { reviews: id } },
+        { new: true }
+      )
+        .populate("category")
+        .populate("reviews")
+        .populate({
+          path: "reviews",
+          populate: "user",
+        });
+
+      return product;
+    },
+    deleteReview: async (parent, { _id }) => {
+      const productId = "629d7fa4215221c7a483c678"; // Placeholder
+      await Review.findByIdAndDelete(_id);
+      const product = Product.findByIdAndUpdate(
+        { _id: productId },
+        { $pull: { reviews: _id } },
+        { new: true }
+      )
+        .populate("category")
+        .populate("reviews")
+        .populate({
+          path: "reviews",
+          populate: "user",
+        });
+
+      return product;
+    },
+    updateReview: async (parent, { input }) => {
+      return Review.findByIdAndUpdate(input._id, input, { new: true }).populate(
+        "user"
+      );
+    },
     // User Mutations
     addUser: async (parent, args) => {
       let usernameCheck = await User.find({ username: args.username });

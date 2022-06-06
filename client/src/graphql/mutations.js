@@ -194,11 +194,74 @@ export const UPDATE_PROMOTION = gql`
   }
 `;
 
-export const ADD_REVIEW = gql``;
+export const ADD_REVIEW = gql`
+  mutation AddReview($input: ReviewInput) {
+    addReview(input: $input) {
+      _id
+      name
+      category {
+        name
+      }
+      reviews {
+        _id
+        review
+        createdAt
+        rating
+        upvotes
+        downvotes
+        user {
+          _id
+          username
+          email
+        }
+      }
+    }
+  }
+`;
 
-export const DELETE_REVIEW = gql``;
+export const DELETE_REVIEW = gql`
+  mutation DeleteReview($id: ID!) {
+    deleteReview(_id: $id) {
+      _id
+      name
+      category {
+        _id
+        name
+      }
+      reviews {
+        _id
+        review
+        createdAt
+        rating
+        upvotes
+        downvotes
+        user {
+          _id
+          username
+          email
+        }
+      }
+    }
+  }
+`;
 
-export const UPDATE_REVIEW = gql``;
+export const UPDATE_REVIEW = gql`
+  mutation UpdateReview($input: ReviewInput) {
+    updateReview(input: $input) {
+      _id
+      review
+      createdAt
+      rating
+      upvotes
+      downvotes
+      user {
+        _id
+        username
+        email
+      }
+    }
+  }
+`;
 
 export const ADD_USER = gql`
   mutation AddUser($username: String!, $email: String!, $password: String!) {

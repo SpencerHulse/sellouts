@@ -136,8 +136,8 @@ const typeDefs = gql`
     deletePromotion(_id: ID!): Promotion
     updatePromotion(input: PromotionInput): Promotion
 
-    addReview(input: ReviewInput): Review
-    deleteReview(_id: ID!): Review
+    addReview(input: ReviewInput): Product
+    deleteReview(_id: ID!): Product
     updateReview(input: ReviewInput): Review
 
     addUser(username: String!, email: String!, password: String!): Auth
