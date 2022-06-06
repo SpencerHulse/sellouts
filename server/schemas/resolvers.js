@@ -52,7 +52,11 @@ const resolvers = {
       const product = await Product.find(params)
         .populate("category")
         .populate("promotion")
-        .populate("reviews");
+        .populate("reviews")
+        .populate({
+          path: "reviews",
+          populate: "user",
+        });
       return product;
     },
     // Promotion
@@ -67,6 +71,12 @@ const resolvers = {
       return promotions;
     },
     // Review
+    reviews: async (parent, { _id }) => {
+      const params = {};
+      if (_id) params._id = _id;
+      const reviews = await Review.find(params).populate("user");
+      return reviews;
+    },
     // User
     users: async (parent, { _id }) => {
       const params = {};

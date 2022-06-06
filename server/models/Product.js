@@ -70,7 +70,7 @@ productSchema.virtual("rating").get(function () {
     averageRating = averageRating + review.rating;
   });
   // Divides the summed ratings by the number of ratings
-  averageRating = averageRating / this.review?.length;
+  averageRating = averageRating / this.reviews?.length;
   // If there is no average (no ratings), return 0
   if (!averageRating) {
     return 0;

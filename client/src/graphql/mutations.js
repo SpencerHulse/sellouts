@@ -194,7 +194,11 @@ export const UPDATE_PROMOTION = gql`
   }
 `;
 
-export const PLACEHOLDER = gql``;
+export const ADD_REVIEW = gql``;
+
+export const DELETE_REVIEW = gql``;
+
+export const UPDATE_REVIEW = gql``;
 
 export const ADD_USER = gql`
   mutation AddUser($username: String!, $email: String!, $password: String!) {

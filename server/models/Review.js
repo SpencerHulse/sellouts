@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
+const { DateTime } = require("luxon");
 
 const reviewSchema = new Schema({
   review: {
@@ -9,8 +10,8 @@ const reviewSchema = new Schema({
     max: 255,
   },
   createdAt: {
-    type: Date,
-    default: Date.now(),
+    type: String,
+    default: DateTime.now().toLocaleString(DateTime.DATETIME_SHORT),
   },
   rating: {
     type: Number,

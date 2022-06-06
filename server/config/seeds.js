@@ -86,6 +86,36 @@ db.once("open", async () => {
 
   console.log("promotions seeded");
 
+  await Review.deleteMany();
+
+  const reviews = await Review.insertMany([
+    {
+      review:
+        "My name is Commander Shepard, and this is my favorite shop on the citadel.",
+      rating: 5,
+      upvotes: 27,
+      downvotes: 2,
+      user: users[0]._id,
+    },
+    {
+      review:
+        "Absolutely a great deal, and you will not regret grabbing one for yourself.",
+      rating: 4,
+      upvotes: 4,
+      downvotes: 1,
+      user: users[3]._id,
+    },
+    {
+      review: "This doesn't let me see smells. Waste of money.",
+      rating: 1,
+      upvotes: 3,
+      downvotes: 120,
+      user: users[2]._id,
+    },
+  ]);
+
+  console.log("reviews seeded");
+
   await Product.deleteMany();
 
   const products = await Product.insertMany([
@@ -99,6 +129,7 @@ db.once("open", async () => {
       mainImage: "hat",
       category: categories[0],
       promotion: promotions[0],
+      reviews: [reviews[0]._id, reviews[2]._id, reviews[1]._id],
     },
     {
       name: "Hat Two",

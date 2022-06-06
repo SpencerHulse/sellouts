@@ -85,6 +85,22 @@ const typeDefs = gql`
 
   type Review {
     _id: ID
+    review: String
+    createdAt: String
+    rating: Int
+    upvotes: Int
+    downvotes: Int
+    user: User
+  }
+
+  input ReviewInput {
+    _id: ID
+    review: String
+    createdAt: String
+    rating: Int
+    upvotes: Int
+    downvotes: Int
+    user: ID
   }
 
   type User {
@@ -99,6 +115,7 @@ const typeDefs = gql`
     orders(_id: ID, customer: ID, status: String): [Order]
     products(_id: ID): [Product]
     promotions(_id: ID): [Promotion]
+    reviews(_id: ID): [Review]
     users(_id: ID): [User]
   }
 
@@ -118,6 +135,10 @@ const typeDefs = gql`
     addPromotion(input: PromotionInput): Promotion
     deletePromotion(_id: ID!): Promotion
     updatePromotion(input: PromotionInput): Promotion
+
+    addReview(input: ReviewInput): Review
+    deleteReview(_id: ID!): Review
+    updateReview(input: ReviewInput): Review
 
     addUser(username: String!, email: String!, password: String!): Auth
     deleteUser(_id: ID!): User

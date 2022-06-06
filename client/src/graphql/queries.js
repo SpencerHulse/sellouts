@@ -57,9 +57,20 @@ export const QUERY_PRODUCTS = gql`
         percentage
         ends
         membersOnly
+        name
       }
       reviews {
         _id
+        review
+        createdAt
+        rating
+        upvotes
+        downvotes
+        user {
+          _id
+          username
+          email
+        }
       }
       promotionPrice
       rating
@@ -79,7 +90,23 @@ export const QUERY_PROMOTIONS = gql`
   }
 `;
 
-export const PLACEHOLDER = gql``;
+export const QUERY_REVIEWS = gql`
+  query Reviews($id: ID) {
+    reviews(_id: $id) {
+      _id
+      review
+      createdAt
+      rating
+      upvotes
+      downvotes
+      user {
+        _id
+        username
+        email
+      }
+    }
+  }
+`;
 
 export const QUERY_USERS = gql`
   query Users($id: ID) {
