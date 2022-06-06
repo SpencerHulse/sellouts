@@ -27,6 +27,70 @@ export const UPDATE_CATEGORY = gql`
   }
 `;
 
+export const ADD_PRODUCT = gql`
+  mutation AddProduct($input: ProductInput) {
+    addProduct(input: $input) {
+      _id
+      name
+      description
+      details
+      price
+      inventory
+      images
+      mainImage
+      category {
+        _id
+        name
+      }
+      promotion {
+        _id
+      }
+      reviews {
+        _id
+      }
+      promotionPrice
+      rating
+    }
+  }
+`;
+
+export const DELETE_PRODUCT = gql`
+  mutation DeleteProduct($id: ID!) {
+    deleteProduct(_id: $id) {
+      _id
+      name
+      description
+    }
+  }
+`;
+
+export const UPDATE_PRODUCT = gql`
+  mutation UpdateProduct($input: ProductInput) {
+    updateProduct(input: $input) {
+      _id
+      name
+      description
+      details
+      price
+      inventory
+      images
+      mainImage
+      category {
+        _id
+        name
+      }
+      promotion {
+        _id
+      }
+      reviews {
+        _id
+      }
+      promotionPrice
+      rating
+    }
+  }
+`;
+
 export const ADD_USER = gql`
   mutation AddUser($username: String!, $email: String!, $password: String!) {
     addUser(username: $username, email: $email, password: $password) {

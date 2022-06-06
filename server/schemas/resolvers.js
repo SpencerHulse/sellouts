@@ -56,6 +56,18 @@ const resolvers = {
     },
     // Order Mutations
     // Product Mutations
+    addProduct: async (parent, { input }) => {
+      return Product.create(input);
+    },
+    deleteProduct: async (parent, { _id }) => {
+      return Product.findByIdAndDelete({ _id });
+    },
+    updateProduct: async (parent, { input }) => {
+      return Product.findByIdAndUpdate(input._id, input, { new: true })
+        .populate("category")
+        .populate("promotion")
+        .populate("reviews");
+    },
     // Promotion Mutations
     // Review Mutations
     // User Mutations

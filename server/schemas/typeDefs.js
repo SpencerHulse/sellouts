@@ -32,6 +32,20 @@ const typeDefs = gql`
     rating: Float
   }
 
+  input ProductInput {
+    _id: ID
+    name: String
+    description: String
+    details: [String]
+    price: Float
+    inventory: Int
+    images: [String]
+    mainImage: String
+    category: ID
+    promotion: ID
+    reviews: [ID]
+  }
+
   type Promotion {
     _id: ID
   }
@@ -57,6 +71,10 @@ const typeDefs = gql`
     addCategory(name: String!): Category
     deleteCategory(_id: ID!): Category
     updateCategory(_id: ID!, name: String): Category
+
+    addProduct(input: ProductInput): Product
+    deleteProduct(_id: ID!): Product
+    updateProduct(input: ProductInput): Product
 
     addUser(username: String!, email: String!, password: String!): Auth
     deleteUser(_id: ID!): User
