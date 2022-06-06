@@ -95,6 +95,7 @@ const typeDefs = gql`
     updateCategory(_id: ID!, name: String): Category
 
     addOrder(input: OrderInput): Order
+    deleteOrder(_id: ID): Order
     updateOrder(input: OrderInput): Order
 
     addProduct(input: ProductInput): Product

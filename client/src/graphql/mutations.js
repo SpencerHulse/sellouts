@@ -27,6 +27,77 @@ export const UPDATE_CATEGORY = gql`
   }
 `;
 
+export const ADD_ORDER = gql`
+  mutation AddOrder($input: OrderInput) {
+    addOrder(input: $input) {
+      _id
+      purchaseDate
+      products {
+        _id
+        name
+        mainImage
+        category {
+          name
+        }
+      }
+      customer {
+        _id
+        username
+        email
+      }
+      status
+      deliveryAddress
+      shippingType
+      shippingCost
+      tax
+    }
+  }
+`;
+
+export const DELETE_ORDER = gql`
+  mutation DeleteOrder($id: ID) {
+    deleteOrder(_id: $id) {
+      _id
+      purchaseDate
+      customer {
+        _id
+        username
+        email
+      }
+    }
+  }
+`;
+
+export const UPDATE_ORDER = gql`
+  mutation UpdateOrder($input: OrderInput) {
+    updateOrder(input: $input) {
+      _id
+      purchaseDate
+      products {
+        _id
+        name
+        mainImage
+        category {
+          name
+        }
+      }
+      customer {
+        _id
+        username
+        email
+      }
+      status
+      deliveryAddress
+      shippingType
+      shippingCost
+      tax
+      productsTotal
+    }
+  }
+`;
+
+export const PLACEHOLDER = gql``;
+
 export const ADD_PRODUCT = gql`
   mutation AddProduct($input: ProductInput) {
     addProduct(input: $input) {
@@ -138,5 +209,3 @@ export const LOGIN = gql`
     }
   }
 `;
-
-export const PLACEHOLDER = gql``;

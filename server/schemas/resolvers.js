@@ -48,7 +48,10 @@ const resolvers = {
         params._id = _id;
       }
 
-      const product = await Product.find(params).populate("category");
+      const product = await Product.find(params)
+        .populate("category")
+        .populate("promotion")
+        .populate("reviews");
       return product;
     },
     // Promotion
@@ -78,6 +81,21 @@ const resolvers = {
       return Category.findByIdAndUpdate(args._id, args, { new: true }).exec();
     },
     // Order Mutations
+    addOrder: async (parent, { input }) => {
+      return Order.create(input);
+    },
+    deleteOrder: async (parent, { _id }) => {
+      return Order.findByIdAndDelete(_id);
+    },
+    updateOrder: async (parent, { input }) => {
+      return Order.findByIdAndUpdate(input._id, input, { new: true })
+        .populate("customer")
+        .populate("products")
+        .populate({
+          path: "products",
+          populate: "category",
+        });
+    },
     // Product Mutations
     addProduct: async (parent, { input }) => {
       return Product.create(input);
