@@ -69,6 +69,9 @@ const typeDefs = gql`
 
   type Promotion {
     _id: ID
+    percentage: Int
+    ends: String
+    membersOnly: Boolean
   }
 
   type Review {

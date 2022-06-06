@@ -56,7 +56,11 @@ const productSchema = new Schema(
 );
 
 productSchema.virtual("promotionPrice").get(function () {
-  return this.price * (this.promotion?.percentage / 100) || this.price;
+  if (!this.promotion) return this.price;
+  // Process to ensure not round to whole dollar amounts after promotion
+  let promotionPrice = this.price * (this.promotion.percentage / 100);
+  promotionPrice = promotionPrice * 100;
+  return Math.trunc(promotionPrice) / 100;
 });
 
 productSchema.virtual("rating").get(function () {

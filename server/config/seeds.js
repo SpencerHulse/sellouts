@@ -65,6 +65,19 @@ db.once("open", async () => {
 
   console.log("categories seeded");
 
+  await Promotion.deleteMany();
+
+  const promotions = await Promotion.insertMany([
+    {
+      percentage: 40,
+      ends: DateTime.now()
+        .plus({ days: 30 })
+        .toLocaleString(DateTime.DATE_SHORT),
+    },
+  ]);
+
+  console.log("promotions seeded");
+
   await Product.deleteMany();
 
   const products = await Product.insertMany([
@@ -77,6 +90,7 @@ db.once("open", async () => {
       images: ["hatRed", "hatRedWorn"],
       mainImage: "hat",
       category: categories[0],
+      promotion: promotions[0],
     },
     {
       name: "Hat Two",

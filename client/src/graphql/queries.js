@@ -54,6 +54,9 @@ export const QUERY_PRODUCTS = gql`
       }
       promotion {
         _id
+        percentage
+        ends
+        membersOnly
       }
       reviews {
         _id

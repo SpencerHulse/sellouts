@@ -1,17 +1,20 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
+const { DateTime } = require("luxon");
 
 const promotionSchema = new Schema({
   percentage: {
     type: Number,
     required: true,
   },
-  // Might be best to use the method in membership
-  // on server side, giving it a dynamic duration
   ends: {
-    type: Date,
+    type: String,
     required: true,
+    default: DateTime.now()
+      .plus({ days: 30 })
+      .toLocaleString(DateTime.DATE_SHORT),
   },
+  // Set up for potential memberships
   membersOnly: {
     type: Boolean,
     default: false,
