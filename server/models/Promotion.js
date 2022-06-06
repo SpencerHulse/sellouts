@@ -3,6 +3,10 @@ const { Schema } = mongoose;
 const { DateTime } = require("luxon");
 
 const promotionSchema = new Schema({
+  name: {
+    type: String,
+    required: true,
+  },
   percentage: {
     type: Number,
     required: true,

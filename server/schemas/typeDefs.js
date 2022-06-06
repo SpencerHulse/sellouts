@@ -69,6 +69,15 @@ const typeDefs = gql`
 
   type Promotion {
     _id: ID
+    name: String
+    percentage: Int
+    ends: String
+    membersOnly: Boolean
+  }
+
+  input PromotionInput {
+    _id: ID
+    name: String
     percentage: Int
     ends: String
     membersOnly: Boolean
@@ -89,6 +98,7 @@ const typeDefs = gql`
     categories: [Category]
     orders(_id: ID, customer: ID, status: String): [Order]
     products(_id: ID): [Product]
+    promotions(_id: ID): [Promotion]
     users(_id: ID): [User]
   }
 
@@ -98,12 +108,16 @@ const typeDefs = gql`
     updateCategory(_id: ID!, name: String): Category
 
     addOrder(input: OrderInput): Order
-    deleteOrder(_id: ID): Order
+    deleteOrder(_id: ID!): Order
     updateOrder(input: OrderInput): Order
 
     addProduct(input: ProductInput): Product
     deleteProduct(_id: ID!): Product
     updateProduct(input: ProductInput): Product
+
+    addPromotion(input: PromotionInput): Promotion
+    deletePromotion(_id: ID!): Promotion
+    updatePromotion(input: PromotionInput): Promotion
 
     addUser(username: String!, email: String!, password: String!): Auth
     deleteUser(_id: ID!): User

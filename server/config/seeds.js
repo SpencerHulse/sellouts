@@ -69,7 +69,15 @@ db.once("open", async () => {
 
   const promotions = await Promotion.insertMany([
     {
+      name: "Summer Blowout",
       percentage: 40,
+      ends: DateTime.now()
+        .plus({ days: 30 })
+        .toLocaleString(DateTime.DATE_SHORT),
+    },
+    {
+      name: "Smaller Blowout",
+      percentage: 30,
       ends: DateTime.now()
         .plus({ days: 30 })
         .toLocaleString(DateTime.DATE_SHORT),

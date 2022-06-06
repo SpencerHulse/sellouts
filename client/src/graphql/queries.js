@@ -67,6 +67,20 @@ export const QUERY_PRODUCTS = gql`
   }
 `;
 
+export const QUERY_PROMOTIONS = gql`
+  query Promotions($id: ID) {
+    promotions(_id: $id) {
+      _id
+      name
+      percentage
+      ends
+      membersOnly
+    }
+  }
+`;
+
+export const PLACEHOLDER = gql``;
+
 export const QUERY_USERS = gql`
   query Users($id: ID) {
     users(_id: $id) {
@@ -77,5 +91,3 @@ export const QUERY_USERS = gql`
     }
   }
 `;
-
-export const PLACEHOLDER = gql``;

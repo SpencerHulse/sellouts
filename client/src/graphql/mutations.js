@@ -55,7 +55,7 @@ export const ADD_ORDER = gql`
 `;
 
 export const DELETE_ORDER = gql`
-  mutation DeleteOrder($id: ID) {
+  mutation DeleteOrder($id: ID!) {
     deleteOrder(_id: $id) {
       _id
       purchaseDate
@@ -95,8 +95,6 @@ export const UPDATE_ORDER = gql`
     }
   }
 `;
-
-export const PLACEHOLDER = gql``;
 
 export const ADD_PRODUCT = gql`
   mutation AddProduct($input: ProductInput) {
@@ -161,6 +159,8 @@ export const UPDATE_PRODUCT = gql`
     }
   }
 `;
+
+export const PLACEHOLDER = gql``;
 
 export const ADD_USER = gql`
   mutation AddUser($username: String!, $email: String!, $password: String!) {

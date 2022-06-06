@@ -55,6 +55,16 @@ const resolvers = {
       return product;
     },
     // Promotion
+    promotions: async (parent, { _id }) => {
+      const params = {};
+
+      if (_id) {
+        params._id = _id;
+      }
+
+      const promotions = await Promotion.find(params);
+      return promotions;
+    },
     // Review
     // User
     users: async (parent, { _id }) => {
