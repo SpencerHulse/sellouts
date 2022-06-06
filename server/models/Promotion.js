@@ -6,6 +6,7 @@ const promotionSchema = new Schema({
   name: {
     type: String,
     required: true,
+    unique: true,
   },
   percentage: {
     type: Number,

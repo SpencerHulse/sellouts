@@ -1,4 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
+const { DateTime } = require("luxon");
 const { signToken } = require("../utils/auth");
 const {
   Category,
@@ -120,6 +121,21 @@ const resolvers = {
         .populate("reviews");
     },
     // Promotion Mutations
+    addPromotion: async (parent, { input }) => {
+      if (input.ends) {
+        input.ends = DateTime.now()
+          .plus({ days: Number(input.ends) })
+          .toLocaleString(DateTime.DATE_SHORT);
+      }
+
+      return Promotion.create(input);
+    },
+    deletePromotion: async (parent, { _id }) => {
+      return Promotion.findByIdAndDelete({ _id });
+    },
+    updatePromotion: async (parent, { input }) => {
+      return Promotion.findByIdAndUpdate(input._id, input, { new: true });
+    },
     // Review Mutations
     // User Mutations
     addUser: async (parent, args) => {

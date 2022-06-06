@@ -160,6 +160,40 @@ export const UPDATE_PRODUCT = gql`
   }
 `;
 
+export const ADD_PROMOTION = gql`
+  mutation AddPromotion($input: PromotionInput) {
+    addPromotion(input: $input) {
+      _id
+      name
+      percentage
+      ends
+      membersOnly
+    }
+  }
+`;
+
+export const DELETE_PROMOTION = gql`
+  mutation DeletePromotion($id: ID!) {
+    deletePromotion(_id: $id) {
+      _id
+      name
+      ends
+    }
+  }
+`;
+
+export const UPDATE_PROMOTION = gql`
+  mutation UpdatePromotion($input: PromotionInput) {
+    updatePromotion(input: $input) {
+      _id
+      name
+      percentage
+      ends
+      membersOnly
+    }
+  }
+`;
+
 export const PLACEHOLDER = gql``;
 
 export const ADD_USER = gql`
