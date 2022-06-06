@@ -1,11 +1,12 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
+const { DateTime } = require("luxon");
 
 const orderSchema = new Schema(
   {
-    purchaseData: {
-      type: Date,
-      default: Date.now,
+    purchaseDate: {
+      type: String,
+      default: DateTime.now().toLocaleString(DateTime.DATETIME_SHORT),
     },
     products: [
       {
@@ -44,10 +45,10 @@ const orderSchema = new Schema(
   }
 );
 
-orderSchema.virtual("calculatedTotal").get(function () {
+orderSchema.virtual("productsTotal").get(function () {
   let sum = 0;
   this.products.forEach((product) => (sum = sum + product.price));
-  return total;
+  return sum.toFixed(2);
 });
 
 const Order = mongoose.model("Order", orderSchema);

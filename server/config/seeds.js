@@ -1,4 +1,5 @@
 const db = require("./connection");
+const { DateTime } = require("luxon");
 const {
   Category,
   Order,
@@ -174,6 +175,40 @@ db.once("open", async () => {
   ]);
 
   console.log("products seeded");
+
+  await Order.deleteMany();
+
+  const orders = await Order.insertMany([
+    {
+      products: [
+        products[0]._id,
+        products[0]._id,
+        products[0]._id,
+        products[2]._id,
+      ],
+      customer: users[1]._id,
+      deliveryAddress: "290 This Street Chattanooga, TN",
+      shippingType: "standard",
+      shippingCost: 4.99,
+      tax: 13.99,
+    },
+    {
+      products: [
+        products[0]._id,
+        products[0]._id,
+        products[0]._id,
+        products[2]._id,
+      ],
+      customer: users[1]._id,
+      status: "shipped",
+      deliveryAddress: "290 This Street Chattanooga, TN",
+      shippingType: "overnight",
+      shippingCost: 14.99,
+      tax: 13.99,
+    },
+  ]);
+
+  console.log("orders seeded");
 
   process.exit();
 });

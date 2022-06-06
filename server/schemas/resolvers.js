@@ -17,6 +17,29 @@ const resolvers = {
       return categories;
     },
     // Order
+    orders: async (parent, { _id, customer, status }) => {
+      const params = {};
+
+      if (_id) {
+        params._id = _id;
+      }
+      if (customer) {
+        params.customer = customer;
+      }
+      if (status) {
+        params.status = status;
+      }
+
+      const orders = await Order.find(params)
+        .populate("customer")
+        .populate("products")
+        .populate({
+          path: "products",
+          populate: "category",
+        });
+
+      return orders;
+    },
     // Product
     products: async (parent, { _id }) => {
       const params = {};

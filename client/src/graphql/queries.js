@@ -9,13 +9,30 @@ export const QUERY_CATEGORIES = gql`
   }
 `;
 
-export const QUERY_USERS = gql`
-  query Users($id: ID) {
-    users(_id: $id) {
+export const QUERY_ORDERS = gql`
+  query Orders($id: ID, $customer: ID, $status: String) {
+    orders(_id: $id, customer: $customer, status: $status) {
       _id
-      username
-      email
-      admin
+      purchaseDate
+      products {
+        category {
+          name
+        }
+        _id
+        name
+        mainImage
+      }
+      customer {
+        _id
+        username
+        email
+      }
+      status
+      deliveryAddress
+      shippingType
+      shippingCost
+      tax
+      productsTotal
     }
   }
 `;
@@ -43,6 +60,17 @@ export const QUERY_PRODUCTS = gql`
       }
       promotionPrice
       rating
+    }
+  }
+`;
+
+export const QUERY_USERS = gql`
+  query Users($id: ID) {
+    users(_id: $id) {
+      _id
+      username
+      email
+      admin
     }
   }
 `;
