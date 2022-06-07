@@ -1,5 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+// Pages
 import Homepage from "./pages/homepage";
+
+// Components
 import ComponentOne from "./components/TestComponents/ComponentOne";
 import ComponentTwo from "./components/TestComponents/ComponentTwo";
 import Nested from "./components/TestComponents/Nested";
