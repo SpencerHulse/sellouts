@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./style.css";
 const hamburgerNavLinks = [
   "Admin",
   "Orders",
@@ -14,7 +15,7 @@ function Hamburger() {
   }
 
   return (
-    <div>
+    <div className="hamburger-container">
       <button
         className="nav-toggle"
         aria-label="toggle navigation"
