@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
-import { navLinks } from "../../navLinks";
 
 function Hamburger() {
+  const navLinks = ["Admin", "Orders", "Account", "Logout"];
+
   function toggleHamburger() {
     document.body.classList.toggle("hamburger-open");
   }
@@ -21,11 +22,7 @@ function Hamburger() {
         <ul className="hamburger-list">
           {navLinks.map((navLink, index) => {
             return (
-              <li
-                key={index}
-                onClick={toggleHamburger}
-                className="hamburger-li"
-              >
+              <li key={index} onClick={toggleHamburger}>
                 <Link to="/" className="hamburger-item">
                   {navLink}
                 </Link>

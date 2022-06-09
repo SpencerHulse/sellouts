@@ -1,0 +1,15 @@
+.navbar-list {
+  margin-bottom: 0;
+  list-style: none;
+  display: flex;
+}
+
+.navbar-li {
+  margin: 0 30px;
+}
+
+.navbar-item {
+  color: inherit;
+  cursor: pointer;
+  text-decoration: none;
+}
