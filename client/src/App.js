@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Homepage from "./pages/homepage";
 
 // Components
+import Nav from "./components/Nav";
 import ComponentOne from "./components/TestComponents/ComponentOne";
 import ComponentTwo from "./components/TestComponents/ComponentTwo";
 import Nested from "./components/TestComponents/Nested";
@@ -39,6 +40,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
+        <Nav />
         <Routes>
           <Route path="/" element={<Homepage />}>
             <Route path="c1" element={<ComponentOne />}>
