@@ -1,5 +1,5 @@
 /* Button */
-.nav-toggle {
+.hamburger-toggle {
   padding: 0.5em;
   background: transparent;
   border: 0;
@@ -42,27 +42,27 @@
   bottom: 6px;
 }
 /* Animation setup for the three lines turning into the "X" */
-.nav-open .hamburger {
+.hamburger-open .hamburger {
   transform: rotate(0.625turn);
 }
 
-.nav-open .hamburger::after {
+.hamburger-open .hamburger::after {
   opacity: 0;
 }
 
-.nav-open .hamburger::before {
+.hamburger-open .hamburger::before {
   transform: rotate(90deg) translateX(-6px);
 }
 
-.nav-open .nav-toggle {
+.hamburger-open .hamburger-toggle {
   position: fixed;
 }
 /* Deals with the list, its size, and where it enters the screen */
-.nav-open .nav {
+.hamburger-open .hamburger-nav {
   transform: translateY(0%);
 }
 
-.nav {
+.hamburger-nav {
   position: fixed;
   background: black;
   color: white;
@@ -75,7 +75,7 @@
   transition: transform 250ms cubic-bezier(0.5, 0, 0.5, 1);
 }
 
-.nav-list {
+.hamburger-list {
   list-style: none;
   display: flex;
   height: 100vh;
@@ -88,7 +88,7 @@
   padding: 0;
 }
 
-.nav-item {
+.hamburger-item {
   color: inherit;
   font-weight: bold;
   font-size: x-large;

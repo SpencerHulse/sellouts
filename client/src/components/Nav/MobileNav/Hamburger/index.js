@@ -1,34 +1,32 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
-const hamburgerNavLinks = [
-  "Admin",
-  "Orders",
-  "Account",
-  "Signup/Login",
-  "Logout",
-];
+import { navLinks } from "../../navLinks";
 
 function Hamburger() {
-  function toggleNav() {
-    document.body.classList.toggle("nav-open");
+  function toggleHamburger() {
+    document.body.classList.toggle("hamburger-open");
   }
 
   return (
     <div className="hamburger-container">
       <button
-        className="nav-toggle"
+        className="hamburger-toggle"
         aria-label="toggle navigation"
-        onClick={toggleNav}
+        onClick={toggleHamburger}
       >
         <span className="hamburger"></span>
       </button>
-      <div className="nav">
-        <ul className="nav-list">
-          {hamburgerNavLinks.map((navLink, index) => {
+      <div className="hamburger-nav">
+        <ul className="hamburger-list">
+          {navLinks.map((navLink, index) => {
             return (
-              <li key={index} onClick={toggleNav} className="nav-li">
-                <Link to="/" className="nav-item">
+              <li
+                key={index}
+                onClick={toggleHamburger}
+                className="hamburger-li"
+              >
+                <Link to="/" className="hamburger-item">
                   {navLink}
                 </Link>
               </li>
