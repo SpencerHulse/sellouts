@@ -1,7 +1,7 @@
 import React from "react";
 import MobileNav from "./MobileNav";
 import Navbar from "./Navbar";
-import ShoppingCart from "./ShoppingCart";
+import ShoppingCart from "../ShoppingCart";
 import { useWindowWidth } from "../../hooks/navHooks";
 
 function Header() {

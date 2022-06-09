@@ -1,10 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Auth from "../../../../utils/auth";
 import "./style.css";
 
 function Hamburger() {
-  const navLinks = ["Admin", "Orders", "Account", "Logout"];
-
   function toggleHamburger() {
     document.body.classList.toggle("hamburger-open");
   }
@@ -20,15 +19,28 @@ function Hamburger() {
       </button>
       <div className="hamburger-nav">
         <ul className="hamburger-list">
-          {navLinks.map((navLink, index) => {
-            return (
-              <li key={index} onClick={toggleHamburger}>
-                <Link to="/" className="hamburger-item">
-                  {navLink}
-                </Link>
-              </li>
-            );
-          })}
+          {Auth.getProfile().data.admin && (
+            <li onClick={toggleHamburger}>
+              <Link to="/" className="hamburger-item">
+                Admin
+              </Link>
+            </li>
+          )}
+          <li onClick={toggleHamburger}>
+            <Link to="/" className="hamburger-item">
+              Orders
+            </Link>
+          </li>
+          <li onClick={toggleHamburger}>
+            <Link to="/" className="hamburger-item">
+              Account
+            </Link>
+          </li>
+          <li onClick={toggleHamburger}>
+            <Link to="/" className="hamburger-item" onClick={Auth.logout()}>
+              Logout
+            </Link>
+          </li>
         </ul>
       </div>
     </div>

@@ -1,44 +1,43 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Auth from "../../../utils/auth";
 import "./style.css";
 
 function Navbar() {
-  const navLinks = ["Admin", "Orders", "Account", "Logout", "Login/Signup"];
   return (
     <>
       <div>Logo</div>
       <ul className="navbar-list">
         {Auth.loggedIn() && Auth.getProfile().data.admin && (
           <li className="navbar-li">
-            <Link to="/" className="navbar-item">
-              {navLinks[0]}
-            </Link>
+            <NavLink to="/admin" className="navbar-item">
+              Admin
+            </NavLink>
           </li>
         )}
         {Auth.loggedIn() && (
           <>
             <li className="navbar-li">
-              <Link to="/" className="navbar-item">
-                {navLinks[1]}
-              </Link>
+              <NavLink to="/orders" className="navbar-item">
+                Orders
+              </NavLink>
             </li>
             <li className="navbar-li">
-              <Link to="/" className="navbar-item">
-                {navLinks[2]}
-              </Link>
+              <NavLink to="/account" className="navbar-item">
+                Account
+              </NavLink>
             </li>
-            <li className="navbar-li">
-              <Link to="/" className="navbar-item">
-                {navLinks[3]}
-              </Link>
+            <li className="navbar-li" onClick={Auth.logout()}>
+              <NavLink to="/" className="navbar-item">
+                Logout
+              </NavLink>
             </li>
           </>
         )}
         <li className="navbar-li">
-          <Link to="/" className="navbar-item">
-            {navLinks[4]}
-          </Link>
+          <NavLink to="/login" className="navbar-item">
+            Login/Signup
+          </NavLink>
         </li>
       </ul>
     </>

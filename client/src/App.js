@@ -4,9 +4,8 @@ import Homepage from "./pages/homepage";
 
 // Components
 import Nav from "./components/Nav";
-import ComponentOne from "./components/TestComponents/ComponentOne";
-import ComponentTwo from "./components/TestComponents/ComponentTwo";
-import Nested from "./components/TestComponents/Nested";
+import Login from "./pages/login";
+import Signup from "./pages/signup";
 
 // Apollo
 import {
@@ -42,12 +41,9 @@ function App() {
       <Router>
         <Nav />
         <Routes>
-          <Route path="/" element={<Homepage />}>
-            <Route path="c1" element={<ComponentOne />}>
-              <Route path="nested" element={<Nested />} />
-            </Route>
-            <Route path="c2" element={<ComponentTwo />} />
-          </Route>
+          <Route path="/" element={<Homepage />} />
+          <Route path="login" element={<Login />} />
+          <Route path="signup" element={<Signup />} />
         </Routes>
       </Router>
     </ApolloProvider>
