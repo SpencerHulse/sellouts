@@ -12,45 +12,50 @@ const {
 db.once("open", async () => {
   await User.deleteMany();
 
-  const users = await User.insertMany([
-    {
-      username: "admin",
-      email: "admin@admin.com",
-      password: "admin",
-      admin: true,
-    },
-    {
-      username: "a",
-      email: "a@example.com",
-      password: "password",
-      admin: false,
-    },
-    {
-      username: "b",
-      email: "b@example.com",
-      password: "password",
-      admin: false,
-    },
-    {
-      username: "c",
-      email: "c@example.com",
-      password: "password",
-      admin: false,
-    },
-    {
-      username: "d",
-      email: "d@example.com",
-      password: "password",
-      admin: false,
-    },
-    {
-      username: "e",
-      email: "e@example.com",
-      password: "password",
-      admin: false,
-    },
-  ]);
+  await User.create({
+    username: "admin",
+    email: "admin@admin.com",
+    password: "admin",
+    admin: true,
+  });
 
+  await User.create({
+    username: "a",
+    email: "a@example.com",
+    password: "password",
+    admin: false,
+  });
+
+  await User.create({
+    username: "b",
+    email: "b@example.com",
+    password: "password",
+    admin: false,
+  });
+
+  await User.create({
+    username: "c",
+    email: "c@example.com",
+    password: "password",
+    admin: false,
+  });
+
+  await User.create({
+    username: "d",
+    email: "d@example.com",
+    password: "password",
+    admin: false,
+  });
+
+  await User.create({
+    username: "e",
+    email: "e@example.com",
+    password: "password",
+    admin: false,
+  });
+
+  const users = await User.find({});
+  console.log(users[0]._id);
   console.log("users seeded");
 
   await Category.deleteMany();

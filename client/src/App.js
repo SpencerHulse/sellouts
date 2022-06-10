@@ -4,8 +4,7 @@ import Homepage from "./pages/homepage";
 
 // Components
 import Nav from "./components/Nav";
-import Login from "./pages/login";
-import Signup from "./pages/signup";
+import Accounts from "./pages/accounts";
 
 // Apollo
 import {
@@ -42,8 +41,8 @@ function App() {
         <Nav />
         <Routes>
           <Route path="/" element={<Homepage />} />
-          <Route path="login" element={<Login />} />
-          <Route path="signup" element={<Signup />} />
+          <Route path="login" element={<Accounts formType={"login"} />} />
+          <Route path="signup" element={<Accounts formType={"signup"} />} />
         </Routes>
       </Router>
     </ApolloProvider>
