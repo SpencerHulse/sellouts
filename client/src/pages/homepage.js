@@ -7,7 +7,8 @@ const Homepage = () => {
   const productData = useProducts();
   // Custom hook for category data
   const categoryData = useCategories();
-  // For eventual filtering...?
+  console.log(productData, categoryData);
+  // For eventual filtering...? Might also do a helper function of sorts.
   const visibleProducts = productData;
   return (
     <>

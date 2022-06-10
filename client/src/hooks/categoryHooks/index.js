@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 // Redux
 import { useSelector, useDispatch } from "react-redux";
-import { updateCategories } from "../../redux/features/categoriesSlice";
+import { updateCategories } from "../../redux/features/categorySlice";
 // Apollo/GraphQL
 import { useQuery } from "@apollo/client";
 import { QUERY_CATEGORIES } from "../../graphql/queries";

@@ -7,6 +7,7 @@ export function idbPromise(storeName, method, object) {
     request.onupgradeneeded = function (event) {
       const db = request.result;
       db.createObjectStore("products", { keyPath: "_id" });
+      db.createObjectStore("categories", { keyPath: "_id" });
     };
 
     request.onerror = function (err) {

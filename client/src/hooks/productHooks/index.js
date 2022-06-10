@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 // Redux
 import { useSelector, useDispatch } from "react-redux";
-import { updateProducts } from "../../redux/features/productsSlice";
+import { updateProducts } from "../../redux/features/productSlice";
 // Apollo/GraphQL
 import { useQuery } from "@apollo/client";
 import { QUERY_PRODUCTS } from "../../graphql/queries";
