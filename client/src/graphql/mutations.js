@@ -273,6 +273,7 @@ export const ADD_USER = gql`
         email
         admin
       }
+      message
     }
   }
 `;
