@@ -27,7 +27,7 @@ function Navbar() {
                 Account
               </NavLink>
             </li>
-            <li className="navbar-li" onClick={Auth.logout()}>
+            <li className="navbar-li" onClick={() => Auth.logout()}>
               <NavLink to="/" className="navbar-item">
                 Logout
               </NavLink>
