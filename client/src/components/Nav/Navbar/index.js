@@ -15,7 +15,7 @@ function Navbar() {
             </NavLink>
           </li>
         )}
-        {Auth.loggedIn() && (
+        {Auth.loggedIn() ? (
           <>
             <li className="navbar-li">
               <NavLink to="/orders" className="navbar-item">
@@ -33,12 +33,13 @@ function Navbar() {
               </NavLink>
             </li>
           </>
+        ) : (
+          <li className="navbar-li">
+            <NavLink to="/login" className="navbar-item">
+              Login/Signup
+            </NavLink>
+          </li>
         )}
-        <li className="navbar-li">
-          <NavLink to="/login" className="navbar-item">
-            Login/Signup
-          </NavLink>
-        </li>
       </ul>
     </>
   );
