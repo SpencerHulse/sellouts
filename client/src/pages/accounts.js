@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import LoginForm from "../components/Forms/LoginForm";
-import SignupForm from "../components/Forms/SignupForm";
+import LoginForm from "../components/Forms/Accounts/LoginForm";
+import SignupForm from "../components/Forms/Accounts/SignupForm";
 
 function Login({ formType }) {
   return (

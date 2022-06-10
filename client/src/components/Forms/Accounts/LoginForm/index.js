@@ -1,35 +1,20 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { ADD_USER } from "../../../graphql/mutations";
-import Auth from "../../../utils/auth";
+import { LOGIN } from "../../../../graphql/mutations";
+import Auth from "../../../../utils/auth";
 
-function SignupForm() {
-  const [addUser] = useMutation(ADD_USER);
-  const [formState, setFormState] = useState({
-    email: "",
-    password: "",
-    username: "",
-  });
-  const [errorMessage, setErrorMessage] = useState("");
+function LoginForm() {
+  const [formState, setFormState] = useState({ email: "", password: "" });
+  const [login, { error }] = useMutation(LOGIN);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    setErrorMessage("");
     try {
-      const mutationResponse = await addUser({
-        variables: {
-          email: formState.email,
-          password: formState.password,
-          username: formState.username,
-        },
+      const mutationResponse = await login({
+        variables: { email: formState.email, password: formState.password },
       });
 
-      if (mutationResponse.data.addUser.message) {
-        setErrorMessage(mutationResponse.data.addUser.message);
-        return;
-      }
-
-      const token = mutationResponse.data.addUser.token;
+      const token = mutationResponse.data.login.token;
       Auth.login(token);
     } catch (e) {
       console.log(e);
@@ -49,20 +34,6 @@ function SignupForm() {
       <input type="hidden" name="remember" value="true" />
       <div className="">
         <div>
-          <label htmlFor="username" className="sr-only">
-            Username
-          </label>
-          <input
-            id="username"
-            name="username"
-            type="username"
-            required
-            className=""
-            placeholder="Username"
-            onChange={handleChange}
-          />
-        </div>
-        <div>
           <label htmlFor="email" className="sr-only">
             Email address
           </label>
@@ -70,6 +41,7 @@ function SignupForm() {
             id="email"
             name="email"
             type="email"
+            autoComplete="email"
             required
             className=""
             placeholder="Email address"
@@ -84,6 +56,7 @@ function SignupForm() {
             id="password"
             name="password"
             type="password"
+            autoComplete="current-password"
             required
             className=""
             placeholder="Password"
@@ -92,19 +65,19 @@ function SignupForm() {
         </div>
       </div>
 
-      {errorMessage && (
+      {error && (
         <div>
-          <p>{errorMessage}</p>
+          <p>The provided credentials are incorrect</p>
         </div>
       )}
 
       <div>
         <button type="submit" className="">
-          Sign up
+          Sign in
         </button>
       </div>
     </form>
   );
 }
 
-export default SignupForm;
+export default LoginForm;
