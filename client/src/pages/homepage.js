@@ -1,10 +1,9 @@
 import ProductList from "../components/Products/ProductList";
-// Apollo/GraphQL
-import { useQuery } from "@apollo/client";
-import { QUERY_PRODUCTS } from "../graphql/queries";
+import { useProducts } from "../hooks/productHooks";
 
 const Homepage = () => {
-  const { data: productData } = useQuery(QUERY_PRODUCTS);
+  // Custom hook for product data
+  const productData = useProducts();
   const visibleProducts = productData;
   return (
     <>
