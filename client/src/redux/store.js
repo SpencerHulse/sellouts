@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import placeholderReducer from "./features/placeholderSlice";
+import productsReducer from "./features/productsSlice";
 
 export const store = configureStore({
   reducer: {
-    placeholder: placeholderReducer,
+    products: productsReducer,
   },
 });
