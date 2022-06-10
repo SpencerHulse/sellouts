@@ -25,7 +25,7 @@ export function useProducts() {
         dispatch(updateProducts(products));
       });
     }
-  }, [productData, loading]);
+  }, [productData, loading, dispatch]);
 
-  return productData;
+  return products;
 }
