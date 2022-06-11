@@ -1,20 +1,15 @@
 import React from "react";
 import ProductCard from "../ProductCard";
 import { useProducts } from "../../../hooks/productHooks";
-import { useCategories } from "../../../hooks/categoryHooks";
+import { useVisibleProducts } from "../../../hooks/productHooks";
 
 function ProductList() {
-  // Custom hook for product data
   const productData = useProducts();
-  // Custom hook for category data
-  const categoryData = useCategories();
-  // For eventual filtering...? Might also do a helper function of sorts.
-  const visibleProducts = productData;
-  console.log(visibleProducts, categoryData);
+  const products = useVisibleProducts(productData);
   return (
     <div>
-      {visibleProducts.length &&
-        visibleProducts.map((product) => {
+      {products.length &&
+        products.map((product) => {
           return <ProductCard key={product._id} product={product} />;
         })}
     </div>

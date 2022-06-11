@@ -1,10 +1,7 @@
 import Auth from "./auth";
 
-export function loggedInRedirect() {
-  const loggedIn = Auth.loggedIn();
-  if (loggedIn) {
-    window.location.assign("/");
-  }
+export function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 export function calculateTotal(cartItems) {
@@ -65,4 +62,11 @@ export function idbPromise(storeName, method, object) {
       };
     };
   });
+}
+
+export function loggedInRedirect() {
+  const loggedIn = Auth.loggedIn();
+  if (loggedIn) {
+    window.location.assign("/");
+  }
 }

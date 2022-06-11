@@ -29,3 +29,16 @@ export function useProducts() {
 
   return products;
 }
+
+export function useVisibleProducts(products) {
+  const { currentCategory } = useSelector((state) => state.categories);
+  let filteredProducts = products;
+
+  if (currentCategory) {
+    filteredProducts = filteredProducts.filter(
+      (product) => product.category.name === currentCategory
+    );
+  }
+
+  return filteredProducts;
+}
