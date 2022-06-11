@@ -7,6 +7,14 @@ export function loggedInRedirect() {
   }
 }
 
+export function calculateTotal(cartItems) {
+  let sum = 0;
+  cartItems.forEach((item) => {
+    sum += item.product.price * item.purchaseQuantity;
+  });
+  return sum.toFixed(2);
+}
+
 export function idbPromise(storeName, method, object) {
   return new Promise((resolve, reject) => {
     const request = window.indexedDB.open("sellouts", 1);

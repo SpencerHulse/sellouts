@@ -1,74 +1,23 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import CartItem from "../CartItem";
 import Auth from "../../../utils/auth";
-import { idbPromise } from "../../../utils/helpers";
+import { calculateTotal } from "../../../utils/helpers";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  toggleCart,
-  addMultipleItems,
-} from "../../../redux/features/cartSlice";
+import { toggleCart } from "../../../redux/features/cartSlice";
+import { useGetCart, useClickOutside } from "../../../hooks/cartHooks";
 import "./style.css";
 
 function ShoppingCart() {
   const dispatch = useDispatch();
   const { cartItems, cartOpen } = useSelector((state) => state.cart);
-
-  useEffect(() => {
-    async function getCart() {
-      const cart = await idbPromise("cart", "get");
-      dispatch(addMultipleItems([...cart]));
-    }
-
-    if (!cartItems.length) {
-      getCart();
-    }
-  }, [cartItems.length, dispatch]);
-
-  function toggle() {
-    dispatch(toggleCart());
-  }
-
-  function calculateTotal() {
-    let sum = 0;
-    cartItems.forEach((item) => {
-      sum += item.product.price * item.purchaseQuantity;
-    });
-    return sum.toFixed(2);
-  }
-
-  useEffect(() => {
-    async function getCart() {
-      const cart = await idbPromise("cart", "get");
-      dispatch(addMultipleItems([...cart]));
-    }
-
-    if (!cartItems.length) {
-      getCart();
-    }
-  }, [cartItems.length, dispatch]);
-
   let cartRef = useRef();
   let cartTabRef = useRef();
 
-  useEffect(() => {
-    let handler = (event) => {
-      if (!cartOpen) {
-        return;
-      }
+  useGetCart(cartItems);
+  useClickOutside(cartOpen, cartRef, cartTabRef);
 
-      if (
-        !cartRef.current.contains(event.target) &&
-        !cartTabRef.current.contains(event.target)
-      ) {
-        toggle();
-      }
-    };
-
-    document.addEventListener("mousedown", handler);
-
-    return () => document.removeEventListener("mousedown", handler);
-  });
+  const toggle = () => dispatch(toggleCart());
 
   if (!cartOpen) {
     return <button onClick={() => toggle()}>Cart ({cartItems.length})</button>;
@@ -102,7 +51,7 @@ function ShoppingCart() {
                 <dl className="">
                   <div className="">
                     <dt className="">Subtotal</dt>
-                    <dd className="">${calculateTotal()}</dd>
+                    <dd className="">${calculateTotal(cartItems)}</dd>
                   </div>
                 </dl>
                 <p className="">
