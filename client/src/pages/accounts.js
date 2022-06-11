@@ -2,8 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import LoginForm from "../components/Forms/Accounts/LoginForm";
 import SignupForm from "../components/Forms/Accounts/SignupForm";
+import { loggedInRedirect } from "../utils/helpers";
 
 function Login({ formType }) {
+  loggedInRedirect();
   return (
     <div>
       <div>

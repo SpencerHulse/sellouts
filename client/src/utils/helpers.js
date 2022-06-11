@@ -1,3 +1,12 @@
+import Auth from "./auth";
+
+export function loggedInRedirect() {
+  const loggedIn = Auth.loggedIn();
+  if (loggedIn) {
+    window.location.assign("/");
+  }
+}
+
 export function idbPromise(storeName, method, object) {
   return new Promise((resolve, reject) => {
     const request = window.indexedDB.open("sellouts", 1);
