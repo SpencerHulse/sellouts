@@ -1,0 +1,27 @@
+.cart {
+  position: absolute;
+  width: 300px;
+  height: calc(100vh - 60px);
+  top: 60px;
+  right: 0;
+  /* Bow down before the hideousness! */
+  background-color: hotpink;
+}
+
+::-webkit-scrollbar {
+  position: absolute;
+  width: 10px;
+}
+
+/* Ugliness continues! */
+::-webkit-scrollbar-thumb {
+  background: teal;
+}
+
+::-webkit-scrollbar-track {
+  background: gold;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: aqua;
+}

@@ -1,7 +1,7 @@
 import React from "react";
 import MobileNav from "./MobileNav";
 import Navbar from "./Navbar";
-import ShoppingCart from "../ShoppingCart";
+import Cart from "../ShoppingCart/Cart";
 import { useWindowWidth } from "../../hooks/navHooks";
 
 function Header() {
@@ -9,7 +9,7 @@ function Header() {
     <nav className="navbar d-flex">
       {/* place non-mobile in null spot */}
       {useWindowWidth() < 768 ? <MobileNav /> : <Navbar />}
-      <ShoppingCart />
+      <Cart />
     </nav>
   );
 }
