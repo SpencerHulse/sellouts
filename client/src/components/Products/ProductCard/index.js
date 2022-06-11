@@ -1,7 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../../../redux/features/cartSlice";
+import { idbPromise } from "../../../utils/helpers";
 
 function ProductCard({ product }) {
+  const { name: category } = product.category;
   const {
     _id,
     description,
@@ -12,7 +16,28 @@ function ProductCard({ product }) {
     promotionPrice,
     rating,
   } = product;
-  const { name: category } = product.category;
+
+  const dispatch = useDispatch();
+  const { cartItems } = useSelector((state) => state.cart);
+
+  const addItemToCart = () => {
+    const itemInCart = cartItems.find((item) => item._id === _id);
+
+    dispatch(addToCart({ product, purchaseQuantity: 1, _id }));
+
+    if (itemInCart) {
+      idbPromise("cart", "put", {
+        ...itemInCart,
+        purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1,
+      });
+    } else {
+      idbPromise("cart", "put", {
+        product,
+        purchaseQuantity: 1,
+        _id,
+      });
+    }
+  };
 
   return (
     <div className="">
