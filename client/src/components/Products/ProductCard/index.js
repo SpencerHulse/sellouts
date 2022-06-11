@@ -20,20 +20,20 @@ function ProductCard({ product }) {
   const dispatch = useDispatch();
   const { cartItems } = useSelector((state) => state.cart);
 
-  const addItemToCart = () => {
+  const addItemToCart = (quantity) => {
     const itemInCart = cartItems.find((item) => item._id === _id);
 
-    dispatch(addToCart({ product, purchaseQuantity: 1, _id }));
+    dispatch(addToCart({ product, purchaseQuantity: quantity, _id }));
 
     if (itemInCart) {
       idbPromise("cart", "put", {
         ...itemInCart,
-        purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1,
+        purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + quantity,
       });
     } else {
       idbPromise("cart", "put", {
         product,
-        purchaseQuantity: 1,
+        purchaseQuantity: quantity,
         _id,
       });
     }
@@ -45,7 +45,7 @@ function ProductCard({ product }) {
         <img
           className=""
           // src={mainImage}
-          alt={`${name} ${category}`}
+          alt={`${name} ${category} ${mainImage}`}
         />
       </Link>
       <div className="">
@@ -54,22 +54,18 @@ function ProductCard({ product }) {
             {name} {category}
           </h5>
         </Link>
+        <div>Rating: {rating}</div>
         <p className="">{description}</p>
         <div className="">
-          <p className="">${price}</p>
+          <p className="">
+            ${price} or on sale for ${promotionPrice}
+          </p>
           {inventory <= 0 ? (
-            <button
-              className=""
-              /* onClick={addItemToCart} */
-              disabled
-            >
+            <button className="" disabled>
               Unavailable
             </button>
           ) : (
-            <button
-              className=""
-              /* onClick={addItemToCart} */
-            >
+            <button className="" onClick={() => addItemToCart(1)}>
               Add to Cart
             </button>
           )}

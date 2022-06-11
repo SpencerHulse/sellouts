@@ -10,7 +10,7 @@ function ProductList() {
   const categoryData = useCategories();
   // For eventual filtering...? Might also do a helper function of sorts.
   const visibleProducts = productData;
-  console.log(visibleProducts);
+  console.log(visibleProducts, categoryData);
   return (
     <div>
       {visibleProducts.length &&
