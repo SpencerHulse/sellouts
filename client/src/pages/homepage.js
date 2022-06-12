@@ -7,6 +7,7 @@ const Homepage = () => {
   const { currentCategory } = useSelector((state) => state.categories);
   return (
     <>
+      <h1>Oh the horror! The color scheme! Hahahahaha!</h1>
       <FilterOptions />
       <h2>
         {currentCategory

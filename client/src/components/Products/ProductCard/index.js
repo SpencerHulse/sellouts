@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../../redux/features/cartSlice";
 import { idbPromise } from "../../../utils/helpers";
+import "./style.css";
 
 function ProductCard({ product }) {
   const { name: category } = product.category;
@@ -40,10 +41,10 @@ function ProductCard({ product }) {
   };
 
   return (
-    <div className="">
+    <div className="pc-container">
       <Link to={`/product/${_id}`}>
         <img
-          className=""
+          className="pc-image"
           // src={mainImage}
           alt={`${name} ${category} ${mainImage}`}
         />
