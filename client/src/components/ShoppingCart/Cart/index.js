@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
+import { TiShoppingCart } from "react-icons/ti";
 import CartItem from "../CartItem";
 import Auth from "../../../utils/auth";
 import { calculateTotal } from "../../../utils/helpers";
@@ -20,13 +21,17 @@ function ShoppingCart() {
   const toggle = () => dispatch(toggleCart());
 
   if (!cartOpen) {
-    return <button onClick={() => toggle()}>Cart ({cartItems.length})</button>;
+    return (
+      <button className="cart-button" onClick={() => toggle()}>
+        <TiShoppingCart size={30}>({cartItems.length})</TiShoppingCart>
+      </button>
+    );
   }
 
   return (
     <>
-      <button ref={cartTabRef} onClick={() => toggle()}>
-        Cart ({cartItems.length})
+      <button className="cart-button" ref={cartTabRef} onClick={() => toggle()}>
+        <TiShoppingCart size={30}>({cartItems.length})</TiShoppingCart>
       </button>
       <div className="cart" ref={cartRef}>
         <div>

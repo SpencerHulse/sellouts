@@ -8,7 +8,7 @@ function MobileNav() {
     <>
       {/* Hamburger and relevant options only appears when logged in */}
       {Auth.loggedIn() && <Hamburger />}
-      <div className="logo">Logo</div>
+      <div className="hamburger-logo">Logo</div>
       {!Auth.loggedIn() && (
         <NavLink to="/login" className="navbar-item">
           Login/Signup

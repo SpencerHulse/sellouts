@@ -6,7 +6,7 @@ import "./style.css";
 function Navbar() {
   return (
     <>
-      <div>Logo</div>
+      <div className="logo">Logo</div>
       <ul className="navbar-list">
         {Auth.loggedIn() && Auth.getProfile().data.admin && (
           <li className="navbar-li">
