@@ -108,6 +108,15 @@ export const QUERY_REVIEWS = gql`
   }
 `;
 
+// Retrieves Secure URLs used to upload AWS s3 Images
+export const QUERY_URL = gql`
+  query uploadImage($mainImage: String!) {
+    uploadImage(mainImage: $mainImage) {
+      url
+    }
+  }
+`;
+
 export const QUERY_USERS = gql`
   query Users($id: ID) {
     users(_id: $id) {
