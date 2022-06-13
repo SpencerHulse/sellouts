@@ -45,7 +45,7 @@ function ProductCard({ product }) {
       <Link to={`/product/${_id}`}>
         <img
           className="pc-image"
-          // src={mainImage}
+          src={mainImage}
           alt={`${name} ${category} ${mainImage}`}
         />
       </Link>

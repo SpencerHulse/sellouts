@@ -1,6 +1,7 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { DateTime } = require("luxon");
 const { signToken } = require("../utils/auth");
+const { generateUploadURL } = require("../utils/aws-s3");
 const {
   Category,
   Order,
@@ -80,6 +81,11 @@ const resolvers = {
       const reviews = await Review.find(params).populate("user");
       return reviews;
     },
+    // Upload Image to AWS S3 Bucket
+    uploadImage: async (parent, { mainImage }) => {
+      const url = await generateUploadURL(mainImage);
+      return { url };
+    },
     // User
     users: async (parent, { _id }) => {
       const params = {};
@@ -128,6 +134,7 @@ const resolvers = {
       return Product.findByIdAndDelete({ _id });
     },
     updateProduct: async (parent, { input }) => {
+      input.images = input.images.push(input.mainImage);
       return Product.findByIdAndUpdate(input._id, input, { new: true })
         .populate("category")
         .populate("promotion")

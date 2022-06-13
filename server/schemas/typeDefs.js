@@ -1,6 +1,10 @@
 const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
+  type AmazonS3 {
+    url: String
+  }
+
   type Auth {
     token: ID
     user: User
@@ -116,6 +120,7 @@ const typeDefs = gql`
     products(_id: ID): [Product]
     promotions(_id: ID): [Promotion]
     reviews(_id: ID): [Review]
+    uploadImage(mainImage: String!): AmazonS3
     users(_id: ID): [User]
   }
 

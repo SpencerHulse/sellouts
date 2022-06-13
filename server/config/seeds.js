@@ -55,7 +55,6 @@ db.once("open", async () => {
   });
 
   const users = await User.find({});
-  console.log(users[0]._id);
   console.log("users seeded");
 
   await Category.deleteMany();
@@ -130,8 +129,8 @@ db.once("open", async () => {
       details: ["It's red", "It's big", "It's cheap"],
       price: 9.99,
       inventory: 100,
-      images: ["hatRed", "hatRedWorn"],
-      mainImage: "hat",
+      images: ["https://nsense-images.s3.amazonaws.com/default.jpg"],
+      mainImage: "https://nsense-images.s3.amazonaws.com/default.jpg",
       category: categories[0],
       promotion: promotions[0],
       reviews: [reviews[0]._id, reviews[2]._id, reviews[1]._id],
@@ -142,8 +141,8 @@ db.once("open", async () => {
       details: ["It's blue", "It's small", "It's quality"],
       price: 9.99,
       inventory: 100,
-      images: ["hatBlue", "hatBlueWorn"],
-      mainImage: "hatBlueWorn",
+      images: ["https://nsense-images.s3.amazonaws.com/default.jpg"],
+      mainImage: "https://nsense-images.s3.amazonaws.com/default.jpg",
       category: categories[0],
     },
     {
@@ -152,8 +151,8 @@ db.once("open", async () => {
       details: ["It's white", "It comes in many sizes", "100% cotton"],
       price: 19.99,
       inventory: 100,
-      images: ["shirt"],
-      mainImage: "shirt",
+      images: ["https://nsense-images.s3.amazonaws.com/default.jpg"],
+      mainImage: "https://nsense-images.s3.amazonaws.com/default.jpg",
       category: categories[1],
     },
     {
@@ -162,8 +161,8 @@ db.once("open", async () => {
       details: ["Cool design", "Soft fabric", "Made in China"],
       price: 9.99,
       inventory: 100,
-      images: ["ChinaShirt"],
-      mainImage: "ChinaShirt",
+      images: ["https://nsense-images.s3.amazonaws.com/default.jpg"],
+      mainImage: "https://nsense-images.s3.amazonaws.com/default.jpg",
       category: categories[1],
     },
     {
@@ -172,8 +171,8 @@ db.once("open", async () => {
       details: ["Tough", "Comfy", "Pockets"],
       price: 29.99,
       inventory: 100,
-      images: ["jeans"],
-      mainImage: "jeans",
+      images: ["https://nsense-images.s3.amazonaws.com/default.jpg"],
+      mainImage: "https://nsense-images.s3.amazonaws.com/default.jpg",
       category: categories[2],
     },
     {
@@ -182,8 +181,8 @@ db.once("open", async () => {
       details: ["Dressy", "Comfy", "Rip-resistant"],
       price: 9.99,
       inventory: 100,
-      images: ["dressy"],
-      mainImage: "dressy",
+      images: ["https://nsense-images.s3.amazonaws.com/default.jpg"],
+      mainImage: "https://nsense-images.s3.amazonaws.com/default.jpg",
       category: categories[2],
     },
     {
@@ -196,8 +195,8 @@ db.once("open", async () => {
       ],
       price: 9.99,
       inventory: 100,
-      images: ["blackSocks"],
-      mainImage: "blackSocks",
+      images: ["https://nsense-images.s3.amazonaws.com/default.jpg"],
+      mainImage: "https://nsense-images.s3.amazonaws.com/default.jpg",
       category: categories[3],
     },
     {
@@ -206,8 +205,8 @@ db.once("open", async () => {
       details: ["Lots of material", "Great price", "Four pairs in each set"],
       price: 9.99,
       inventory: 100,
-      images: ["kneeSocks"],
-      mainImage: "kneeSocks",
+      images: ["https://nsense-images.s3.amazonaws.com/default.jpg"],
+      mainImage: "https://nsense-images.s3.amazonaws.com/default.jpg",
       category: categories[3],
     },
     {
@@ -216,8 +215,8 @@ db.once("open", async () => {
       details: ["Fly", "Arch support", "Steel toes"],
       price: 69.99,
       inventory: 100,
-      images: ["flyShoes"],
-      mainImage: "flyShoes",
+      images: ["https://nsense-images.s3.amazonaws.com/default.jpg"],
+      mainImage: "https://nsense-images.s3.amazonaws.com/default.jpg",
       category: categories[4],
     },
     {
@@ -226,8 +225,8 @@ db.once("open", async () => {
       details: ["All white", "Many sizes", "Made in China"],
       price: 29.99,
       inventory: 100,
-      images: ["ChinaShoes"],
-      mainImage: "ChinaShoes",
+      images: ["https://nsense-images.s3.amazonaws.com/default.jpg"],
+      mainImage: "https://nsense-images.s3.amazonaws.com/default.jpg",
       category: categories[4],
     },
   ]);
