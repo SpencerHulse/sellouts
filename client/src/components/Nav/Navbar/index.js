@@ -6,43 +6,47 @@ import "./style.css";
 function Navbar() {
   return (
     <>
-      <NavLink to="/" className="logo">
-        Logo
-      </NavLink>
-      <ul className="navbar-list">
-        {Auth.loggedIn() && Auth.getProfile().data.admin && (
-          <li className="navbar-li">
-            <NavLink to="/admin" className="navbar-item">
-              Admin
-            </NavLink>
-          </li>
-        )}
-        {Auth.loggedIn() ? (
-          <>
+      <div className="col-4">
+        <ul className="navbar-list">
+          {Auth.loggedIn() && Auth.getProfile().data.admin && (
             <li className="navbar-li">
-              <NavLink to="/orders" className="navbar-item">
-                Orders
+              <NavLink to="/admin" className="navbar-item">
+                Admin
               </NavLink>
             </li>
+          )}
+          {Auth.loggedIn() ? (
+            <>
+              <li className="navbar-li">
+                <NavLink to="/orders" className="navbar-item">
+                  Orders
+                </NavLink>
+              </li>
+              <li className="navbar-li">
+                <NavLink to="/account" className="navbar-item">
+                  Account
+                </NavLink>
+              </li>
+              <li className="navbar-li" onClick={() => Auth.logout()}>
+                <NavLink to="/" className="navbar-item">
+                  Logout
+                </NavLink>
+              </li>
+            </>
+          ) : (
             <li className="navbar-li">
-              <NavLink to="/account" className="navbar-item">
-                Account
+              <NavLink to="/login" className="navbar-item">
+                Login/Signup
               </NavLink>
             </li>
-            <li className="navbar-li" onClick={() => Auth.logout()}>
-              <NavLink to="/" className="navbar-item">
-                Logout
-              </NavLink>
-            </li>
-          </>
-        ) : (
-          <li className="navbar-li">
-            <NavLink to="/login" className="navbar-item">
-              Login/Signup
-            </NavLink>
-          </li>
-        )}
-      </ul>
+          )}
+        </ul>
+      </div>
+      <div>
+        <NavLink to="/" className="logo col-4">
+          Sellouts
+        </NavLink>
+      </div>
     </>
   );
 }
