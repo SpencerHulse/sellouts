@@ -40,6 +40,13 @@ function ProductCard({ product }) {
     }
   };
 
+  function percentDifference(price, percentDifference) {
+    const percent = price-percentDifference/price*100;
+    return (
+      percent.toFixed(2)
+    );
+  }
+
   return (
     <div className="pc-container">
       <Link to={`/product/${_id}`}>
@@ -57,15 +64,19 @@ function ProductCard({ product }) {
           {name}
         </Link>
         <div>
-
-          {promotionPrice === price ?
-            <div className="pc-price">${price}</div>
-            :
-            <>
-              <div className="pc-price">${promotionPrice}</div>
-              <div className="pc-price text-decoration-line-through">${price}</div>
-            </>
-          }
+          <div className="pc-priceblock">
+            {promotionPrice === price ?
+              <div className="pc-price font-weight-bold bolden">${price}</div>
+              
+              :
+              <>
+                <div className="pc-price pc-promoprice"><span className="bolden">${promotionPrice}</span>{" "}
+                ({percentDifference(price, promotionPrice)} % off)
+                </div>
+                <div className="pc-price text-decoration-line-through">${price}</div>
+              </>
+            }
+          </div>
 
           <div>Rating: {rating}</div>
           {inventory <= 0 ? (

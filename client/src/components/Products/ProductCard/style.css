@@ -15,6 +15,15 @@
   height: 250px;
 }
 
-.pc-price {
+.pc-priceblock {
+  height: 55px;
+  margin: 5px 0;
+}
 
+.bolden {
+  font-weight: 600;
+}
+
+.pc-promoprice {
+  color: rgb(230, 58, 58);
 }
