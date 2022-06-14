@@ -1,6 +1,11 @@
 .pc-title {
   color: black;
   text-decoration: none;
+  font-size: 18px;
+}
+
+.pc-container {
+  min-width: 250px;
 }
 
 .pc-category {
@@ -16,7 +21,6 @@
 }
 
 .pc-priceblock {
-  height: 55px;
   margin: 5px 0;
 }
 
@@ -26,4 +30,9 @@
 
 .pc-promoprice {
   color: rgb(230, 58, 58);
+}
+
+.pc-details {
+  display: block;
+  width: 100%;
 }
