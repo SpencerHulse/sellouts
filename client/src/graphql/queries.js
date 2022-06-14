@@ -37,11 +37,14 @@ export const QUERY_ORDERS = gql`
         email
       }
       status
+      stripeId
+      paymentStatus
       deliveryAddress
       shippingType
       shippingCost
       tax
-      productsTotal
+      subtotal
+      total
     }
   }
 `;

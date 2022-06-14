@@ -244,10 +244,14 @@ db.once("open", async () => {
         products[2]._id,
       ],
       customer: users[1]._id,
+      stripeId: "91219jasnadks",
+      paymentStatus: "paid",
       deliveryAddress: "290 This Street Chattanooga, TN",
       shippingType: "standard",
       shippingCost: 4.99,
       tax: 13.99,
+      subtotal: 49.96,
+      total: 68.94,
     },
     {
       products: [
@@ -258,10 +262,14 @@ db.once("open", async () => {
       ],
       customer: users[1]._id,
       status: "shipped",
+      stripeId: "asdasd1213213",
+      paymentStatus: "paid",
       deliveryAddress: "290 This Street Chattanooga, TN",
       shippingType: "overnight",
       shippingCost: 14.99,
       tax: 13.99,
+      subtotal: 49.96,
+      total: 78.94,
     },
   ]);
 

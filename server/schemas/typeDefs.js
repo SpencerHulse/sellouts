@@ -26,11 +26,14 @@ const typeDefs = gql`
     products: [Product]
     customer: User
     status: String
+    stripeId: String
+    paymentStatus: String
     deliveryAddress: String
     shippingType: String
     shippingCost: Float
     tax: Float
-    productsTotal: Float
+    subtotal: Float
+    total: Float
   }
 
   input OrderInput {
@@ -39,10 +42,14 @@ const typeDefs = gql`
     products: [ID]
     customer: ID
     status: String
+    stripeId: String
+    paymentStatus: String
     deliveryAddress: String
     shippingType: String
     shippingCost: Float
     tax: Float
+    subtotal: Float
+    total: Float
   }
 
   type Product {

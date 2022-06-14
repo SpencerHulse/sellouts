@@ -152,7 +152,7 @@ const resolvers = {
       return { session: session.id };
     },
     // Order
-    orders: async (parent, { _id, customer, status }) => {
+    orders: async (parent, { _id, customer, status, stripeId }) => {
       const params = {};
 
       if (_id) {
@@ -163,6 +163,9 @@ const resolvers = {
       }
       if (status) {
         params.status = status;
+      }
+      if (stripeId) {
+        params.stripeId = stripeId;
       }
 
       const orders = await Order.find(params)

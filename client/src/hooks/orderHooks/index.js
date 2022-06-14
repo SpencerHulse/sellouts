@@ -6,11 +6,11 @@ import { idbPromise } from "../../utils/helpers";
 import Auth from "../../utils/auth";
 import { addMultipleItems } from "../../redux/features/cartSlice";
 
-export function useSuccessfulPurchase() {
+export function useSuccessfulPurchase(data) {
   const dispatch = useDispatch();
   const [addOrder] = useMutation(ADD_ORDER);
   const [updateProduct] = useMutation(UPDATE_PRODUCT);
-
+  console.log(data);
   useEffect(() => {
     async function saveOrder() {
       const cart = await idbPromise("cart", "get");

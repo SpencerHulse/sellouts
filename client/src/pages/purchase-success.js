@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-import { loggedOutRedirect } from "../utils/helpers";
+import { loggedOutRedirect, noSessionRedirect } from "../utils/helpers";
 import { useSuccessfulPurchase } from "../hooks/orderHooks";
 import { QUERY_SESSION } from "../graphql/queries";
 
@@ -11,10 +11,12 @@ function PurchaseSuccess() {
   const { data } = useQuery(QUERY_SESSION, {
     variables: { sessionId },
   });
-  loggedOutRedirect();
 
-  useSuccessfulPurchase();
-  console.log(data);
+  loggedOutRedirect();
+  noSessionRedirect(sessionId);
+
+  useSuccessfulPurchase(data);
+
   return (
     <div className="mt-5">
       <div className="success-container shadow">

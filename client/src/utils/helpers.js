@@ -77,3 +77,9 @@ export function loggedOutRedirect() {
     window.location.assign("/");
   }
 }
+
+export function noSessionRedirect(sessionId) {
+  if (!sessionId) {
+    window.location.assign("/");
+  }
+}

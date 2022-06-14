@@ -22,7 +22,7 @@ const orderSchema = new Schema({
     type: String,
     default: "pending",
   },
-  stripeSessionId: {
+  stripeId: {
     type: String,
     required: true,
   },
