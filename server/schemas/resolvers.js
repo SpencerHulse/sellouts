@@ -99,7 +99,7 @@ const resolvers = {
         line_items,
         mode: "payment",
         shipping_address_collection: {
-          allowed_countries: ["US", "CA"],
+          allowed_countries: ["US"],
         },
         shipping_options: [
           {
