@@ -111,6 +111,42 @@ const typeDefs = gql`
     user: ID
   }
 
+  type Stripe {
+    session: StripeSession
+    shipping: StripeShippingRate
+  }
+
+  type StripeSession {
+    id: ID
+    amount_subtotal: Int
+    amount_total: Int
+    payment_status: String
+    shipping: StripeShipping
+  }
+
+  type StripeShipping {
+    address: StripeAddress
+  }
+
+  type StripeAddress {
+    city: String
+    country: String
+    line1: String
+    line2: String
+    postal_code: String
+    state: String
+  }
+
+  type StripeShippingRate {
+    id: ID
+    display_name: String
+    fixed_amount: StripeFixedRate
+  }
+
+  type StripeFixedRate {
+    amount: Int
+  }
+
   type User {
     _id: ID
     username: String
@@ -125,6 +161,7 @@ const typeDefs = gql`
     products(_id: ID): [Product]
     promotions(_id: ID): [Promotion]
     reviews(_id: ID): [Review]
+    session(id: ID): Stripe
     uploadImage(mainImage: String!): AmazonS3
     users(_id: ID): [User]
   }

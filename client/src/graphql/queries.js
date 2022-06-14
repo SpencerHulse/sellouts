@@ -117,6 +117,36 @@ export const QUERY_REVIEWS = gql`
   }
 `;
 
+export const QUERY_SESSION = gql`
+  query Session($sessionId: ID) {
+    session(id: $sessionId) {
+      session {
+        id
+        amount_subtotal
+        amount_total
+        payment_status
+        shipping {
+          address {
+            city
+            country
+            line1
+            line2
+            postal_code
+            state
+          }
+        }
+      }
+      shipping {
+        id
+        display_name
+        fixed_amount {
+          amount
+        }
+      }
+    }
+  }
+`;
+
 // Retrieves Secure URLs used to upload AWS s3 Images
 export const QUERY_URL = gql`
   query uploadImage($mainImage: String!) {

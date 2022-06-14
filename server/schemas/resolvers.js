@@ -98,6 +98,9 @@ const resolvers = {
         payment_method_types: ["card"],
         line_items,
         mode: "payment",
+        shipping_address_collection: {
+          allowed_countries: ["US", "CA"],
+        },
         shipping_options: [
           {
             shipping_rate_data: {
@@ -116,6 +119,27 @@ const resolvers = {
                 maximum: {
                   unit: "business_day",
                   value: 7,
+                },
+              },
+            },
+          },
+          {
+            shipping_rate_data: {
+              type: "fixed_amount",
+              fixed_amount: {
+                amount: 1499,
+                currency: "usd",
+              },
+              display_name: "Next day air",
+              // Delivers in exactly 1 business day
+              delivery_estimate: {
+                minimum: {
+                  unit: "business_day",
+                  value: 1,
+                },
+                maximum: {
+                  unit: "business_day",
+                  value: 1,
                 },
               },
             },
@@ -189,6 +213,13 @@ const resolvers = {
       }
       const reviews = await Review.find(params).populate("user");
       return reviews;
+    },
+    session: async (parent, args) => {
+      const session = await stripe.checkout.sessions.retrieve(args.id);
+      const shipping = await stripe.shippingRates.retrieve(
+        session.shipping_rate
+      );
+      return { session, shipping };
     },
     // Upload Image to AWS S3 Bucket
     uploadImage: async (parent, { mainImage }) => {
