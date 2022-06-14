@@ -1,5 +1,6 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { DateTime } = require("luxon");
+require("dotenv").config();
 const { signToken } = require("../utils/auth");
 const { generateUploadURL } = require("../utils/aws-s3");
 const {
@@ -10,6 +11,7 @@ const {
   Review,
   User,
 } = require("../models");
+const stripe = require("stripe")(process.env.STRIPE_SK);
 
 const resolvers = {
   Query: {
@@ -17,6 +19,113 @@ const resolvers = {
     categories: async (parent, args) => {
       const categories = await Category.find({});
       return categories;
+    },
+    checkout: async (parent, args, context) => {
+      // Parse out the referring URL
+      const url = new URL(context.headers.referer).origin;
+      const order = new Order({ products: args.products });
+      const { products } = await order.populate("products");
+
+      const line_items = [];
+      const orderSummary = [];
+
+      await products.forEach((product) => {
+        const { _id, name, description, price, promotionPrice, mainImage } =
+          product;
+        let updated = false;
+
+        orderSummary.map((orderProduct) => {
+          if (orderProduct[0]._id === _id) {
+            orderProduct[0].quantityPurchased += 1;
+            updated = true;
+          }
+          return orderProduct;
+        });
+
+        if (!updated) {
+          const productSummary = [
+            {
+              _id,
+              name,
+              description,
+              price,
+              promotionPrice,
+              mainImage,
+              quantityPurchased: 1,
+            },
+          ];
+          orderSummary.push(productSummary);
+        }
+      });
+
+      for (let i = 0; i < orderSummary.length; i++) {
+        // generate product id
+        const product = await stripe.products.create({
+          name: orderSummary[i][0].name,
+          description: orderSummary[i][0].description,
+        });
+        // generate price id using the product id
+        let usedPrice = orderSummary[i][0].price;
+        if (orderSummary[i][0].promotionPrice) {
+          usedPrice = orderSummary[i][0].promotionPrice;
+        }
+        const price = await stripe.prices.create({
+          product: product.id,
+          /* Because stripe requires cost in cents */
+          unit_amount: Math.round(usedPrice * 100),
+          currency: "usd",
+          tax_behavior: "exclusive",
+        });
+        const taxRate = await stripe.taxRates.create({
+          display_name: "Sales Tax",
+          inclusive: false,
+          percentage: 7.25,
+          country: "US",
+          state: "CA",
+          jurisdiction: "US - CA",
+          description: "CA Sales Tax",
+        });
+        // add price id to the line items array
+        line_items.push({
+          price: price.id,
+          quantity: orderSummary[i][0].quantityPurchased,
+          tax_rates: [taxRate.id],
+        });
+      }
+
+      // Checkout session
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ["card"],
+        line_items,
+        mode: "payment",
+        shipping_options: [
+          {
+            shipping_rate_data: {
+              type: "fixed_amount",
+              fixed_amount: {
+                amount: 0,
+                currency: "usd",
+              },
+              display_name: "Free shipping",
+              // Delivers between 5-7 business days
+              delivery_estimate: {
+                minimum: {
+                  unit: "business_day",
+                  value: 5,
+                },
+                maximum: {
+                  unit: "business_day",
+                  value: 7,
+                },
+              },
+            },
+          },
+        ],
+        success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${url}/`,
+      });
+
+      return { session: session.id };
     },
     // Order
     orders: async (parent, { _id, customer, status }) => {
@@ -201,7 +310,6 @@ const resolvers = {
     addUser: async (parent, args) => {
       let usernameCheck = await User.find({ username: args.username });
       if (usernameCheck.length) {
-        console.log(usernameCheck);
         return { message: "Username already exists" };
       }
 

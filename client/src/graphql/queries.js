@@ -9,6 +9,15 @@ export const QUERY_CATEGORIES = gql`
   }
 `;
 
+// Requires an array of product IDs
+export const QUERY_CHECKOUT = gql`
+  query getCheckout($products: [ID]!) {
+    checkout(products: $products) {
+      session
+    }
+  }
+`;
+
 export const QUERY_ORDERS = gql`
   query Orders($id: ID, $customer: ID, $status: String) {
     orders(_id: $id, customer: $customer, status: $status) {
