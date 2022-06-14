@@ -70,3 +70,10 @@ export function loggedInRedirect() {
     window.location.assign("/");
   }
 }
+
+export function loggedOutRedirect() {
+  const loggedIn = Auth.loggedIn();
+  if (!loggedIn) {
+    window.location.assign("/");
+  }
+}

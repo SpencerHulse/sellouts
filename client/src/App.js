@@ -3,8 +3,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Homepage from "./pages/homepage";
 
 // Components
-import Nav from "./components/Nav";
 import Accounts from "./pages/accounts";
+import PurchaseSuccess from "./pages/purchase-success";
+import Nav from "./components/Nav";
 import ImageUpload from "./components/ImageUpload";
 
 // Apollo
@@ -44,6 +45,7 @@ function App() {
           <Route path="/" element={<Homepage />} />
           <Route path="login" element={<Accounts formType={"login"} />} />
           <Route path="signup" element={<Accounts formType={"signup"} />} />
+          <Route path="success" element={<PurchaseSuccess />} />
           <Route path="upload" element={<ImageUpload />} />
         </Routes>
       </Router>
