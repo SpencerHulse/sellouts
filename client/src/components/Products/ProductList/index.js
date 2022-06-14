@@ -7,11 +7,13 @@ function ProductList() {
   const productData = useProducts();
   const products = useVisibleProducts(productData);
   return (
-    <div className="d-flex flex-wrap justify-content-evenly mt-5">
-      {products.length &&
-        products.map((product) => {
-          return <ProductCard key={product._id} product={product} />;
-        })}
+    <div className="d-flex flex-wrap mt-5">
+      <div className="row row-cols-5">
+        {products.length &&
+          products.map((product) => {
+            return <ProductCard key={product._id} product={product} />;
+          })}
+      </div>
     </div>
   );
 }

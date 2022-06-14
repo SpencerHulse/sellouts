@@ -49,18 +49,25 @@ function ProductCard({ product }) {
           alt={`${name} ${category} ${mainImage}`}
         />
       </Link>
-      <div className="">
-        <Link to={`/product/${_id}`}>
-          <h5 className="">
-            {name} {category}
-          </h5>
+      <div>
+        <div className="pc-category">
+          {category}
+        </div>
+        <Link to={`/product/${_id}`} className="pc-title">
+          {name}
         </Link>
-        <div>Rating: {rating}</div>
-        <p className="">{description}</p>
-        <div className="">
-          <p className="">
-            ${price} or on sale for ${promotionPrice}
-          </p>
+        <div>
+
+          {promotionPrice === price ?
+            <div className="pc-price">${price}</div>
+            :
+            <>
+              <div className="pc-price">${promotionPrice}</div>
+              <div className="pc-price text-decoration-line-through">${price}</div>
+            </>
+          }
+
+          <div>Rating: {rating}</div>
           {inventory <= 0 ? (
             <button className="" disabled>
               Unavailable

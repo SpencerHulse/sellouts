@@ -7,14 +7,17 @@ const Homepage = () => {
   const { currentCategory } = useSelector((state) => state.categories);
   return (
     <>
-      <h1>Oh the horror! The color scheme! Hahahahaha!</h1>
-      <FilterOptions />
-      <h2>
-        {currentCategory
-          ? capitalizeFirstLetter(currentCategory)
-          : "All Products"}
-      </h2>
-      <ProductList />
+      <div className="container">
+        <div className="row">
+          <FilterOptions />
+          <h2>
+            {currentCategory
+              ? capitalizeFirstLetter(currentCategory)
+              : "All Products"}
+          </h2>
+          <ProductList />
+        </div>
+      </div>
     </>
   );
 };
