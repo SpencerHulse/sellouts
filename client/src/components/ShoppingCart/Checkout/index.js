@@ -6,7 +6,7 @@ const stripePromise = loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
 
 function Checkout({ cartItems }) {
   const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
-  console.log(data);
+
   function submitCheckout(event) {
     event.preventDefault();
     const productIds = [];

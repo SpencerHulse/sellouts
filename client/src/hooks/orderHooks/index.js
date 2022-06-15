@@ -112,7 +112,7 @@ export function useSuccessfulPurchase(data) {
         if (orderExists.orders.length === 0) {
           saveOrder();
         } else {
-          console.log("Order already exists");
+          window.location.replace("/");
         }
       }
     }
