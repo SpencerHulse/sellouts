@@ -8,25 +8,23 @@ function FilterOptions() {
   const dispatch = useDispatch();
   const categoryData = useCategories();
 
-  function categoryHandler() {
-    const value = document.getElementById("categories").value;
+  function categoryHandler(value) {
+    // const value = document.getElementById("categories").value;
     dispatch(selectCategory(value));
   }
 
   return (
     <div>
-      <select
-        name="categories"
-        id="categories"
-        onChange={() => categoryHandler()}
-      >
-        <option value="">Choose a Category</option>
+
+      <div className="new-dropdown">
+        <button className="dropdown-button">Category</button>
+        <div className="dropdown-content">
         {categoryData.map((category) => (
-          <option value={category.name} key={category._id}>
-            {capitalizeFirstLetter(category.name)}
-          </option>
+          <div className="dd-item" onClick={() => categoryHandler(category.name)}>{category.name}
+          </div>
         ))}
-      </select>
+        </div>
+      </div>
     </div>
   );
 }

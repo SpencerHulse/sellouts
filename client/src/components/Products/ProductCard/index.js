@@ -83,7 +83,7 @@ function ProductCard({ product }) {
             )}
           </div>
           <div>
-            <ReactStars count={5} value={rating} size={24} edit={false} />
+            <ReactStars count={5} value={rating} size={18} edit={false} color2={'#7f60db'} color1={'#e3e3e3'} />
           </div>
           <div>
             {inventory <= 0 ? (

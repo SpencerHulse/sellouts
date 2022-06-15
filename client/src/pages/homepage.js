@@ -9,12 +9,14 @@ const Homepage = () => {
     <>
       <div className="container">
         <div className="row">
-          <FilterOptions />
-          <h2>
-            {currentCategory
-              ? capitalizeFirstLetter(currentCategory)
-              : "All Products"}
-          </h2>
+          <div className="d-flex justify-content-between align-items-center mt-5">
+            <h2>
+              {currentCategory
+                ? capitalizeFirstLetter(currentCategory)
+                : "All Products"}
+            </h2>
+            <FilterOptions />
+          </div>
           <ProductList />
         </div>
       </div>
