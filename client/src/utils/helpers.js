@@ -1,4 +1,5 @@
 import Auth from "./auth";
+import { DateTime } from "luxon";
 
 export function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -82,4 +83,9 @@ export function noSessionRedirect(sessionId) {
   if (!sessionId) {
     window.location.assign("/");
   }
+}
+
+export function effectivePromotion(promotion, ends) {
+  const date = DateTime.now().toLocaleString(DateTime.DATE_SHORT);
+  return !promotion ? false : ends > date ? true : false;
 }

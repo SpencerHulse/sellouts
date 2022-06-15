@@ -1,10 +1,9 @@
 import React from "react";
 import ReactStars from "react-stars";
-import { DateTime } from "luxon";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../../redux/features/cartSlice";
-import { idbPromise } from "../../../utils/helpers";
+import { idbPromise, effectivePromotion } from "../../../utils/helpers";
 import "./style.css";
 
 function ProductCard({ product }) {
@@ -48,11 +47,6 @@ function ProductCard({ product }) {
     }
   };
 
-  function effectivePromotion() {
-    const date = DateTime.now().toLocaleString(DateTime.DATE_SHORT);
-    return !promotion ? false : ends > date ? true : false;
-  }
-
   return (
     <div className="pc-container mb-4 d-sm-flex flex-xl-column p-md-2">
       <Link to={`/product/${_id}`} className="me-md-3 me-xl-0">
@@ -68,7 +62,7 @@ function ProductCard({ product }) {
         </Link>
         <div>
           <div className="pc-priceblock">
-            {effectivePromotion() === false ? (
+            {effectivePromotion(promotion, ends) === false ? (
               <div className="pc-price font-weight-bold bolden">${price}</div>
             ) : (
               <>

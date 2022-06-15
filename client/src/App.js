@@ -4,8 +4,9 @@ import Homepage from "./pages/homepage";
 
 // Components
 import Accounts from "./pages/accounts";
-import PurchaseSuccess from "./pages/purchase-success";
 import Nav from "./components/Nav";
+import PurchaseSuccess from "./pages/purchase-success";
+import SingleProduct from "./pages/single-product";
 import ImageUpload from "./components/ImageUpload";
 
 // Apollo
@@ -44,6 +45,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="login" element={<Accounts formType={"login"} />} />
+          <Route path="product/:productId" element={<SingleProduct />} />
           <Route path="signup" element={<Accounts formType={"signup"} />} />
           <Route path="success" element={<PurchaseSuccess />} />
           <Route path="upload" element={<ImageUpload />} />
