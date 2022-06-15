@@ -1,4 +1,5 @@
 import React from "react";
+import ReactStars from "react-stars";
 import { DateTime } from "luxon";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -87,8 +88,9 @@ function ProductCard({ product }) {
               </>
             )}
           </div>
-
-          <div>Rating: {rating}</div>
+          <div>
+            <ReactStars count={5} value={rating} size={24} edit={false} />
+          </div>
           <div>
             {inventory <= 0 ? (
               <button className="addtocart-unavailable mt-2" disabled>
