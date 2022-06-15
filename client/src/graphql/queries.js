@@ -19,8 +19,13 @@ export const QUERY_CHECKOUT = gql`
 `;
 
 export const QUERY_ORDERS = gql`
-  query Orders($id: ID, $customer: ID, $status: String) {
-    orders(_id: $id, customer: $customer, status: $status) {
+  query Orders($id: ID, $customer: ID, $status: String, $stripeId: String) {
+    orders(
+      _id: $id
+      customer: $customer
+      status: $status
+      stripeId: $stripeId
+    ) {
       _id
       purchaseDate
       products {

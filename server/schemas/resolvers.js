@@ -154,7 +154,7 @@ const resolvers = {
     // Order
     orders: async (parent, { _id, customer, status, stripeId }) => {
       const params = {};
-
+      console.log(stripeId);
       if (_id) {
         params._id = _id;
       }
@@ -277,7 +277,9 @@ const resolvers = {
       return Product.findByIdAndDelete({ _id });
     },
     updateProduct: async (parent, { input }) => {
-      input.images = input.images.push(input.mainImage);
+      // Might need a different route for images since this messes up normal updates
+      // input.images = input.images.push(input.mainImage);
+      console.log(input);
       return Product.findByIdAndUpdate(input._id, input, { new: true })
         .populate("category")
         .populate("promotion")

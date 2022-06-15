@@ -164,7 +164,7 @@ const typeDefs = gql`
   type Query {
     categories: [Category]
     checkout(products: [ID]!): Checkout
-    orders(_id: ID, customer: ID, status: String): [Order]
+    orders(_id: ID, customer: ID, status: String, stripeId: String): [Order]
     products(_id: ID): [Product]
     promotions(_id: ID): [Promotion]
     reviews(_id: ID): [Review]

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { loggedOutRedirect, noSessionRedirect } from "../utils/helpers";
 import { useSuccessfulPurchase } from "../hooks/orderHooks";
+import { useProducts } from "../hooks/productHooks";
 import { QUERY_SESSION } from "../graphql/queries";
 
 function PurchaseSuccess() {
@@ -16,6 +17,7 @@ function PurchaseSuccess() {
   noSessionRedirect(sessionId);
 
   useSuccessfulPurchase(data);
+  useProducts();
 
   return (
     <div className="mt-5">
