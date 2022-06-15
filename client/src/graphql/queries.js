@@ -9,9 +9,23 @@ export const QUERY_CATEGORIES = gql`
   }
 `;
 
+// Requires an array of product IDs
+export const QUERY_CHECKOUT = gql`
+  query getCheckout($products: [ID]!) {
+    checkout(products: $products) {
+      session
+    }
+  }
+`;
+
 export const QUERY_ORDERS = gql`
-  query Orders($id: ID, $customer: ID, $status: String) {
-    orders(_id: $id, customer: $customer, status: $status) {
+  query Orders($id: ID, $customer: ID, $status: String, $stripeId: String) {
+    orders(
+      _id: $id
+      customer: $customer
+      status: $status
+      stripeId: $stripeId
+    ) {
       _id
       purchaseDate
       products {
@@ -28,11 +42,14 @@ export const QUERY_ORDERS = gql`
         email
       }
       status
+      stripeId
+      paymentStatus
       deliveryAddress
       shippingType
       shippingCost
       tax
-      productsTotal
+      subtotal
+      total
     }
   }
 `;
@@ -103,6 +120,36 @@ export const QUERY_REVIEWS = gql`
         _id
         username
         email
+      }
+    }
+  }
+`;
+
+export const QUERY_SESSION = gql`
+  query Session($sessionId: ID) {
+    session(id: $sessionId) {
+      session {
+        id
+        amount_subtotal
+        amount_total
+        payment_status
+        shipping {
+          address {
+            city
+            country
+            line1
+            line2
+            postal_code
+            state
+          }
+        }
+      }
+      shipping {
+        id
+        display_name
+        fixed_amount {
+          amount
+        }
       }
     }
   }

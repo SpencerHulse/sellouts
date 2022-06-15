@@ -33,12 +33,12 @@ export const ADD_ORDER = gql`
       _id
       purchaseDate
       products {
-        _id
-        name
-        mainImage
         category {
           name
         }
+        _id
+        name
+        mainImage
       }
       customer {
         _id
@@ -46,10 +46,14 @@ export const ADD_ORDER = gql`
         email
       }
       status
+      stripeId
+      paymentStatus
       deliveryAddress
       shippingType
       shippingCost
       tax
+      subtotal
+      total
     }
   }
 `;
@@ -74,12 +78,12 @@ export const UPDATE_ORDER = gql`
       _id
       purchaseDate
       products {
-        _id
-        name
-        mainImage
         category {
           name
         }
+        _id
+        name
+        mainImage
       }
       customer {
         _id
@@ -87,11 +91,14 @@ export const UPDATE_ORDER = gql`
         email
       }
       status
+      stripeId
+      paymentStatus
       deliveryAddress
       shippingType
       shippingCost
       tax
-      productsTotal
+      subtotal
+      total
     }
   }
 `;

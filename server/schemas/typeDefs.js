@@ -16,17 +16,24 @@ const typeDefs = gql`
     name: String
   }
 
+  type Checkout {
+    session: ID
+  }
+
   type Order {
     _id: ID
     purchaseDate: String
     products: [Product]
     customer: User
     status: String
+    stripeId: String
+    paymentStatus: String
     deliveryAddress: String
     shippingType: String
     shippingCost: Float
     tax: Float
-    productsTotal: Float
+    subtotal: Float
+    total: Float
   }
 
   input OrderInput {
@@ -35,10 +42,14 @@ const typeDefs = gql`
     products: [ID]
     customer: ID
     status: String
+    stripeId: String
+    paymentStatus: String
     deliveryAddress: String
     shippingType: String
     shippingCost: Float
     tax: Float
+    subtotal: Float
+    total: Float
   }
 
   type Product {
@@ -107,6 +118,42 @@ const typeDefs = gql`
     user: ID
   }
 
+  type Stripe {
+    session: StripeSession
+    shipping: StripeShippingRate
+  }
+
+  type StripeSession {
+    id: ID
+    amount_subtotal: Int
+    amount_total: Int
+    payment_status: String
+    shipping: StripeShipping
+  }
+
+  type StripeShipping {
+    address: StripeAddress
+  }
+
+  type StripeAddress {
+    city: String
+    country: String
+    line1: String
+    line2: String
+    postal_code: String
+    state: String
+  }
+
+  type StripeShippingRate {
+    id: ID
+    display_name: String
+    fixed_amount: StripeFixedRate
+  }
+
+  type StripeFixedRate {
+    amount: Int
+  }
+
   type User {
     _id: ID
     username: String
@@ -116,10 +163,12 @@ const typeDefs = gql`
 
   type Query {
     categories: [Category]
-    orders(_id: ID, customer: ID, status: String): [Order]
+    checkout(products: [ID]!): Checkout
+    orders(_id: ID, customer: ID, status: String, stripeId: String): [Order]
     products(_id: ID): [Product]
     promotions(_id: ID): [Promotion]
     reviews(_id: ID): [Review]
+    session(id: ID): Stripe
     uploadImage(mainImage: String!): AmazonS3
     users(_id: ID): [User]
   }

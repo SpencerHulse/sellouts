@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import { TiShoppingCart } from "react-icons/ti";
 import CartItem from "../CartItem";
+import Checkout from "../Checkout";
 import Auth from "../../../utils/auth";
 import { calculateTotal } from "../../../utils/helpers";
 import { useSelector, useDispatch } from "react-redux";
@@ -64,19 +65,7 @@ function ShoppingCart() {
                 </p>
               </div>
               {Auth.loggedIn() ? (
-                cartItems.length ? (
-                  <div className="">
-                    <button type="submit" className="">
-                      Checkout
-                    </button>
-                  </div>
-                ) : (
-                  <div className="mt-10">
-                    <button type="submit" className="" disabled>
-                      Checkout
-                    </button>
-                  </div>
-                )
+                <Checkout cartItems={cartItems} />
               ) : (
                 <span>
                   (

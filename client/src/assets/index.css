@@ -2,12 +2,16 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
+}
+
+:root {
+  --primary-background: rgb(236, 236, 236);
 }
 
 .navbar {
   height: 60px;
-  background-color: rgb(236, 236, 236);
+  background-color: var(--primary-background);
   font-size: 20px;
 }
 
@@ -22,7 +26,7 @@
 
 .addtocart {
   width: 200px;
-  background-image: url('./shopping-cart-01.png');
+  background-image: url("./shopping-cart-01.png");
   background-size: contain;
   background-repeat: no-repeat;
   padding: 0 0 0 20px;
@@ -34,4 +38,22 @@
 .addtocart:hover {
   background-color: rgb(211, 211, 211);
   border: 3px solid rgb(211, 211, 211);
+}
+
+/* Success Page */
+.success-header {
+  height: 50px;
+  background-color: var(--primary-background);
+}
+
+.success-container {
+  width: 300px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .success-container {
+    width: 600px;
+    height: 250px;
+  }
 }

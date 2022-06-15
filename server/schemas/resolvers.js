@@ -1,5 +1,6 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { DateTime } = require("luxon");
+require("dotenv").config();
 const { signToken } = require("../utils/auth");
 const { generateUploadURL } = require("../utils/aws-s3");
 const {
@@ -10,6 +11,7 @@ const {
   Review,
   User,
 } = require("../models");
+const stripe = require("stripe")(process.env.STRIPE_SK);
 
 const resolvers = {
   Query: {
@@ -18,8 +20,143 @@ const resolvers = {
       const categories = await Category.find({});
       return categories;
     },
+    checkout: async (parent, args, context) => {
+      // Parse out the referring URL
+      const url = new URL(context.headers.referer).origin;
+      const order = new Order({ products: args.products });
+      const { products } = await order.populate("products");
+      await order.populate({
+        path: "products",
+        populate: "promotion",
+      });
+
+      const line_items = [];
+      const orderSummary = [];
+
+      await products.forEach((product) => {
+        const { _id, name, description, price, promotionPrice, mainImage } =
+          product;
+        let updated = false;
+
+        orderSummary.map((orderProduct) => {
+          if (orderProduct[0]._id === _id) {
+            orderProduct[0].quantityPurchased += 1;
+            updated = true;
+          }
+          return orderProduct;
+        });
+
+        if (!updated) {
+          const productSummary = [
+            {
+              _id,
+              name,
+              description,
+              price,
+              promotionPrice,
+              mainImage,
+              quantityPurchased: 1,
+            },
+          ];
+          orderSummary.push(productSummary);
+        }
+      });
+
+      for (let i = 0; i < orderSummary.length; i++) {
+        // generate product id
+        const product = await stripe.products.create({
+          name: orderSummary[i][0].name,
+          description: orderSummary[i][0].description,
+        });
+        // generate price id using the product id
+        let usedPrice = orderSummary[i][0].price;
+        if (orderSummary[i][0].promotionPrice) {
+          usedPrice = orderSummary[i][0].promotionPrice;
+        }
+        const price = await stripe.prices.create({
+          product: product.id,
+          /* Because stripe requires cost in cents */
+          unit_amount: Math.round(usedPrice * 100),
+          currency: "usd",
+          tax_behavior: "exclusive",
+        });
+        const taxRate = await stripe.taxRates.create({
+          display_name: "Sales Tax",
+          inclusive: false,
+          percentage: 7.25,
+          country: "US",
+          state: "CA",
+          jurisdiction: "US - CA",
+          description: "CA Sales Tax",
+        });
+        // add price id to the line items array
+        line_items.push({
+          price: price.id,
+          quantity: orderSummary[i][0].quantityPurchased,
+          tax_rates: [taxRate.id],
+        });
+      }
+
+      // Checkout session
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ["card"],
+        line_items,
+        mode: "payment",
+        shipping_address_collection: {
+          allowed_countries: ["US"],
+        },
+        shipping_options: [
+          {
+            shipping_rate_data: {
+              type: "fixed_amount",
+              fixed_amount: {
+                amount: 0,
+                currency: "usd",
+              },
+              display_name: "Free shipping",
+              // Delivers between 5-7 business days
+              delivery_estimate: {
+                minimum: {
+                  unit: "business_day",
+                  value: 5,
+                },
+                maximum: {
+                  unit: "business_day",
+                  value: 7,
+                },
+              },
+            },
+          },
+          {
+            shipping_rate_data: {
+              type: "fixed_amount",
+              fixed_amount: {
+                amount: 1499,
+                currency: "usd",
+              },
+              display_name: "Next day air",
+              // Delivers in exactly 1 business day
+              delivery_estimate: {
+                minimum: {
+                  unit: "business_day",
+                  value: 1,
+                },
+                maximum: {
+                  unit: "business_day",
+                  value: 1,
+                },
+              },
+            },
+          },
+        ],
+        success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${url}/`,
+      });
+
+      return { session: session.id };
+    },
     // Order
-    orders: async (parent, { _id, customer, status }) => {
+    orders: async (parent, { _id, customer, status, stripeId }) => {
       const params = {};
 
       if (_id) {
@@ -30,6 +167,9 @@ const resolvers = {
       }
       if (status) {
         params.status = status;
+      }
+      if (stripeId) {
+        params.stripeId = stripeId;
       }
 
       const orders = await Order.find(params)
@@ -80,6 +220,13 @@ const resolvers = {
       }
       const reviews = await Review.find(params).populate("user");
       return reviews;
+    },
+    session: async (parent, args) => {
+      const session = await stripe.checkout.sessions.retrieve(args.id);
+      const shipping = await stripe.shippingRates.retrieve(
+        session.shipping_rate
+      );
+      return { session, shipping };
     },
     // Upload Image to AWS S3 Bucket
     uploadImage: async (parent, { mainImage }) => {
@@ -134,7 +281,9 @@ const resolvers = {
       return Product.findByIdAndDelete({ _id });
     },
     updateProduct: async (parent, { input }) => {
-      input.images = input.images.push(input.mainImage);
+      // Might need a different route for images since this messes up normal updates
+      // input.images = input.images.push(input.mainImage);
+      // console.log(input);
       return Product.findByIdAndUpdate(input._id, input, { new: true })
         .populate("category")
         .populate("promotion")
@@ -201,7 +350,6 @@ const resolvers = {
     addUser: async (parent, args) => {
       let usernameCheck = await User.find({ username: args.username });
       if (usernameCheck.length) {
-        console.log(usernameCheck);
         return { message: "Username already exists" };
       }
 
