@@ -58,7 +58,7 @@ const productSchema = new Schema(
 productSchema.virtual("promotionPrice").get(function () {
   if (!this.promotion) return this.price;
   // Process to ensure not round to whole dollar amounts after promotion
-  let promotionPrice = this.price * (this.promotion.percentage / 100);
+  let promotionPrice = this.price * ((100 - this.promotion.percentage) / 100);
   promotionPrice = promotionPrice * 100;
   return Math.trunc(promotionPrice) / 100;
 });

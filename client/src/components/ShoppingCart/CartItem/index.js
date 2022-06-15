@@ -35,62 +35,54 @@ const CartItem = ({ item }) => {
   }
 
   return (
-    <li key={product.id} className="flex cart-list">
-      <div className="orderlist-img">
+    <li key={product.id} className="">
+      <div className="">
         <img
           src={product.primaryImage}
           alt={`${product.name} ${product.category.categoryName}`}
         />
       </div>
-      <div className="ml-4 flex-1 flex flex-col">
+      <div className="">
         <div>
-          <div className="flex justify-between">
-            <h4 className="text-sm">
-              <a
-                href={product.href}
-                className="font-medium text-gray-700 hover:text-gray-800 dark:text-white"
-              >
+          <div className="">
+            <h4 className="">
+              <a href={product.href} className="">
                 {product.name}
               </a>
               <div>
-                <button
-                  type="button"
-                  className="text-sm font-medium text-indigo-600 hover:text-indigo-500"
-                >
+                <button type="button" className="">
                   <span
                     aria-label="trash"
                     onClick={() => {
                       dispatch(removeFromCart(item));
                       idbPromise("cart", "delete", { _id: product._id });
                     }}
-                    className="text-green-700 hover:text-green-700 dark:text-green-600"
+                    className=""
                   >
                     Remove
                   </span>
                 </button>
               </div>
             </h4>
-            <div className="ml-4 ">
-              <p className="mb-4 text-sm font-medium text-gray-900 dark:text-white">
-                {product.price}
-              </p>
+            <div className=" ">
+              <p className="">{product.promotionPrice}</p>
               <label htmlFor={`quantity-`} className="sr-only">
                 Quantity, {product.name}
               </label>
               <input
                 id={`quantity-`}
                 name={`quantity-`}
-                className="dark:bg-[#333333] dark:text-white product-quantity block max-w-full rounded-md border border-gray-300 py-1.5 text-base leading-5 font-medium text-gray-700 text-left shadow-sm focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm cart-quantity-pad"
+                className=""
                 value={purchaseQuantity}
                 onChange={onChange}
                 type="number"
               />
             </div>
           </div>
-          <p className="mt-1 text-sm text-gray-500">{product.color}</p>
-          <p className="mt-1 text-sm text-gray-500">{product.size}</p>
+          <p className="">{product.color}</p>
+          <p className="">{product.size}</p>
         </div>
-        <div className="mt-4 flex-1 flex items-end justify-between"></div>
+        <div className=""></div>
       </div>
     </li>
   );

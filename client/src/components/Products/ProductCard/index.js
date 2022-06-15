@@ -1,4 +1,5 @@
 import React from "react";
+import { DateTime } from "luxon";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../../redux/features/cartSlice";
@@ -9,14 +10,20 @@ function ProductCard({ product }) {
   const { name: category } = product.category;
   const {
     _id,
-    description,
     inventory,
     mainImage,
     name,
     price,
+    promotion,
     promotionPrice,
     rating,
   } = product;
+  let percentage, ends;
+
+  if (promotion) {
+    percentage = promotion.percentage;
+    ends = promotion.ends;
+  }
 
   const dispatch = useDispatch();
   const { cartItems } = useSelector((state) => state.cart);
@@ -40,12 +47,9 @@ function ProductCard({ product }) {
     }
   };
 
-  function percentDifference(price, percentDifference) {
-    const percent = price - percentDifference / price * 100;
-
-    return (
-      Math.abs(percent.toFixed(2))
-    );
+  function effectivePromotion() {
+    const date = DateTime.now().toLocaleString(DateTime.DATE_SHORT);
+    return !promotion ? false : ends > date ? true : false;
   }
 
   return (
@@ -63,25 +67,25 @@ function ProductCard({ product }) {
         </Link>
         <div>
           <div className="pc-priceblock">
-            {promotionPrice === price ?
+            {effectivePromotion() === false ? (
               <div className="pc-price font-weight-bold bolden">${price}</div>
-              :
+            ) : (
               <>
                 <div className="d-xs-column d-md-flex">
-                  <div className="pc-price text-decoration-line-through me-2">${price}</div>
+                  <div className="pc-price text-decoration-line-through me-2">
+                    ${price}
+                  </div>
                   <div className="pc-price pc-promoprice">
                     <div className="d-sm-column d-md-flex">
                       <div>
                         <span className="bolden me-1">${promotionPrice}</span>
                       </div>
-                      <div>
-                        ({percentDifference(price, promotionPrice)} % off)
-                      </div>
+                      <div>({percentage}% off)</div>
                     </div>
                   </div>
                 </div>
               </>
-            }
+            )}
           </div>
 
           <div>Rating: {rating}</div>
@@ -91,7 +95,10 @@ function ProductCard({ product }) {
                 Unavailable
               </button>
             ) : (
-              <button className="addtocart mt-2" onClick={() => addItemToCart(1)}>
+              <button
+                className="addtocart mt-2"
+                onClick={() => addItemToCart(1)}
+              >
                 Add to Cart
               </button>
             )}
