@@ -24,7 +24,7 @@ function FilterOptions() {
               key={category._id}
               onClick={() => categoryHandler(category.name)}
             >
-              {category.name}
+              {capitalizeFirstLetter(category.name)}
             </div>
           ))}
         </div>

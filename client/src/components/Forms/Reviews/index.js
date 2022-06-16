@@ -1,10 +1,19 @@
 import React, { useState } from "react";
 import ReactStars from "react-stars";
+import { useMutation } from "@apollo/client";
+import { ADD_REVIEW } from "../../../graphql/mutations";
 import Auth from "../../../utils/auth";
 
 function ReviewForm({ currentProduct }) {
   const [formOpen, setFormOpen] = useState(false);
-  const [formState, setFormState] = useState({ rating: 0 });
+  const [formState, setFormState] = useState({
+    _id: currentProduct._id,
+    user: Auth.getProfile().data._id,
+    review: "",
+    rating: 0,
+  });
+
+  const [addReview] = useMutation(ADD_REVIEW);
 
   // Checks if the user has already reviewed the product.
   const reviewed = currentProduct.reviews.filter((review) => {
@@ -15,6 +24,16 @@ function ReviewForm({ currentProduct }) {
     setFormState({ ...formState, rating: newRating });
   }
   console.log(formState);
+  function handleFormUpdate(event) {
+    const { name, value } = event.target;
+    setFormState({ ...formState, [name]: value });
+  }
+
+  function handleFormSubmit(event) {
+    event.preventDefault();
+    addReview({ variables: { input: { ...formState } } });
+  }
+
   return (
     <>
       {!reviewed && (
@@ -24,16 +43,27 @@ function ReviewForm({ currentProduct }) {
         </div>
       )}
       {formOpen && (
-        <div>
-          <ReactStars
-            count={5}
-            size={24}
-            value={formState.rating}
-            edit={true}
-            half={false}
-            onChange={handleStars}
-          />
-        </div>
+        <form onSubmit={handleFormSubmit}>
+          <div>
+            <ReactStars
+              count={5}
+              size={24}
+              value={formState.rating}
+              edit={true}
+              half={false}
+              onChange={handleStars}
+            />
+            <textarea
+              name="review"
+              id="review"
+              cols="50"
+              rows="5"
+              value={formState.review}
+              onChange={handleFormUpdate}
+            />
+          </div>
+          <button type="submit">Submit</button>
+        </form>
       )}
     </>
   );

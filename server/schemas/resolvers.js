@@ -307,7 +307,7 @@ const resolvers = {
     },
     // Review Mutations
     addReview: async (parent, { input }) => {
-      const productId = "629d7fa4215221c7a483c678"; // Placeholder
+      const productId = input._id;
       const review = await Review.create(input);
       const id = review._id.toString();
       const product = Product.findByIdAndUpdate(
@@ -325,7 +325,7 @@ const resolvers = {
       return product;
     },
     deleteReview: async (parent, { _id }) => {
-      const productId = "629d7fa4215221c7a483c678"; // Placeholder
+      const productId = input._id;
       await Review.findByIdAndDelete(_id);
       const product = Product.findByIdAndUpdate(
         { _id: productId },
