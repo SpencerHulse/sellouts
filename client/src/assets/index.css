@@ -3,18 +3,25 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
-  
 }
 
 :root {
   --primary-background: rgb(236, 236, 236);
   --brand-color: #7f60db;
-  --brand-color-hover: rgb(243, 239, 255);
+  --brand-color: #7f60db;
+}
+
+a {
+  color: var(--brand-color)!important;
+}
+
+a:hover {
+  color: var(--brand-color)!important;
 }
 
 .navbar {
   height: 60px;
-  background-color: var(--primary-background);
+  background-color: white;
   font-size: 20px;
 }
 
@@ -104,6 +111,23 @@
 
 .dropdown-button:hover {
   background-color: var(--brand-color-hover);
+}
+
+.bg-tint {
+  background-color: rgb(230, 230, 230)!important;
+}
+
+.fullpage {
+  min-height: calc(100vh - 60px);
+}
+
+.product-image {
+  width: 100%;
+}
+
+.product-description {
+  max-height: 300px;
+  overflow: scroll;
 }
 
 @media (min-width: 768px) {

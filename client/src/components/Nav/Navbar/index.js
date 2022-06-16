@@ -43,7 +43,7 @@ function Navbar() {
         </ul>
       </div>
       <div>
-        <NavLink to="/" className="logo col-4">
+        <NavLink to="/" className="logo col-4 text-black">
           Sellouts
         </NavLink>
       </div>
