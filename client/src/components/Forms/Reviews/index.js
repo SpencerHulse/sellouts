@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactStars from "react-stars";
 import { useMutation } from "@apollo/client";
 import { ADD_REVIEW } from "../../../graphql/mutations";
@@ -23,14 +23,13 @@ function ReviewForm({ currentProduct }) {
   function handleStars(newRating) {
     setFormState({ ...formState, rating: newRating });
   }
-  console.log(formState);
+
   function handleFormUpdate(event) {
     const { name, value } = event.target;
     setFormState({ ...formState, [name]: value });
   }
 
-  function handleFormSubmit(event) {
-    event.preventDefault();
+  function handleFormSubmit() {
     addReview({ variables: { input: { ...formState } } });
   }
 
