@@ -15,14 +15,18 @@ function FilterOptions() {
 
   return (
     <div>
-
       <div className="new-dropdown">
         <button className="dropdown-button">Category</button>
         <div className="dropdown-content">
-        {categoryData.map((category) => (
-          <div className="dd-item" onClick={() => categoryHandler(category.name)}>{category.name}
-          </div>
-        ))}
+          {categoryData.map((category) => (
+            <div
+              className="dd-item"
+              key={category._id}
+              onClick={() => categoryHandler(category.name)}
+            >
+              {category.name}
+            </div>
+          ))}
         </div>
       </div>
     </div>

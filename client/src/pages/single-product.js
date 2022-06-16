@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ReactStars from "react-stars";
+import ReviewList from "../components/ReviewList";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { updateProducts } from "../redux/features/productSlice";
@@ -8,6 +9,8 @@ import { useQuery } from "@apollo/client";
 import { QUERY_PRODUCTS } from "../graphql/queries";
 
 import { effectivePromotion } from "../utils/helpers";
+import Auth from "../utils/auth";
+import ReviewForm from "../components/Forms/Reviews";
 
 function SingleProduct() {
   const [currentProduct, setCurrentProduct] = useState("");
@@ -92,35 +95,9 @@ function SingleProduct() {
           </div>
           <div>{currentProduct.description}</div>
           <div>
+            {Auth.loggedIn() && <ReviewForm currentProduct={currentProduct} />}
             {currentProduct.reviews.length ? (
-              currentProduct.reviews.map((review) => {
-                const {
-                  _id,
-                  user,
-                  review: userReview,
-                  rating,
-                  upvotes,
-                  downvotes,
-                } = review;
-                return (
-                  <div key={_id}>
-                    <h3>
-                      Review by {user.username}
-                      <ReactStars
-                        count={5}
-                        value={rating}
-                        size={24}
-                        edit={false}
-                      />
-                    </h3>
-                    <p>{userReview}</p>
-                    <p>
-                      {upvotes} users found this useful. {downvotes} users found
-                      this unhelpful
-                    </p>
-                  </div>
-                );
-              })
+              <ReviewList currentProduct={currentProduct} />
             ) : (
               <div>There are no reviews yet. Be the first to leave one!</div>
             )}
