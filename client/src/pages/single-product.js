@@ -89,7 +89,9 @@ function SingleProduct() {
                       color2={"#7f60db"}
                       color1={"rgba(0, 0, 0, 0.19)"}
                     />
-                    <div className="review-button ms-2">(14 reviews)</div>
+                    <div className="review-button ms-2">
+                      ({currentProduct.reviews.length} reviews)
+                    </div>
                   </div>
                   <div className="d-none">
                     <ul>

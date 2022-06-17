@@ -9,6 +9,7 @@ function ReviewForm({ currentProduct }) {
   const [formState, setFormState] = useState({
     _id: currentProduct._id,
     user: Auth.getProfile().data._id,
+    title: "",
     review: "",
     rating: 0,
   });
@@ -29,7 +30,8 @@ function ReviewForm({ currentProduct }) {
     setFormState({ ...formState, [name]: value });
   }
 
-  function handleFormSubmit() {
+  function handleFormSubmit(event) {
+    event.preventDefault();
     addReview({ variables: { input: { ...formState } } });
   }
 

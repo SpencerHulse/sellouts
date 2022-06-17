@@ -6,6 +6,7 @@ function ReviewList({ currentProduct }) {
   const [visibleReviews, setVisibleReviews] = useState([
     ...currentProduct.reviews.slice(0, 5),
   ]);
+  const [sort, setSort] = useState("newest");
 
   const pages = Math.floor(currentProduct.reviews.length / 5 + 1);
 
@@ -18,14 +19,50 @@ function ReviewList({ currentProduct }) {
   }
 
   useEffect(() => {
+    let reviews = [...currentProduct.reviews];
     const start = (page - 1) * 5;
     const end = page * 5;
-    setVisibleReviews(currentProduct.reviews.slice(start, end));
-  }, [currentProduct.reviews, page]);
+    if (sort === "newest") {
+      reviews.sort(function (a, b) {
+        if (a.createdAt > b.createdAt) return -1;
+        if (a.createdAt < b.createdAt) return 1;
+        return 0;
+      });
+    } else if (sort === "oldest") {
+      reviews.sort(function (a, b) {
+        if (a.createdAt < b.createdAt) return -1;
+        if (a.createdAt > b.createdAt) return 1;
+        return 0;
+      });
+    } else if (sort === "high") {
+      reviews.sort(function (a, b) {
+        if (a.rating > b.rating) return -1;
+        if (a.rating < b.rating) return 1;
+        return 0;
+      });
+    } else if (sort === "low") {
+      reviews.sort(function (a, b) {
+        if (a.rating < b.rating) return -1;
+        if (a.rating > b.rating) return 1;
+        return 0;
+      });
+    }
+
+    setVisibleReviews(reviews.slice(start, end));
+  }, [currentProduct.reviews, page, sort]);
 
   return (
     <>
-      {visibleReviews.map((review, index) => {
+      <div>
+        Sort by:{" "}
+        <select onChange={(e) => setSort(e.target.value)}>
+          <option value="newest">Newest</option>
+          <option value="oldest">Oldest</option>
+          <option value="high">High Rating</option>
+          <option value="low">Low Rating</option>
+        </select>
+      </div>
+      {visibleReviews.map((review) => {
         const {
           _id,
           createdAt,
@@ -35,7 +72,7 @@ function ReviewList({ currentProduct }) {
           rating,
         } = review;
         return (
-          <div key={_id + index} className="mb-4">
+          <div key={_id} className="mb-4">
             <div className="d-flex justify-content-center">
               <ReactStars
                 count={5}

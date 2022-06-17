@@ -37,13 +37,12 @@ function Hamburger() {
             </Link>
           </li>
           <li onClick={toggleHamburger}>
-            <Link
-              to="/"
-              className="hamburger-item"
+            <div
+              className="hamburger-item logout"
               onClick={() => Auth.logout()}
             >
               Logout
-            </Link>
+            </div>
           </li>
         </ul>
       </div>

@@ -93,6 +93,7 @@
   font-weight: bold;
   font-size: x-large;
   cursor: pointer;
+  text-decoration: none;
 }
 
 @media (min-width: 768px) {

@@ -25,6 +25,10 @@ a:hover {
   font-size: 20px;
 }
 
+.logout {
+  color: var(--brand-color) !important;
+}
+
 .logo {
   text-decoration: none;
   color: black;

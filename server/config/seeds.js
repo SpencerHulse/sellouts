@@ -20,36 +20,99 @@ db.once("open", async () => {
   });
 
   await User.create({
-    username: "a",
+    username: "Able",
     email: "a@example.com",
     password: "password",
     admin: false,
   });
 
   await User.create({
-    username: "b",
+    username: "Barney",
     email: "b@example.com",
     password: "password",
     admin: false,
   });
 
   await User.create({
-    username: "c",
+    username: "Carol",
     email: "c@example.com",
     password: "password",
     admin: false,
   });
 
   await User.create({
-    username: "d",
+    username: "Daniel",
     email: "d@example.com",
     password: "password",
     admin: false,
   });
 
   await User.create({
-    username: "e",
+    username: "Ellen",
     email: "e@example.com",
+    password: "password",
+    admin: false,
+  });
+
+  await User.create({
+    username: "Francis",
+    email: "f@example.com",
+    password: "password",
+    admin: false,
+  });
+
+  await User.create({
+    username: "Garrus",
+    email: "g@example.com",
+    password: "password",
+    admin: false,
+  });
+
+  await User.create({
+    username: "Helen",
+    email: "h@example.com",
+    password: "password",
+    admin: false,
+  });
+
+  await User.create({
+    username: "Indigo",
+    email: "i@example.com",
+    password: "password",
+    admin: false,
+  });
+
+  await User.create({
+    username: "Jack",
+    email: "j@example.com",
+    password: "password",
+    admin: false,
+  });
+
+  await User.create({
+    username: "Kelly",
+    email: "k@example.com",
+    password: "password",
+    admin: false,
+  });
+
+  await User.create({
+    username: "Larson",
+    email: "l@example.com",
+    password: "password",
+    admin: false,
+  });
+
+  await User.create({
+    username: "Miranda",
+    email: "m@example.com",
+    password: "password",
+    admin: false,
+  });
+
+  await User.create({
+    username: "Nora",
+    email: "n@example.com",
     password: "password",
     admin: false,
   });
@@ -97,6 +160,9 @@ db.once("open", async () => {
       title: "Commander Shepard only recommends the best!",
       review:
         "My name is Commander Shepard, and this is my favorite shop on the citadel.",
+      createdAt: DateTime.now()
+        .plus({ days: 1 })
+        .toLocaleString(DateTime.DATETIME_SHORT),
       rating: 5,
       upvotes: 27,
       downvotes: 2,
@@ -106,10 +172,13 @@ db.once("open", async () => {
       title: "Fantastic deal",
       review:
         "Absolutely a great deal, and you will not regret grabbing one for yourself.",
+      createdAt: DateTime.now()
+        .plus({ days: 2 })
+        .toLocaleString(DateTime.DATETIME_SHORT),
       rating: 4,
       upvotes: 4,
       downvotes: 1,
-      user: users[3]._id,
+      user: users[1]._id,
     },
     {
       title: "Ridiculous product",
@@ -118,6 +187,93 @@ db.once("open", async () => {
       upvotes: 3,
       downvotes: 120,
       user: users[2]._id,
+    },
+    {
+      title: "It's not bad",
+      review: "Not the best, but it's not the worst, either.",
+      rating: 4,
+      upvotes: 3,
+      downvotes: 120,
+      user: users[3]._id,
+    },
+    {
+      title: "Looks great!",
+      review: "Worth!",
+      rating: 5,
+      upvotes: 3,
+      downvotes: 120,
+      user: users[4]._id,
+    },
+    {
+      title: "Not just a simple hat",
+      review:
+        "Few people know the history of this hat, which first made its appearance on French beaches in 1934. But since it's arrival, life as we know it has changed, with the sun no longer standing a change against its superior protection. It's stylish, too.",
+      rating: 5,
+      upvotes: 3,
+      downvotes: 120,
+      user: users[5]._id,
+    },
+    {
+      title: "Great deal",
+      review: "I got mine on sale for two bucks.",
+      rating: 4,
+      upvotes: 3,
+      downvotes: 120,
+      user: users[6]._id,
+    },
+    {
+      title: "Started showing signs of wear after a week.",
+      review:
+        "Not sure why they sell products that can't remain perfectly fine after an Amazon Jungle trip, but it's disappointing.",
+      createdAt: DateTime.now()
+        .plus({ days: 10 })
+        .toLocaleString(DateTime.DATETIME_SHORT),
+      rating: 2,
+      upvotes: 3,
+      downvotes: 120,
+      user: users[7]._id,
+    },
+    {
+      title: "Trash",
+      review: "Already threw mine away.",
+      rating: 1,
+      upvotes: 3,
+      downvotes: 120,
+      user: users[8]._id,
+    },
+    {
+      title: "Great product, odd fit.",
+      review:
+        "High quality hat, but it didn't fit my father's head. I'm the one wearing it now.",
+      rating: 4,
+      upvotes: 3,
+      downvotes: 120,
+      user: users[9]._id,
+    },
+    {
+      title: "Bald no more!",
+      review: "Or so people may believe when I'm wearing this great hat.",
+      rating: 4,
+      upvotes: 3,
+      downvotes: 120,
+      user: users[10]._id,
+    },
+    {
+      title: "FLAMMABLE!",
+      review:
+        "Caught fire while I was grilling! No warning and they won't offer me a refund. Garbage!",
+      rating: 1,
+      upvotes: 3,
+      downvotes: 120,
+      user: users[11]._id,
+    },
+    {
+      title: "Odd material",
+      review: "It's a bit scratchy when worn for long periods.",
+      rating: 3,
+      upvotes: 3,
+      downvotes: 120,
+      user: users[12]._id,
     },
   ]);
 
@@ -138,21 +294,17 @@ db.once("open", async () => {
       promotion: promotions[0],
       reviews: [
         reviews[0]._id,
-        reviews[2]._id,
         reviews[1]._id,
-        reviews[0]._id,
-        reviews[0]._id,
-        reviews[0]._id,
-        reviews[0]._id,
-        reviews[0]._id,
-        reviews[0]._id,
-        reviews[0]._id,
-        reviews[0]._id,
-        reviews[0]._id,
-        reviews[0]._id,
-        reviews[0]._id,
-        reviews[0]._id,
-        reviews[0]._id,
+        reviews[2]._id,
+        reviews[3]._id,
+        reviews[4]._id,
+        reviews[5]._id,
+        reviews[6]._id,
+        reviews[7]._id,
+        reviews[8]._id,
+        reviews[9]._id,
+        reviews[10]._id,
+        reviews[11]._id,
       ],
     },
     {
