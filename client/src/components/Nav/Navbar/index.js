@@ -1,9 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { selectCategory } from "../../../redux/features/categorySlice";
 import Auth from "../../../utils/auth";
 import "./style.css";
 
 function Navbar() {
+  const dispatch = useDispatch();
   return (
     <>
       <div className="col-4">
@@ -43,7 +46,11 @@ function Navbar() {
         </ul>
       </div>
       <div>
-        <NavLink to="/" className="logo col-4 text-black">
+        <NavLink
+          to="/"
+          className="logo col-4 text-black"
+          onClick={() => dispatch(selectCategory(""))}
+        >
           Sellouts
         </NavLink>
       </div>

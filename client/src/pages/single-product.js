@@ -111,7 +111,8 @@ function SingleProduct() {
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                       Ut ac hendrerit magna, sit amet feugiat est. Nunc a tempor
                       est. Nam dignissim ante eu urna ultrices accumsan.{" "}
-                      <a href="#">Read more</a>
+                      {/* href returning to the current page is a temp fix for a React warning. */}
+                      <a href={`/product/${currentProduct._id}`}>Read more</a>
                     </p>
                   </div>
                   <div>
