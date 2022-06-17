@@ -78,6 +78,7 @@ export const QUERY_PRODUCTS = gql`
       }
       reviews {
         _id
+        title
         review
         createdAt
         rating
@@ -111,6 +112,7 @@ export const QUERY_REVIEWS = gql`
   query Reviews($id: ID) {
     reviews(_id: $id) {
       _id
+      title
       review
       createdAt
       rating

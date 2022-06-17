@@ -100,6 +100,7 @@ const typeDefs = gql`
 
   type Review {
     _id: ID
+    title: String
     review: String
     createdAt: String
     rating: Int
@@ -110,6 +111,7 @@ const typeDefs = gql`
 
   input ReviewInput {
     _id: ID
+    title: String
     review: String
     createdAt: String
     rating: Int

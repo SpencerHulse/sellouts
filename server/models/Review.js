@@ -3,6 +3,12 @@ const { Schema } = mongoose;
 const { DateTime } = require("luxon");
 
 const reviewSchema = new Schema({
+  title: {
+    type: String,
+    required: true,
+    min: 1,
+    max: 50,
+  },
   review: {
     type: String,
     required: true,

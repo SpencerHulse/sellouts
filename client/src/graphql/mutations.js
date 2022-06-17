@@ -211,6 +211,7 @@ export const ADD_REVIEW = gql`
       }
       reviews {
         _id
+        title
         review
         createdAt
         rating
@@ -237,6 +238,7 @@ export const DELETE_REVIEW = gql`
       }
       reviews {
         _id
+        title
         review
         createdAt
         rating
@@ -256,6 +258,7 @@ export const UPDATE_REVIEW = gql`
   mutation UpdateReview($input: ReviewInput) {
     updateReview(input: $input) {
       _id
+      title
       review
       createdAt
       rating

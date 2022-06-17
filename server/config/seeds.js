@@ -94,6 +94,7 @@ db.once("open", async () => {
 
   const reviews = await Review.insertMany([
     {
+      title: "Commander Shepard only recommends the best!",
       review:
         "My name is Commander Shepard, and this is my favorite shop on the citadel.",
       rating: 5,
@@ -102,6 +103,7 @@ db.once("open", async () => {
       user: users[0]._id,
     },
     {
+      title: "Fantastic deal",
       review:
         "Absolutely a great deal, and you will not regret grabbing one for yourself.",
       rating: 4,
@@ -110,6 +112,7 @@ db.once("open", async () => {
       user: users[3]._id,
     },
     {
+      title: "Ridiculous product",
       review: "This doesn't let me see smells. Waste of money.",
       rating: 1,
       upvotes: 3,

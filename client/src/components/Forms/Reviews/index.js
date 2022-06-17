@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ReactStars from "react-stars";
 import { useMutation } from "@apollo/client";
 import { ADD_REVIEW } from "../../../graphql/mutations";

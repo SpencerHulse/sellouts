@@ -11,7 +11,6 @@ import { QUERY_PRODUCTS } from "../graphql/queries";
 import { effectivePromotion } from "../utils/helpers";
 import Auth from "../utils/auth";
 import ReviewForm from "../components/Forms/Reviews";
-import { current } from "@reduxjs/toolkit";
 
 function SingleProduct() {
   const [currentProduct, setCurrentProduct] = useState("");
@@ -49,13 +48,17 @@ function SingleProduct() {
             <div className="container">
               <div className="row gx-4 fullpage align-items-stretch">
                 <div className="col-xl-8 col-md-12 my-auto">
-                  <img src={require(`../assets/product-placeholder.png`)} alt={currentProduct.name} className="product-image" />
+                  <img
+                    src={require(`../assets/product-placeholder.png`)}
+                    alt={currentProduct.name}
+                    className="product-image"
+                  />
                 </div>
                 <div className="product-details p-4 h-100 col-xl-4 col-md-12 my-auto text-center">
                   <h1 className="fw-light mb-4">{currentProduct.name}</h1>
                   <div className="pc-priceblock mb-2">
                     {effectivePromotion(currentProduct.promotion, ends) ===
-                      false ? (
+                    false ? (
                       <div className="pc-price font-weight-bold bolden">
                         ${currentProduct.price}
                       </div>
@@ -78,7 +81,14 @@ function SingleProduct() {
                     )}
                   </div>
                   <div className="d-flex justify-content-center mb-3">
-                    <ReactStars count={5} value={currentProduct.rating} size={18} edit={false} color2={'#7f60db'} color1={'rgba(0, 0, 0, 0.19)'} />
+                    <ReactStars
+                      count={5}
+                      value={currentProduct.rating}
+                      size={18}
+                      edit={false}
+                      color2={"#7f60db"}
+                      color1={"rgba(0, 0, 0, 0.19)"}
+                    />
                     <div className="review-button ms-2">(14 reviews)</div>
                   </div>
                   <div className="d-none">
@@ -86,7 +96,9 @@ function SingleProduct() {
                       {currentProduct.details.length ? (
                         currentProduct.details.map((detail, index) => {
                           return (
-                            <li key={`${productId}-detail-${index}`}>{detail}</li>
+                            <li key={`${productId}-detail-${index}`}>
+                              {detail}
+                            </li>
                           );
                         })
                       ) : (
@@ -95,30 +107,32 @@ function SingleProduct() {
                     </ul>
                   </div>
                   <div className="product-description lh-lg">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac hendrerit magna, sit amet feugiat est. Nunc a tempor est. Nam dignissim ante eu urna ultrices accumsan. <a href="#">Read more</a></p>
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Ut ac hendrerit magna, sit amet feugiat est. Nunc a tempor
+                      est. Nam dignissim ante eu urna ultrices accumsan.{" "}
+                      <a href="#">Read more</a>
+                    </p>
                   </div>
                   <div>
-                    <button
-                      className="addtocart mt-2"
-                    >
-                      Add to Cart
-                    </button>
+                    <button className="addtocart mt-2">Add to Cart</button>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div className="bg-tint pt-5 pb-5 text-center mb-4">
-
             <div className="container">
               <h1 className="fw-light mb-5">Product Description</h1>
               <div>{currentProduct.description}</div>
-              </div>
-              </div>
-              <div className="bg-tint p-5 text-center">
-                <div className="container">
+            </div>
+          </div>
+          <div className="bg-tint p-5 text-center">
+            <div className="container">
               <h1 className="fw-light mb-5">Product Reviews</h1>
-              {Auth.loggedIn() && <ReviewForm currentProduct={currentProduct} />}
+              {Auth.loggedIn() && (
+                <ReviewForm currentProduct={currentProduct} />
+              )}
               {currentProduct.reviews.length ? (
                 <ReviewList currentProduct={currentProduct} />
               ) : (
