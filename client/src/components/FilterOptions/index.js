@@ -93,7 +93,7 @@ function FilterOptions() {
         </div>
       </div>
       <div className="new-dropdown">
-        <button className="dropdown-button">On Sale</button>
+        <button className="dropdown-button">Promotions Only</button>
         <div className="dropdown-content">
           {saleOptions.map((option, index) => (
             <div

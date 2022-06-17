@@ -5,7 +5,7 @@ import { updateProducts } from "../../redux/features/productSlice";
 // Apollo/GraphQL
 import { useQuery } from "@apollo/client";
 import { QUERY_PRODUCTS } from "../../graphql/queries";
-import { idbPromise } from "../../utils/helpers";
+import { idbPromise, effectivePromotion } from "../../utils/helpers";
 
 export function useProducts() {
   const dispatch = useDispatch();
@@ -32,11 +32,50 @@ export function useProducts() {
 
 export function useVisibleProducts(products) {
   const { currentCategory } = useSelector((state) => state.categories);
+  const { currentSaleOption, currentPriceOption, currentRatingOption } =
+    useSelector((state) => state.filters);
+
   let filteredProducts = products;
 
   if (currentCategory) {
     filteredProducts = filteredProducts.filter(
       (product) => product.category.name === currentCategory
+    );
+  }
+  console.log(products);
+  if (currentSaleOption.option === "yes") {
+    filteredProducts = filteredProducts.filter((product) => {
+      if (product.promotion) {
+        return (
+          effectivePromotion(product.promotion, product.promotion.ends) === true
+        );
+      } else {
+        return false;
+      }
+    });
+  }
+  console.log(currentRatingOption);
+  if (currentPriceOption) {
+    if (currentPriceOption === 25) {
+      filteredProducts = filteredProducts.filter(
+        (product) => product.promotionPrice < currentPriceOption
+      );
+    } else if (currentPriceOption % 2) {
+      filteredProducts = filteredProducts.filter(
+        (product) => product.promotionPrice > currentPriceOption - 1
+      );
+    } else {
+      filteredProducts = filteredProducts.filter(
+        (product) =>
+          product.promotionPrice > currentPriceOption / 2 &&
+          product.promotionPrice < currentPriceOption
+      );
+    }
+  }
+
+  if (currentRatingOption) {
+    filteredProducts = filteredProducts.filter(
+      (product) => product.rating > currentRatingOption
     );
   }
 

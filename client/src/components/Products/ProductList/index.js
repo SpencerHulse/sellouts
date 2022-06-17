@@ -9,10 +9,13 @@ function ProductList() {
   return (
     <div className="d-flex flex-wrap mt-5">
       <div className="row row-cols-xl-5 row-cols-sm-1">
-        {products.length &&
+        {products.length ? (
           products.map((product) => {
             return <ProductCard key={product._id} product={product} />;
-          })}
+          })
+        ) : (
+          <div>There are no products here!</div>
+        )}
       </div>
     </div>
   );
