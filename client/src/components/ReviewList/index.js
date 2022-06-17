@@ -79,8 +79,8 @@ function ReviewList({ currentProduct }) {
                 value={rating}
                 size={24}
                 edit={false}
-                color2="#7f60db"
-                color1="rgba(0, 0, 0, 0.19)"
+                color2={"#7f60db"}
+                color1={"rgba(0, 0, 0, 0.19)"}
               />
             </div>
             <h3 className="fw-light">{title}</h3>

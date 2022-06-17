@@ -53,6 +53,8 @@ function ReviewForm({ currentProduct }) {
               edit={true}
               half={false}
               onChange={handleStars}
+              color2={"#7f60db"}
+              color1={"rgba(0, 0, 0, 0.19)"}
             />
             <label htmlFor="title">Title: </label>
             <input
