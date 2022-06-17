@@ -12,11 +12,11 @@
 }
 
 a {
-  color: var(--brand-color)!important;
+  color: var(--brand-color) !important;
 }
 
 a:hover {
-  color: var(--brand-color)!important;
+  color: var(--brand-color) !important;
 }
 
 .navbar {
@@ -69,11 +69,10 @@ a:hover {
 .new-dropdown {
   position: relative;
   display: inline-block;
-
 }
 
 .dropdown-button {
-  background-image: url('./arrow-down.png');
+  background-image: url("./arrow-down.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: right;
@@ -103,7 +102,9 @@ a:hover {
   cursor: pointer;
 }
 
-.dd-item:hover {background-color: #f1f1f1}
+.dd-item:hover {
+  background-color: #f1f1f1;
+}
 
 .new-dropdown:hover .dropdown-content {
   display: block;
@@ -114,7 +115,7 @@ a:hover {
 }
 
 .bg-tint {
-  background-color: rgb(230, 230, 230)!important;
+  background-color: rgb(230, 230, 230) !important;
 }
 
 .fullpage {
@@ -135,4 +136,19 @@ a:hover {
     width: 600px;
     height: 250px;
   }
+}
+
+/* ReviewList */
+.prev-button,
+.next-button {
+  padding: 1px 10px;
+  border-radius: 15px;
+}
+
+.prev-button {
+  margin-right: 10px;
+}
+
+.next-button {
+  margin-left: 10px;
 }
