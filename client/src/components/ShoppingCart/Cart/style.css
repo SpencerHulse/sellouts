@@ -13,21 +13,3 @@
   /* Bow down before the hideousness! */
   background-color: hotpink;
 }
-
-::-webkit-scrollbar {
-  position: absolute;
-  width: 10px;
-}
-
-/* Ugliness continues! */
-::-webkit-scrollbar-thumb {
-  background: teal;
-}
-
-::-webkit-scrollbar-track {
-  background: gold;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: aqua;
-}
