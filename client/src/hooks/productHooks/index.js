@@ -42,7 +42,7 @@ export function useVisibleProducts(products) {
       (product) => product.category.name === currentCategory
     );
   }
-  console.log(products);
+
   if (currentSaleOption.option === "yes") {
     filteredProducts = filteredProducts.filter((product) => {
       if (product.promotion) {
@@ -54,7 +54,7 @@ export function useVisibleProducts(products) {
       }
     });
   }
-  console.log(currentRatingOption);
+
   if (currentPriceOption) {
     if (currentPriceOption === 25) {
       filteredProducts = filteredProducts.filter(
