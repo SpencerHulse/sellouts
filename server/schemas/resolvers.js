@@ -324,11 +324,11 @@ const resolvers = {
 
       return product;
     },
-    deleteReview: async (parent, { _id }) => {
-      const productId = input._id;
+    deleteReview: async (parent, { productId, _id }) => {
+      const pId = productId;
       await Review.findByIdAndDelete(_id);
       const product = Product.findByIdAndUpdate(
-        { _id: productId },
+        { _id: pId },
         { $pull: { reviews: _id } },
         { new: true }
       )

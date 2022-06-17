@@ -49,7 +49,7 @@ function SingleProduct() {
               <div className="row gx-4 fullpage align-items-stretch">
                 <div className="col-xl-8 col-md-12 my-auto">
                   <img
-                    src={require(`../assets/product-placeholder.png`)}
+                    src={currentProduct.mainImage}
                     alt={currentProduct.name}
                     className="product-image"
                   />

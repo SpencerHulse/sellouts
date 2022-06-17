@@ -52,6 +52,13 @@ function ReviewForm({ currentProduct }) {
               half={false}
               onChange={handleStars}
             />
+            <label htmlFor="title">Title: </label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              onChange={handleFormUpdate}
+            />
             <textarea
               name="review"
               id="review"
