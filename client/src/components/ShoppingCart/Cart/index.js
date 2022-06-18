@@ -8,7 +8,6 @@ import { calculateTotal } from "../../../utils/helpers";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleCart } from "../../../redux/features/cartSlice";
 import { useGetCart, useClickOutside } from "../../../hooks/cartHooks";
-import "./style.css";
 
 function ShoppingCart() {
   const dispatch = useDispatch();

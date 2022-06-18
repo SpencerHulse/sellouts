@@ -7,7 +7,6 @@ import { idbPromise, effectivePromotion } from "../../../utils/helpers";
 import "./style.css";
 
 function ProductCard({ product }) {
-  const { name: category } = product.category;
   const {
     _id,
     inventory,
@@ -18,17 +17,15 @@ function ProductCard({ product }) {
     promotionPrice,
     rating,
   } = product;
-  let percentage, ends;
 
-  if (promotion) {
-    percentage = promotion.percentage;
-    ends = promotion.ends;
-  }
+  const { name: category } = product.category;
+  const percentage = product?.promotion?.percentage;
+  const ends = product?.promotion?.ends;
 
   const dispatch = useDispatch();
   const { cartItems } = useSelector((state) => state.cart);
 
-  const addItemToCart = (quantity) => {
+  function addItemToCart(quantity) {
     const itemInCart = cartItems.find((item) => item._id === _id);
 
     dispatch(addToCart({ product, purchaseQuantity: quantity, _id }));
@@ -45,7 +42,7 @@ function ProductCard({ product }) {
         _id,
       });
     }
-  };
+  }
 
   return (
     <div className="pc-container mb-4 d-sm-flex flex-xl-column p-md-2">
@@ -83,7 +80,14 @@ function ProductCard({ product }) {
             )}
           </div>
           <div>
-            <ReactStars count={5} value={rating} size={18} edit={false} color2={'#7f60db'} color1={'#e3e3e3'} />
+            <ReactStars
+              count={5}
+              value={rating}
+              size={18}
+              edit={false}
+              color2={"#7f60db"}
+              color1={"#e3e3e3"}
+            />
           </div>
           <div>
             {inventory <= 0 ? (
