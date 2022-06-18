@@ -5,6 +5,7 @@ import Homepage from "./pages/homepage";
 // Components
 import Accounts from "./pages/accounts";
 import Nav from "./components/Nav";
+import OrderHistory from "./pages/order-history";
 import PurchaseSuccess from "./pages/purchase-success";
 import SingleProduct from "./pages/single-product";
 import ImageUpload from "./components/ImageUpload";
@@ -45,6 +46,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="login" element={<Accounts formType={"login"} />} />
+          <Route path="/orders" element={<OrderHistory />} />
           <Route path="product/:productId" element={<SingleProduct />} />
           <Route path="signup" element={<Accounts formType={"signup"} />} />
           <Route path="success" element={<PurchaseSuccess />} />

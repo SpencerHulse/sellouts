@@ -8,7 +8,15 @@ export function capitalizeFirstLetter(string) {
 export function calculateTotal(cartItems) {
   let sum = 0;
   cartItems.forEach((item) => {
-    sum += item.product.price * item.purchaseQuantity;
+    const { product, purchaseQuantity } = item;
+    const { promotion, price, promotionPrice } = product;
+    const ends = product?.promotion?.ends;
+
+    if (effectivePromotion(promotion, ends)) {
+      sum += promotionPrice * purchaseQuantity;
+    } else {
+      sum += price * purchaseQuantity;
+    }
   });
   return sum.toFixed(2);
 }
