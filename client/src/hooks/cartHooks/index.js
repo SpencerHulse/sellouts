@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 import { idbPromise } from "../../utils/helpers";
 import { addMultipleItems } from "../../redux/features/cartSlice";
 import { toggleCart } from "../../redux/features/cartSlice";
+import { loadStripe } from "@stripe/stripe-js";
+const stripePromise = loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
 
 export function useGetCart(cartItems) {
   const dispatch = useDispatch();
@@ -40,4 +42,14 @@ export function useClickOutside(cartOpen, cartRef, cartTabRef) {
 
     return () => document.removeEventListener("mousedown", handler);
   });
+}
+
+export function useCheckoutRedirect(data) {
+  useEffect(() => {
+    if (data) {
+      stripePromise.then((res) => {
+        res.redirectToCheckout({ sessionId: data.checkout.session });
+      });
+    }
+  }, [data]);
 }

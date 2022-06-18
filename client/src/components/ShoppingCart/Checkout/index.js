@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
-import { loadStripe } from "@stripe/stripe-js";
+import React from "react";
 import { useLazyQuery } from "@apollo/client";
 import { QUERY_CHECKOUT } from "../../../graphql/queries";
-const stripePromise = loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
+import { useCheckoutRedirect } from "../../../hooks/cartHooks";
 
 function Checkout({ cartItems }) {
   const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
@@ -22,13 +21,7 @@ function Checkout({ cartItems }) {
     });
   }
 
-  useEffect(() => {
-    if (data) {
-      stripePromise.then((res) => {
-        res.redirectToCheckout({ sessionId: data.checkout.session });
-      });
-    }
-  }, [data]);
+  useCheckoutRedirect(data);
 
   return cartItems.length ? (
     <div className="">

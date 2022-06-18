@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { updateProducts } from "../redux/features/productSlice";
 
-import { useQuery } from "@apollo/client";
+import { useLazyQuery } from "@apollo/client";
 import { QUERY_PRODUCTS } from "../graphql/queries";
 
 import { effectivePromotion } from "../utils/helpers";
@@ -19,26 +19,20 @@ function SingleProduct() {
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.products);
 
-  // Potentially change this to a lazy query that only launches when it has to.
-  // As it is now, it always queries the database, even if the product is in state.
-  const { data } = useQuery(QUERY_PRODUCTS);
+  const [getData, { data }] = useLazyQuery(QUERY_PRODUCTS);
 
   useEffect(() => {
     if (products.length) {
       setCurrentProduct(products.find((product) => product._id === productId));
     } else if (data) {
       dispatch(updateProducts(data.products));
+    } else {
+      getData();
     }
-  }, [data, productId, products, dispatch]);
+  }, [data, productId, products, dispatch, getData]);
 
-  let percentage, ends;
-
-  if (currentProduct) {
-    if (currentProduct.promotion) {
-      percentage = currentProduct.promotion.percentage;
-      ends = currentProduct.promotion.ends;
-    }
-  }
+  const percentage = currentProduct?.promotion?.percentage || "";
+  const ends = currentProduct?.promotion?.ends || "";
 
   return (
     <>
