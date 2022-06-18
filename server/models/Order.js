@@ -1,11 +1,10 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
-const { DateTime } = require("luxon");
 
 const orderSchema = new Schema({
   purchaseDate: {
     type: String,
-    default: DateTime.now().toLocaleString(DateTime.DATETIME_SHORT),
+    required: true,
   },
   products: [
     {

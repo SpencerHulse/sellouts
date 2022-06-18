@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { DateTime } from "luxon";
 import { useLazyQuery, useMutation } from "@apollo/client";
 import { QUERY_ORDERS } from "../../graphql/queries";
 import { ADD_ORDER, UPDATE_PRODUCT } from "../../graphql/mutations";
@@ -80,6 +81,9 @@ export function useSuccessfulPurchase(data) {
             variables: {
               input: {
                 products: products,
+                purchaseDate: DateTime.now().toLocaleString(
+                  DateTime.DATETIME_SHORT
+                ),
                 customer: Auth.getProfile().data._id,
                 stripeId: stripeId,
                 paymentStatus: payment_status,
