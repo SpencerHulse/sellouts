@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { loggedOutRedirect, noSessionRedirect } from "../utils/helpers";
 import { useSuccessfulPurchase } from "../hooks/orderHooks";
@@ -23,9 +22,7 @@ function PurchaseSuccess() {
     <div className="mt-5">
       <div className="success-container shadow">
         <div className="success-header d-flex align-items-center justify-content-center">
-          <Link to="/" className="logo">
-            Sellouts
-          </Link>
+          <div className="logo">Sellouts</div>
         </div>
         <h2 className="mt-4 text-center">Thank you for your purchase!</h2>
         <p className="mt-3 mb-5 text-center">
@@ -33,7 +30,7 @@ function PurchaseSuccess() {
         </p>
         <div>
           <p className="mt-2 pb-4 text-center">
-            <Link to="/">Continue shopping</Link>
+            <a href="/">Continue shopping</a>
           </p>
         </div>
       </div>

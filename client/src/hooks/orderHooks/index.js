@@ -64,7 +64,7 @@ export function useSuccessfulPurchase(data) {
           for (let i = 0; i < product.purchaseQuantity; i++) {
             products.push(product._id);
           }
-          console.log(product.product.inventory);
+
           updateProduct({
             variables: {
               input: {
@@ -98,7 +98,7 @@ export function useSuccessfulPurchase(data) {
               },
             },
           });
-          console.log(orderData);
+
           const productData = orderData.addOrder.products;
           productData.forEach((item) => {
             idbPromise("cart", "delete", { _id: item._id });
