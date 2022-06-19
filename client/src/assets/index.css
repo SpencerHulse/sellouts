@@ -156,6 +156,34 @@ a:hover {
   overflow: scroll;
 }
 
+.accountinput {
+  padding: 5px 15px;
+  margin: 5px;
+  width: 350px;
+  border: 1px solid var(--brand-color);
+}
+
+.accountinput:focus {
+  background-color: #f3efff;
+}
+
+.default-button {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: right;
+  border: solid 1px var(--brand-color);
+  background-color: white;
+  color: var(--brand-color);
+  padding: 5px 35px 5px 35px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.button-filled {
+  background-color: var(--brand-color);
+  color: white;
+}
+
 @media (min-width: 768px) {
   .success-container {
     width: 600px;

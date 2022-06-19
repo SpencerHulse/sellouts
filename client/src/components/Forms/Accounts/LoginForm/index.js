@@ -34,7 +34,7 @@ function LoginForm() {
       <input type="hidden" name="remember" value="true" />
       <div className="">
         <div>
-          <label htmlFor="email" className="sr-only">
+          <label htmlFor="email" className="sr-only d-none">
             Email address
           </label>
           <input
@@ -43,13 +43,13 @@ function LoginForm() {
             type="email"
             autoComplete="email"
             required
-            className=""
+            className="accountinput"
             placeholder="Email address"
             onChange={handleChange}
           />
         </div>
         <div>
-          <label htmlFor="password" className="sr-only">
+          <label htmlFor="password" className="sr-only d-none">
             Password
           </label>
           <input
@@ -58,7 +58,7 @@ function LoginForm() {
             type="password"
             autoComplete="current-password"
             required
-            className=""
+            className="accountinput"
             placeholder="Password"
             onChange={handleChange}
           />
@@ -72,7 +72,7 @@ function LoginForm() {
       )}
 
       <div>
-        <button type="submit" className="">
+        <button type="submit" className="default-button button-filled mt-5">
           Sign in
         </button>
       </div>

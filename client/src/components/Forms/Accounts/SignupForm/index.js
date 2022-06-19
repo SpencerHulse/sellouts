@@ -49,7 +49,7 @@ function SignupForm() {
       <input type="hidden" name="remember" value="true" />
       <div className="">
         <div>
-          <label htmlFor="username" className="sr-only">
+          <label htmlFor="username" className="sr-only d-none">
             Username
           </label>
           <input
@@ -57,13 +57,13 @@ function SignupForm() {
             name="username"
             type="username"
             required
-            className=""
+            className="accountinput"
             placeholder="Username"
             onChange={handleChange}
           />
         </div>
         <div>
-          <label htmlFor="email" className="sr-only">
+          <label htmlFor="email" className="sr-only d-none">
             Email address
           </label>
           <input
@@ -71,13 +71,13 @@ function SignupForm() {
             name="email"
             type="email"
             required
-            className=""
+            className="accountinput"
             placeholder="Email address"
             onChange={handleChange}
           />
         </div>
         <div>
-          <label htmlFor="password" className="sr-only">
+          <label htmlFor="password" className="sr-only d-none">
             Password
           </label>
           <input
@@ -85,7 +85,7 @@ function SignupForm() {
             name="password"
             type="password"
             required
-            className=""
+            className="accountinput"
             placeholder="Password"
             onChange={handleChange}
           />
@@ -99,7 +99,7 @@ function SignupForm() {
       )}
 
       <div>
-        <button type="submit" className="">
+        <button type="submit" className="default-button button-filled mt-5">
           Sign up
         </button>
       </div>
