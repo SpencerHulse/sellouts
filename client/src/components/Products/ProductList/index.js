@@ -43,12 +43,9 @@ function ProductList() {
     numberOfPages(filteredProducts);
   }, [filteredProducts.length, filteredProducts]);
 
-  // Handles filtering and determining the visible products from the filtered products array
+  // Handles filtering products and resetting the page count when a new filter is added
   useEffect(() => {
     let products = [...productData];
-    const start = (page - 1) * itemsPP;
-    const end = page * itemsPP;
-
     if (currentCategory) {
       products = products.filter(
         (product) => product.category.name === currentCategory
@@ -91,20 +88,27 @@ function ProductList() {
         (product) => product.rating > currentRatingOption
       );
     }
+    setPage(1);
     setFilteredProducts(products);
-    setVisibleProducts(products.slice(start, end));
   }, [
+    productData,
     currentCategory,
+    currentSaleOption.option,
     currentPriceOption,
     currentRatingOption,
-    currentSaleOption.option,
-    page,
-    productData,
   ]);
+
+  // Handles determining the visible products from the filtered products array
+  useEffect(() => {
+    const start = (page - 1) * itemsPP;
+    const end = page * itemsPP;
+
+    setVisibleProducts(filteredProducts.slice(start, end));
+  }, [filteredProducts, page]);
 
   return (
     <>
-      <div className="d-flex flex-wrap mt-5">
+      <div className="d-flex flex-wrap mt-5" id="top-of-products">
         <div className="row row-cols-xl-5 row-cols-sm-1">
           {visibleProducts.length ? (
             visibleProducts.map((product) => {
@@ -116,15 +120,19 @@ function ProductList() {
         </div>
       </div>
       <div className="d-flex justify-content-center align-items-baseline">
-        <button className="prev-button" onClick={() => changePage("prev")}>
-          Prev
-        </button>
+        <a href="#top-of-products" className="pagination-link">
+          <button className="prev-button" onClick={() => changePage("prev")}>
+            Prev
+          </button>
+        </a>
         <p>
           page {page} of {pages || 1}
         </p>
-        <button className="next-button" onClick={() => changePage("next")}>
-          Next
-        </button>
+        <a href="#top-of-products" className="pagination-link">
+          <button className="next-button" onClick={() => changePage("next")}>
+            Next
+          </button>
+        </a>
       </div>
     </>
   );

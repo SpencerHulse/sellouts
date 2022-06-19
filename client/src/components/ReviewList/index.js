@@ -69,9 +69,14 @@ function ReviewList({ currentProduct }) {
 
   return (
     <>
-      <div>
+      <div id="top-of-reviews">
         Sort by:{" "}
-        <select onChange={(e) => setSort(e.target.value)}>
+        <select
+          onChange={(e) => {
+            setSort(e.target.value);
+            setPage(1);
+          }}
+        >
           <option value="newest">Newest</option>
           <option value="oldest">Oldest</option>
           <option value="high">High Rating</option>
@@ -109,15 +114,19 @@ function ReviewList({ currentProduct }) {
         );
       })}
       <div className="d-flex justify-content-center align-items-baseline">
-        <button className="prev-button" onClick={() => changePage("prev")}>
-          Prev
-        </button>
+        <a href="#top-of-reviews" className="pagination-link">
+          <button className="prev-button" onClick={() => changePage("prev")}>
+            Prev
+          </button>
+        </a>
         <p>
           page {page} of {pages}
         </p>
-        <button className="next-button" onClick={() => changePage("next")}>
-          Next
-        </button>
+        <a href="#top-of-reviews" className="pagination-link">
+          <button className="next-button" onClick={() => changePage("next")}>
+            Next
+          </button>
+        </a>
       </div>
     </>
   );

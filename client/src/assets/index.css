@@ -8,7 +8,6 @@
 :root {
   --primary-background: rgb(236, 236, 236);
   --brand-color: #7f60db;
-  --brand-color: #7f60db;
 }
 
 a {
@@ -169,6 +168,17 @@ a:hover {
 .next-button {
   padding: 1px 10px;
   border-radius: 15px;
+  background-color: var(--brand-color);
+  color: white !important;
+  border: 3px solid var(--brand-color);
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+}
+
+.prev-button:hover,
+.next-button:hover {
+  box-shadow: 0 0 10px 0 var(--brand-color) inset,
+    0 0 10px 2px var(--brand-color);
 }
 
 .prev-button {
@@ -177,4 +187,8 @@ a:hover {
 
 .next-button {
   margin-left: 10px;
+}
+
+.pagination-link {
+  text-decoration: none;
 }
