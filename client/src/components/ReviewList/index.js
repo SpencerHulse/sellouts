@@ -2,14 +2,29 @@ import React, { useState, useEffect } from "react";
 import ReactStars from "react-stars";
 
 function ReviewList({ currentProduct }) {
-  const [page, setPage] = useState(1);
+  // How many reviews per "page"
+  const itemsPP = 5;
+  // The items of the array that are visible, loading in from the start
   const [visibleReviews, setVisibleReviews] = useState([
-    ...currentProduct.reviews.slice(0, 5),
+    ...currentProduct.reviews.slice(0, itemsPP),
   ]);
+  // The type of sort being used
   const [sort, setSort] = useState("newest");
+  // The page currently shown
+  const [page, setPage] = useState(1);
 
-  const pages = Math.floor(currentProduct.reviews.length / 5 + 1);
+  // Returns the number of pages needed to get through the reviews
+  function numberOfPages() {
+    if (currentProduct.reviews.length % itemsPP === 0) {
+      return currentProduct.reviews.length / itemsPP;
+    } else {
+      return Math.floor(currentProduct.reviews.length / itemsPP) + 1;
+    }
+  }
 
+  const pages = numberOfPages();
+
+  // Handles changing the page backward or forward
   function changePage(direction) {
     if (page < pages && direction === "next") {
       setPage(page + 1);
@@ -18,10 +33,11 @@ function ReviewList({ currentProduct }) {
     }
   }
 
+  // Handles sorting and returning relevant page of reviews
   useEffect(() => {
     let reviews = [...currentProduct.reviews];
-    const start = (page - 1) * 5;
-    const end = page * 5;
+    const start = (page - 1) * itemsPP;
+    const end = page * itemsPP;
     if (sort === "newest") {
       reviews.sort(function (a, b) {
         if (a.createdAt > b.createdAt) return -1;
@@ -47,7 +63,7 @@ function ReviewList({ currentProduct }) {
         return 0;
       });
     }
-
+    // Sets with the new sorted and sliced array of reviews
     setVisibleReviews(reviews.slice(start, end));
   }, [currentProduct.reviews, page, sort]);
 
