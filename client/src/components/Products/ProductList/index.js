@@ -122,11 +122,11 @@ function ProductList() {
       <div className="d-flex justify-content-center align-items-baseline">
         <a href="#top-of-products" className="pagination-link">
           <button className="prev-button" onClick={() => changePage("prev")}>
-            Prev
+            Previous
           </button>
         </a>
         <p>
-          page {page} of {pages || 1}
+          Page {page} of {pages || 1}
         </p>
         <a href="#top-of-products" className="pagination-link">
           <button className="next-button" onClick={() => changePage("next")}>

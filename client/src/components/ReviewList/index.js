@@ -120,7 +120,7 @@ function ReviewList({ currentProduct }) {
           </button>
         </a>
         <p>
-          page {page} of {pages}
+          Page {page} of {pages}
         </p>
         <a href="#top-of-reviews" className="pagination-link">
           <button className="next-button" onClick={() => changePage("next")}>

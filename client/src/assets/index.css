@@ -194,8 +194,8 @@ a:hover {
 /* ReviewList */
 .prev-button,
 .next-button {
+  width: 110px;
   padding: 1px 10px;
-  border-radius: 15px;
   background-color: var(--brand-color);
   color: white !important;
   border: 3px solid var(--brand-color);
@@ -205,8 +205,8 @@ a:hover {
 
 .prev-button:hover,
 .next-button:hover {
-  box-shadow: 0 0 10px 0 var(--brand-color) inset,
-    0 0 10px 2px var(--brand-color);
+  box-shadow: 0 0 10px 0 #7f60db6f inset,
+    0 0 10px 2px #7f60db6f;
 }
 
 .prev-button {
