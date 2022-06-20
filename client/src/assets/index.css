@@ -104,16 +104,19 @@ a:hover {
   padding: 5px 35px 5px 15px;
   font-size: 16px;
   cursor: pointer;
+  width: 200px;
 }
 
 .dropdown-content {
   display: none;
   position: absolute;
-  right: 0;
+  left: 0;
   background-color: #f9f9f9;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.071);
   z-index: 1;
+  border: 1px solid var(--brand-color);
+  width: 200px;
 }
 
 .dd-item {
@@ -218,6 +221,56 @@ a:hover {
 
 .pagination-link {
   text-decoration: none;
+}
+
+.dialog {
+  border: solid 1px var(--brand-color);
+  background-color: white;
+  padding: 40px!important;
+  margin-bottom: 50px;
+}
+
+.default-input {
+  padding: 5px;
+  width: 100%;
+  border: solid 1px var(--brand-color);
+}
+
+.dialog-section {
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+  border-bottom: solid 1px var(--brand-color);
+}
+
+.dialog-section:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border: 0;
+}
+
+.dialog-subsection {
+  padding: 20px;
+  margin: 20px 0;
+  background-color: #0000000b;
+}
+
+.price-input-group {
+  border: 1px solid rgba(0, 0, 0, 0.245);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.price-input {
+  width: 100%;
+  border: 0;
+}
+
+.currency {
+  text-align: center;
+  padding: 8px;
+  width: 40px;
+  height: 40px;
+  border-right: 1px solid rgba(0, 0, 0, 0.245);
 }
 
 /* FilterList */

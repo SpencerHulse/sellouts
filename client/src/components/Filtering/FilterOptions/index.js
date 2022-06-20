@@ -27,7 +27,7 @@ function FilterOptions() {
 
   return (
     <div>
-      <div className="new-dropdown">
+      <div className="new-dropdown me-2 mt-sm-2 mt-md-0">
         <button className="dropdown-button">Category</button>
         <div className="dropdown-content">
           {categoryData.map((category) => (
@@ -41,7 +41,7 @@ function FilterOptions() {
           ))}
         </div>
       </div>
-      <div className="new-dropdown">
+      <div className="new-dropdown  me-2 mt-sm-2">
         <button className="dropdown-button">Price</button>
         <div className="dropdown-content">
           <div
@@ -71,8 +71,8 @@ function FilterOptions() {
           </div>
         </div>
       </div>
-      <div className="new-dropdown">
-        <button className="dropdown-button">Min. Rating</button>
+      <div className="new-dropdown me-2 mt-sm-2">
+        <button className="dropdown-button">Minimum Rating</button>
         <div className="dropdown-content">
           {ratingOptions.map((option, index) => (
             <div

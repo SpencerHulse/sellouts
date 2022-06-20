@@ -9,6 +9,7 @@ import OrderHistory from "./pages/order-history";
 import PurchaseSuccess from "./pages/purchase-success";
 import SingleProduct from "./pages/single-product";
 import ImageUpload from "./components/ImageUpload";
+import NewItem from "./pages/new-item";
 
 // Apollo
 import {
@@ -47,6 +48,7 @@ function App() {
           <Route path="/" element={<Homepage />} />
           <Route path="login" element={<Accounts formType={"login"} />} />
           <Route path="/orders" element={<OrderHistory />} />
+          <Route path="/new-item" element={<NewItem />} />
           <Route path="product/:productId" element={<SingleProduct />} />
           <Route path="signup" element={<Accounts formType={"signup"} />} />
           <Route path="success" element={<PurchaseSuccess />} />
