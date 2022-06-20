@@ -22,11 +22,6 @@ function Navbar() {
                   Orders
                 </NavLink>
               </li>
-              <li className="navbar-li">
-                <NavLink to="/account" className="navbar-item">
-                  Account
-                </NavLink>
-              </li>
               <li className="navbar-li" onClick={() => Auth.logout()}>
                 <div className="navbar-item logout">Logout</div>
               </li>

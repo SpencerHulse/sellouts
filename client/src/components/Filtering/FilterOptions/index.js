@@ -1,14 +1,14 @@
 import React from "react";
 import ReactStars from "react-stars";
 import { useDispatch } from "react-redux";
-import { useCategories } from "../../hooks/categoryHooks";
-import { capitalizeFirstLetter } from "../../utils/helpers";
-import { selectCategory } from "../../redux/features/categorySlice";
+import { useCategories } from "../../../hooks/categoryHooks";
+import { capitalizeFirstLetter } from "../../../utils/helpers";
+import { selectCategory } from "../../../redux/features/categorySlice";
 import {
   selectSaleOption,
   selectPriceOption,
   selectRatingOption,
-} from "../../redux/features/filterSlice";
+} from "../../../redux/features/filterSlice";
 
 function FilterOptions() {
   const dispatch = useDispatch();
@@ -105,9 +105,6 @@ function FilterOptions() {
             </div>
           ))}
         </div>
-      </div>
-      <div className="new-dropdown" onClick={clearSelections}>
-        Clear Chosen
       </div>
     </div>
   );

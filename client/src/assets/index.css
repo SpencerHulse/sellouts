@@ -205,8 +205,7 @@ a:hover {
 
 .prev-button:hover,
 .next-button:hover {
-  box-shadow: 0 0 10px 0 #7f60db6f inset,
-    0 0 10px 2px #7f60db6f;
+  box-shadow: 0 0 10px 0 #7f60db6f inset, 0 0 10px 2px #7f60db6f;
 }
 
 .prev-button {
@@ -219,4 +218,16 @@ a:hover {
 
 .pagination-link {
   text-decoration: none;
+}
+
+/* FilterList */
+.filter-item {
+  border: solid 1px var(--brand-color);
+  background-color: white;
+  color: var(--brand-color);
+  padding: 5px;
+  font-size: 16px;
+  max-height: 35px;
+  width: 130px;
+  cursor: pointer;
 }

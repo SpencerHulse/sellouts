@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
-import FilterOptions from "../components/FilterOptions";
+import FilterOptions from "../components/Filtering/FilterOptions";
+import FilterList from "../components/Filtering/FilterList";
 import ProductList from "../components/Products/ProductList";
 import { capitalizeFirstLetter } from "../utils/helpers";
 
@@ -9,7 +10,7 @@ const Homepage = () => {
     <>
       <div className="container">
         <div className="row">
-          <div className="d-flex justify-content-between align-items-center mt-5">
+          <div className="d-flex justify-content-between flex-wrap align-items-center mt-5">
             <h2>
               {currentCategory
                 ? capitalizeFirstLetter(currentCategory)
@@ -17,6 +18,7 @@ const Homepage = () => {
             </h2>
             <FilterOptions />
           </div>
+          <FilterList />
           <ProductList />
         </div>
       </div>

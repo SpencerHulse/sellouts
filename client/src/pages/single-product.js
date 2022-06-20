@@ -1,17 +1,15 @@
-import React, { useState, useEffect } from "react";
-import ReactStars from "react-stars";
-import ReviewList from "../components/ReviewList";
+import { useState, useEffect } from "react";
+import { useLazyQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import ReactStars from "react-stars";
+import ReviewList from "../components/ReviewList";
+import ReviewForm from "../components/Forms/Reviews";
 import { updateProducts } from "../redux/features/productSlice";
 import { addToCart } from "../redux/features/cartSlice";
-
-import { useLazyQuery } from "@apollo/client";
 import { QUERY_PRODUCTS } from "../graphql/queries";
-
 import { effectivePromotion, idbPromise } from "../utils/helpers";
 import Auth from "../utils/auth";
-import ReviewForm from "../components/Forms/Reviews";
 
 function SingleProduct() {
   // Sets up for dispatch and gets all products and items in the cart from state
