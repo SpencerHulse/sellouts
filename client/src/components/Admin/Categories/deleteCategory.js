@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { DELETE_CATEGORY } from "../../../graphql/mutations";
 import { useCategories } from "../../../hooks/categoryHooks";

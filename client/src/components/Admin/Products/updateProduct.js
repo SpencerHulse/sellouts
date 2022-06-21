@@ -3,20 +3,18 @@ import { useMutation, useLazyQuery, useQuery } from "@apollo/client";
 import { UPDATE_PRODUCT } from "../../../graphql/mutations";
 import { QUERY_URL, QUERY_PRODUCTS } from "../../../graphql/queries";
 import { useCategories } from "../../../hooks/categoryHooks";
+import { useProducts } from "../../../hooks/productHooks";
 import { capitalizeFirstLetter } from "../../../utils/helpers";
 
-const UpdateProduct = ({ selectedProduct }) => {
+const UpdateProduct = () => {
   const [updateProduct] = useMutation(UPDATE_PRODUCT);
   const [getURL] = useLazyQuery(QUERY_URL);
-  const { loading: loadingProduct, data: productData } = useQuery(
-    QUERY_PRODUCTS,
-    {
-      variables: { id: "62b159905efb4e2c6ac68575" },
-    }
-  );
 
   const categories = useCategories();
+  const products = useProducts();
 
+  const [productData, setProductData] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState("");
   const [formState, setFormState] = useState({
     name: "",
     description: "",
@@ -34,7 +32,15 @@ const UpdateProduct = ({ selectedProduct }) => {
   const [imageState, setImageState] = useState({ images: [], mainImage: "" });
 
   useEffect(() => {
-    if (loadingProduct) return;
+    const product = products.filter(
+      (product) => product._id === selectedProduct
+    );
+
+    setProductData(product);
+  }, [products, selectedProduct]);
+
+  useEffect(() => {
+    if (!productData.length) return;
     const {
       name,
       description,
@@ -44,7 +50,7 @@ const UpdateProduct = ({ selectedProduct }) => {
       images,
       mainImage,
       category,
-    } = productData.products[0];
+    } = productData[0];
     const categoryId = category._id;
 
     setFormState({
@@ -67,7 +73,7 @@ const UpdateProduct = ({ selectedProduct }) => {
       }
     }
     setDetailsState(newDetails);
-  }, [productData, loadingProduct]);
+  }, [productData]);
 
   useEffect(() => {
     if (!formState) {
@@ -87,7 +93,12 @@ const UpdateProduct = ({ selectedProduct }) => {
       const detail = detailsState[key];
       document.getElementById(key).value = detail;
     }
-  }, [selectedProduct, formState, detailsState]);
+  }, [formState, detailsState]);
+
+  function handleSelect(event) {
+    const { value } = event.target;
+    setSelectedProduct(value);
+  }
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -166,7 +177,7 @@ const UpdateProduct = ({ selectedProduct }) => {
     updateProduct({
       variables: {
         input: {
-          _id: "62b159905efb4e2c6ac68575",
+          _id: selectedProduct,
           name: name,
           description: description,
           details: details,
@@ -188,6 +199,29 @@ const UpdateProduct = ({ selectedProduct }) => {
             <div className="row">
               <div className="mt-5 dialog">
                 <form action="submit" onSubmit={handleSubmit}>
+                  <div className="dialog-section">
+                    <h2 className="fw-light">Products</h2>
+                    <p className="description">
+                      Select the product you want to update
+                    </p>
+                    <label htmlFor="product" className="d-none">
+                      Product
+                    </label>
+                    <select
+                      className="default-input"
+                      name="product"
+                      id="product"
+                      required
+                      onChange={handleSelect}
+                    >
+                      <option value="">Select a Product</option>
+                      {products.map((product) => (
+                        <option value={product._id} key={product._id}>
+                          {product.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                   <div className="dialog-section">
                     <h2 className="fw-light">Title</h2>
                     <p className="description">

@@ -16,7 +16,7 @@ function UpdateCategory() {
     const categoryData = categories.filter(
       (category) => category._id === selectedCategory
     );
-    console.log(categoryData);
+
     document.getElementById("name").value = capitalizeFirstLetter(
       categoryData[0].name
     );
