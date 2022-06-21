@@ -409,6 +409,7 @@ db.once("open", async () => {
 
   const orders = await Order.insertMany([
     {
+      purchaseDate: DateTime.now().toLocaleString(DateTime.DATETIME_SHORT),
       products: [
         products[0]._id,
         products[0]._id,
@@ -426,6 +427,7 @@ db.once("open", async () => {
       total: 68.94,
     },
     {
+      purchaseDate: DateTime.now().toLocaleString(DateTime.DATETIME_SHORT),
       products: [
         products[0]._id,
         products[0]._id,

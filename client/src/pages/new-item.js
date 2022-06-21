@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useMutation, useLazyQuery } from "@apollo/client";
 import { ADD_PRODUCT } from "../graphql/mutations";
 import { QUERY_URL } from "../graphql/queries";
@@ -7,7 +7,7 @@ import { capitalizeFirstLetter } from "../utils/helpers";
 
 const NewItem = () => {
   const [addProduct] = useMutation(ADD_PRODUCT);
-  const [getURL, { data }] = useLazyQuery(QUERY_URL);
+  const [getURL] = useLazyQuery(QUERY_URL);
 
   const categories = useCategories();
 
@@ -25,8 +25,7 @@ const NewItem = () => {
     detail4: "",
     detail5: "",
   });
-  const [imageState, setImageState] = useState([]);
-  console.log(formState, detailsState, imageState);
+  const [imageState, setImageState] = useState("");
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -44,15 +43,76 @@ const NewItem = () => {
     });
   }
 
-  function handleImageChange(event) {
-    setImageState([...imageState, event.target.files[0]]);
+  async function handleImageChange(event) {
+    if (event.target.files[0] !== undefined) {
+      setImageState(event.target.files[0]);
+    }
   }
 
   function handleSubmit(event) {
     event.preventDefault();
-    const { title } = formState;
-    if (title) {
-      // addProduct({ variables: { input: { name: title } } });
+    const { title, description, price, category, inventory } = formState;
+    const details = [];
+
+    // Checks to ensure all required parts of the form are filled out
+    if (!title || !description || !price || !category) return;
+
+    // Puts all the created details into an array
+    for (const key in detailsState) {
+      if (detailsState[key] !== "") {
+        details.push(detailsState[key]);
+      }
+    }
+
+    // Gets an s3 Secure URL and uploads the image to a bucket
+    if (imageState) {
+      // Gets the secure URL for the s3 bucket
+      getURL({ variables: { mainImage: imageState.name } }).then(({ data }) => {
+        // Uses the data from the getURL query to upload the image
+        fetch(data.uploadImage.url, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          body: imageState,
+        });
+        // Gets the URL for src and pushes it to the the images array
+        const bucketLink = data.uploadImage.url.split("?")[0];
+        // Adds a new product
+        addProduct({
+          variables: {
+            input: {
+              name: title,
+              description: description,
+              details: details,
+              price: parseFloat(price),
+              inventory: parseInt(inventory),
+              images: [bucketLink],
+              mainImage: bucketLink,
+              category: category,
+            },
+          },
+        });
+
+        window.location.assign("/");
+      });
+    } else {
+      addProduct({
+        variables: {
+          input: {
+            name: title,
+            description: description,
+            details: details,
+            price: parseFloat(price),
+            inventory: parseInt(inventory),
+            images: ["https://nsense-images.s3.amazonaws.com/default.jpg"],
+            mainImage: "https://nsense-images.s3.amazonaws.com/default.jpg",
+            category: category,
+          },
+        },
+      });
+
+      window.location.assign("/");
     }
   }
 
@@ -61,7 +121,7 @@ const NewItem = () => {
       <div className="container">
         <div className="row">
           <div className="mt-5 dialog">
-            <form>
+            <form action="submit" onSubmit={handleSubmit}>
               <div className="dialog-section">
                 <h2 className="fw-light">Title</h2>
                 <p className="description">
@@ -135,7 +195,6 @@ const NewItem = () => {
                     id="detail1"
                     name="detail1"
                     type="text"
-                    required
                     placeholder="Enter a detail of a maximum 100 characters"
                     maxLength="100"
                     className="default-input item-detail"
@@ -145,7 +204,6 @@ const NewItem = () => {
                     id="detail2"
                     name="detail2"
                     type="text"
-                    required
                     placeholder="Enter a detail of a maximum 100 characters"
                     maxLength="100"
                     className="default-input item-detail"
@@ -155,7 +213,6 @@ const NewItem = () => {
                     id="detail3"
                     name="detail3"
                     type="text"
-                    required
                     placeholder="Enter a detail of a maximum 100 characters"
                     maxLength="100"
                     className="default-input item-detail"
@@ -165,7 +222,6 @@ const NewItem = () => {
                     id="detail4"
                     name="detail4"
                     type="text"
-                    required
                     placeholder="Enter a detail of a maximum 100 characters"
                     maxLength="100"
                     className="default-input item-detail"
@@ -175,7 +231,6 @@ const NewItem = () => {
                     id="detail5"
                     name="detail5"
                     type="text"
-                    required
                     placeholder="Enter a detail of a maximum 100 characters"
                     maxLength="100"
                     className="default-input item-detail"

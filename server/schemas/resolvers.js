@@ -230,6 +230,7 @@ const resolvers = {
     },
     // Upload Image to AWS S3 Bucket
     uploadImage: async (parent, { mainImage }) => {
+      console.log(mainImage);
       const url = await generateUploadURL(mainImage);
       return { url };
     },
@@ -275,15 +276,13 @@ const resolvers = {
     },
     // Product Mutations
     addProduct: async (parent, { input }) => {
+      console.log(input);
       return Product.create(input);
     },
     deleteProduct: async (parent, { _id }) => {
       return Product.findByIdAndDelete({ _id });
     },
     updateProduct: async (parent, { input }) => {
-      // Might need a different route for images since this messes up normal updates
-      // input.images = input.images.push(input.mainImage);
-      // console.log(input);
       return Product.findByIdAndUpdate(input._id, input, { new: true })
         .populate("category")
         .populate("promotion")
