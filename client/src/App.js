@@ -13,6 +13,8 @@ import Admin from "./components/Admin";
 import AdminProducts from "./components/Admin/Products";
 import AddProduct from "./components/Admin/Products/addProduct";
 import UpdateProduct from "./components/Admin/Products/updateProduct";
+import AdminCategories from "./components/Admin/Categories";
+import AddCategory from "./components/Admin/Categories/addCategory";
 
 // Apollo
 import {
@@ -55,6 +57,9 @@ function App() {
             <Route path="products" element={<AdminProducts />}>
               <Route path="add-product" element={<AddProduct />} />
               <Route path="update-product" element={<UpdateProduct />} />
+            </Route>
+            <Route path="categories" element={<AdminCategories />}>
+              <Route path="add-category" element={<AddCategory />} />
             </Route>
           </Route>
           <Route path="product/:productId" element={<SingleProduct />} />
