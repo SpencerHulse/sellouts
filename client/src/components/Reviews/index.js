@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import ReactStars from "react-stars";
 import { useMutation } from "@apollo/client";
-import { ADD_REVIEW } from "../../../graphql/mutations";
-import Auth from "../../../utils/auth";
+import { ADD_REVIEW } from "../../graphql/mutations";
+import Auth from "../../utils/auth";
 
 function ReviewForm({ currentProduct }) {
   const [formOpen, setFormOpen] = useState(false);

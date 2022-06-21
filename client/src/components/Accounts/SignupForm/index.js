@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { ADD_USER } from "../../../../graphql/mutations";
-import Auth from "../../../../utils/auth";
+import { ADD_USER } from "../../../graphql/mutations";
+import Auth from "../../../utils/auth";
 
 function SignupForm() {
   const [addUser] = useMutation(ADD_USER);

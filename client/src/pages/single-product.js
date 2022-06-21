@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import ReactStars from "react-stars";
 import ReviewList from "../components/ReviewList";
-import ReviewForm from "../components/Forms/Reviews";
+import ReviewForm from "../components/Reviews";
 import { updateProducts } from "../redux/features/productSlice";
 import { addToCart } from "../redux/features/cartSlice";
 import { QUERY_PRODUCTS } from "../graphql/queries";
