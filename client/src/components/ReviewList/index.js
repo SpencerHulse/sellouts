@@ -108,7 +108,8 @@ function ReviewList({ currentProduct }) {
             <p>
               {userReview}
               <br />
-              —written by {user.username} on {createdAt.split(", ")[0]}
+              —written by {user?.username || "a retired user"} on{" "}
+              {createdAt.split(", ")[0]}
             </p>
           </div>
         );

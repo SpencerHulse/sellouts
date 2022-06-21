@@ -5,6 +5,7 @@ function AdminDashboard() {
     <div>
       <Link to="/admin/products">Products</Link>
       <Link to="/admin/categories">Categories</Link>
+      <Link to="/admin/users">Users</Link>
       <Outlet />
     </div>
   );

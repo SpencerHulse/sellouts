@@ -18,7 +18,7 @@ function ReviewForm({ currentProduct }) {
 
   // Checks if the user has already reviewed the product.
   const reviewed = currentProduct.reviews.filter((review) => {
-    return review.user._id === Auth.getProfile().data._id;
+    return review?.user?._id === Auth.getProfile().data._id;
   }).length;
 
   function handleStars(newRating) {
