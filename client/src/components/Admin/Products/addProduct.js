@@ -5,7 +5,7 @@ import { QUERY_URL } from "../../../graphql/queries";
 import { useCategories } from "../../../hooks/categoryHooks";
 import { capitalizeFirstLetter } from "../../../utils/helpers";
 
-const NewItem = () => {
+const AddProduct = () => {
   const [addProduct] = useMutation(ADD_PRODUCT);
   const [getURL] = useLazyQuery(QUERY_URL);
 
@@ -94,7 +94,7 @@ const NewItem = () => {
           },
         });
 
-        window.location.assign("/");
+        window.location.assign("/admin");
       });
     } else {
       addProduct({
@@ -112,7 +112,7 @@ const NewItem = () => {
         },
       });
 
-      window.location.assign("/");
+      window.location.assign("/admin");
     }
   }
 
@@ -285,4 +285,4 @@ const NewItem = () => {
   );
 };
 
-export default NewItem;
+export default AddProduct;

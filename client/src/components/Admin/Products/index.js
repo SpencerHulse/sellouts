@@ -4,6 +4,8 @@ function AdminProducts() {
   return (
     <div>
       <Link to="/admin/products/add-product">Add Product</Link>
+      <br />
+      <Link to="/admin/products/update-product">Update Product</Link>
       <Outlet />
     </div>
   );

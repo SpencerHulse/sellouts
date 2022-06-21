@@ -283,10 +283,11 @@ const resolvers = {
       return Product.findByIdAndDelete({ _id });
     },
     updateProduct: async (parent, { input }) => {
-      return Product.findByIdAndUpdate(input._id, input, { new: true })
+      const product = Product.findByIdAndUpdate(input._id, input, { new: true })
         .populate("category")
         .populate("promotion")
         .populate("reviews");
+      return product;
     },
     // Promotion Mutations
     addPromotion: async (parent, { input }) => {
