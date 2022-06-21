@@ -4,7 +4,7 @@ import { ADD_CATEGORY } from "../../../graphql/mutations";
 
 function AddCategory() {
   const [formState, setFormState] = useState({ name: "" });
-  const [addProduct] = useMutation(ADD_CATEGORY);
+  const [addCategory] = useMutation(ADD_CATEGORY);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -18,7 +18,7 @@ function AddCategory() {
     const { name } = formState;
 
     if (name) {
-      addProduct({ variables: { name: name } });
+      addCategory({ variables: { name: name } });
     }
 
     window.location.assign("/admin");

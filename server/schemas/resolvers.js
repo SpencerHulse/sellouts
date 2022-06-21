@@ -256,6 +256,7 @@ const resolvers = {
       return Category.findByIdAndDelete({ _id }).exec();
     },
     updateCategory: async (parent, args) => {
+      console.log(args);
       return Category.findByIdAndUpdate(args._id, args, { new: true }).exec();
     },
     // Order Mutations
