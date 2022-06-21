@@ -8,8 +8,10 @@ import Nav from "./components/Nav";
 import OrderHistory from "./pages/order-history";
 import PurchaseSuccess from "./pages/purchase-success";
 import SingleProduct from "./pages/single-product";
-import ImageUpload from "./components/ImageUpload";
-import NewItem from "./pages/new-item";
+// Admin Components
+import Admin from "./components/Admin";
+import AdminProducts from "./components/Admin/Products";
+import AddProduct from "./components/Admin/Products/addProduct";
 
 // Apollo
 import {
@@ -48,11 +50,14 @@ function App() {
           <Route path="/" element={<Homepage />} />
           <Route path="login" element={<Accounts formType={"login"} />} />
           <Route path="/orders" element={<OrderHistory />} />
-          <Route path="/new-item" element={<NewItem />} />
+          <Route path="/admin" element={<Admin />}>
+            <Route path="products" element={<AdminProducts />}>
+              <Route path="add-product" element={<AddProduct />} />
+            </Route>
+          </Route>
           <Route path="product/:productId" element={<SingleProduct />} />
           <Route path="signup" element={<Accounts formType={"signup"} />} />
           <Route path="success" element={<PurchaseSuccess />} />
-          <Route path="upload" element={<ImageUpload />} />
         </Routes>
       </Router>
     </ApolloProvider>

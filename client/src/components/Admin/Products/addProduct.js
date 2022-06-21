@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useMutation, useLazyQuery } from "@apollo/client";
-import { ADD_PRODUCT } from "../graphql/mutations";
-import { QUERY_URL } from "../graphql/queries";
-import { useCategories } from "../hooks/categoryHooks";
-import { capitalizeFirstLetter } from "../utils/helpers";
+import { ADD_PRODUCT } from "../../../graphql/mutations";
+import { QUERY_URL } from "../../../graphql/queries";
+import { useCategories } from "../../../hooks/categoryHooks";
+import { capitalizeFirstLetter } from "../../../utils/helpers";
 
 const NewItem = () => {
   const [addProduct] = useMutation(ADD_PRODUCT);
@@ -184,7 +184,7 @@ const NewItem = () => {
                     required
                     rows="6"
                     maxLength="500"
-                    placeholder="Write a short description of your item. Max. 500 characters."
+                    placeholder="Write a short description of your item with a max of 500 characters."
                     className="default-input"
                     onChange={handleChange}
                   />
@@ -195,7 +195,7 @@ const NewItem = () => {
                     id="detail1"
                     name="detail1"
                     type="text"
-                    placeholder="Enter a detail of a maximum 100 characters"
+                    placeholder="Enter a detail of a maximum 100 characters."
                     maxLength="100"
                     className="default-input item-detail"
                     onChange={handleDetailsChange}
@@ -204,7 +204,7 @@ const NewItem = () => {
                     id="detail2"
                     name="detail2"
                     type="text"
-                    placeholder="Enter a detail of a maximum 100 characters"
+                    placeholder="Enter a detail of a maximum 100 characters."
                     maxLength="100"
                     className="default-input item-detail"
                     onChange={handleDetailsChange}
@@ -213,7 +213,7 @@ const NewItem = () => {
                     id="detail3"
                     name="detail3"
                     type="text"
-                    placeholder="Enter a detail of a maximum 100 characters"
+                    placeholder="Enter a detail of a maximum 100 characters."
                     maxLength="100"
                     className="default-input item-detail"
                     onChange={handleDetailsChange}
@@ -222,7 +222,7 @@ const NewItem = () => {
                     id="detail4"
                     name="detail4"
                     type="text"
-                    placeholder="Enter a detail of a maximum 100 characters"
+                    placeholder="Enter a detail of a maximum 100 characters."
                     maxLength="100"
                     className="default-input item-detail"
                     onChange={handleDetailsChange}
@@ -231,7 +231,7 @@ const NewItem = () => {
                     id="detail5"
                     name="detail5"
                     type="text"
-                    placeholder="Enter a detail of a maximum 100 characters"
+                    placeholder="Enter a detail of a maximum 100 characters."
                     maxLength="100"
                     className="default-input item-detail"
                     onChange={handleDetailsChange}
