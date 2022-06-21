@@ -39,7 +39,7 @@ function UpdateCategory() {
     event.preventDefault();
     const { name } = formState;
 
-    if (name) {
+    if (name && selectedCategory) {
       updateCategory({ variables: { id: selectedCategory, name: name } });
     }
 

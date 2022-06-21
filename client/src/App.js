@@ -16,6 +16,7 @@ import UpdateProduct from "./components/Admin/Products/updateProduct";
 import AdminCategories from "./components/Admin/Categories";
 import AddCategory from "./components/Admin/Categories/addCategory";
 import UpdateCategory from "./components/Admin/Categories/updateCategory";
+import DeleteCategory from "./components/Admin/Categories/deleteCategory";
 
 // Apollo
 import {
@@ -62,6 +63,7 @@ function App() {
             <Route path="categories" element={<AdminCategories />}>
               <Route path="add-category" element={<AddCategory />} />
               <Route path="update-category" element={<UpdateCategory />} />
+              <Route path="delete-category" element={<DeleteCategory />} />
             </Route>
           </Route>
           <Route path="product/:productId" element={<SingleProduct />} />
