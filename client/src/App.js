@@ -20,6 +20,7 @@ import DeleteCategory from "./components/Admin/Categories/deleteCategory";
 import AdminProducts from "./components/Admin/Products";
 import AddProduct from "./components/Admin/Products/addProduct";
 import UpdateProduct from "./components/Admin/Products/updateProduct";
+import DeleteProduct from "./components/Admin/Products/deleteProduct";
 // Promotion
 import AdminPromotions from "./components/Admin/Promotions";
 import AddPromotion from "./components/Admin/Promotions/addPromotion";
@@ -75,6 +76,7 @@ function App() {
             <Route path="products" element={<AdminProducts />}>
               <Route path="add-product" element={<AddProduct />} />
               <Route path="update-product" element={<UpdateProduct />} />
+              <Route path="delete-product" element={<DeleteProduct />} />
             </Route>
             <Route path="promotions" element={<AdminPromotions />}>
               <Route path="add-promotions" element={<AddPromotion />} />
