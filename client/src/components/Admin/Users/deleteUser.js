@@ -41,13 +41,13 @@ function DeleteUser() {
                     <p className="description">
                       Select the user you want to delete
                     </p>
-                    <label htmlFor="category" className="d-none">
+                    <label htmlFor="user" className="d-none">
                       User
                     </label>
                     <select
                       className="default-input"
-                      name="category"
-                      id="category"
+                      name="user"
+                      id="user"
                       required
                       onChange={handleSelect}
                     >

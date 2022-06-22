@@ -23,6 +23,7 @@ import UpdateProduct from "./components/Admin/Products/updateProduct";
 // Promotion
 import AdminPromotions from "./components/Admin/Promotions";
 import AddPromotion from "./components/Admin/Promotions/addPromotion";
+import UpdatePromotion from "./components/Admin/Promotions/updatePromotion";
 // User
 import AdminUsers from "./components/Admin/Users";
 import DeleteUser from "./components/Admin/Users/deleteUser";
@@ -76,8 +77,8 @@ function App() {
             </Route>
             <Route path="promotions" element={<AdminPromotions />}>
               <Route path="add-promotions" element={<AddPromotion />} />
-              {/* <Route path="update-promotions" element={<UpdatePromotion />} />
-              <Route path="delete-promotions" element={<DeletePromotion />} /> */}
+              <Route path="update-promotions" element={<UpdatePromotion />} />
+              {/* <Route path="delete-promotions" element={<DeletePromotion />} /> */}
             </Route>
             <Route path="users" element={<AdminUsers />}>
               <Route path="delete-user" element={<DeleteUser />} />
