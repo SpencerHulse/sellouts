@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
-const { DateTime } = require("luxon");
 
 const reviewSchema = new Schema({
   title: {
@@ -17,7 +16,7 @@ const reviewSchema = new Schema({
   },
   createdAt: {
     type: String,
-    default: DateTime.now().toLocaleString(DateTime.DATETIME_SHORT),
+    required: true,
   },
   rating: {
     type: Number,

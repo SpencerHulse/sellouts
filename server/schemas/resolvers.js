@@ -303,12 +303,13 @@ const resolvers = {
     },
     // Review Mutations
     addReview: async (parent, { input }) => {
-      const { _id, title, review: reviewText, rating, user } = input;
+      const { _id, title, review: reviewText, rating, user, createdAt } = input;
       const review = await Review.create({
         review: reviewText,
         title,
         rating,
         user,
+        createdAt,
       });
       const id = review._id.toString();
       const product = Product.findByIdAndUpdate(

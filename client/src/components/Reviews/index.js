@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { DateTime } from "luxon";
 import ReactStars from "react-stars";
 import { useMutation } from "@apollo/client";
 import { ADD_REVIEW } from "../../graphql/mutations";
@@ -12,6 +13,7 @@ function ReviewForm({ currentProduct }) {
     title: "",
     review: "",
     rating: 0,
+    createdAt: DateTime.now().toLocaleString(DateTime.DATETIME_SHORT),
   });
 
   const [addReview] = useMutation(ADD_REVIEW);
@@ -32,7 +34,12 @@ function ReviewForm({ currentProduct }) {
 
   function handleFormSubmit(event) {
     event.preventDefault();
+    const { _id, user, title, review, rating } = formState;
+    if (!_id || !user || !title || !review || !rating) return;
+
     addReview({ variables: { input: { ...formState } } });
+
+    window.location.reload();
   }
 
   return (
