@@ -296,3 +296,8 @@ a:hover {
   width: 130px;
   cursor: pointer;
 }
+
+/* AdminPromotion */
+.promotion-date {
+  margin-top: 15px;
+}

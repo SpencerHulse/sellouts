@@ -292,12 +292,7 @@ const resolvers = {
     },
     // Promotion Mutations
     addPromotion: async (parent, { input }) => {
-      if (input.ends) {
-        input.ends = DateTime.now()
-          .plus({ days: Number(input.ends) })
-          .toLocaleString(DateTime.DATE_SHORT);
-      }
-
+      console.log(input);
       return Promotion.create(input);
     },
     deletePromotion: async (parent, { _id }) => {

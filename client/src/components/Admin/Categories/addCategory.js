@@ -14,7 +14,8 @@ function AddCategory() {
     });
   }
 
-  function handleSubmit() {
+  function handleSubmit(event) {
+    event.preventDefault();
     const { name } = formState;
 
     if (name) {
@@ -44,7 +45,7 @@ function AddCategory() {
                   name="name"
                   type="text"
                   required
-                  placeholder="Item Title"
+                  placeholder="Category Name"
                   className="default-input"
                   onChange={handleChange}
                 />

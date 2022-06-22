@@ -8,15 +8,22 @@ import Nav from "./components/Nav";
 import OrderHistory from "./pages/order-history";
 import PurchaseSuccess from "./pages/purchase-success";
 import SingleProduct from "./pages/single-product";
-// Admin Components
+
+// --- Admin Components ---
 import Admin from "./components/Admin";
-import AdminProducts from "./components/Admin/Products";
-import AddProduct from "./components/Admin/Products/addProduct";
-import UpdateProduct from "./components/Admin/Products/updateProduct";
+// Category
 import AdminCategories from "./components/Admin/Categories";
 import AddCategory from "./components/Admin/Categories/addCategory";
 import UpdateCategory from "./components/Admin/Categories/updateCategory";
 import DeleteCategory from "./components/Admin/Categories/deleteCategory";
+// Product
+import AdminProducts from "./components/Admin/Products";
+import AddProduct from "./components/Admin/Products/addProduct";
+import UpdateProduct from "./components/Admin/Products/updateProduct";
+// Promotion
+import AdminPromotions from "./components/Admin/Promotions";
+import AddPromotion from "./components/Admin/Promotions/addPromotion";
+// User
 import AdminUsers from "./components/Admin/Users";
 import DeleteUser from "./components/Admin/Users/deleteUser";
 
@@ -58,14 +65,19 @@ function App() {
           <Route path="login" element={<Accounts formType={"login"} />} />
           <Route path="/orders" element={<OrderHistory />} />
           <Route path="/admin" element={<Admin />}>
-            <Route path="products" element={<AdminProducts />}>
-              <Route path="add-product" element={<AddProduct />} />
-              <Route path="update-product" element={<UpdateProduct />} />
-            </Route>
             <Route path="categories" element={<AdminCategories />}>
               <Route path="add-category" element={<AddCategory />} />
               <Route path="update-category" element={<UpdateCategory />} />
               <Route path="delete-category" element={<DeleteCategory />} />
+            </Route>
+            <Route path="products" element={<AdminProducts />}>
+              <Route path="add-product" element={<AddProduct />} />
+              <Route path="update-product" element={<UpdateProduct />} />
+            </Route>
+            <Route path="promotions" element={<AdminPromotions />}>
+              <Route path="add-promotions" element={<AddPromotion />} />
+              {/* <Route path="update-promotions" element={<UpdatePromotion />} />
+              <Route path="delete-promotions" element={<DeletePromotion />} /> */}
             </Route>
             <Route path="users" element={<AdminUsers />}>
               <Route path="delete-user" element={<DeleteUser />} />

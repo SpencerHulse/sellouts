@@ -91,7 +91,7 @@ function UpdateCategory() {
                       name="name"
                       type="text"
                       required
-                      placeholder="Item Title"
+                      placeholder="Category Name"
                       className="default-input"
                       onChange={handleChange}
                     />
