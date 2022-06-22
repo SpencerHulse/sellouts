@@ -293,11 +293,69 @@ a:hover {
   padding: 5px;
   font-size: 16px;
   max-height: 35px;
-  width: 130px;
+  width: 200px;
   cursor: pointer;
+  text-align: center;
 }
 
 /* AdminPromotion */
 .promotion-date {
   margin-top: 15px;
+}
+
+/* ProductCard */
+.pc-title {
+  color: black;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.pc-container {
+  min-width: 250px;
+}
+
+.pc-category {
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.pc-image {
+  background-color: rgb(236, 236, 236);
+  object-fit: contain;
+  padding: 10px;
+  width: 250px;
+  height: 250px;
+}
+
+.pc-priceblock {
+  margin: 5px 0;
+}
+
+.bolden {
+  font-weight: 600;
+}
+
+.pc-promoprice {
+  color: rgb(230, 58, 58);
+}
+
+.pc-details {
+  display: block;
+  width: 100%;
+}
+
+/* Filter Nav Setup */
+.twocols {
+  display: flex;
+  min-height: calc(100vh - 60px);
+  padding: 0px;
+}
+
+.f-nav-col {
+  min-width: 250px;
+  max-width: 250px;
+}
+
+.shadow-bot {
+  box-shadow: 0 3px 2px -2px var(--brand-color);
 }

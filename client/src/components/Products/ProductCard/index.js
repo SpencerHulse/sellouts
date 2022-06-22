@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../../redux/features/cartSlice";
 import { idbPromise, effectivePromotion } from "../../../utils/helpers";
-import "./style.css";
 
 function ProductCard({ product }) {
   const {
@@ -45,7 +44,7 @@ function ProductCard({ product }) {
   }
 
   return (
-    <div className="pc-container mb-4 d-sm-flex flex-xl-column p-md-2">
+    <div className="pc-container mb-4 flex-xl-column p-md-2">
       <Link to={`/product/${_id}`} className="me-md-3 me-xl-0">
         <img
           className="pc-image mb-xl-2"
@@ -63,12 +62,12 @@ function ProductCard({ product }) {
               <div className="pc-price font-weight-bold bolden">${price}</div>
             ) : (
               <>
-                <div className="d-xs-column d-md-flex">
+                <div className="d-flex">
                   <div className="pc-price text-decoration-line-through me-2">
                     ${price}
                   </div>
                   <div className="pc-price pc-promoprice">
-                    <div className="d-sm-column d-md-flex">
+                    <div className="d-flex">
                       <div>
                         <span className="bolden me-1">${promotionPrice}</span>
                       </div>

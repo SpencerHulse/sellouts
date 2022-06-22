@@ -34,13 +34,24 @@ function FilterList() {
     dispatch(selectRatingOption(""));
   }
 
+  function activeFilter() {
+    if (
+      currentCategory ||
+      currentSaleOption ||
+      currentPriceOption ||
+      currentRatingOption
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   return (
-    <div className="d-flex align-items-center">
-      <div className="filter-item" onClick={clearSelections}>
-        Clear Filters
-      </div>
+    <div className="d-flex flex-column align-items-center mt-5">
+      <h2 className="shadow-bot">Active Filters</h2>
       {currentCategory && (
-        <div className="filter-item d-flex justify-content-between">
+        <div className="my-2 filter-item d-flex justify-content-between">
           {capitalizeFirstLetter(currentCategory)}
           <span onClick={() => dispatch(selectCategory(""))}>
             {" "}
@@ -49,7 +60,7 @@ function FilterList() {
         </div>
       )}
       {currentPriceOption && (
-        <div className="filter-item d-flex justify-content-between">
+        <div className="my-2 filter-item d-flex justify-content-between">
           {priceString(currentPriceOption)}
           <span onClick={() => dispatch(selectPriceOption(""))}>
             {" "}
@@ -58,7 +69,7 @@ function FilterList() {
         </div>
       )}
       {currentRatingOption && (
-        <div className="d-flex justify-content-between align-items-center filter-item">
+        <div className="my-2 d-flex justify-content-between align-items-center filter-item">
           <ReactStars
             count={5}
             value={currentRatingOption}
@@ -74,7 +85,7 @@ function FilterList() {
         </div>
       )}
       {currentSaleOption.option === "yes" && (
-        <div className="filter-item d-flex justify-content-between">
+        <div className="my-2 filter-item d-flex justify-content-between">
           On Sale
           <span onClick={() => dispatch(selectSaleOption(""))}>
             {" "}
@@ -82,6 +93,12 @@ function FilterList() {
           </span>
         </div>
       )}
+      {activeFilter() === false && (
+        <p className="my-2">There are no active filters</p>
+      )}
+      <div className="my-2 filter-item" onClick={clearSelections}>
+        Clear Filters
+      </div>
     </div>
   );
 }

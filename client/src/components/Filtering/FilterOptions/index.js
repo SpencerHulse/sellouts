@@ -18,16 +18,10 @@ function FilterOptions() {
   const priceOptions = [50, 100, 200];
   const ratingOptions = [4, 3, 2, 1];
 
-  function clearSelections() {
-    dispatch(selectCategory(""));
-    dispatch(selectSaleOption(""));
-    dispatch(selectPriceOption(""));
-    dispatch(selectRatingOption(""));
-  }
-
   return (
-    <div>
-      <div className="new-dropdown me-2 mt-sm-2 mt-md-0">
+    <div className="d-flex flex-column align-items-center">
+      <h2 className="shadow-bot">Filters</h2>
+      <div className="new-dropdown my-2">
         <button className="dropdown-button">Category</button>
         <div className="dropdown-content">
           {categoryData.map((category) => (
@@ -41,7 +35,7 @@ function FilterOptions() {
           ))}
         </div>
       </div>
-      <div className="new-dropdown  me-2 mt-sm-2">
+      <div className="new-dropdown my-2 ">
         <button className="dropdown-button">Price</button>
         <div className="dropdown-content">
           <div
@@ -71,7 +65,7 @@ function FilterOptions() {
           </div>
         </div>
       </div>
-      <div className="new-dropdown me-2 mt-sm-2">
+      <div className="new-dropdown my-2">
         <button className="dropdown-button">Minimum Rating</button>
         <div className="dropdown-content">
           {ratingOptions.map((option, index) => (
@@ -92,7 +86,7 @@ function FilterOptions() {
           ))}
         </div>
       </div>
-      <div className="new-dropdown">
+      <div className="new-dropdown my-2">
         <button className="dropdown-button">Promotions Only</button>
         <div className="dropdown-content">
           {saleOptions.map((option, index) => (
