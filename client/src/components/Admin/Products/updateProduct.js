@@ -76,9 +76,7 @@ const UpdateProduct = () => {
   }, [productData]);
 
   useEffect(() => {
-    if (!formState) {
-      return;
-    }
+    if (!formState) return;
 
     for (let key in formState) {
       const formData = formState[key];

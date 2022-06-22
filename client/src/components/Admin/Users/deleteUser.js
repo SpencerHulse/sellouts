@@ -15,10 +15,9 @@ function DeleteUser() {
 
   function handleSubmit(event) {
     event.preventDefault();
+    if (!selectedUser) return;
 
-    if (selectedUser) {
-      deleteUser({ variables: { id: selectedUser } });
-    }
+    deleteUser({ variables: { id: selectedUser } });
 
     window.location.assign("/admin");
   }

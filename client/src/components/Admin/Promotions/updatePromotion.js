@@ -77,18 +77,18 @@ function UpdatePromotion() {
     event.preventDefault();
     const { name, percentage, ends } = formState;
 
-    if (name && percentage && ends) {
-      updatePromotion({
-        variables: {
-          input: {
-            _id: selectedPromotion,
-            name: name,
-            percentage: parseInt(percentage),
-            ends: ends,
-          },
+    if (!name || !percentage || !ends) return;
+
+    updatePromotion({
+      variables: {
+        input: {
+          _id: selectedPromotion,
+          name: name,
+          percentage: parseInt(percentage),
+          ends: ends,
         },
-      });
-    }
+      },
+    });
 
     window.location.assign("/admin");
   }

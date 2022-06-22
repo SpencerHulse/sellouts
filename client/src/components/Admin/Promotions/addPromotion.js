@@ -38,13 +38,13 @@ function AddPromotion() {
     event.preventDefault();
     const { name, percentage, ends } = formState;
 
-    if (name && percentage && ends) {
-      addPromotions({
-        variables: {
-          input: { name: name, percentage: parseInt(percentage), ends: ends },
-        },
-      });
-    }
+    if (!name || !percentage || !ends) return;
+
+    addPromotions({
+      variables: {
+        input: { name: name, percentage: parseInt(percentage), ends: ends },
+      },
+    });
 
     window.location.assign("/admin");
   }

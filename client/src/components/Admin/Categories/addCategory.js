@@ -18,9 +18,9 @@ function AddCategory() {
     event.preventDefault();
     const { name } = formState;
 
-    if (name) {
-      addCategory({ variables: { name: name } });
-    }
+    if (!name) return;
+
+    addCategory({ variables: { name: name } });
 
     window.location.assign("/admin");
   }

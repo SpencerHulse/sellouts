@@ -17,9 +17,9 @@ function DeleteCategory() {
   function handleSubmit(event) {
     event.preventDefault();
 
-    if (selectedCategory) {
-      deleteCategory({ variables: { id: selectedCategory } });
-    }
+    if (!selectedCategory) return;
+
+    deleteCategory({ variables: { id: selectedCategory } });
 
     window.location.assign("/admin");
   }

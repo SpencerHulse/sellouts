@@ -8,17 +8,13 @@ function DeletePromotion() {
 
   const { loading, data } = useQuery(QUERY_PROMOTIONS);
   const [deletePromotion] = useMutation(DELETE_PROMOTION);
-  console.log(selectedPromotion);
+
   function handleSubmit(event) {
     event.preventDefault();
 
-    if (selectedPromotion) {
-      deletePromotion({
-        variables: {
-          id: selectedPromotion,
-        },
-      });
-    }
+    if (!selectedPromotion) return;
+
+    deletePromotion({ variables: { id: selectedPromotion } });
 
     window.location.assign("/admin");
   }

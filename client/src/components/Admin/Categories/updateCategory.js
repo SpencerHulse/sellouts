@@ -39,9 +39,9 @@ function UpdateCategory() {
     event.preventDefault();
     const { name } = formState;
 
-    if (name && selectedCategory) {
-      updateCategory({ variables: { id: selectedCategory, name: name } });
-    }
+    if (!name || !selectedCategory) return;
+
+    updateCategory({ variables: { id: selectedCategory, name: name } });
 
     window.location.assign("/admin");
   }
