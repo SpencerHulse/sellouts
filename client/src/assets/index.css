@@ -204,6 +204,12 @@ a:hover {
   border-top: solid 1px var(--brand-color);
 }
 
+.review-char {
+  font-size: 14px;
+  bottom: 10px;
+  right: 20px;
+}
+
 /* Account Pages */
 .accountinput {
   padding: 5px 15px;

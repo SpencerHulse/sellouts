@@ -8,6 +8,7 @@ import Auth from "../../utils/auth";
 function ReviewForm({ currentProduct }) {
   const [formOpen, setFormOpen] = useState(false);
   const [error, setError] = useState(false);
+  const [characterCount, setCharacterCount] = useState({ title: 0, review: 0 });
   const [formState, setFormState] = useState({
     _id: currentProduct._id,
     user: Auth.getProfile().data._id,
@@ -31,6 +32,9 @@ function ReviewForm({ currentProduct }) {
 
   function handleFormUpdate(event) {
     const { name, value } = event.target;
+    console.log(value.length);
+    console.log(name);
+    setCharacterCount({ ...characterCount, [name]: value.length });
     setFormState({ ...formState, [name]: value });
   }
 
@@ -80,7 +84,8 @@ function ReviewForm({ currentProduct }) {
                 type="text"
                 id="title"
                 name="title"
-                max="50"
+                className="review-input"
+                maxLength="50"
                 required
                 placeholder="Enter a title for your review"
                 onChange={handleFormUpdate}
@@ -102,17 +107,23 @@ function ReviewForm({ currentProduct }) {
             <label htmlFor="review" className="d-none">
               Review
             </label>
-            <textarea
-              name="review"
-              id="review"
-              cols="50"
-              rows="5"
-              required
-              max="255"
-              placeholder="Enter a review of 255 characters or less"
-              value={formState.review}
-              onChange={handleFormUpdate}
-            />
+            <div className="position-relative">
+              <textarea
+                name="review"
+                id="review"
+                className="review-input"
+                cols="50"
+                rows="5"
+                required
+                maxLength="255"
+                placeholder="Enter a review of 255 characters or less"
+                value={formState.review}
+                onChange={handleFormUpdate}
+              />
+              <span className="position-absolute review-char">
+                {characterCount.review} / 255
+              </span>
+            </div>
             {error && (
               <p className="mb-0 text-danger text-start">Rating is required!</p>
             )}

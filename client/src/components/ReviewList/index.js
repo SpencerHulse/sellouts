@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ReactStars from "react-stars";
+import { capitalizeFirstLetter } from "../../utils/helpers";
 
 function ReviewList({ currentProduct }) {
   // How many reviews per "page"
@@ -67,24 +68,34 @@ function ReviewList({ currentProduct }) {
     setVisibleReviews(reviews.slice(start, end));
   }, [currentProduct.reviews, page, sort]);
 
-  console.log(page);
+  function selectSortType(e) {
+    setSort(e.target.attributes.value.value);
+    setPage(1);
+  }
 
   return (
     <>
       <div id="top-of-reviews" className="mb-4">
         <span className="sort-by">Sort by:</span>
-        <select
-          className="dropdown-button sort-select"
-          onChange={(e) => {
-            setSort(e.target.value);
-            setPage(1);
-          }}
-        >
-          <option value="newest">Newest</option>
-          <option value="oldest">Oldest</option>
-          <option value="high">High Rating</option>
-          <option value="low">Low Rating</option>
-        </select>
+        <div className="new-dropdown">
+          <div className="dropdown-button sort-select">
+            {capitalizeFirstLetter(sort)}
+          </div>
+          <div className="dropdown-content">
+            <div value="newest" className="dd-item" onClick={selectSortType}>
+              Newest
+            </div>
+            <div value="oldest" className="dd-item" onClick={selectSortType}>
+              Oldest
+            </div>
+            <div value="high" className="dd-item" onClick={selectSortType}>
+              High Rating
+            </div>
+            <div value="low" className="dd-item" onClick={selectSortType}>
+              Low Rating
+            </div>
+          </div>
+        </div>
       </div>
       {visibleReviews.map((review) => {
         const {
