@@ -168,13 +168,15 @@ function SingleProduct() {
           <div className="bg-tint p-5 text-center">
             <div className="container">
               <h2 className="fw-light mb-3 h1">Reviews</h2>
-              {Auth.loggedIn() && (
-                <ReviewForm currentProduct={currentProduct} />
-              )}
               {currentProduct.reviews.length ? (
                 <ReviewList currentProduct={currentProduct} />
               ) : (
-                <div>There are no reviews yet. Be the first to leave one!</div>
+                <div className="mb-3">
+                  There are no reviews yet. Be the first to leave one!
+                </div>
+              )}
+              {Auth.loggedIn() && (
+                <ReviewForm currentProduct={currentProduct} />
               )}
             </div>
           </div>

@@ -7,6 +7,7 @@ import Auth from "../../utils/auth";
 
 function ReviewForm({ currentProduct }) {
   const [formOpen, setFormOpen] = useState(false);
+  const [error, setError] = useState(false);
   const [formState, setFormState] = useState({
     _id: currentProduct._id,
     user: Auth.getProfile().data._id,
@@ -24,6 +25,7 @@ function ReviewForm({ currentProduct }) {
   }).length;
 
   function handleStars(newRating) {
+    setError(false);
     setFormState({ ...formState, rating: newRating });
   }
 
@@ -35,7 +37,13 @@ function ReviewForm({ currentProduct }) {
   function handleFormSubmit(event) {
     event.preventDefault();
     const { _id, user, title, review, rating } = formState;
-    if (!_id || !user || !title || !review || !rating) return;
+
+    if (!rating) {
+      setError(true);
+      return;
+    }
+
+    if (!_id || !user || !title || !review) return;
 
     addReview({ variables: { input: { ...formState } } });
 
@@ -47,39 +55,71 @@ function ReviewForm({ currentProduct }) {
       {!reviewed && (
         <div>
           Want to leave a review?{" "}
-          <button onClick={() => setFormOpen(!formOpen)}>Click Here!</button>
+          <button
+            className="default-button button-filled"
+            onClick={() => setFormOpen(!formOpen)}
+          >
+            Click Here!
+          </button>
         </div>
       )}
       {formOpen && (
-        <form onSubmit={handleFormSubmit}>
-          <div>
-            <ReactStars
-              count={5}
-              size={24}
-              value={formState.rating}
-              edit={true}
-              half={false}
-              onChange={handleStars}
-              color2={"#7f60db"}
-              color1={"rgba(0, 0, 0, 0.19)"}
-            />
-            <label htmlFor="title">Title: </label>
-            <input
-              type="text"
-              id="title"
-              name="title"
-              onChange={handleFormUpdate}
-            />
+        <form
+          onSubmit={handleFormSubmit}
+          className="d-flex mx-auto mt-4 pt-3 review-form"
+        >
+          <div className="d-flex flex-column">
+            <p className="mb-1 text-start">
+              Let us know what you think of the product!
+            </p>
+            <div className="d-flex flex-column">
+              <label htmlFor="title" className="d-none">
+                Title
+              </label>
+              <input
+                type="text"
+                id="title"
+                name="title"
+                max="50"
+                required
+                placeholder="Enter a title for your review"
+                onChange={handleFormUpdate}
+              />
+            </div>
+            <div className="d-flex justify-content-start align-items-center">
+              <p className="mb-0">Rating: </p>
+              <ReactStars
+                count={5}
+                size={24}
+                value={formState.rating}
+                edit={true}
+                half={false}
+                onChange={handleStars}
+                color2={"#7f60db"}
+                color1={"rgba(0, 0, 0, 0.19)"}
+              />
+            </div>
+            <label htmlFor="review" className="d-none">
+              Review
+            </label>
             <textarea
               name="review"
               id="review"
               cols="50"
               rows="5"
+              required
+              max="255"
+              placeholder="Enter a review of 255 characters or less"
               value={formState.review}
               onChange={handleFormUpdate}
             />
+            {error && (
+              <p className="mb-0 text-danger text-start">Rating is required!</p>
+            )}
+            <button type="submit" className="default-button button-filled mt-2">
+              Submit
+            </button>
           </div>
-          <button type="submit">Submit</button>
         </form>
       )}
     </>

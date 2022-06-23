@@ -198,8 +198,13 @@ a:hover {
   margin-bottom: 0;
 }
 
-/* Account Pages */
+/* Reviews */
+.review-form {
+  max-width: 400px;
+  border-top: solid 1px var(--brand-color);
+}
 
+/* Account Pages */
 .accountinput {
   padding: 5px 15px;
   margin: 5px;
@@ -235,7 +240,7 @@ a:hover {
   }
 }
 
-/* ReviewList */
+/* Pagination */
 .prev-button,
 .next-button {
   width: 110px;
