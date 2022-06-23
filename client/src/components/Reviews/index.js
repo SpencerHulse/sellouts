@@ -4,6 +4,7 @@ import ReactStars from "react-stars";
 import { useMutation } from "@apollo/client";
 import { ADD_REVIEW } from "../../graphql/mutations";
 import Auth from "../../utils/auth";
+import { useWindowWidth } from "../../hooks/navHooks";
 
 function ReviewForm({ currentProduct }) {
   const [formOpen, setFormOpen] = useState(false);
@@ -17,6 +18,8 @@ function ReviewForm({ currentProduct }) {
     rating: 0,
     createdAt: DateTime.now().toLocaleString(DateTime.DATETIME_SHORT),
   });
+
+  const windowWidth = useWindowWidth();
 
   const [addReview] = useMutation(ADD_REVIEW);
 
@@ -76,7 +79,7 @@ function ReviewForm({ currentProduct }) {
             <p className="mb-1 text-start">
               Let us know what you think of the product!
             </p>
-            <div className="d-flex flex-column">
+            <div className="d-flex flex-column position-relative">
               <label htmlFor="title" className="d-none">
                 Title
               </label>
@@ -87,9 +90,12 @@ function ReviewForm({ currentProduct }) {
                 className="review-input"
                 maxLength="50"
                 required
-                placeholder="Enter a title for your review"
+                placeholder="Enter a title"
                 onChange={handleFormUpdate}
               />
+              <span className="position-absolute review-char review-title-char">
+                {characterCount.title} / 50
+              </span>
             </div>
             <div className="d-flex justify-content-start align-items-center">
               <p className="mb-0">Rating: </p>
@@ -112,11 +118,13 @@ function ReviewForm({ currentProduct }) {
                 name="review"
                 id="review"
                 className="review-input"
-                cols="50"
+                cols={
+                  windowWidth > 1000 ? "70" : windowWidth < 500 ? "25" : "50"
+                }
                 rows="5"
                 required
                 maxLength="255"
-                placeholder="Enter a review of 255 characters or less"
+                placeholder="Enter your review"
                 value={formState.review}
                 onChange={handleFormUpdate}
               />

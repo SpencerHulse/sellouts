@@ -200,7 +200,7 @@ a:hover {
 
 /* Reviews */
 .review-form {
-  max-width: 400px;
+  max-width: 210px;
   border-top: solid 1px var(--brand-color);
 }
 
@@ -208,6 +208,23 @@ a:hover {
   font-size: 14px;
   bottom: 10px;
   right: 20px;
+}
+
+.review-title-char {
+  bottom: 3px;
+  right: 20px;
+}
+
+@media (min-width: 500px) {
+  .review-form {
+    max-width: 400px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .review-form {
+    max-width: 600px;
+  }
 }
 
 /* Account Pages */
