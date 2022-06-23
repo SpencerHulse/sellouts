@@ -67,11 +67,14 @@ function ReviewList({ currentProduct }) {
     setVisibleReviews(reviews.slice(start, end));
   }, [currentProduct.reviews, page, sort]);
 
+  console.log(page);
+
   return (
     <>
-      <div id="top-of-reviews">
-        Sort by:{" "}
+      <div id="top-of-reviews" className="mb-4">
+        <span className="sort-by">Sort by:</span>
         <select
+          className="dropdown-button sort-select"
           onChange={(e) => {
             setSort(e.target.value);
             setPage(1);
@@ -93,7 +96,8 @@ function ReviewList({ currentProduct }) {
           rating,
         } = review;
         return (
-          <div key={_id} className="mb-4">
+          <div key={_id} className="mb-4 review">
+            <h3 className="fw-light review-title">{title}</h3>
             <div className="d-flex justify-content-center">
               <ReactStars
                 count={5}
@@ -104,10 +108,8 @@ function ReviewList({ currentProduct }) {
                 color1={"rgba(0, 0, 0, 0.19)"}
               />
             </div>
-            <h3 className="fw-light">{title}</h3>
+            <p>{userReview}</p>
             <p>
-              {userReview}
-              <br />
               —written by {user?.username || "a retired user"} on{" "}
               {createdAt.split(", ")[0]}
             </p>
@@ -115,19 +117,31 @@ function ReviewList({ currentProduct }) {
         );
       })}
       <div className="d-flex justify-content-center align-items-baseline">
-        <a href="#top-of-reviews" className="pagination-link">
-          <button className="prev-button" onClick={() => changePage("prev")}>
+        {page === 1 ? (
+          <button className="disabled-btn disabled-prev" disabled>
             Prev
           </button>
-        </a>
+        ) : (
+          <a href="#top-of-reviews" className="pagination-link">
+            <button className="prev-button" onClick={() => changePage("prev")}>
+              Prev
+            </button>
+          </a>
+        )}
         <p>
           Page {page} of {pages}
         </p>
-        <a href="#top-of-reviews" className="pagination-link">
-          <button className="next-button" onClick={() => changePage("next")}>
+        {page === pages ? (
+          <button className="disabled-btn disabled-next" disabled>
             Next
           </button>
-        </a>
+        ) : (
+          <a href="#top-of-reviews" className="pagination-link">
+            <button className="next-button" onClick={() => changePage("next")}>
+              Next
+            </button>
+          </a>
+        )}
       </div>
     </>
   );

@@ -124,21 +124,6 @@ function SingleProduct() {
                       ({currentProduct.reviews.length} reviews)
                     </div>
                   </div>
-                  <div className="d-none">
-                    <ul>
-                      {currentProduct.details.length ? (
-                        currentProduct.details.map((detail, index) => {
-                          return (
-                            <li key={`${productId}-detail-${index}`}>
-                              {detail}
-                            </li>
-                          );
-                        })
-                      ) : (
-                        <li>Nothing here yet...</li>
-                      )}
-                    </ul>
-                  </div>
                   <div className="product-description lh-lg">
                     <p className="mx-1 text-start">
                       {currentProduct.description}{" "}
@@ -167,16 +152,22 @@ function SingleProduct() {
                 </div>
                 <ul className="col-md-3 product-details mt-5 mt-md-0">
                   <h2 className="text-start fw-light mb-4 h1">Details</h2>
-                  {currentProduct.details.map((detail) => (
-                    <li>{detail}</li>
-                  ))}
+                  {currentProduct.details.length ? (
+                    currentProduct.details.map((detail, index) => {
+                      return (
+                        <li key={`${productId}-detail-${index}`}>{detail}</li>
+                      );
+                    })
+                  ) : (
+                    <li>Nothing here yet...</li>
+                  )}
                 </ul>
               </div>
             </div>
           </div>
           <div className="bg-tint p-5 text-center">
             <div className="container">
-              <h2 className="fw-light mb-4 h1">Reviews</h2>
+              <h2 className="fw-light mb-3 h1">Reviews</h2>
               {Auth.loggedIn() && (
                 <ReviewForm currentProduct={currentProduct} />
               )}

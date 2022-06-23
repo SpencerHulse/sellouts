@@ -123,19 +123,31 @@ function ProductList() {
         </div>
       </div>
       <div className="d-flex justify-content-center align-items-baseline">
-        <a href="#top-of-products" className="pagination-link">
-          <button className="prev-button" onClick={() => changePage("prev")}>
-            Previous
+        {page === 1 ? (
+          <button className="disabled-btn disabled-prev" disabled>
+            Prev
           </button>
-        </a>
+        ) : (
+          <a href="#top-of-products" className="pagination-link">
+            <button className="prev-button" onClick={() => changePage("prev")}>
+              Prev
+            </button>
+          </a>
+        )}
         <p>
           Page {page} of {pages || 1}
         </p>
-        <a href="#top-of-products" className="pagination-link">
-          <button className="next-button" onClick={() => changePage("next")}>
+        {page === pages ? (
+          <button className="disabled-btn disabled-next" disabled>
             Next
           </button>
-        </a>
+        ) : (
+          <a href="#top-of-products" className="pagination-link">
+            <button className="next-button" onClick={() => changePage("next")}>
+              Next
+            </button>
+          </a>
+        )}
       </div>
     </div>
   );

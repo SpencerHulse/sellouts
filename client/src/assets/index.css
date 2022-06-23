@@ -193,6 +193,13 @@ a:hover {
   color: var(--brand-color);
 }
 
+/* ReviewsList */
+.review-title {
+  margin-bottom: 0;
+}
+
+/* Account Pages */
+
 .accountinput {
   padding: 5px 15px;
   margin: 5px;
@@ -255,6 +262,36 @@ a:hover {
 
 .pagination-link {
   text-decoration: none;
+}
+
+.disabled-btn {
+  background-color: gray;
+  color: white !important;
+  border: 3px solid gray;
+  width: 110px;
+  padding: 1px 10px;
+  cursor: not-allowed;
+}
+
+.disabled-prev {
+  margin-right: 10px;
+}
+
+.disabled-next {
+  margin-left: 10px;
+}
+
+.sort-by {
+  font-size: 24px;
+}
+
+.sort-select {
+  width: 150px;
+  margin-left: 10px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: "";
 }
 
 /* Form Styles */
