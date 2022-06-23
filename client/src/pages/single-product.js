@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useLazyQuery } from "@apollo/client";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { IoIosArrowRoundBack } from "react-icons/io";
 import ReactStars from "react-stars";
 import ReviewList from "../components/ReviewList";
 import ReviewForm from "../components/Reviews";
@@ -76,6 +77,9 @@ function SingleProduct() {
       {currentProduct ? (
         <div>
           <div className="bg-tint mb-4">
+            <Link to="/" className="back-to">
+              <IoIosArrowRoundBack size="48" /> back to products
+            </Link>
             <div className="container">
               <div className="row gx-4 fullpage align-items-stretch">
                 <div className="col-xl-8 col-md-12 my-auto">

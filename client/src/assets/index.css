@@ -148,6 +148,10 @@ a:hover {
   min-height: calc(100vh - 60px);
 }
 
+.fullpage-order-h {
+  min-height: calc(100vh - 108px);
+}
+
 .home-products {
   min-height: calc(100vh - 202px);
 }
@@ -191,6 +195,11 @@ a:hover {
 
 .product-details li::marker {
   color: var(--brand-color);
+}
+
+.back-to {
+  text-decoration: none;
+  font-size: 24px;
 }
 
 /* ReviewsList */
