@@ -7,10 +7,10 @@ import { loggedInRedirect } from "../utils/helpers";
 function Login({ formType }) {
   loggedInRedirect();
   return (
-    <div className="bg-tint fullpage row">
-      <div className="text-center col">
+    <div className="bg-tint fullpage row m-0">
+      <div className="text-center col p-0">
         <h1 className="m-5">Welcome to Sellouts!</h1>
-        <div className="bg-white pt-5 pb-5">
+        <div className="bg-white pt-5 pb-5 account-mid">
           <h2 className="fw-light mb-3">
             {formType === "login" ? "Sign In" : "Sign Up"}
           </h2>

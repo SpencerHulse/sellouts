@@ -248,6 +248,10 @@ a:hover {
   background-color: #f3efff;
 }
 
+.account-mid {
+  width: 100vw;
+}
+
 .default-button {
   background-size: contain;
   background-repeat: no-repeat;
