@@ -34,7 +34,7 @@ function MobileFilterOptions() {
       </button>
       <div className="position-relative">
         <div className="position-absolute">
-          <div className="new-dropdown">
+          <div className="new-dropdown filter-index-2">
             <button
               className={
                 dropdown.menu ? `m-dropdown-button` : `m-dropdown-button hidden`
@@ -54,7 +54,7 @@ function MobileFilterOptions() {
               ))}
             </div>
           </div>
-          <div className="new-dropdown">
+          <div className="new-dropdown filter-index-2">
             <button
               className={
                 dropdown.menu ? `m-dropdown-button` : `m-dropdown-button hidden`
@@ -90,7 +90,7 @@ function MobileFilterOptions() {
               </div>
             </div>
           </div>
-          <div className="new-dropdown">
+          <div className="new-dropdown filter-index-2">
             <button
               className={
                 dropdown.menu ? `m-dropdown-button` : `m-dropdown-button hidden`
@@ -117,7 +117,7 @@ function MobileFilterOptions() {
               ))}
             </div>
           </div>
-          <div className="new-dropdown">
+          <div className="new-dropdown filter-index-2">
             <button
               className={
                 dropdown.menu

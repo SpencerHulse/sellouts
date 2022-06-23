@@ -410,6 +410,10 @@ a:hover {
   text-align: center;
 }
 
+.filter-index-2 {
+  z-index: 2;
+}
+
 /* Filter - Multi Dropdown */
 .hidden {
   display: none;
