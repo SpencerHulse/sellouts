@@ -39,7 +39,7 @@ const Homepage = () => {
       ) : (
         <div className="container">
           <div className="row">
-            <div className="d-flex justify-content-between flex-wrap align-items-center mt-5">
+            <div className="d-flex justify-content-between flex-wrap align-items-center">
               <MobileFilterOptions />
               <MobileFilterList />
             </div>

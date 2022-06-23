@@ -55,7 +55,7 @@ function FilterList() {
           {capitalizeFirstLetter(currentCategory)}
           <span onClick={() => dispatch(selectCategory(""))}>
             {" "}
-            <IoIosClose />
+            <IoIosClose size="24px" />
           </span>
         </div>
       )}
@@ -64,7 +64,7 @@ function FilterList() {
           {priceString(currentPriceOption)}
           <span onClick={() => dispatch(selectPriceOption(""))}>
             {" "}
-            <IoIosClose />
+            <IoIosClose size="24px" />
           </span>
         </div>
       )}
@@ -80,7 +80,7 @@ function FilterList() {
           />
           <span onClick={() => dispatch(selectRatingOption(""))}>
             {" "}
-            <IoIosClose />
+            <IoIosClose size="24px" />
           </span>
         </div>
       )}
@@ -89,7 +89,7 @@ function FilterList() {
           On Sale
           <span onClick={() => dispatch(selectSaleOption(""))}>
             {" "}
-            <IoIosClose />
+            <IoIosClose size="24px" />
           </span>
         </div>
       )}

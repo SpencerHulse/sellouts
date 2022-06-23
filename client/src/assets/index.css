@@ -329,7 +329,15 @@ a:hover {
   width: 175px;
 }
 
-.m-dropdown-init-btn {
+.m-no-bg-img {
+  background-image: none;
+}
+
+.m-active-bg-img {
+  background-image: url("./arrow-right.png");
+}
+
+.m-dropdown-btn {
   width: 175px;
 }
 
@@ -341,6 +349,10 @@ a:hover {
   margin: -35px 0 0 175px;
   width: 75px;
   text-align: center;
+}
+
+.m-filter-item {
+  width: 120px;
 }
 
 /* AdminPromotion */

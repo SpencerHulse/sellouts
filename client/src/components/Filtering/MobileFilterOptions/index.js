@@ -26,115 +26,119 @@ function MobileFilterOptions() {
       onMouseLeave={() => setDropdown({ menu: false })}
     >
       <button
-        className="dropdown-button m-dropdown-init-btn"
+        className="dropdown-button m-dropdown-btn"
         onClick={() => setDropdown({ ...dropdown, menu: !dropdown.menu })}
         onMouseEnter={() => setDropdown({ menu: true })}
       >
         Filter Options
       </button>
-      <div className="new-dropdown">
-        <button
-          className={
-            dropdown.menu ? `m-dropdown-button` : `m-dropdown-button hidden`
-          }
-        >
-          Categories
-        </button>
-        <div className="dropdown-content m-dropdown-content">
-          {categoryData.map((category) => (
-            <div
-              className="dd-item"
-              key={category._id}
-              onClick={() => dispatch(selectCategory(category.name))}
+      <div className="position-relative">
+        <div className="position-absolute">
+          <div className="new-dropdown">
+            <button
+              className={
+                dropdown.menu ? `m-dropdown-button` : `m-dropdown-button hidden`
+              }
             >
-              {capitalizeFirstLetter(category.name)}
+              Categories
+            </button>
+            <div className="dropdown-content m-dropdown-content">
+              {categoryData.map((category) => (
+                <div
+                  className="dd-item"
+                  key={category._id}
+                  onClick={() => dispatch(selectCategory(category.name))}
+                >
+                  {capitalizeFirstLetter(category.name)}
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-      </div>
-      <div className="new-dropdown">
-        <button
-          className={
-            dropdown.menu ? `m-dropdown-button` : `m-dropdown-button hidden`
-          }
-        >
-          Price
-        </button>
-        <div className="dropdown-content m-dropdown-content">
-          <div
-            className="dd-item"
-            onClick={() => dispatch(selectPriceOption(25))}
-          >
-            ${0} to ${25}
           </div>
-          {priceOptions.map((option, index) => (
-            <div
-              className="dd-item"
-              key={"priceOption" + index}
-              onClick={() => dispatch(selectPriceOption(option))}
+          <div className="new-dropdown">
+            <button
+              className={
+                dropdown.menu ? `m-dropdown-button` : `m-dropdown-button hidden`
+              }
             >
-              ${option / 2} to ${option}
+              Price
+            </button>
+            <div className="dropdown-content m-dropdown-content">
+              <div
+                className="dd-item"
+                onClick={() => dispatch(selectPriceOption(25))}
+              >
+                ${0} to ${25}
+              </div>
+              {priceOptions.map((option, index) => (
+                <div
+                  className="dd-item"
+                  key={"priceOption" + index}
+                  onClick={() => dispatch(selectPriceOption(option))}
+                >
+                  ${option / 2} to ${option}
+                </div>
+              ))}
+              <div
+                className="dd-item"
+                onClick={() =>
+                  dispatch(
+                    selectPriceOption(priceOptions[priceOptions.length - 1] + 1)
+                  )
+                }
+              >
+                Over ${priceOptions[priceOptions.length - 1]}
+              </div>
             </div>
-          ))}
-          <div
-            className="dd-item"
-            onClick={() =>
-              dispatch(
-                selectPriceOption(priceOptions[priceOptions.length - 1] + 1)
-              )
-            }
-          >
-            Over ${priceOptions[priceOptions.length - 1]}
           </div>
-        </div>
-      </div>
-      <div className="new-dropdown">
-        <button
-          className={
-            dropdown.menu ? `m-dropdown-button` : `m-dropdown-button hidden`
-          }
-        >
-          Min. Rating
-        </button>
-        <div className="dropdown-content m-dropdown-content">
-          {ratingOptions.map((option, index) => (
-            <div
-              className="dd-item d-flex justify-content-center"
-              key={"ratingOptions" + index}
-              onClick={() => dispatch(selectRatingOption(option))}
+          <div className="new-dropdown">
+            <button
+              className={
+                dropdown.menu ? `m-dropdown-button` : `m-dropdown-button hidden`
+              }
             >
-              <ReactStars
-                count={5}
-                size={20}
-                value={option}
-                edit={false}
-                color2={"#7f60db"}
-                color1={"rgba(0, 0, 0, 0.19)"}
-              />
+              Min. Rating
+            </button>
+            <div className="dropdown-content m-dropdown-content">
+              {ratingOptions.map((option, index) => (
+                <div
+                  className="dd-item d-flex justify-content-center"
+                  key={"ratingOptions" + index}
+                  onClick={() => dispatch(selectRatingOption(option))}
+                >
+                  <ReactStars
+                    count={5}
+                    size={20}
+                    value={option}
+                    edit={false}
+                    color2={"#7f60db"}
+                    color1={"rgba(0, 0, 0, 0.19)"}
+                  />
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-      </div>
-      <div className="new-dropdown">
-        <button
-          className={
-            dropdown.menu
-              ? `m-dropdown-button last-dropdown`
-              : `last-dropdown m-dropdown-button hidden`
-          }
-        >
-          Promotional
-        </button>
-        <div className="dropdown-content m-dropdown-content">
-          {saleOptions.map((option, index) => (
-            <div
-              className="dd-item"
-              key={"saleOption" + index}
-              onClick={() => dispatch(selectSaleOption({ option }))}
+          </div>
+          <div className="new-dropdown">
+            <button
+              className={
+                dropdown.menu
+                  ? `m-dropdown-button last-dropdown`
+                  : `last-dropdown m-dropdown-button hidden`
+              }
             >
-              {capitalizeFirstLetter(option)}
+              Promotional
+            </button>
+            <div className="dropdown-content m-dropdown-content">
+              {saleOptions.map((option, index) => (
+                <div
+                  className="dd-item"
+                  key={"saleOption" + index}
+                  onClick={() => dispatch(selectSaleOption({ option }))}
+                >
+                  {capitalizeFirstLetter(option)}
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
       </div>
     </div>
