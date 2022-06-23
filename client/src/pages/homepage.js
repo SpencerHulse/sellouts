@@ -17,10 +17,15 @@ const Homepage = () => {
                 <FilterNav />
               </div>
             </div>
-            <div className="col2 p-0">
+            <div className="col2 p-0 column-two">
               <div className="p-5">
                 <div className="flex-row justify-space-between">
-                  <div className="col-12">
+                  <div>
+                    <h2 className="text-center">
+                      {currentCategory
+                        ? capitalizeFirstLetter(currentCategory)
+                        : "All Products"}
+                    </h2>
                     <ProductList />
                   </div>
                 </div>

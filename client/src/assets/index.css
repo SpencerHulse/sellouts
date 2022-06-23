@@ -147,6 +147,10 @@ a:hover {
   min-height: calc(100vh - 60px);
 }
 
+.home-products {
+  min-height: calc(100vh - 202px);
+}
+
 .product-image {
   width: 100%;
   max-height: calc(100vh - 60px);
@@ -349,6 +353,10 @@ a:hover {
   display: flex;
   min-height: calc(100vh - 60px);
   padding: 0px;
+}
+
+.column-two {
+  min-width: calc(100% - 250px);
 }
 
 .f-nav-col {

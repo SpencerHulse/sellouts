@@ -37,7 +37,7 @@ function FilterList() {
   function activeFilter() {
     if (
       currentCategory ||
-      currentSaleOption ||
+      currentSaleOption.option === "yes" ||
       currentPriceOption ||
       currentRatingOption
     ) {

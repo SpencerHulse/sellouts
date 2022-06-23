@@ -107,15 +107,18 @@ function ProductList() {
   }, [filteredProducts, page]);
 
   return (
-    <>
-      <div className="d-flex flex-wrap mt-5" id="top-of-products">
-        <div className="row row-cols-xl-5 row-cols-sm-1">
+    <div className="d-flex flex-column justify-content-between home-products">
+      <div
+        className="d-flex flex-wrap justify-content-center mt-4"
+        id="top-of-products"
+      >
+        <div className="d-flex flex-wrap justify-content-evenly">
           {visibleProducts.length ? (
             visibleProducts.map((product) => {
               return <ProductCard key={product._id} product={product} />;
             })
           ) : (
-            <div>There are no products here!</div>
+            <div className="">There are no products here!</div>
           )}
         </div>
       </div>
@@ -134,7 +137,7 @@ function ProductList() {
           </button>
         </a>
       </div>
-    </>
+    </div>
   );
 }
 
