@@ -140,13 +140,9 @@ function SingleProduct() {
                     </ul>
                   </div>
                   <div className="product-description lh-lg">
-                    <p>
-                      {/* {currentProduct.description} */} Lorem ipsum dolor sit
-                      amet, consectetur adipiscing elit. Ut ac hendrerit magna,
-                      sit amet feugiat est. Nunc a tempor est. Nam dignissim
-                      ante eu urna ultrices accumsan.{" "}
-                      {/* href returning to the current page is a temp fix for a React warning. */}
-                      <a href={`/product/${currentProduct._id}`}>Read more</a>
+                    <p className="mx-1 text-start">
+                      {currentProduct.description}{" "}
+                      <a href="#description-anchor">Read more</a>.
                     </p>
                   </div>
                   <div>
@@ -161,15 +157,26 @@ function SingleProduct() {
               </div>
             </div>
           </div>
-          <div className="bg-tint pt-5 pb-5 text-center mb-4">
-            <div className="container">
-              <h1 className="fw-light mb-5">Product Description</h1>
-              <div>{currentProduct.description}</div>
+          <div className="bg-tint pt-5 pb-5 mb-4">
+            <div className="container" id="description-anchor">
+              <div className="row">
+                <div className="col-12 col-md-6">
+                  {" "}
+                  <h2 className="fw-light mb-4 h1">Description</h2>
+                  {currentProduct.description}
+                </div>
+                <ul className="col-md-3 product-details mt-5 mt-md-0">
+                  <h2 className="text-start fw-light mb-4 h1">Details</h2>
+                  {currentProduct.details.map((detail) => (
+                    <li>{detail}</li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
           <div className="bg-tint p-5 text-center">
             <div className="container">
-              <h1 className="fw-light mb-5">Product Reviews</h1>
+              <h2 className="fw-light mb-4 h1">Reviews</h2>
               {Auth.loggedIn() && (
                 <ReviewForm currentProduct={currentProduct} />
               )}
