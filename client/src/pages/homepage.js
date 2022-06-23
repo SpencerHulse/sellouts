@@ -1,54 +1,57 @@
 import { useSelector } from "react-redux";
 import FilterNav from "../components/Filtering";
-import FilterOptions from "../components/Filtering/FilterOptions";
-import FilterList from "../components/Filtering/FilterList";
+import MobileFilterOptions from "../components/Filtering/MobileFilterOptions";
+import MobileFilterList from "../components/Filtering/MobileFilterList";
 import ProductList from "../components/Products/ProductList";
 import { capitalizeFirstLetter } from "../utils/helpers";
+import { useWindowWidth } from "../hooks/navHooks";
 
 const Homepage = () => {
   const { currentCategory } = useSelector((state) => state.categories);
   return (
     <>
-      <div className="container-fluid p-0">
-        <div className="row m-0">
-          <div className="twocols p-0">
-            <div className="col1 shadow-sm p-0 f-nav-col">
-              <div>
-                <FilterNav />
+      {useWindowWidth() > 768 ? (
+        <div className="container-fluid p-0">
+          <div className="row m-0">
+            <div className="twocols p-0">
+              <div className="col1 shadow-sm p-0 f-nav-col">
+                <div>
+                  <FilterNav />
+                </div>
               </div>
-            </div>
-            <div className="col2 p-0 column-two">
-              <div className="p-5">
-                <div className="flex-row justify-space-between">
-                  <div>
-                    <h2 className="text-center">
-                      {currentCategory
-                        ? capitalizeFirstLetter(currentCategory)
-                        : "All Products"}
-                    </h2>
-                    <ProductList />
+              <div className="col2 p-0 column-two">
+                <div className="p-5">
+                  <div className="flex-row justify-space-between">
+                    <div>
+                      <h2 className="text-center">
+                        {currentCategory
+                          ? capitalizeFirstLetter(currentCategory)
+                          : "All Products"}
+                      </h2>
+                      <ProductList />
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      {/*       <div className="container">
-        <div className="row">
-          <div className="d-flex justify-content-between flex-wrap align-items-center mt-5">
+      ) : (
+        <div className="container">
+          <div className="row">
+            <div className="d-flex justify-content-between flex-wrap align-items-center mt-5">
+              <MobileFilterOptions />
+              <MobileFilterList />
+            </div>
             <h2>
               {currentCategory
                 ? capitalizeFirstLetter(currentCategory)
                 : "All Products"}
             </h2>
-            <FilterNav />
-            <FilterOptions />
+            <ProductList />
           </div>
-          <FilterList />
-          <ProductList />
         </div>
-      </div> */}
+      )}
     </>
   );
 };

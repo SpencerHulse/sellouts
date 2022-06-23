@@ -303,6 +303,46 @@ a:hover {
   text-align: center;
 }
 
+/* Filter - Multi Dropdown */
+.hidden {
+  display: none;
+}
+
+.shown {
+  display: block;
+}
+
+.m-dropdown-button {
+  background-image: url("./arrow-right.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: right;
+  border-left: solid 1px var(--brand-color);
+  border-right: solid 1px var(--brand-color);
+  border-bottom: none;
+  border-top: none;
+  background-color: white;
+  color: var(--brand-color);
+  padding: 5px 35px 5px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 175px;
+}
+
+.m-dropdown-init-btn {
+  width: 175px;
+}
+
+.last-dropdown {
+  border-bottom: solid 1px var(--brand-color);
+}
+
+.m-dropdown-content {
+  margin: -35px 0 0 175px;
+  width: 75px;
+  text-align: center;
+}
+
 /* AdminPromotion */
 .promotion-date {
   margin-top: 15px;

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import ReactStars from "react-stars";
 import { useDispatch } from "react-redux";
 import { useCategories } from "../../../hooks/categoryHooks";
@@ -9,20 +10,37 @@ import {
   selectRatingOption,
 } from "../../../redux/features/filterSlice";
 
-function FilterOptions() {
+function MobileFilterOptions() {
   const dispatch = useDispatch();
   const categoryData = useCategories();
+
+  const [dropdown, setDropdown] = useState({ menu: false });
 
   const saleOptions = ["yes", "no"];
   const priceOptions = [50, 100, 200];
   const ratingOptions = [4, 3, 2, 1];
 
   return (
-    <div className="d-flex flex-column align-items-center">
-      <h2 className="shadow-bot">Filters</h2>
-      <div className="new-dropdown my-2">
-        <button className="dropdown-button">Category</button>
-        <div className="dropdown-content">
+    <div
+      className="my-2 d-flex flex-column"
+      onMouseLeave={() => setDropdown({ menu: false })}
+    >
+      <button
+        className="dropdown-button m-dropdown-init-btn"
+        onClick={() => setDropdown({ ...dropdown, menu: !dropdown.menu })}
+        onMouseEnter={() => setDropdown({ menu: true })}
+      >
+        Filter Options
+      </button>
+      <div className="new-dropdown">
+        <button
+          className={
+            dropdown.menu ? `m-dropdown-button` : `m-dropdown-button hidden`
+          }
+        >
+          Categories
+        </button>
+        <div className="dropdown-content m-dropdown-content">
           {categoryData.map((category) => (
             <div
               className="dd-item"
@@ -34,9 +52,15 @@ function FilterOptions() {
           ))}
         </div>
       </div>
-      <div className="new-dropdown my-2">
-        <button className="dropdown-button">Price</button>
-        <div className="dropdown-content">
+      <div className="new-dropdown">
+        <button
+          className={
+            dropdown.menu ? `m-dropdown-button` : `m-dropdown-button hidden`
+          }
+        >
+          Price
+        </button>
+        <div className="dropdown-content m-dropdown-content">
           <div
             className="dd-item"
             onClick={() => dispatch(selectPriceOption(25))}
@@ -64,12 +88,18 @@ function FilterOptions() {
           </div>
         </div>
       </div>
-      <div className="new-dropdown my-2">
-        <button className="dropdown-button">Minimum Rating</button>
-        <div className="dropdown-content">
+      <div className="new-dropdown">
+        <button
+          className={
+            dropdown.menu ? `m-dropdown-button` : `m-dropdown-button hidden`
+          }
+        >
+          Min. Rating
+        </button>
+        <div className="dropdown-content m-dropdown-content">
           {ratingOptions.map((option, index) => (
             <div
-              className="dd-item"
+              className="dd-item d-flex justify-content-center"
               key={"ratingOptions" + index}
               onClick={() => dispatch(selectRatingOption(option))}
             >
@@ -85,9 +115,17 @@ function FilterOptions() {
           ))}
         </div>
       </div>
-      <div className="new-dropdown my-2">
-        <button className="dropdown-button">Promotions Only</button>
-        <div className="dropdown-content">
+      <div className="new-dropdown">
+        <button
+          className={
+            dropdown.menu
+              ? `m-dropdown-button last-dropdown`
+              : `last-dropdown m-dropdown-button hidden`
+          }
+        >
+          Promotional
+        </button>
+        <div className="dropdown-content m-dropdown-content">
           {saleOptions.map((option, index) => (
             <div
               className="dd-item"
@@ -103,4 +141,4 @@ function FilterOptions() {
   );
 }
 
-export default FilterOptions;
+export default MobileFilterOptions;
