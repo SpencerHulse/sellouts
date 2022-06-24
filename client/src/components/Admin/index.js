@@ -6,7 +6,7 @@ function AdminDashboard() {
     <div className="admin">
       <div className="admin-main-menu">
         <ul>
-        <li>
+          <li>
             <NavLink to="/admin/dashboard">
               <Icon.Speedometer color="black" size={30} className="admin-icon" />
               <div className="menu-title">Dashboard</div>
@@ -43,6 +43,7 @@ function AdminDashboard() {
             </NavLink>
           </li>
         </ul>
+        <Icon.List className="admin-menu-button" size={30} />
       </div>
       <div className="admin-body">
         <Outlet />

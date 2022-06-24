@@ -1,5 +1,7 @@
 import { Link, Outlet } from "react-router-dom";
 
+
+
 function AdminCategories() {
   return (
     <div className="admin-body-content">

@@ -675,10 +675,6 @@ a:hover {
   word-wrap: break-word;
 }
 
-.admin {
-  display: flex;
-}
-
 .admin-body {
   padding-left: 100px;
   width: 100%;
@@ -689,6 +685,7 @@ a:hover {
 
 .admin-body-content {
   padding: 30px;
+  
 }
 
 .admin-main-menu {
@@ -750,16 +747,65 @@ a:hover {
   transition: all 0.15s ease-in-out;
 }
 
+.admin-menu-button {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+}
 
 
 @media (min-width: 768px) {
   .hamburger-container {
     display: none;
   }
+
+  .admin-menu-button {
+    display: none;
+  }
+
 }
 
 @media (max-width: 768px) {
   .product-details li {
     max-width: 400px;
   }
+
+  .admin-body {
+    padding-top: 60px;
+    padding-left: 0px;
+  }
+
+  .admin-main-menu {
+    background-color: rgb(236, 236, 236);
+    height: 60px;
+    width: 100vw;
+    transition: none;
+    position: absolute;
+    overflow: hidden;
+  }
+  
+  .admin-main-menu a:hover .menu-title {
+    opacity: 100%;
+    width: 100vw;
+    transition: none!important;
+    display: block;
+    background-color: rgb(252, 252, 252);
+    box-shadow: none;
+  }
+
+  .admin-main-menu:hover {
+    width: 100%;
+    position: absolute;
+    height: calc(100vh - 60px);
+    transition: none!important;
+  }
+
+  .admin-main-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 11px 0;
+  }
+
+
+
 }

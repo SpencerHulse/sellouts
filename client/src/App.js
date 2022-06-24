@@ -17,6 +17,7 @@ import Dashboard from "./components/Admin/Dashboard";
 
 // Category
 import AdminCategories from "./components/Admin/Categories";
+import AllCategories from "./components/Admin/Categories/allCategories"
 import AddCategory from "./components/Admin/Categories/addCategory";
 import UpdateCategory from "./components/Admin/Categories/updateCategory";
 import DeleteCategory from "./components/Admin/Categories/deleteCategory";
@@ -74,6 +75,7 @@ function App() {
           <Route path="/admin" element={<Admin />}>
             <Route path="dashboard" element={<Dashboard />}></Route>
             <Route path="categories" element={<AdminCategories />}>
+              <Route path="all-categories" element={<AllCategories />} />
               <Route path="add-category" element={<AddCategory />} />
               <Route path="update-category" element={<UpdateCategory />} />
               <Route path="delete-category" element={<DeleteCategory />} />
