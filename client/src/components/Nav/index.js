@@ -7,11 +7,13 @@ import { useWindowWidth } from "../../hooks/navHooks";
 function Header() {
   return (
     <nav className="navbar d-flex">
-      <div className={useWindowWidth() < 768 ? "container nav-p" : "container"}>
-        {/* place non-mobile in null spot */}
-        {useWindowWidth() < 768 ? <MobileNav /> : <Navbar />}
-        <div className="col-4 text-end">
-          <Cart />
+      <div className="row w-100">
+        <div className={useWindowWidth() < 768 ? "nav-p" : "d-flex justify-content-between"}>
+          {/* place non-mobile in null spot */}
+          {useWindowWidth() < 768 ? <MobileNav /> : <Navbar />}
+          <div className="col-4 text-end">
+            <Cart />
+          </div>
         </div>
       </div>
     </nav>

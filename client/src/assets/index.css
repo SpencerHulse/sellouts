@@ -543,7 +543,7 @@ a:hover {
 }
 
 .navbar-li {
-  margin: 0;
+  margin: 0 40px 0 0;
 }
 
 .navbar-item {
@@ -657,6 +657,21 @@ a:hover {
 
 .nav-p {
   margin: 0 0 0 auto !important;
+}
+
+.order-item {
+  background-color: white;
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
+.table-items {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.row-cell {
+  word-wrap: break-word;
 }
 
 @media (min-width: 768px) {

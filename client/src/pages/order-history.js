@@ -25,8 +25,26 @@ function OrderHistory() {
             {!loading &&
               data.orders.map((order) => {
                 return (
-                  <div key={order._id}>
+                  <div className="order-item" key={order._id}>
                     <div>Order #{order._id}</div>
+                    <table class="table table-items">
+                      <thead>
+                        <tr>
+                          <th scope="col">Item</th>
+                          <th scope="col">Quantity</th>
+                          <th scope="col">Item Price</th>
+                          <th scope="col">Total</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td className="row-cell">Item name</td>
+                          <td className="row-cell">1</td>
+                          <td className="row-cell">$9.99</td>
+                          <td className="row-cell">$10.00</td>
+                        </tr>
+                      </tbody>
+                    </table>
                     <div>{order.purchaseDate}</div>
                   </div>
                 );
