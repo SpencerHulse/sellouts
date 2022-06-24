@@ -11,6 +11,10 @@ import SingleProduct from "./pages/single-product";
 
 // --- Admin Components ---
 import Admin from "./components/Admin";
+
+// Dashboard 
+import Dashboard from "./components/Admin/Dashboard";
+
 // Category
 import AdminCategories from "./components/Admin/Categories";
 import AddCategory from "./components/Admin/Categories/addCategory";
@@ -68,6 +72,7 @@ function App() {
           <Route path="login" element={<Accounts formType={"login"} />} />
           <Route path="/orders" element={<OrderHistory />} />
           <Route path="/admin" element={<Admin />}>
+            <Route path="dashboard" element={<Dashboard />}></Route>
             <Route path="categories" element={<AdminCategories />}>
               <Route path="add-category" element={<AddCategory />} />
               <Route path="update-category" element={<UpdateCategory />} />

@@ -27,40 +27,36 @@ function DeleteCategory() {
   return (
     <>
       {categories && (
-        <div className="fullpage bg-tint">
-          <div className="container">
-            <div className="row">
-              <div className="mt-5 dialog">
-                <form action="submit" onSubmit={handleSubmit}>
-                  <div className="dialog-section">
-                    <h2 className="fw-light">Categories</h2>
-                    <p className="description">
-                      Select the category you want to delete
-                    </p>
-                    <label htmlFor="category" className="d-none">
-                      Category
-                    </label>
-                    <select
-                      className="default-input"
-                      name="category"
-                      id="category"
-                      required
-                      onChange={handleSelect}
-                    >
-                      <option value="">Select a Category</option>
-                      {categories.map((category) => (
-                        <option value={category._id} key={category._id}>
-                          {capitalizeFirstLetter(category.name)}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <button className="default-button button-filled">
-                    Delete
-                  </button>
-                </form>
+        <div>
+          <div className="mt-5 dialog">
+            <form action="submit" onSubmit={handleSubmit}>
+              <div className="dialog-section">
+                <h2 className="fw-light">Categories</h2>
+                <p className="description">
+                  Select the category you want to delete
+                </p>
+                <label htmlFor="category" className="d-none">
+                  Category
+                </label>
+                <select
+                  className="default-input"
+                  name="category"
+                  id="category"
+                  required
+                  onChange={handleSelect}
+                >
+                  <option value="">Select a Category</option>
+                  {categories.map((category) => (
+                    <option value={category._id} key={category._id}>
+                      {capitalizeFirstLetter(category.name)}
+                    </option>
+                  ))}
+                </select>
               </div>
-            </div>
+              <button className="default-button button-filled">
+                Delete
+              </button>
+            </form>
           </div>
         </div>
       )}

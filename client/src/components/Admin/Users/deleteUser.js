@@ -30,10 +30,8 @@ function DeleteUser() {
   return (
     <>
       {!loading && (
-        <div className="fullpage bg-tint">
-          <div className="container">
-            <div className="row">
-              <div className="mt-5 dialog">
+    <div>
+    <div className="mt-5 dialog">
                 <form action="submit" onSubmit={handleSubmit}>
                   <div className="dialog-section">
                     <h2 className="fw-light">Users</h2>
@@ -70,8 +68,6 @@ function DeleteUser() {
                 </form>
               </div>
             </div>
-          </div>
-        </div>
       )}
     </>
   );

@@ -9,7 +9,7 @@ function Navbar() {
         <ul className="navbar-list d-flex justify-content-start">
           {Auth.loggedIn() && Auth.getProfile().data.admin && (
             <li className="navbar-li">
-              <NavLink to="/admin" className="navbar-item">
+              <NavLink to="/admin/dashboard" className="navbar-item">
                 Admin
               </NavLink>
             </li>

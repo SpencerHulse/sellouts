@@ -26,34 +26,30 @@ function AddCategory() {
   }
 
   return (
-    <div className="fullpage bg-tint">
-      <div className="container">
-        <div className="row">
-          <div className="mt-5 dialog">
-            <form action="submit" onSubmit={handleSubmit}>
-              <div className="dialog-section">
-                <h2 className="fw-light">Name</h2>
-                <p className="description">
-                  A name for the category that will be displayed throughout your
-                  online store
-                </p>
-                <label htmlFor="name" className="d-none">
-                  Name
-                </label>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  required
-                  placeholder="Category Name"
-                  className="default-input"
-                  onChange={handleChange}
-                />
-              </div>
-              <button className="default-button button-filled">Submit</button>
-            </form>
+    <div>
+      <div className="mt-5 dialog">
+        <form action="submit" onSubmit={handleSubmit}>
+          <div className="dialog-section">
+            <h2 className="fw-light">Name</h2>
+            <p className="description">
+              A name for the category that will be displayed throughout your
+              online store
+            </p>
+            <label htmlFor="name" className="d-none">
+              Name
+            </label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              required
+              placeholder="Category Name"
+              className="default-input"
+              onChange={handleChange}
+            />
           </div>
-        </div>
+          <button className="default-button button-filled">Submit</button>
+        </form>
       </div>
     </div>
   );

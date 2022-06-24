@@ -99,99 +99,95 @@ function UpdatePromotion() {
   }
 
   return (
-    <div className="fullpage bg-tint">
-      <div className="container">
-        <div className="row">
-          <div className="mt-5 dialog">
-            <form action="submit" onSubmit={handleSubmit}>
-              <div className="dialog-section">
-                <h2 className="fw-light">Promotion</h2>
-                <p className="description">
-                  Select the promotion you want to edit
-                </p>
-                {promotionEnded && (
-                  <p className="description">This promotion has ended</p>
-                )}
-                <label htmlFor="promotion" className="d-none">
-                  Promotion
-                </label>
-                <select
-                  className="default-input"
-                  name="promotion"
-                  id="promotion"
-                  required
-                  onChange={handleSelect}
-                >
-                  <option value="">Select a Promotion</option>
-                  {!loading &&
-                    data.promotions.map((promotion) => (
-                      <option value={promotion._id} key={promotion._id}>
-                        {promotion.name} ({promotion.ends})
-                      </option>
-                    ))}
-                </select>
-              </div>
-              <div className="dialog-section">
-                <h2 className="fw-light">Name</h2>
-                <p className="description">
-                  A name for the promotion (must be unique)
-                </p>
-                <label htmlFor="name" className="d-none">
-                  Name
-                </label>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  required
-                  placeholder="Promotion Name"
-                  className="default-input"
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="dialog-section">
-                <h2 className="fw-light">Percentage</h2>
-                <p className="description">
-                  The percentage discount you want the promotion to apply
-                </p>
-                <label htmlFor="percentage" className="d-none">
-                  Percentage
-                </label>
-                <input
-                  id="percentage"
-                  name="percentage"
-                  type="number"
-                  min="0"
-                  required
-                  placeholder="Percentage Discount"
-                  className="default-input"
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="dialog-section">
-                <h2 className="fw-light">Duration</h2>
-                <p className="description">
-                  The number of days the promotion will be in effect
-                </p>
-                {endDate && <p className="description">Ends on {endDate}</p>}
-                <label htmlFor="ends" className="d-none">
-                  Ends
-                </label>
-                <input
-                  id="ends"
-                  name="ends"
-                  type="number"
-                  min="0"
-                  required
-                  placeholder="Duration of Promotion"
-                  className="default-input"
-                  onChange={handleChange}
-                />
-              </div>
-              <button className="default-button button-filled">Submit</button>
-            </form>
+    <div>
+      <div className="mt-5 dialog">
+        <form action="submit" onSubmit={handleSubmit}>
+          <div className="dialog-section">
+            <h2 className="fw-light">Promotion</h2>
+            <p className="description">
+              Select the promotion you want to edit
+            </p>
+            {promotionEnded && (
+              <p className="description">This promotion has ended</p>
+            )}
+            <label htmlFor="promotion" className="d-none">
+              Promotion
+            </label>
+            <select
+              className="default-input"
+              name="promotion"
+              id="promotion"
+              required
+              onChange={handleSelect}
+            >
+              <option value="">Select a Promotion</option>
+              {!loading &&
+                data.promotions.map((promotion) => (
+                  <option value={promotion._id} key={promotion._id}>
+                    {promotion.name} ({promotion.ends})
+                  </option>
+                ))}
+            </select>
           </div>
-        </div>
+          <div className="dialog-section">
+            <h2 className="fw-light">Name</h2>
+            <p className="description">
+              A name for the promotion (must be unique)
+            </p>
+            <label htmlFor="name" className="d-none">
+              Name
+            </label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              required
+              placeholder="Promotion Name"
+              className="default-input"
+              onChange={handleChange}
+            />
+          </div>
+          <div className="dialog-section">
+            <h2 className="fw-light">Percentage</h2>
+            <p className="description">
+              The percentage discount you want the promotion to apply
+            </p>
+            <label htmlFor="percentage" className="d-none">
+              Percentage
+            </label>
+            <input
+              id="percentage"
+              name="percentage"
+              type="number"
+              min="0"
+              required
+              placeholder="Percentage Discount"
+              className="default-input"
+              onChange={handleChange}
+            />
+          </div>
+          <div className="dialog-section">
+            <h2 className="fw-light">Duration</h2>
+            <p className="description">
+              The number of days the promotion will be in effect
+            </p>
+            {endDate && <p className="description">Ends on {endDate}</p>}
+            <label htmlFor="ends" className="d-none">
+              Ends
+            </label>
+            <input
+              id="ends"
+              name="ends"
+              type="number"
+              min="0"
+              required
+              placeholder="Duration of Promotion"
+              className="default-input"
+              onChange={handleChange}
+            />
+          </div>
+          <button className="default-button button-filled">Submit</button>
+        </form>
       </div>
     </div>
   );

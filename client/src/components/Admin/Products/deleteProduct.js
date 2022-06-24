@@ -27,40 +27,36 @@ function DeleteProduct() {
   return (
     <>
       {products && (
-        <div className="fullpage bg-tint">
-          <div className="container">
-            <div className="row">
-              <div className="mt-5 dialog">
-                <form action="submit" onSubmit={handleSubmit}>
-                  <div className="dialog-section">
-                    <h2 className="fw-light">Products</h2>
-                    <p className="description">
-                      Select the product you want to update
-                    </p>
-                    <label htmlFor="product" className="d-none">
-                      Product
-                    </label>
-                    <select
-                      className="default-input"
-                      name="product"
-                      id="product"
-                      required
-                      onChange={handleSelect}
-                    >
-                      <option value="">Select a Product</option>
-                      {products.map((product) => (
-                        <option value={product._id} key={product._id}>
-                          {product.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <button className="default-button button-filled">
-                    Submit
-                  </button>
-                </form>
+        <div>
+          <div className="mt-5 dialog">
+            <form action="submit" onSubmit={handleSubmit}>
+              <div className="dialog-section">
+                <h2 className="fw-light">Products</h2>
+                <p className="description">
+                  Select the product you want to update
+                </p>
+                <label htmlFor="product" className="d-none">
+                  Product
+                </label>
+                <select
+                  className="default-input"
+                  name="product"
+                  id="product"
+                  required
+                  onChange={handleSelect}
+                >
+                  <option value="">Select a Product</option>
+                  {products.map((product) => (
+                    <option value={product._id} key={product._id}>
+                      {product.name}
+                    </option>
+                  ))}
+                </select>
               </div>
-            </div>
+              <button className="default-button button-filled">
+                Submit
+              </button>
+            </form>
           </div>
         </div>
       )}

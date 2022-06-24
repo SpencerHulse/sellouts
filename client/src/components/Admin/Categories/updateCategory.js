@@ -49,62 +49,59 @@ function UpdateCategory() {
   return (
     <>
       {formState && (
-        <div className="fullpage bg-tint">
-          <div className="container">
-            <div className="row">
-              <div className="mt-5 dialog">
-                <form action="submit" onSubmit={handleSubmit}>
-                  <div className="dialog-section">
-                    <h2 className="fw-light">Categories</h2>
-                    <p className="description">
-                      Select the category you want to update
-                    </p>
-                    <label htmlFor="category" className="d-none">
-                      Category
-                    </label>
-                    <select
-                      className="default-input"
-                      name="category"
-                      id="category"
-                      required
-                      onChange={handleSelect}
-                    >
-                      <option value="">Select a Category</option>
-                      {categories.map((category) => (
-                        <option value={category._id} key={category._id}>
-                          {capitalizeFirstLetter(category.name)}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <div className="dialog-section">
-                    <h2 className="fw-light">Name</h2>
-                    <p className="description">
-                      A name for the category that will be displayed throughout
-                      your online store
-                    </p>
-                    <label htmlFor="name" className="d-none">
-                      Name
-                    </label>
-                    <input
-                      id="name"
-                      name="name"
-                      type="text"
-                      required
-                      placeholder="Category Name"
-                      className="default-input"
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <button className="default-button button-filled">
-                    Submit
-                  </button>
-                </form>
+        <div>
+          <div className="mt-5 dialog">
+            <form action="submit" onSubmit={handleSubmit}>
+              <div className="dialog-section">
+                <h2 className="fw-light">Categories</h2>
+                <p className="description">
+                  Select the category you want to update
+                </p>
+                <label htmlFor="category" className="d-none">
+                  Category
+                </label>
+                <select
+                  className="default-input"
+                  name="category"
+                  id="category"
+                  required
+                  onChange={handleSelect}
+                >
+                  <option value="">Select a Category</option>
+                  {categories.map((category) => (
+                    <option value={category._id} key={category._id}>
+                      {capitalizeFirstLetter(category.name)}
+                    </option>
+                  ))}
+                </select>
               </div>
-            </div>
+              <div className="dialog-section">
+                <h2 className="fw-light">Name</h2>
+                <p className="description">
+                  A name for the category that will be displayed throughout
+                  your online store
+                </p>
+                <label htmlFor="name" className="d-none">
+                  Name
+                </label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  required
+                  placeholder="Category Name"
+                  className="default-input"
+                  onChange={handleChange}
+                />
+              </div>
+              <button className="default-button button-filled">
+                Submit
+              </button>
+            </form>
           </div>
         </div>
-      )}
+      )
+      }
     </>
   );
 }

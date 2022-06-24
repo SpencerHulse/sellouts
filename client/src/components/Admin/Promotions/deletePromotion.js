@@ -25,10 +25,8 @@ function DeletePromotion() {
   }
 
   return (
-    <div className="fullpage bg-tint">
-      <div className="container">
-        <div className="row">
-          <div className="mt-5 dialog">
+    <div>
+      <div className="mt-5 dialog">
             <form action="submit" onSubmit={handleSubmit}>
               <div className="dialog-section">
                 <h2 className="fw-light">Promotion</h2>
@@ -58,8 +56,6 @@ function DeletePromotion() {
             </form>
           </div>
         </div>
-      </div>
-    </div>
   );
 }
 
