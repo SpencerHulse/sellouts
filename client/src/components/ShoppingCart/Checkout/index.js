@@ -24,14 +24,22 @@ function Checkout({ cartItems }) {
   useCheckoutRedirect(data);
 
   return cartItems.length ? (
-    <div className="">
-      <button type="submit" className="" onClick={submitCheckout}>
+    <div>
+      <button
+        type="submit"
+        className="default-button button-filled"
+        onClick={submitCheckout}
+      >
         Checkout
       </button>
     </div>
   ) : (
-    <div className="mt-10">
-      <button type="submit" className="" disabled>
+    <div>
+      <button
+        type="submit"
+        className="default-button button-filled disabled-btn"
+        disabled
+      >
         Checkout
       </button>
     </div>

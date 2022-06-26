@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import { TiShoppingCart } from "react-icons/ti";
+import { IoIosClose } from "react-icons/io";
 import CartItem from "../CartItem";
 import Checkout from "../Checkout";
 import Auth from "../../../utils/auth";
@@ -33,42 +34,36 @@ function ShoppingCart() {
       <button className="cart-button" ref={cartTabRef} onClick={() => toggle()}>
         <TiShoppingCart size={30}>({cartItems.length})</TiShoppingCart>
       </button>
-      <div className="cart" ref={cartRef}>
+      <div className="cart shadow" ref={cartRef}>
         <div>
-          <div className="" onClick={() => toggle()}>
-            <button>Close cart</button>
+          <div className="text-start close-cart" onClick={() => toggle()}>
+            <IoIosClose size="48px" />
           </div>
           <form>
-            <section>
-              <ul className="">
+            {/* Order summary */}
+            <section aria-labelledby="summary-heading">
+              <h2 className="sr-only">Order summary</h2>
+              <ul>
                 {cartItems.map((item) => {
                   return <CartItem key={item.product._id} item={item} />;
                 })}
               </ul>
               {!cartItems.length && "There's nothing here yet!"}
-            </section>
-
-            {/* Order summary */}
-            <section aria-labelledby="summary-heading" className="">
-              <h2 className="sr-only">Order summary</h2>
-
               <div>
-                <dl className="">
-                  <div className="">
-                    <dt className="">Subtotal</dt>
-                    <dd className="">${calculateTotal(cartItems)}</dd>
+                <dl>
+                  <div>
+                    <dt>Subtotal</dt>
+                    <dd>${calculateTotal(cartItems)}</dd>
                   </div>
                 </dl>
-                <p className="">
-                  Shipping and taxes will be calculated at checkout.
-                </p>
+                <p>Shipping and taxes will be calculated at checkout.</p>
               </div>
               {Auth.loggedIn() ? (
                 <Checkout cartItems={cartItems} />
               ) : (
                 <span>
                   (
-                  <Link className="" to="/login" onClick={() => toggle()}>
+                  <Link to="/login" onClick={() => toggle()}>
                     Log in
                   </Link>{" "}
                   to check out)

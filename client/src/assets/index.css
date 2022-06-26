@@ -65,13 +65,16 @@ a:hover {
 .cart {
   position: absolute;
   width: 300px;
-  height: calc(100vh - 60px);
+  height: 90vh;
   z-index: 20;
   top: 60px;
-  right: 0;
-  background-color: white;
-  border: 1px solid black;
-  padding: 10px;
+  right: 10px;
+  padding: 20px;
+  background: white;
+}
+
+.close-cart {
+  cursor: pointer;
 }
 
 /* Success Page */
@@ -310,9 +313,13 @@ a:hover {
   background-color: gray;
   color: white !important;
   border: 3px solid gray;
+  cursor: not-allowed;
+}
+
+.disabled-prev,
+.disabled-next {
   width: 110px;
   padding: 1px 10px;
-  cursor: not-allowed;
 }
 
 .disabled-prev {
