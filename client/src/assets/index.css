@@ -607,6 +607,7 @@ a:hover {
   z-index: 9999;
   display: block;
 }
+
 /* Three lines that make the hamburger (hamburger, before, after) */
 .hamburger {
   display: block;
@@ -638,6 +639,7 @@ a:hover {
 .hamburger::after {
   bottom: 6px;
 }
+
 /* Animation setup for the three lines turning into the "X" */
 .hamburger-open .hamburger {
   transform: rotate(0.625turn);
@@ -654,6 +656,7 @@ a:hover {
 .hamburger-open .hamburger-toggle {
   position: fixed;
 }
+
 /* Deals with the list, its size, and where it enters the screen */
 .hamburger-open .hamburger-nav {
   transform: translateY(0%);
@@ -749,42 +752,38 @@ a:hover {
   padding: 25px 0;
 }
 
-.admin-main-menu li {
-  position: relative;
-  margin-bottom: 30px;
+.admin-main-menu li a {
+  display: flex;
+  padding: 20px 0;
+  width: 300px;
+  overflow: scroll;
 }
 
-.admin-main-menu a:hover .menu-title {
-  opacity: 100%;
-  transition: all 0.15s ease-in-out;
-  display: block;
+.admin-main-menu li a.active {
   background-color: rgb(252, 252, 252);
+}
+
+.admin-main-menu li a:hover {
+  background-color: rgb(252, 252, 252);
+  transition: all 0.15s ease-in-out;
   -webkit-box-shadow: 0px 0px 22px 6px rgba(0, 0, 0, 0.18);
   box-shadow: 0px 0px 22px 6px rgba(0, 0, 0, 0.18);
 }
 
-.admin-main-menu a.active .menu-title {
-  opacity: 100%;
-  transition: all 0.15s ease-in-out;
-  display: block;
-  background-color: rgb(252, 252, 252);
-}
-
 .admin-icon {
-  position: relative;
-  z-index: 100;
-  margin-left: 35px;
+  width: 100px;
 }
 
 .menu-title {
-  opacity: 100%;
-  width: 100%;
-  position: absolute;
-  top: -11px;
+  margin: auto 0;
   color: black;
-  padding: 13px 20px 13px 100px;
-  z-index: 50;
+  margin-left: 0px;
   transition: all 0.15s ease-in-out;
+}
+
+.admin-main-menu li a.active .menu-title {
+  font-weight: 700;
+  color: var(--brand-color);
 }
 
 .admin-menu-button {

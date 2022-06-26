@@ -8,11 +8,7 @@ function AdminDashboard() {
         <ul>
           <li>
             <NavLink to="/admin/dashboard">
-              <Icon.Speedometer
-                color="black"
-                size={30}
-                className="admin-icon"
-              />
+              <Icon.Speedometer color="black" size={30} className="admin-icon" />
               <div className="menu-title">Dashboard</div>
             </NavLink>
           </li>
