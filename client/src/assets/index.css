@@ -64,6 +64,7 @@ a:hover {
 
 .cart {
   position: absolute;
+  font-size: 18px;
   width: 300px;
   height: 90vh;
   z-index: 20;
@@ -71,10 +72,36 @@ a:hover {
   right: 10px;
   padding: 20px;
   background: white;
+  overflow: scroll;
 }
 
 .close-cart {
   cursor: pointer;
+}
+
+.cart-ul {
+  list-style: none;
+  padding: 0;
+}
+
+/* Cart Item */
+.cart-list {
+  width: 100%;
+}
+
+.orderlist-img {
+  width: 75px;
+  height: 75px;
+  border-radius: 5px;
+  object-fit: contain;
+  overflow: hidden;
+}
+
+.cart-quantity {
+  width: 40px;
+  height: 30px;
+  padding: 0 3px;
+  border: 1px solid var(--brand-color);
 }
 
 /* Success Page */
@@ -172,16 +199,19 @@ a:hover {
   overflow: scroll;
 }
 
-.product-description::-webkit-scrollbar {
+.product-description::-webkit-scrollbar,
+.cart::-webkit-scrollbar {
   width: 5px;
   height: 0px;
 }
 
-.product-description::-webkit-scrollbar-track {
+.product-description::-webkit-scrollbar-track,
+.cart::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
 
-.product-description::-webkit-scrollbar-thumb {
+.product-description::-webkit-scrollbar-thumb,
+.cart::-webkit-scrollbar-thumb {
   background-color: var(--brand-color);
 }
 

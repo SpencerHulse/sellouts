@@ -36,14 +36,18 @@ function ShoppingCart() {
       </button>
       <div className="cart shadow" ref={cartRef}>
         <div>
-          <div className="text-start close-cart" onClick={() => toggle()}>
-            <IoIosClose size="48px" />
-          </div>
           <form>
             {/* Order summary */}
             <section aria-labelledby="summary-heading">
-              <h2 className="sr-only">Order summary</h2>
-              <ul>
+              <div className="d-flex justify-content-between">
+                <div className="text-start close-cart" onClick={() => toggle()}>
+                  <IoIosClose size="36px" />
+                </div>
+                <h2 className="sr-only h4 m-0 align-self-center">
+                  Order Summary
+                </h2>
+              </div>
+              <ul className="cart-ul">
                 {cartItems.map((item) => {
                   return <CartItem key={item.product._id} item={item} />;
                 })}

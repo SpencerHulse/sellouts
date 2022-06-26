@@ -8,17 +8,19 @@ const CartItem = ({ item }) => {
   const { product, purchaseQuantity } = item;
 
   function onChange(e) {
-    // Prevents empty input and thus NaN value
-    if (!e.target.value && e.target.value !== "0") {
-      return;
-    }
-    const change = parseInt(e.target.value) - purchaseQuantity;
-
-    if (change === -1 && purchaseQuantity === 1) {
+    function removeItem() {
       dispatch(removeFromCart(item));
       idbPromise("cart", "delete", { _id: product._id });
-      return;
     }
+
+    // Prevents empty input and thus NaN value
+    if (!e.target.value || e.target.value < 0) return;
+
+    if (e.target.value === "0") return removeItem();
+
+    const change = parseInt(e.target.value) - purchaseQuantity;
+
+    if (change === -1 && purchaseQuantity === 1) return removeItem();
 
     dispatch(
       addToCart({
@@ -35,54 +37,47 @@ const CartItem = ({ item }) => {
   }
 
   return (
-    <li key={product.id} className="">
-      <div className="">
-        <img
-          src={product.primaryImage}
-          alt={`${product.name} ${product.category.categoryName}`}
-        />
-      </div>
-      <div className="">
+    <li key={product.id} className="cart-list pb-3 mt-3 shadow-bot">
+      <div className="d-flex justify-content-between">
         <div>
-          <div className="">
-            <h4 className="">
-              <a href={product.href} className="">
-                {product.name}
-              </a>
-              <div>
-                <button type="button" className="">
-                  <span
-                    aria-label="trash"
-                    onClick={() => {
-                      dispatch(removeFromCart(item));
-                      idbPromise("cart", "delete", { _id: product._id });
-                    }}
-                    className=""
-                  >
-                    Remove
-                  </span>
-                </button>
-              </div>
-            </h4>
-            <div className=" ">
-              <p className="">{product.promotionPrice}</p>
-              <label htmlFor={`quantity-`} className="sr-only">
-                Quantity, {product.name}
-              </label>
-              <input
-                id={`quantity-`}
-                name={`quantity-`}
-                className=""
-                value={purchaseQuantity}
-                onChange={onChange}
-                type="number"
-              />
-            </div>
-          </div>
-          <p className="">{product.color}</p>
-          <p className="">{product.size}</p>
+          <img
+            className="orderlist-img"
+            src={product.mainImage}
+            alt={`${product.name} ${product.category.categoryName}`}
+          />
         </div>
-        <div className=""></div>
+        <div className="d-flex flex-column">
+          <p className="h5">
+            <a href={`/product/${product._id}`}>{product.name}</a>
+          </p>
+          <p>{product.promotionPrice} / each</p>
+        </div>
+      </div>
+      <div className="d-flex justify-content-between">
+        <div className="d-flex">
+          <label htmlFor={`quantity-`} className="px-1 align-self-center">
+            Qty:
+          </label>
+          <input
+            id={`quantity-`}
+            name={`quantity-`}
+            className="cart-quantity align-self-center"
+            value={purchaseQuantity}
+            onChange={onChange}
+            type="number"
+          />
+        </div>
+        <button type="button" className="default-button">
+          <span
+            aria-label="trash"
+            onClick={() => {
+              dispatch(removeFromCart(item));
+              idbPromise("cart", "delete", { _id: product._id });
+            }}
+          >
+            Remove
+          </span>
+        </button>
       </div>
     </li>
   );
