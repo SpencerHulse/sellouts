@@ -3,7 +3,7 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 import { useQuery } from "@apollo/client";
 import { QUERY_ORDERS } from "../graphql/queries";
 import Auth from "../utils/auth";
-import { loggedOutRedirect } from "../utils/helpers";
+import { capitalizeFirstLetter, loggedOutRedirect } from "../utils/helpers";
 
 function OrderHistory() {
   loggedOutRedirect();
@@ -11,7 +11,45 @@ function OrderHistory() {
   const { loading, data } = useQuery(QUERY_ORDERS, {
     variables: { customer: _id },
   });
-  console.log(data);
+
+  const updatedOrders = [];
+
+  if (!loading) {
+    const orders = data.orders;
+    orders.forEach((order) => {
+      const { products } = order;
+      const orderSummary = [];
+
+      products.forEach((product) => {
+        const { _id, name } = product;
+        let updated = false;
+
+        orderSummary.map((orderProduct) => {
+          if (orderProduct[0]._id === _id) {
+            orderProduct[0].quantityPurchased += 1;
+            updated = true;
+          }
+          return orderProduct;
+        });
+
+        if (!updated) {
+          const productSummary = [
+            {
+              _id,
+              name,
+              quantityPurchased: 1,
+            },
+          ];
+          orderSummary.push(productSummary);
+        }
+      });
+      updatedOrders.push({
+        orderData: order,
+        products: orderSummary,
+      });
+    });
+  }
+
   return (
     <div className="bg-tint">
       <Link to="/" className="back-to">
@@ -22,12 +60,19 @@ function OrderHistory() {
           <h2>Order history for {username}...</h2>
           <div>Sort by: </div>
           <div>
-            {!loading &&
-              data.orders.map((order) => {
+            {updatedOrders.length &&
+              updatedOrders.map((order) => {
+                const { orderData, products } = order;
+                const { _id, status, purchaseDate, total } = orderData;
                 return (
-                  <div className="order-item" key={order._id}>
-                    <div>Order #{order._id}</div>
-                    <table class="table table-items">
+                  <div className="order-item" key={_id}>
+                    <div>
+                      <div className="px-2">Order #{_id}</div>
+                      <div className="px-2">
+                        Status: {capitalizeFirstLetter(status)}
+                      </div>
+                    </div>
+                    <table className="table table-items">
                       <thead>
                         <tr>
                           <th scope="col">Item</th>
@@ -37,15 +82,27 @@ function OrderHistory() {
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td className="row-cell">Item name</td>
-                          <td className="row-cell">1</td>
-                          <td className="row-cell">$9.99</td>
-                          <td className="row-cell">$10.00</td>
-                        </tr>
+                        {products.map((product) => {
+                          const { name, quantityPurchased, _id } = product[0];
+                          return (
+                            <tr key={_id}>
+                              <td className="row-cell">{name}</td>
+                              <td className="row-cell">{quantityPurchased}</td>
+                              <td className="row-cell">----</td>
+                              <td className="row-cell">----</td>
+                            </tr>
+                          );
+                        })}
                       </tbody>
                     </table>
-                    <div>{order.purchaseDate}</div>
+                    <div className="container">
+                      <div className="row">
+                        <div className="col-9 px-2">{purchaseDate}</div>
+                        <div className="col-3 px-2 order-total">
+                          ${(total / 100).toFixed(2)}
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 );
               })}
