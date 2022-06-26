@@ -1,12 +1,35 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { DateTime } from "luxon";
-import { useLazyQuery, useMutation } from "@apollo/client";
+import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import { QUERY_ORDERS } from "../../graphql/queries";
 import { ADD_ORDER, UPDATE_PRODUCT } from "../../graphql/mutations";
 import { idbPromise } from "../../utils/helpers";
 import Auth from "../../utils/auth";
 import { addMultipleItems } from "../../redux/features/cartSlice";
+
+export function useGetOrders(params) {
+  const variables = {};
+
+  // Query by Order ID
+  if (params._id) {
+    variables._id = params._id;
+  }
+  // Query by User ID
+  if (params.customerId) {
+    variables.customer = params.customerId;
+  }
+  // Query by Order Status
+  if (params.status) {
+    variables.status = params.status;
+  }
+
+  const { data } = useQuery(QUERY_ORDERS, {
+    variables: variables,
+  });
+
+  return data;
+}
 
 export function useSuccessfulPurchase(data) {
   const dispatch = useDispatch();

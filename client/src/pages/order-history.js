@@ -1,20 +1,17 @@
 import { Link } from "react-router-dom";
 import { IoIosArrowRoundBack } from "react-icons/io";
-import { useQuery } from "@apollo/client";
-import { QUERY_ORDERS } from "../graphql/queries";
 import Auth from "../utils/auth";
 import { capitalizeFirstLetter, loggedOutRedirect } from "../utils/helpers";
+import { useGetOrders } from "../hooks/orderHooks";
 
 function OrderHistory() {
   loggedOutRedirect();
   const { username, _id } = Auth.getProfile().data;
-  const { loading, data } = useQuery(QUERY_ORDERS, {
-    variables: { customer: _id },
-  });
+  const data = useGetOrders({ customerId: _id });
 
   const updatedOrders = [];
 
-  if (!loading) {
+  if (data) {
     const orders = data.orders;
     orders.forEach((order) => {
       const { products } = order;
@@ -58,9 +55,8 @@ function OrderHistory() {
       <div className="container">
         <div className="fullpage-order-h">
           <h2>Order history for {username}...</h2>
-          <div>Sort by: </div>
           <div>
-            {updatedOrders.length &&
+            {updatedOrders.length ? (
               updatedOrders.map((order) => {
                 const { orderData, products } = order;
                 const { _id, status, purchaseDate, total } = orderData;
@@ -105,7 +101,10 @@ function OrderHistory() {
                     </div>
                   </div>
                 );
-              })}
+              })
+            ) : (
+              <p>You have no orders yet!</p>
+            )}
           </div>
         </div>
       </div>

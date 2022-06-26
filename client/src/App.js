@@ -12,12 +12,12 @@ import SingleProduct from "./pages/single-product";
 // --- Admin Components ---
 import Admin from "./components/Admin";
 
-// Dashboard 
+// Dashboard
 import Dashboard from "./components/Admin/Dashboard";
 
 // Category
 import AdminCategories from "./components/Admin/Categories";
-import AllCategories from "./components/Admin/Categories/allCategories"
+import AllCategories from "./components/Admin/Categories/allCategories";
 import AddCategory from "./components/Admin/Categories/addCategory";
 import UpdateCategory from "./components/Admin/Categories/updateCategory";
 import DeleteCategory from "./components/Admin/Categories/deleteCategory";
@@ -34,6 +34,9 @@ import DeletePromotion from "./components/Admin/Promotions/deletePromotion";
 // User
 import AdminUsers from "./components/Admin/Users";
 import DeleteUser from "./components/Admin/Users/deleteUser";
+// Orders
+import AdminOrders from "./components/Admin/Orders";
+import UpdateOrders from "./components/Admin/Orders/updateOrders";
 
 // Apollo
 import {
@@ -92,6 +95,9 @@ function App() {
             </Route>
             <Route path="users" element={<AdminUsers />}>
               <Route path="delete-user" element={<DeleteUser />} />
+            </Route>
+            <Route path="orders" element={<AdminOrders />}>
+              <Route path="update-orders" element={<UpdateOrders />} />
             </Route>
           </Route>
           <Route path="product/:productId" element={<SingleProduct />} />
