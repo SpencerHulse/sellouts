@@ -182,6 +182,7 @@ const AddProduct = () => {
           </div>
           <div className="dialog-section">
             <h2 className="fw-light">Item image</h2>
+            <p className="description">Select an image (PNG recommended)</p>
             <input
               type="file"
               accept="image/*"
@@ -257,6 +258,9 @@ const AddProduct = () => {
 
           <div className="dialog-section">
             <h2 className="fw-light">Pricing and Inventory</h2>
+            <p className="description">
+              Items become unavailable when inventory runs out
+            </p>
             <div className="dialog-subsection">
               <div className="row">
                 <div className="col">

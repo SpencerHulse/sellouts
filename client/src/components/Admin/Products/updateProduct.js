@@ -253,7 +253,8 @@ const UpdateProduct = () => {
                 </select>
               </div>
               <div className="dialog-section">
-                <h2 className="fw-light">Item images</h2>
+                <h2 className="fw-light">Item image</h2>
+                <p className="description">Select a new image if you want</p>
                 <input
                   type="file"
                   accept="image/*"
