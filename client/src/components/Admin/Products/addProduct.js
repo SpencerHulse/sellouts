@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { DateTime } from "luxon";
 import { useMutation, useLazyQuery } from "@apollo/client";
 import { ADD_PRODUCT } from "../../../graphql/mutations";
 import { QUERY_URL } from "../../../graphql/queries";
 import { useCategories } from "../../../hooks/categoryHooks";
+import { usePromotions } from "../../../hooks/promotionHooks";
 import { capitalizeFirstLetter } from "../../../utils/helpers";
 
 const AddProduct = () => {
@@ -10,6 +12,7 @@ const AddProduct = () => {
   const [getURL] = useLazyQuery(QUERY_URL);
 
   const categories = useCategories();
+  const promotions = usePromotions();
 
   const [formState, setFormState] = useState({
     title: "",
@@ -17,6 +20,7 @@ const AddProduct = () => {
     price: 0,
     inventory: 0,
     category: "",
+    promotion: "",
   });
   const [detailsState, setDetailsState] = useState({
     detail1: "",
@@ -51,7 +55,8 @@ const AddProduct = () => {
 
   function handleSubmit(event) {
     event.preventDefault();
-    const { title, description, price, category, inventory } = formState;
+    const { title, description, price, category, inventory, promotion } =
+      formState;
     const details = [];
 
     // Checks to ensure all required parts of the form are filled out
@@ -87,6 +92,7 @@ const AddProduct = () => {
               details: details,
               price: parseFloat(price),
               inventory: parseInt(inventory),
+              promotion: promotion,
               images: [bucketLink],
               mainImage: bucketLink,
               category: category,
@@ -105,6 +111,7 @@ const AddProduct = () => {
             details: details,
             price: parseFloat(price),
             inventory: parseInt(inventory),
+            promotion: promotion,
             images: ["https://nsense-images.s3.amazonaws.com/default.jpg"],
             mainImage: "https://nsense-images.s3.amazonaws.com/default.jpg",
             category: category,
@@ -116,6 +123,13 @@ const AddProduct = () => {
     }
   }
 
+  function activePromotions() {
+    return promotions.filter(
+      (promotion) =>
+        promotion.ends > DateTime.now().toLocaleString(DateTime.DATE_SHORT)
+    );
+  }
+
   return (
     <div>
       <div className="dialog">
@@ -123,8 +137,7 @@ const AddProduct = () => {
           <div className="dialog-section">
             <h2 className="fw-light">Title</h2>
             <p className="description">
-              A short title that will be displayed throughout your online
-              store
+              A short title that will be displayed throughout your online store
             </p>
             <label htmlFor="title" className="d-none">
               Title
@@ -155,15 +168,16 @@ const AddProduct = () => {
               onChange={handleChange}
             >
               <option value="">Select a Category</option>
-              {categories.map((category) => (
-                <option value={category._id} key={category._id}>
-                  {capitalizeFirstLetter(category.name)}
-                </option>
-              ))}
+              {categories &&
+                categories.map((category) => (
+                  <option value={category._id} key={category._id}>
+                    {capitalizeFirstLetter(category.name)}
+                  </option>
+                ))}
             </select>
           </div>
           <div className="dialog-section">
-            <h2 className="fw-light">Item images</h2>
+            <h2 className="fw-light">Item image</h2>
             <input
               type="file"
               accept="image/*"
@@ -273,6 +287,28 @@ const AddProduct = () => {
                 </div>
               </div>
             </div>
+          </div>
+
+          <div className="dialog-section">
+            <h2 className="fw-light">Promotion</h2>
+            <p className="description">Select an active promotion (optional)</p>
+            <label htmlFor="promotion" className="d-none">
+              Promotion
+            </label>
+            <select
+              className="default-input"
+              name="promotion"
+              id="promotion"
+              onChange={handleChange}
+            >
+              <option value="">Select a Promotion</option>
+              {promotions &&
+                activePromotions().map((promotion) => (
+                  <option value={promotion._id} key={promotion._id}>
+                    {promotion.name}
+                  </option>
+                ))}
+            </select>
           </div>
           <button className="default-button button-filled">Submit</button>
         </form>

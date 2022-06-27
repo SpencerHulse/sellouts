@@ -298,6 +298,28 @@ a:hover {
   cursor: pointer;
 }
 
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
 .admin-submenu-button {
   background-color: white;
   color: var(--brand-color);
@@ -309,7 +331,6 @@ a:hover {
   border-right: 1px solid var(--brand-color);
   margin-top: 10px;
   transition: all 0.15s ease-in-out;
-
 }
 
 .admin-submenu-button:not(:first-child, :last-child) {
@@ -319,7 +340,7 @@ a:hover {
 
 .admin-submenu-button.active {
   background-color: var(--brand-color);
-  color: white!important;
+  color: white !important;
   margin-top: 5px;
   padding-top: 5px;
   transition: all 0.15s ease-in-out;

@@ -18,7 +18,7 @@ function UpdateOrders() {
       setFilteredOrders(
         orders.orders.filter((order) => order.status === orderFilters.status)
       );
-    } else if (!orderFilters.status) {
+    } else if (orders && !orderFilters.status) {
       setFilteredOrders(orders.orders);
     }
   }, [orders, orderFilters]);
@@ -66,7 +66,7 @@ function UpdateOrders() {
 
   return (
     <div>
-      <div>UpdateOrders</div>
+      <div>Show:</div>
       <select name="filters" id="filters" onChange={handleFilterChange}>
         <option value="">All</option>
         <option value="pending">Pending</option>
