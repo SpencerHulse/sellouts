@@ -804,7 +804,6 @@ a:hover {
   display: flex;
   padding: 20px 0;
   width: 300px;
-  overflow: scroll;
 }
 
 .admin-main-menu li a.active {
