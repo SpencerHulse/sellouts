@@ -20,7 +20,7 @@ const Homepage = () => {
                 </div>
               </div>
               <div className="col2 p-0 column-two">
-                <div className="p-5">
+                <div className="p-5 pt-0">
                   <div className="flex-row justify-space-between">
                     <div>
                       <h2 className="text-center">

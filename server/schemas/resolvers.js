@@ -267,13 +267,15 @@ const resolvers = {
       return Order.findByIdAndDelete(_id);
     },
     updateOrder: async (parent, { input }) => {
-      return Order.findByIdAndUpdate(input._id, input, { new: true })
+      console.log(input);
+      const order = Order.findByIdAndUpdate(input._id, input, { new: true })
         .populate("customer")
         .populate("products")
         .populate({
           path: "products",
           populate: "category",
         });
+      return order;
     },
     // Product Mutations
     addProduct: async (parent, { input }) => {

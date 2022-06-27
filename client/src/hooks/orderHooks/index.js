@@ -12,15 +12,15 @@ export function useGetOrders(params) {
   const variables = {};
 
   // Query by Order ID
-  if (params._id) {
+  if (params?._id) {
     variables._id = params._id;
   }
   // Query by User ID
-  if (params.customerId) {
+  if (params?.customerId) {
     variables.customer = params.customerId;
   }
   // Query by Order Status
-  if (params.status) {
+  if (params?.status) {
     variables.status = params.status;
   }
 
