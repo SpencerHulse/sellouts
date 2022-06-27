@@ -46,75 +46,74 @@ function AddPromotion() {
       },
     });
 
-    window.location.assign("/admin");
+    window.location.assign("/admin/promotions");
   }
 
   return (
     <div>
       <div className="dialog">
-            <form action="submit" onSubmit={handleSubmit}>
-              <div className="dialog-section">
-                <h2 className="fw-light">Name</h2>
-                <p className="description">
-                  A name for the promotion (must be unique)
-                </p>
-                <label htmlFor="name" className="d-none">
-                  Name
-                </label>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  required
-                  placeholder="Promotion Name"
-                  className="default-input"
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="dialog-section">
-                <h2 className="fw-light">Percentage</h2>
-                <p className="description">
-                  The percentage discount you want the promotion to apply
-                </p>
-                <label htmlFor="percentage" className="d-none">
-                  Percentage
-                </label>
-                <input
-                  id="percentage"
-                  name="percentage"
-                  type="number"
-                  min="0"
-                  required
-                  placeholder="Percentage Discount"
-                  className="default-input"
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="dialog-section">
-                <h2 className="fw-light">Duration</h2>
-                <p className="description">
-                  The number of days the promotion will be in effect
-                </p>
-                {endDate && <p className="description">Ends on {endDate}</p>}
-                <label htmlFor="ends" className="d-none">
-                  Ends
-                </label>
-                <input
-                  id="ends"
-                  name="ends"
-                  type="number"
-                  min="0"
-                  required
-                  placeholder="Duration of Promotion"
-                  className="default-input"
-                  onChange={handleChange}
-                />
-              </div>
-              <button className="default-button button-filled">Submit</button>
-            </form>
+        <form action="submit" onSubmit={handleSubmit}>
+          <div className="dialog-section">
+            <h2 className="fw-light">Name</h2>
+            <p className="description">
+              A name for the promotion (must be unique)
+            </p>
+            <label htmlFor="name" className="d-none">
+              Name
+            </label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              required
+              placeholder="Promotion Name"
+              className="default-input"
+              onChange={handleChange}
+            />
           </div>
-        </div>
-
+          <div className="dialog-section">
+            <h2 className="fw-light">Percentage</h2>
+            <p className="description">
+              The percentage discount you want the promotion to apply
+            </p>
+            <label htmlFor="percentage" className="d-none">
+              Percentage
+            </label>
+            <input
+              id="percentage"
+              name="percentage"
+              type="number"
+              min="0"
+              required
+              placeholder="Percentage Discount"
+              className="default-input"
+              onChange={handleChange}
+            />
+          </div>
+          <div className="dialog-section">
+            <h2 className="fw-light">Duration</h2>
+            <p className="description">
+              The number of days the promotion will be in effect
+            </p>
+            {endDate && <p className="description">Ends on {endDate}</p>}
+            <label htmlFor="ends" className="d-none">
+              Ends
+            </label>
+            <input
+              id="ends"
+              name="ends"
+              type="number"
+              min="0"
+              required
+              placeholder="Duration of Promotion"
+              className="default-input"
+              onChange={handleChange}
+            />
+          </div>
+          <button className="default-button button-filled">Submit</button>
+        </form>
+      </div>
+    </div>
   );
 }
 

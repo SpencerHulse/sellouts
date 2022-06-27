@@ -21,7 +21,7 @@ function DeleteCategory() {
 
     deleteCategory({ variables: { id: selectedCategory } });
 
-    window.location.assign("/admin");
+    window.location.assign("/admin/categories");
   }
 
   return (
@@ -53,9 +53,7 @@ function DeleteCategory() {
                   ))}
                 </select>
               </div>
-              <button className="default-button button-filled">
-                Delete
-              </button>
+              <button className="default-button button-filled">Delete</button>
             </form>
           </div>
         </div>

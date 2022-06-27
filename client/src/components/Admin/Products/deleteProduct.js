@@ -21,7 +21,7 @@ function DeleteProduct() {
 
     deleteProduct({ variables: { id: selectedProduct } });
 
-    window.location.assign("/admin");
+    window.location.assign("/admin/products");
   }
 
   return (
@@ -53,9 +53,7 @@ function DeleteProduct() {
                   ))}
                 </select>
               </div>
-              <button className="default-button button-filled">
-                Submit
-              </button>
+              <button className="default-button button-filled">Submit</button>
             </form>
           </div>
         </div>

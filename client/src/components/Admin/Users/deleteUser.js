@@ -19,7 +19,7 @@ function DeleteUser() {
 
     deleteUser({ variables: { id: selectedUser } });
 
-    window.location.assign("/admin");
+    window.location.assign("/admin/users");
   }
 
   // Removes admins from the deletion list
@@ -30,44 +30,42 @@ function DeleteUser() {
   return (
     <>
       {!loading && (
-    <div>
-    <div className="dialog">
-                <form action="submit" onSubmit={handleSubmit}>
-                  <div className="dialog-section">
-                    <h2 className="fw-light">Delete a user</h2>
-                    <p className="description">
-                      Select the user you want to delete
-                    </p>
-                    <label htmlFor="user" className="d-none">
-                      User
-                    </label>
-                    <select
-                      className="default-input"
-                      name="user"
-                      id="user"
-                      required
-                      onChange={handleSelect}
-                    >
-                      <option value="">Select a User</option>
-                      {filteredUsers(users).map((user) => (
-                        <option value={user._id} key={user._id}>
-                          {user.email}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  {selectedUser.admin ? (
-                    <button disabled className="default-button button-filled">
-                      Delete
-                    </button>
-                  ) : (
-                    <button className="default-button button-filled">
-                      Delete
-                    </button>
-                  )}
-                </form>
+        <div>
+          <div className="dialog">
+            <form action="submit" onSubmit={handleSubmit}>
+              <div className="dialog-section">
+                <h2 className="fw-light">Delete a user</h2>
+                <p className="description">
+                  Select the user you want to delete
+                </p>
+                <label htmlFor="user" className="d-none">
+                  User
+                </label>
+                <select
+                  className="default-input"
+                  name="user"
+                  id="user"
+                  required
+                  onChange={handleSelect}
+                >
+                  <option value="">Select a User</option>
+                  {filteredUsers(users).map((user) => (
+                    <option value={user._id} key={user._id}>
+                      {user.email}
+                    </option>
+                  ))}
+                </select>
               </div>
-            </div>
+              {selectedUser.admin ? (
+                <button disabled className="default-button button-filled">
+                  Delete
+                </button>
+              ) : (
+                <button className="default-button button-filled">Delete</button>
+              )}
+            </form>
+          </div>
+        </div>
       )}
     </>
   );

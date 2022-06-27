@@ -22,7 +22,7 @@ function AddCategory() {
 
     addCategory({ variables: { name: name } });
 
-    window.location.assign("/admin");
+    window.location.assign("/admin/categories");
   }
 
   return (

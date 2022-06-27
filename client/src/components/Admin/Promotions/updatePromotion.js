@@ -90,7 +90,7 @@ function UpdatePromotion() {
       },
     });
 
-    window.location.assign("/admin");
+    window.location.assign("/admin/promotions");
   }
 
   function handleSelect(event) {
@@ -104,9 +104,7 @@ function UpdatePromotion() {
         <form action="submit" onSubmit={handleSubmit}>
           <div className="dialog-section">
             <h2 className="fw-light">Promotion</h2>
-            <p className="description">
-              Select the promotion you want to edit
-            </p>
+            <p className="description">Select the promotion you want to edit</p>
             {promotionEnded && (
               <p className="description">This promotion has ended</p>
             )}

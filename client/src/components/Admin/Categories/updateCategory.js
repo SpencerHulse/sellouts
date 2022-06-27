@@ -43,7 +43,7 @@ function UpdateCategory() {
 
     updateCategory({ variables: { id: selectedCategory, name: name } });
 
-    window.location.assign("/admin");
+    window.location.assign("/admin/categories");
   }
 
   return (
@@ -78,8 +78,8 @@ function UpdateCategory() {
               <div className="dialog-section">
                 <h2 className="fw-light">Name</h2>
                 <p className="description">
-                  A name for the category that will be displayed throughout
-                  your online store
+                  A name for the category that will be displayed throughout your
+                  online store
                 </p>
                 <label htmlFor="name" className="d-none">
                   Name
@@ -94,14 +94,11 @@ function UpdateCategory() {
                   onChange={handleChange}
                 />
               </div>
-              <button className="default-button button-filled">
-                Submit
-              </button>
+              <button className="default-button button-filled">Submit</button>
             </form>
           </div>
         </div>
-      )
-      }
+      )}
     </>
   );
 }

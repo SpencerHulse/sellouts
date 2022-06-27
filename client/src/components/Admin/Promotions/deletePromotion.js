@@ -16,7 +16,7 @@ function DeletePromotion() {
 
     deletePromotion({ variables: { id: selectedPromotion } });
 
-    window.location.assign("/admin");
+    window.location.assign("/admin/promotions");
   }
 
   function handleSelect(event) {
@@ -27,35 +27,33 @@ function DeletePromotion() {
   return (
     <div>
       <div className="dialog">
-            <form action="submit" onSubmit={handleSubmit}>
-              <div className="dialog-section">
-                <h2 className="fw-light">Promotion</h2>
-                <p className="description">
-                  Select the promotion you want to edit
-                </p>
-                <label htmlFor="promotion" className="d-none">
-                  Promotion
-                </label>
-                <select
-                  className="default-input"
-                  name="promotion"
-                  id="promotion"
-                  required
-                  onChange={handleSelect}
-                >
-                  <option value="">Select a Promotion</option>
-                  {!loading &&
-                    data.promotions.map((promotion) => (
-                      <option value={promotion._id} key={promotion._id}>
-                        {promotion.name} ({promotion.ends})
-                      </option>
-                    ))}
-                </select>
-              </div>
-              <button className="default-button button-filled">Submit</button>
-            </form>
+        <form action="submit" onSubmit={handleSubmit}>
+          <div className="dialog-section">
+            <h2 className="fw-light">Promotion</h2>
+            <p className="description">Select the promotion you want to edit</p>
+            <label htmlFor="promotion" className="d-none">
+              Promotion
+            </label>
+            <select
+              className="default-input"
+              name="promotion"
+              id="promotion"
+              required
+              onChange={handleSelect}
+            >
+              <option value="">Select a Promotion</option>
+              {!loading &&
+                data.promotions.map((promotion) => (
+                  <option value={promotion._id} key={promotion._id}>
+                    {promotion.name} ({promotion.ends})
+                  </option>
+                ))}
+            </select>
           </div>
-        </div>
+          <button className="default-button button-filled">Submit</button>
+        </form>
+      </div>
+    </div>
   );
 }
 
