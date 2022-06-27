@@ -93,6 +93,16 @@ export function noSessionRedirect(sessionId) {
   }
 }
 
+export function notAdminRedirect() {
+  loggedOutRedirect();
+  const admin = Auth.getProfile().data.admin;
+  if (!admin) {
+    window.location.assign("/");
+    return false;
+  }
+  return true;
+}
+
 export function effectivePromotion(promotion, ends) {
   const date = DateTime.now().toLocaleString(DateTime.DATE_SHORT);
   return !promotion ? false : ends > date ? true : false;
