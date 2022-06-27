@@ -17,25 +17,25 @@ function AdminDashboard() {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/admin/categories/add-category">
+            <NavLink to="categories">
               <Icon.Tag color="black" size={30} className="admin-icon" />
               <div className="menu-title">Categories</div>
             </NavLink>
           </li>
           <li>
-            <NavLink to="/admin/products/add-product">
+            <NavLink to="products">
               <Icon.Archive color="black" size={30} className="admin-icon" />
               <div className="menu-title">Products</div>
             </NavLink>
           </li>
           <li>
-            <NavLink to="/admin/promotions/add-promotions">
+            <NavLink to="promotions">
               <Icon.Cash color="black" size={30} className="admin-icon" />
               <div className="menu-title">Promotions</div>
             </NavLink>
           </li>
           <li>
-            <NavLink to="/admin/users/delete-user">
+            <NavLink to="users">
               <Icon.People color="black" size={30} className="admin-icon" />
               <div className="menu-title">Users</div>
             </NavLink>

@@ -298,6 +298,33 @@ a:hover {
   cursor: pointer;
 }
 
+.admin-submenu-button {
+  background-color: white;
+  color: var(--brand-color);
+  padding: 5px 35px 5px 35px;
+  font-size: 16px;
+  cursor: pointer;
+  border-top: 1px solid var(--brand-color);
+  border-left: 1px solid var(--brand-color);
+  border-right: 1px solid var(--brand-color);
+  margin-top: 10px;
+  transition: all 0.15s ease-in-out;
+
+}
+
+.admin-submenu-button:not(:first-child, :last-child) {
+  border-left: 0;
+  border-right: 0;
+}
+
+.admin-submenu-button.active {
+  background-color: var(--brand-color);
+  color: white!important;
+  margin-top: 5px;
+  padding-top: 5px;
+  transition: all 0.15s ease-in-out;
+}
+
 .button-filled {
   background-color: var(--brand-color);
   color: white;

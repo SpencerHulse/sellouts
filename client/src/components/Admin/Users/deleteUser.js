@@ -31,10 +31,10 @@ function DeleteUser() {
     <>
       {!loading && (
     <div>
-    <div className="mt-5 dialog">
+    <div className="dialog">
                 <form action="submit" onSubmit={handleSubmit}>
                   <div className="dialog-section">
-                    <h2 className="fw-light">Users</h2>
+                    <h2 className="fw-light">Delete a user</h2>
                     <p className="description">
                       Select the user you want to delete
                     </p>
