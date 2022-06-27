@@ -6,22 +6,28 @@ import { UPDATE_ORDER } from "../../../graphql/mutations";
 import { capitalizeFirstLetter } from "../../../utils/helpers";
 
 function UpdateOrders() {
-  const [orderFilters, setOrderFilters] = useState({});
-  const orders = useGetOrders(orderFilters);
+  const [orderFilters, setOrderFilters] = useState({ status: "" });
+  const orders = useGetOrders();
   const [updateOrder] = useMutation(UPDATE_ORDER);
-  const [usedOrders, setUsedOrders] = useState("");
   const options = ["pending", "shipped", "delivered"];
-  console.log(orders);
+  // console.log(orders);
+  const [filteredOrders, setFilteredOrders] = useState([]);
 
   useEffect(() => {
-    setUsedOrders(orders);
-  }, [orders]);
+    if (orders && orderFilters.status) {
+      setFilteredOrders(
+        orders.orders.filter((order) => order.status === orderFilters.status)
+      );
+    } else if (!orderFilters.status) {
+      setFilteredOrders(orders.orders);
+    }
+  }, [orders, orderFilters]);
 
   function handleFilterChange(event) {
     const { value } = event.target;
 
     if (!value) {
-      setOrderFilters({});
+      setOrderFilters({ status: "" });
     } else if (value === "pending") {
       setOrderFilters({ status: "pending" });
     } else if (value === "shipped") {
@@ -68,8 +74,8 @@ function UpdateOrders() {
         <option value="delivered">Delivered</option>
       </select>
       <div>
-        {orders?.orders.length ? (
-          orders.orders.map((order) => {
+        {filteredOrders.length ? (
+          filteredOrders.map((order) => {
             return (
               <div className="p-2 border" key={order._id}>
                 <div>Order #{order._id}</div>
