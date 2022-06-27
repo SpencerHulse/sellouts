@@ -255,7 +255,6 @@ const resolvers = {
       return Category.findByIdAndDelete({ _id }).exec();
     },
     updateCategory: async (parent, args) => {
-      console.log(args);
       return Category.findByIdAndUpdate(args._id, args, { new: true }).exec();
     },
     // Order Mutations
@@ -266,7 +265,6 @@ const resolvers = {
       return Order.findByIdAndDelete(_id);
     },
     updateOrder: async (parent, { input }) => {
-      console.log(input);
       const order = Order.findByIdAndUpdate(input._id, input, { new: true })
         .populate("customer")
         .populate("products")
@@ -278,24 +276,21 @@ const resolvers = {
     },
     // Product Mutations
     addProduct: async (parent, { input }) => {
-      console.log(input);
-      return Product.create(input);
+      const product = Product.create(input);
+      return product;
     },
     deleteProduct: async (parent, { _id }) => {
       return Product.findByIdAndDelete({ _id });
     },
     updateProduct: async (parent, { input }) => {
-      console.log(input);
       const product = Product.findByIdAndUpdate(input._id, input, { new: true })
         .populate("category")
         .populate("promotion")
         .populate("reviews");
-      console.log(product);
       return product;
     },
     // Promotion Mutations
     addPromotion: async (parent, { input }) => {
-      console.log(input);
       return Promotion.create(input);
     },
     deletePromotion: async (parent, { _id }) => {

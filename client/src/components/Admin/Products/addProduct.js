@@ -20,7 +20,7 @@ const AddProduct = () => {
     price: 0,
     inventory: 0,
     category: "",
-    promotion: "",
+    promotion: null,
   });
   const [detailsState, setDetailsState] = useState({
     detail1: "",
@@ -72,36 +72,40 @@ const AddProduct = () => {
     // Gets an s3 Secure URL and uploads the image to a bucket
     if (imageState) {
       // Gets the secure URL for the s3 bucket
-      getURL({ variables: { mainImage: imageState.name } }).then(({ data }) => {
-        // Uses the data from the getURL query to upload the image
-        fetch(data.uploadImage.url, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-          body: imageState,
-        });
-        // Gets the URL for src and pushes it to the the images array
-        const bucketLink = data.uploadImage.url.split("?")[0];
-        // Adds a new product
-        addProduct({
-          variables: {
-            input: {
-              name: title,
-              description: description,
-              details: details,
-              price: parseFloat(price),
-              inventory: parseInt(inventory),
-              promotion: promotion,
-              images: [bucketLink],
-              mainImage: bucketLink,
-              category: category,
+      getURL({ variables: { mainImage: imageState.name } })
+        .then(({ data }) => {
+          // Uses the data from the getURL query to upload the image
+          fetch(data.uploadImage.url, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "multipart/form-data",
             },
-          },
-        });
+            body: imageState,
+          });
+          // Gets the URL for src and pushes it to the the images array
+          const bucketLink = data.uploadImage.url.split("?")[0];
+          return bucketLink;
+        })
+        .then((bucketLink) => {
+          // Adds a new product
+          addProduct({
+            variables: {
+              input: {
+                name: title,
+                description: description,
+                details: details,
+                price: parseFloat(price),
+                inventory: parseInt(inventory),
+                promotion: promotion,
+                images: [bucketLink],
+                mainImage: bucketLink,
+                category: category,
+              },
+            },
+          });
 
-        window.location.assign("/admin");
-      });
+          window.location.assign("/admin/products");
+        });
     } else {
       addProduct({
         variables: {
@@ -119,7 +123,7 @@ const AddProduct = () => {
         },
       });
 
-      window.location.assign("/admin");
+      window.location.assign("/admin/products");
     }
   }
 

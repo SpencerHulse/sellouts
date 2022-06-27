@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { useMutation, useLazyQuery, useQuery } from "@apollo/client";
+import { useMutation, useLazyQuery } from "@apollo/client";
 import { UPDATE_PRODUCT } from "../../../graphql/mutations";
-import { QUERY_URL, QUERY_PRODUCTS } from "../../../graphql/queries";
+import { QUERY_URL } from "../../../graphql/queries";
 import { useCategories } from "../../../hooks/categoryHooks";
 import { useProducts } from "../../../hooks/productHooks";
 import { capitalizeFirstLetter } from "../../../utils/helpers";
@@ -29,7 +29,7 @@ const UpdateProduct = () => {
     detail4: "",
     detail5: "",
   });
-  const [imageState, setImageState] = useState({ images: [], mainImage: "" });
+  const [imageState, setImageState] = useState("");
 
   useEffect(() => {
     const product = products.filter(
@@ -41,16 +41,8 @@ const UpdateProduct = () => {
 
   useEffect(() => {
     if (!productData.length) return;
-    const {
-      name,
-      description,
-      details,
-      price,
-      inventory,
-      images,
-      mainImage,
-      category,
-    } = productData[0];
+    const { name, description, details, price, inventory, category } =
+      productData[0];
     const categoryId = category._id;
 
     setFormState({
@@ -60,8 +52,6 @@ const UpdateProduct = () => {
       inventory: inventory,
       category: categoryId,
     });
-
-    setImageState({ images: images, mainImage: mainImage });
 
     const newDetails = {};
     for (let i = 1; i <= 5; i++) {
@@ -134,40 +124,44 @@ const UpdateProduct = () => {
         details.push(detailsState[key]);
       }
     }
-    console.log(imageState);
-    // Gets an s3 Secure URL and uploads the image to a bucket
-    if (imageState.mainImage !== productData[0].mainImage) {
-      // Gets the secure URL for the s3 bucket
-      getURL({ variables: { mainImage: imageState.name } }).then(({ data }) => {
-        // Uses the data from the getURL query to upload the image
-        fetch(data.uploadImage.url, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-          body: imageState,
-        });
-        // Gets the URL for src and pushes it to the the images array
-        const bucketLink = data.uploadImage.url.split("?")[0];
-        // Adds a new product
-        updateProduct({
-          variables: {
-            input: {
-              _id: selectedProduct,
-              name: name,
-              description: description,
-              details: details,
-              price: parseFloat(price),
-              inventory: parseInt(inventory),
-              images: [bucketLink],
-              mainImage: bucketLink,
-              category: category,
-            },
-          },
-        });
 
-        window.location.assign("/admin/products");
-      });
+    // Gets an s3 Secure URL and uploads the image to a bucket
+    if (imageState) {
+      // Gets the secure URL for the s3 bucket
+      getURL({ variables: { mainImage: imageState.name } })
+        .then(({ data }) => {
+          // Uses the data from the getURL query to upload the image
+          fetch(data.uploadImage.url, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+            body: imageState,
+          });
+          // Gets the URL for src and pushes it to the the images array
+          const bucketLink = data.uploadImage.url.split("?")[0];
+          return bucketLink;
+        })
+        .then((bucketLink) => {
+          // Adds a new product
+          updateProduct({
+            variables: {
+              input: {
+                _id: selectedProduct,
+                name: name,
+                description: description,
+                details: details,
+                price: parseFloat(price),
+                inventory: parseInt(inventory),
+                images: [bucketLink],
+                mainImage: bucketLink,
+                category: category,
+              },
+            },
+          });
+
+          window.location.assign("/admin/products");
+        });
     } else {
       updateProduct({
         variables: {
