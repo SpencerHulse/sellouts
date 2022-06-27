@@ -22,7 +22,11 @@ function AllProducts() {
           {products.map((product) => (
             <tr key={product._id}>
               <td>
-                <img className="orderlist-img" src={product.mainImage} />
+                <img
+                  className="orderlist-img"
+                  src={product.mainImage}
+                  alt={product.name}
+                />
               </td>
               <td>
                 <Link to={`/product/${product._id}`}>

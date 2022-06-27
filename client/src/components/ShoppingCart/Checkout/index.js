@@ -16,6 +16,10 @@ function Checkout({ cartItems }) {
       }
     });
 
+    console.log(productIds);
+
+    return;
+
     getCheckout({
       variables: { products: productIds },
     });

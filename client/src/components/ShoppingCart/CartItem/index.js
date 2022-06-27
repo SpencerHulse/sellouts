@@ -43,7 +43,7 @@ const CartItem = ({ item }) => {
           <img
             className="orderlist-img"
             src={product.mainImage}
-            alt={`${product.name} ${product.category.categoryName}`}
+            alt={`${product.name}`}
           />
         </div>
         <div className="d-flex flex-column">
