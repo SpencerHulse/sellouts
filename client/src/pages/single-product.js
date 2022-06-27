@@ -72,6 +72,10 @@ function SingleProduct() {
   const percentage = currentProduct?.promotion?.percentage;
   const ends = currentProduct?.promotion?.ends;
 
+  function shortDescription(description) {
+    return description.split("").slice(0, 50).join("").trim();
+  }
+
   return (
     <>
       {currentProduct ? (
@@ -129,7 +133,14 @@ function SingleProduct() {
                     </div>
                   </div>
                   <div className="product-description lh-lg">
-                    <p className="mx-1">{currentProduct.description}</p>
+                    <p className="mx-1">
+                      {shortDescription(currentProduct.description)}
+                      {currentProduct.description.length > 50 && (
+                        <>
+                          ... <a href="#description-anchor">Read more</a>.
+                        </>
+                      )}
+                    </p>
                   </div>
                   <div>
                     <button
