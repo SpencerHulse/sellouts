@@ -21,7 +21,7 @@ function AllUsers() {
                     </tr>
                 </thead>
                 <tbody>
-                    {users.map((user) => (
+                    {users && users.map((user) => (
                         <tr key={user._id}>
                             <td>{user.username}</td>
                             <td>{user.email}</td>
