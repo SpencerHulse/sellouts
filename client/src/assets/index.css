@@ -201,7 +201,7 @@ a:hover {
 
 .product-description::-webkit-scrollbar,
 .cart::-webkit-scrollbar {
-  width: 5px;
+  width: 0px;
   height: 0px;
 }
 

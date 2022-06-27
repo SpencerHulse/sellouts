@@ -129,10 +129,7 @@ function SingleProduct() {
                     </div>
                   </div>
                   <div className="product-description lh-lg">
-                    <p className="mx-1 text-start">
-                      {currentProduct.description}{" "}
-                      <a href="#description-anchor">Read more</a>.
-                    </p>
+                    <p className="mx-1">{currentProduct.description}</p>
                   </div>
                   <div>
                     <button

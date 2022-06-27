@@ -229,14 +229,12 @@ const resolvers = {
         session.shipping_rate
       );
 
-      const items = await {
+      const items = {
         items: session.line_items.data.map(
           (item) =>
             `${item.description}-*-${item.amount_subtotal}-*-${item.quantity}`
         ),
       };
-
-      console.log(shipping, items);
 
       return { session, shipping, items };
     },
@@ -277,7 +275,9 @@ const resolvers = {
       return Order.findByIdAndDelete(_id);
     },
     updateOrder: async (parent, { input }) => {
-      const order = Order.findByIdAndUpdate(input._id, input, { new: true })
+      const order = await Order.findByIdAndUpdate(input._id, input, {
+        new: true,
+      })
         .populate("customer")
         .populate("products")
         .populate({
@@ -288,14 +288,16 @@ const resolvers = {
     },
     // Product Mutations
     addProduct: async (parent, { input }) => {
-      const product = Product.create(input);
+      const product = await Product.create(input);
       return product;
     },
     deleteProduct: async (parent, { _id }) => {
       return Product.findByIdAndDelete({ _id });
     },
     updateProduct: async (parent, { input }) => {
-      const product = Product.findByIdAndUpdate(input._id, input, { new: true })
+      const product = await Product.findByIdAndUpdate(input._id, input, {
+        new: true,
+      })
         .populate("category")
         .populate("promotion")
         .populate("reviews");

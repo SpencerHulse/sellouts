@@ -156,7 +156,9 @@ const UpdateProduct = () => {
           return bucketLink;
         })
         .then((bucketLink) => {
-          // Adds a new product
+          let promotionCheck;
+          if (!promotion) promotionCheck = null;
+
           updateProduct({
             variables: {
               input: {
@@ -169,7 +171,7 @@ const UpdateProduct = () => {
                 images: [bucketLink],
                 mainImage: bucketLink,
                 category: category,
-                promotion: promotion,
+                promotion: promotionCheck,
               },
             },
           });
@@ -177,6 +179,9 @@ const UpdateProduct = () => {
           window.location.assign("/admin/products");
         });
     } else {
+      let promotionCheck;
+      if (!promotion) promotionCheck = null;
+
       updateProduct({
         variables: {
           input: {
@@ -187,7 +192,7 @@ const UpdateProduct = () => {
             price: parseFloat(price),
             inventory: parseInt(inventory),
             category: category,
-            promotion: promotion,
+            promotion: promotionCheck,
           },
         },
       });
