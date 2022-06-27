@@ -17,7 +17,7 @@ function ProductCard({ product }) {
     rating,
   } = product;
 
-  const { name: category } = product.category;
+  const { name: category } = product?.category || "Uncategorized";
   const percentage = product?.promotion?.percentage;
   const ends = product?.promotion?.ends;
 

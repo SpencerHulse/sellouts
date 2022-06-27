@@ -183,7 +183,7 @@ db.once("open", async () => {
     {
       title: "Ridiculous product",
       review: "This doesn't let me see smells. Waste of money.",
-      createdAt: DateTime.now(),
+      createdAt: DateTime.now().toLocaleString(DateTime.DATETIME_SHORT),
       rating: 1,
       upvotes: 3,
       downvotes: 120,
@@ -192,7 +192,7 @@ db.once("open", async () => {
     {
       title: "It's not bad",
       review: "Not the best, but it's not the worst, either.",
-      createdAt: DateTime.now(),
+      createdAt: DateTime.now().toLocaleString(DateTime.DATETIME_SHORT),
       rating: 4,
       upvotes: 3,
       downvotes: 120,
@@ -201,7 +201,7 @@ db.once("open", async () => {
     {
       title: "Looks great!",
       review: "Worth!",
-      createdAt: DateTime.now(),
+      createdAt: DateTime.now().toLocaleString(DateTime.DATETIME_SHORT),
       rating: 5,
       upvotes: 3,
       downvotes: 120,
@@ -211,7 +211,7 @@ db.once("open", async () => {
       title: "Not just a simple hat",
       review:
         "Few people know the history of this hat, which first made its appearance on French beaches in 1934. But since it's arrival, life as we know it has changed, with the sun no longer standing a change against its superior protection. It's stylish, too.",
-      createdAt: DateTime.now(),
+      createdAt: DateTime.now().toLocaleString(DateTime.DATETIME_SHORT),
       rating: 5,
       upvotes: 3,
       downvotes: 120,
@@ -220,7 +220,7 @@ db.once("open", async () => {
     {
       title: "Great deal",
       review: "I got mine on sale for two bucks.",
-      createdAt: DateTime.now(),
+      createdAt: DateTime.now().toLocaleString(DateTime.DATETIME_SHORT),
       rating: 4,
       upvotes: 3,
       downvotes: 120,
@@ -241,7 +241,7 @@ db.once("open", async () => {
     {
       title: "Trash",
       review: "Already threw mine away.",
-      createdAt: DateTime.now(),
+      createdAt: DateTime.now().toLocaleString(DateTime.DATETIME_SHORT),
       rating: 1,
       upvotes: 3,
       downvotes: 120,
@@ -251,7 +251,7 @@ db.once("open", async () => {
       title: "Great product, odd fit.",
       review:
         "High quality hat, but it didn't fit my father's head. I'm the one wearing it now.",
-      createdAt: DateTime.now(),
+      createdAt: DateTime.now().toLocaleString(DateTime.DATETIME_SHORT),
       rating: 4,
       upvotes: 3,
       downvotes: 120,
@@ -260,7 +260,7 @@ db.once("open", async () => {
     {
       title: "Bald no more!",
       review: "Or so people may believe when I'm wearing this great hat.",
-      createdAt: DateTime.now(),
+      createdAt: DateTime.now().toLocaleString(DateTime.DATETIME_SHORT),
       rating: 4,
       upvotes: 3,
       downvotes: 120,
@@ -270,7 +270,7 @@ db.once("open", async () => {
       title: "FLAMMABLE!",
       review:
         "Caught fire while I was grilling! No warning and they won't offer me a refund. Garbage!",
-      createdAt: DateTime.now(),
+      createdAt: DateTime.now().toLocaleString(DateTime.DATETIME_SHORT),
       rating: 1,
       upvotes: 3,
       downvotes: 120,
@@ -279,7 +279,7 @@ db.once("open", async () => {
     {
       title: "Odd material",
       review: "It's a bit scratchy when worn for long periods.",
-      createdAt: DateTime.now(),
+      createdAt: DateTime.now().toLocaleString(DateTime.DATETIME_SHORT),
       rating: 3,
       upvotes: 3,
       downvotes: 120,

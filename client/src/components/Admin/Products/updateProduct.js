@@ -53,7 +53,7 @@ const UpdateProduct = () => {
       category,
       promotion,
     } = productData[0];
-    const categoryId = category._id;
+    const categoryId = category?._id || "";
     const promotionId = promotion?._id || "";
 
     setFormState({
@@ -195,8 +195,6 @@ const UpdateProduct = () => {
       window.location.assign("/admin/products");
     }
   }
-
-  console.log(formState);
 
   return (
     <>

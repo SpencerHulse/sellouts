@@ -5,9 +5,9 @@ import { updateProducts } from "../../redux/features/productSlice";
 // Apollo/GraphQL
 import { useQuery } from "@apollo/client";
 import { QUERY_PRODUCTS } from "../../graphql/queries";
-import { idbPromise, effectivePromotion } from "../../utils/helpers";
+import { idbPromise } from "../../utils/helpers";
 
-export function useProducts() {
+export function useProducts(params) {
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.products);
   const { loading, data: productData } = useQuery(QUERY_PRODUCTS);

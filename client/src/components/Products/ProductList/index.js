@@ -47,9 +47,10 @@ function ProductList() {
   useEffect(() => {
     let products = [...productData];
     if (currentCategory) {
-      products = products.filter(
-        (product) => product.category.name === currentCategory
-      );
+      products = products.filter((product) => {
+        const { name } = product?.category || "Uncategorized";
+        return name === currentCategory;
+      });
     }
 
     if (currentSaleOption.option === "yes") {
