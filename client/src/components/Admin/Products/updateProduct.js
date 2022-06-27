@@ -134,12 +134,9 @@ const UpdateProduct = () => {
         details.push(detailsState[key]);
       }
     }
-
-    // IMPORTANT !!! The image portion of update should be its own thing,
-    // and it should upload a new image or delete one immediately upon click
-
+    console.log(imageState);
     // Gets an s3 Secure URL and uploads the image to a bucket
-    /* if (imageState) {
+    if (imageState.mainImage !== productData[0].mainImage) {
       // Gets the secure URL for the s3 bucket
       getURL({ variables: { mainImage: imageState.name } }).then(({ data }) => {
         // Uses the data from the getURL query to upload the image
@@ -156,6 +153,7 @@ const UpdateProduct = () => {
         updateProduct({
           variables: {
             input: {
+              _id: selectedProduct,
               name: name,
               description: description,
               details: details,
@@ -168,25 +166,25 @@ const UpdateProduct = () => {
           },
         });
 
-        window.location.assign("/admin");
+        window.location.assign("/admin/products");
       });
-    } */
-
-    updateProduct({
-      variables: {
-        input: {
-          _id: selectedProduct,
-          name: name,
-          description: description,
-          details: details,
-          price: parseFloat(price),
-          inventory: parseInt(inventory),
-          category: category,
+    } else {
+      updateProduct({
+        variables: {
+          input: {
+            _id: selectedProduct,
+            name: name,
+            description: description,
+            details: details,
+            price: parseFloat(price),
+            inventory: parseInt(inventory),
+            category: category,
+          },
         },
-      },
-    });
+      });
 
-    window.location.assign("/admin");
+      window.location.assign("/admin/products");
+    }
   }
 
   return (
@@ -221,8 +219,8 @@ const UpdateProduct = () => {
               <div className="dialog-section">
                 <h2 className="fw-light">Title</h2>
                 <p className="description">
-                  A short title that will be displayed throughout your
-                  online store
+                  A short title that will be displayed throughout your online
+                  store
                 </p>
                 <label htmlFor="name" className="d-none">
                   Title
@@ -372,9 +370,7 @@ const UpdateProduct = () => {
                   </div>
                 </div>
               </div>
-              <button className="default-button button-filled">
-                Submit
-              </button>
+              <button className="default-button button-filled">Submit</button>
             </form>
           </div>
         </div>
