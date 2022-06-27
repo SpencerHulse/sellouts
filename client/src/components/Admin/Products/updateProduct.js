@@ -4,6 +4,7 @@ import { UPDATE_PRODUCT } from "../../../graphql/mutations";
 import { QUERY_URL } from "../../../graphql/queries";
 import { useCategories } from "../../../hooks/categoryHooks";
 import { useProducts } from "../../../hooks/productHooks";
+import { usePromotions } from "../../../hooks/promotionHooks";
 import { capitalizeFirstLetter } from "../../../utils/helpers";
 
 const UpdateProduct = () => {
@@ -12,6 +13,7 @@ const UpdateProduct = () => {
 
   const categories = useCategories();
   const products = useProducts();
+  const promotions = usePromotions();
 
   const [productData, setProductData] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState("");
@@ -21,6 +23,7 @@ const UpdateProduct = () => {
     price: 0,
     inventory: 0,
     category: "",
+    promotion: "",
   });
   const [detailsState, setDetailsState] = useState({
     detail1: "",
@@ -41,9 +44,17 @@ const UpdateProduct = () => {
 
   useEffect(() => {
     if (!productData.length) return;
-    const { name, description, details, price, inventory, category } =
-      productData[0];
+    const {
+      name,
+      description,
+      details,
+      price,
+      inventory,
+      category,
+      promotion,
+    } = productData[0];
     const categoryId = category._id;
+    const promotionId = promotion?._id || "";
 
     setFormState({
       name: name,
@@ -51,6 +62,7 @@ const UpdateProduct = () => {
       price: price,
       inventory: inventory,
       category: categoryId,
+      promotion: promotionId,
     });
 
     const newDetails = {};
@@ -112,7 +124,8 @@ const UpdateProduct = () => {
 
   function handleSubmit(event) {
     event.preventDefault();
-    const { name, description, price, category, inventory } = formState;
+    const { name, description, price, category, inventory, promotion } =
+      formState;
     const details = [];
 
     // Checks to ensure all required parts of the form are filled out
@@ -156,6 +169,7 @@ const UpdateProduct = () => {
                 images: [bucketLink],
                 mainImage: bucketLink,
                 category: category,
+                promotion: promotion,
               },
             },
           });
@@ -173,6 +187,7 @@ const UpdateProduct = () => {
             price: parseFloat(price),
             inventory: parseInt(inventory),
             category: category,
+            promotion: promotion,
           },
         },
       });
@@ -180,6 +195,8 @@ const UpdateProduct = () => {
       window.location.assign("/admin/products");
     }
   }
+
+  console.log(formState);
 
   return (
     <>
@@ -364,6 +381,29 @@ const UpdateProduct = () => {
                     </div>
                   </div>
                 </div>
+              </div>
+
+              <div className="dialog-section">
+                <h2 className="fw-light">Promotion</h2>
+                <p className="description">
+                  Select an active promotion (optional)
+                </p>
+                <label htmlFor="promotion" className="d-none">
+                  Promotion
+                </label>
+                <select
+                  className="default-input"
+                  name="promotion"
+                  id="promotion"
+                  onChange={handleChange}
+                >
+                  <option value="">Select a Promotion</option>
+                  {promotions.map((promotion) => (
+                    <option value={promotion._id} key={promotion._id}>
+                      {promotion.name}
+                    </option>
+                  ))}
+                </select>
               </div>
               <button className="default-button button-filled">Submit</button>
             </form>
