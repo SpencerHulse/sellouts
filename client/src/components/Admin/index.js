@@ -31,7 +31,7 @@ function AdminDashboard() {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/admin/users/delete-user">
+            <NavLink to="users">
               <Icon.People color="black" size={30} className="admin-icon" />
               <div className="menu-title">Users</div>
             </NavLink>

@@ -35,6 +35,7 @@ import UpdatePromotion from "./components/Admin/Promotions/updatePromotion";
 import DeletePromotion from "./components/Admin/Promotions/deletePromotion";
 // User
 import AdminUsers from "./components/Admin/Users";
+import AllUsers from "./components/Admin/Users/allUsers";
 import DeleteUser from "./components/Admin/Users/deleteUser";
 // Orders
 import AdminOrders from "./components/Admin/Orders";
@@ -99,6 +100,7 @@ function App() {
               <Route path="delete-promotions" element={<DeletePromotion />} />
             </Route>
             <Route path="users" element={<AdminUsers />}>
+              <Route index element={<AllUsers />} />
               <Route path="delete-user" element={<DeleteUser />} />
             </Route>
             <Route path="orders" element={<AdminOrders />}>
