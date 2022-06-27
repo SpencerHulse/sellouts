@@ -54,6 +54,7 @@ export const ADD_ORDER = gql`
       tax
       subtotal
       total
+      items
     }
   }
 `;
@@ -99,6 +100,7 @@ export const UPDATE_ORDER = gql`
       tax
       subtotal
       total
+      items
     }
   }
 `;

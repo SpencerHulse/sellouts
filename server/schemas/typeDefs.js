@@ -24,6 +24,7 @@ const typeDefs = gql`
     _id: ID
     purchaseDate: String
     products: [Product]
+    items: [String]
     customer: User
     status: String
     stripeId: String
@@ -40,6 +41,7 @@ const typeDefs = gql`
     _id: ID
     purchaseDate: String
     products: [ID]
+    items: [String]
     customer: ID
     status: String
     stripeId: String
@@ -123,6 +125,7 @@ const typeDefs = gql`
   type Stripe {
     session: StripeSession
     shipping: StripeShippingRate
+    items: StripeItems
   }
 
   type StripeSession {
@@ -154,6 +157,10 @@ const typeDefs = gql`
 
   type StripeFixedRate {
     amount: Int
+  }
+
+  type StripeItems {
+    items: [String]
   }
 
   type User {

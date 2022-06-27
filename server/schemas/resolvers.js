@@ -222,11 +222,23 @@ const resolvers = {
       return reviews;
     },
     session: async (parent, args) => {
-      const session = await stripe.checkout.sessions.retrieve(args.id);
+      const session = await stripe.checkout.sessions.retrieve(args.id, {
+        expand: ["line_items"],
+      });
       const shipping = await stripe.shippingRates.retrieve(
         session.shipping_rate
       );
-      return { session, shipping };
+
+      const items = await {
+        items: session.line_items.data.map(
+          (item) =>
+            `${item.description}-*-${item.amount_subtotal}-*-${item.quantity}`
+        ),
+      };
+
+      console.log(shipping, items);
+
+      return { session, shipping, items };
     },
     // Upload Image to AWS S3 Bucket
     uploadImage: async (parent, { mainImage }) => {

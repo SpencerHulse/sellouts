@@ -40,7 +40,7 @@ export function useSuccessfulPurchase(data) {
   useEffect(() => {
     if (data) {
       // Stripe session data, including shipping type/cost
-      const { session, shipping } = data.session;
+      const { session, shipping, items } = data.session;
       // Payment subtotal, total after tax/shipping,
       // Stripe session ID, payment status, and address
       const {
@@ -122,6 +122,7 @@ export function useSuccessfulPurchase(data) {
                 tax: amount_total - amount_subtotal - shippingCost,
                 subtotal: amount_subtotal,
                 total: amount_total,
+                items: items.items,
               },
             },
           });

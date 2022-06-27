@@ -55,11 +55,12 @@ function OrderHistory() {
       <div className="container">
         <div className="fullpage-order-h">
           <h2>Order history for {username}...</h2>
-          <div>
+          <div className="pb-3">
             {updatedOrders.length ? (
               updatedOrders.map((order) => {
-                const { orderData, products } = order;
-                const { _id, status, purchaseDate, total } = orderData;
+                const { orderData } = order;
+                const { _id, status, purchaseDate, total, items } = orderData;
+                console.log(orderData);
                 return (
                   <div className="order-item" key={_id}>
                     <div>
@@ -72,20 +73,25 @@ function OrderHistory() {
                       <thead>
                         <tr>
                           <th scope="col">Item</th>
-                          <th scope="col">Quantity</th>
-                          <th scope="col">Item Price</th>
+                          <th scope="col">Price</th>
+                          <th scope="col">Qty</th>
                           <th scope="col">Total</th>
                         </tr>
                       </thead>
                       <tbody>
-                        {products.map((product) => {
-                          const { name, quantityPurchased, _id } = product[0];
+                        {items.map((item, index) => {
+                          const itemData = item.split("-*-");
+                          const name = itemData[0];
+                          const subtotal = (itemData[1] / 100).toFixed(2);
+                          const quantity = itemData[2];
+                          const unitPrice = (subtotal / quantity).toFixed(2);
+
                           return (
-                            <tr key={_id}>
+                            <tr key={`${_id}-item-${index}`}>
                               <td className="row-cell">{name}</td>
-                              <td className="row-cell">{quantityPurchased}</td>
-                              <td className="row-cell">----</td>
-                              <td className="row-cell">----</td>
+                              <td className="row-cell">${unitPrice}</td>
+                              <td className="row-cell">{quantity}</td>
+                              <td className="row-cell">${subtotal}</td>
                             </tr>
                           );
                         })}

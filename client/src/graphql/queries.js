@@ -50,6 +50,7 @@ export const QUERY_ORDERS = gql`
       tax
       subtotal
       total
+      items
     }
   }
 `;
@@ -152,6 +153,9 @@ export const QUERY_SESSION = gql`
         fixed_amount {
           amount
         }
+      }
+      items {
+        items
       }
     }
   }
