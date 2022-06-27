@@ -1,27 +1,27 @@
-import { Link, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 
 function AdminCategories() {
   return (
     <div className="admin-body-content">
       <div className="d-flex">
-        <Link
+        <NavLink
           to="/admin/categories/add-category"
-          className="default-button me-3"
+          className="admin-submenu-button"
         >
           Add Category
-        </Link>
-        <Link
+        </NavLink>
+        <NavLink
           to="/admin/categories/update-category"
-          className="default-button me-3"
+          className="admin-submenu-button"
         >
           Update Category
-        </Link>
-        <Link
+        </NavLink>
+        <NavLink
           to="/admin/categories/delete-category"
-          className="default-button me-3"
+          className="admin-submenu-button"
         >
           Delete Category
-        </Link>
+        </NavLink>
       </div>
       <Outlet />
     </div>

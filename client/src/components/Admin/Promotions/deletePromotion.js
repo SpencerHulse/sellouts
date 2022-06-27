@@ -26,7 +26,7 @@ function DeletePromotion() {
 
   return (
     <div>
-      <div className="mt-5 dialog">
+      <div className="dialog">
             <form action="submit" onSubmit={handleSubmit}>
               <div className="dialog-section">
                 <h2 className="fw-light">Promotion</h2>

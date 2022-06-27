@@ -23,11 +23,13 @@ import UpdateCategory from "./components/Admin/Categories/updateCategory";
 import DeleteCategory from "./components/Admin/Categories/deleteCategory";
 // Product
 import AdminProducts from "./components/Admin/Products";
+import AllProducts from "./components/Admin/Products/allProducts";
 import AddProduct from "./components/Admin/Products/addProduct";
 import UpdateProduct from "./components/Admin/Products/updateProduct";
 import DeleteProduct from "./components/Admin/Products/deleteProduct";
 // Promotion
 import AdminPromotions from "./components/Admin/Promotions";
+import AllPromotions from "./components/Admin/Promotions/allPromotions";
 import AddPromotion from "./components/Admin/Promotions/addPromotion";
 import UpdatePromotion from "./components/Admin/Promotions/updatePromotion";
 import DeletePromotion from "./components/Admin/Promotions/deletePromotion";
@@ -78,17 +80,20 @@ function App() {
           <Route path="/admin" element={<Admin />}>
             <Route path="dashboard" element={<Dashboard />}></Route>
             <Route path="categories" element={<AdminCategories />}>
+              <Route index element={<AllCategories />} />
               <Route path="all-categories" element={<AllCategories />} />
               <Route path="add-category" element={<AddCategory />} />
               <Route path="update-category" element={<UpdateCategory />} />
               <Route path="delete-category" element={<DeleteCategory />} />
             </Route>
             <Route path="products" element={<AdminProducts />}>
+              <Route index element={<AllProducts />} />
               <Route path="add-product" element={<AddProduct />} />
               <Route path="update-product" element={<UpdateProduct />} />
               <Route path="delete-product" element={<DeleteProduct />} />
             </Route>
             <Route path="promotions" element={<AdminPromotions />}>
+              <Route index element={<AllPromotions />} />
               <Route path="add-promotions" element={<AddPromotion />} />
               <Route path="update-promotions" element={<UpdatePromotion />} />
               <Route path="delete-promotions" element={<DeletePromotion />} />
