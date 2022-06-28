@@ -199,9 +199,16 @@ a:hover {
   overflow: scroll;
 }
 
+.product-description::-webkit-scrollbar {
+  width: 0px;
+}
+
+.cart::-webkit-scrollbar {
+  width: 5px;
+}
+
 .product-description::-webkit-scrollbar,
 .cart::-webkit-scrollbar {
-  width: 0px;
   height: 0px;
 }
 
@@ -356,6 +363,13 @@ a:hover {
     width: 600px;
     height: 250px;
   }
+}
+
+/* Admin - Category */
+.category-graph svg {
+  position: relative;
+  min-width: 300px;
+  min-height: 300px;
 }
 
 /* Pagination */
@@ -786,6 +800,7 @@ a:hover {
   transition: all 0.15s ease-in-out;
   position: absolute;
   overflow: hidden;
+  z-index: 10;
 }
 
 .admin-main-menu:hover {
