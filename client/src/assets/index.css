@@ -375,6 +375,18 @@ a:hover {
   min-width: 300px;
 }
 
+/* Admin - Orders */
+.admin-order-sl {
+  margin-right: 5px;
+}
+
+.admin-order-select {
+}
+
+.admin-order {
+  max-width: 500px;
+}
+
 /* Pagination */
 .prev-button,
 .next-button {

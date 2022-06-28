@@ -7,7 +7,7 @@ import { useQuery } from "@apollo/client";
 import { QUERY_PRODUCTS } from "../../graphql/queries";
 import { idbPromise } from "../../utils/helpers";
 
-export function useProducts(params) {
+export function useProducts() {
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.products);
   const { loading, data: productData } = useQuery(QUERY_PRODUCTS);
