@@ -29,7 +29,7 @@ const Dashboard = () => {
   if (weeklyOrders) {
     const hash = {};
 
-    for (let i = 0; i < 7; i++) {
+    for (let i = 6; i >= 0; i--) {
       const fullDate = DateTime.now()
         .minus({ day: i })
         .toLocaleString(DateTime.DATE_SHORT);
@@ -119,6 +119,9 @@ const Dashboard = () => {
                   }}
                 />
                 <VictoryBar
+                  style={{
+                    data: { fill: "#7f60db" },
+                  }}
                   data={chartData}
                   // data accessor for x values
                   x="categoryName"
@@ -192,7 +195,7 @@ const Dashboard = () => {
 
                   <VictoryLine
                     style={{
-                      data: { stroke: "tomato" },
+                      data: { stroke: "#7f60db" },
                     }}
                     data={weeklyOrderData}
                     x="date"
