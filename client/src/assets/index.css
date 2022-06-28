@@ -371,6 +371,10 @@ a:hover {
   font-size: 22px;
 }
 
+.weekly-sales {
+  min-width: 300px;
+}
+
 /* Pagination */
 .prev-button,
 .next-button {

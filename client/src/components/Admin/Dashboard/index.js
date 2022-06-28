@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+import { DateTime } from "luxon";
 import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme } from "victory";
 import { useCategories } from "../../../hooks/categoryHooks";
 import { useProducts } from "../../../hooks/productHooks";
@@ -7,9 +9,36 @@ import { capitalizeFirstLetter } from "../../../utils/helpers";
 const Dashboard = () => {
   const categories = useCategories();
   const products = useProducts();
-  const orders = useGetOrders({ status: "pending" });
+  const orders = useGetOrders();
+
+  const [pendingOrders, setPendingOrders] = useState("");
+  const [weeklyOrders, setWeeklyOrders] = useState("");
 
   console.log(orders);
+  console.log(pendingOrders);
+  console.log(weeklyOrders);
+
+  useEffect(() => {
+    function getPending(orders) {
+      return orders.orders.filter((order) => order.status === "pending");
+    }
+
+    function getWeekly(orders) {
+      const aWeekAgo = DateTime.now()
+        .minus({ day: 7 })
+        .toLocaleString(DateTime.DATE_SHORT);
+      console.log(aWeekAgo);
+      return orders.orders.filter((order) => {
+        const orderDate = order.purchaseDate.split(", ")[0];
+        return orderDate >= aWeekAgo;
+      });
+    }
+
+    if (orders) {
+      setPendingOrders(getPending(orders));
+      setWeeklyOrders(getWeekly(orders));
+    }
+  }, [orders]);
 
   // Get an array of category names and how many products they have
   const chartData = categories.map((category) => {
@@ -75,7 +104,7 @@ const Dashboard = () => {
           <div className="dialog pending-orders">
             <h2 className="fw-light">
               Pending orders{" "}
-              <span>( {orders ? orders.orders.length : 0} )</span>
+              <span>( {pendingOrders ? pendingOrders.length : 0} )</span>
             </h2>
             <div>
               <table className="table">
@@ -87,19 +116,20 @@ const Dashboard = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {orders &&
-                    orders.orders.map((order) => {
-                      const { total, products, customer } = order;
-                      const { username } = customer;
-                      const quantity = products.length;
-                      return (
-                        <tr key={order._id}>
-                          <th scope="row">{username}</th>
-                          <td>{quantity}</td>
-                          <td>${(total / 100).toFixed(2)}</td>
-                        </tr>
-                      );
-                    })}
+                  {pendingOrders
+                    ? pendingOrders.map((order) => {
+                        const { total, products, customer } = order;
+                        const { username } = customer;
+                        const quantity = products.length;
+                        return (
+                          <tr key={order._id}>
+                            <td>{username}</td>
+                            <td>{quantity}</td>
+                            <td>${(total / 100).toFixed(2)}</td>
+                          </tr>
+                        );
+                      })
+                    : null}
                 </tbody>
               </table>
             </div>
