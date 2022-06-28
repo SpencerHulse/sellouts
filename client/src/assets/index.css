@@ -212,11 +212,6 @@ a:hover {
   height: 0px;
 }
 
-.product-description::-webkit-scrollbar-track,
-.cart::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-}
-
 .product-description::-webkit-scrollbar-thumb,
 .cart::-webkit-scrollbar-thumb {
   background-color: var(--brand-color);
@@ -358,18 +353,22 @@ a:hover {
   color: white;
 }
 
-@media (min-width: 768px) {
-  .success-container {
-    width: 600px;
-    height: 250px;
-  }
-}
-
-/* Admin - Category */
+/* Admin - Dashboard */
 .category-graph svg {
   position: relative;
   min-width: 300px;
   min-height: 300px;
+}
+
+.pending-orders {
+  min-width: 400px;
+  max-height: 600px;
+  overflow-y: scroll;
+}
+
+.pending-orders span {
+  display: inline-block;
+  font-size: 22px;
 }
 
 /* Pagination */
@@ -908,5 +907,20 @@ a:hover {
     list-style: none;
     margin: 0;
     padding: 11px 0;
+  }
+
+  .success-container {
+    width: 600px;
+    height: 250px;
+  }
+}
+
+@media (max-width: 500px) {
+  .pending-orders {
+    min-width: 300px;
+  }
+
+  .category-graph {
+    min-width: 300px;
   }
 }

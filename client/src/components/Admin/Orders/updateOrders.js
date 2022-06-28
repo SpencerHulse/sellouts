@@ -102,6 +102,10 @@ function UpdateOrders() {
                   </select>
                 </div>
                 <div>
+                  <div>User: {order.customer.username}</div>
+                  <div>Email: {order.customer.email}</div>
+                </div>
+                <div>
                   <div>Shipping Address: {order.deliveryAddress}</div>
                   <div>Shipping Type: {order.shippingType}</div>
                   <div>

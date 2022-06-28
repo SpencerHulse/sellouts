@@ -1,12 +1,17 @@
 import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme } from "victory";
 import { useCategories } from "../../../hooks/categoryHooks";
-import { capitalizeFirstLetter } from "../../../utils/helpers";
 import { useProducts } from "../../../hooks/productHooks";
+import { useGetOrders } from "../../../hooks/orderHooks";
+import { capitalizeFirstLetter } from "../../../utils/helpers";
 
 const Dashboard = () => {
   const categories = useCategories();
   const products = useProducts();
+  const orders = useGetOrders({ status: "pending" });
 
+  console.log(orders);
+
+  // Get an array of category names and how many products they have
   const chartData = categories.map((category) => {
     const productData = products.filter(
       (product) => product.category._id === category._id
@@ -16,8 +21,6 @@ const Dashboard = () => {
       productCount: productData.length,
     };
   });
-
-  console.log(chartData);
 
   return (
     <div className="admin-body-content">
@@ -33,6 +36,10 @@ const Dashboard = () => {
                 domainPadding={20}
               >
                 <VictoryAxis
+                  label="categories"
+                  style={{
+                    axisLabel: { padding: 30 },
+                  }}
                   // tickValues specifies both the number of ticks and where
                   // they are placed on the axis
                   tickValues={[]}
@@ -40,6 +47,10 @@ const Dashboard = () => {
                 />
                 <VictoryAxis
                   dependentAxis
+                  label="products"
+                  style={{
+                    axisLabel: { padding: 25 },
+                  }}
                   // tickFormat specifies how ticks should be displayed
                   tickFormat={(y) => {
                     if (y === Math.round(y)) {
@@ -61,55 +72,34 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="col h-100">
-          <div className="dialog">
-            <h2 className="fw-light">Pending orders</h2>
+          <div className="dialog pending-orders">
+            <h2 className="fw-light">
+              Pending orders{" "}
+              <span>( {orders ? orders.orders.length : 0} )</span>
+            </h2>
             <div>
               <table className="table">
                 <thead>
                   <tr>
-                    <th scope="col">Customer</th>
-                    <th scope="col">Items</th>
+                    <th scope="col">User</th>
+                    <th scope="col">Qty</th>
                     <th scope="col">Total</th>
-                    <th scope="col">Status</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">Full name</th>
-                    <td>2</td>
-                    <td>$67.22</td>
-                    <td>
-                      <select>
-                        <option>Pending</option>
-                        <option>Processing</option>
-                        <option>Fulfilled</option>
-                      </select>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Full name</th>
-                    <td>3</td>
-                    <td>$81.32</td>
-                    <td>
-                      <select>
-                        <option>Pending</option>
-                        <option>Processing</option>
-                        <option>Fulfilled</option>
-                      </select>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Full name</th>
-                    <td>1</td>
-                    <td>$9.99</td>
-                    <td>
-                      <select>
-                        <option>Pending</option>
-                        <option>Processing</option>
-                        <option>Fulfilled</option>
-                      </select>
-                    </td>
-                  </tr>
+                  {orders &&
+                    orders.orders.map((order) => {
+                      const { total, products, customer } = order;
+                      const { username } = customer;
+                      const quantity = products.length;
+                      return (
+                        <tr key={order._id}>
+                          <th scope="row">{username}</th>
+                          <td>{quantity}</td>
+                          <td>${(total / 100).toFixed(2)}</td>
+                        </tr>
+                      );
+                    })}
                 </tbody>
               </table>
             </div>
