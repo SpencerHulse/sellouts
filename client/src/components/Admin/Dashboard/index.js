@@ -1,6 +1,12 @@
 import { useState, useEffect } from "react";
 import { DateTime } from "luxon";
-import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme } from "victory";
+import {
+  VictoryBar,
+  VictoryChart,
+  VictoryAxis,
+  VictoryTheme,
+  VictoryLine,
+} from "victory";
 import { useCategories } from "../../../hooks/categoryHooks";
 import { useProducts } from "../../../hooks/productHooks";
 import { useGetOrders } from "../../../hooks/orderHooks";
@@ -13,10 +19,33 @@ const Dashboard = () => {
 
   const [pendingOrders, setPendingOrders] = useState("");
   const [weeklyOrders, setWeeklyOrders] = useState("");
+  const weeklyOrderData = [];
 
-  console.log(orders);
-  console.log(pendingOrders);
+  // console.log(orders);
+  // console.log(pendingOrders);
   console.log(weeklyOrders);
+  console.log(weeklyOrderData);
+
+  if (weeklyOrders) {
+    const hash = {};
+
+    for (let i = 0; i < 7; i++) {
+      const fullDate = DateTime.now()
+        .minus({ day: i })
+        .toLocaleString(DateTime.DATE_SHORT);
+      const date = fullDate.split("/")[0] + "/" + fullDate.split("/")[1];
+      hash[date] = 0;
+    }
+
+    weeklyOrders.forEach((order) => {
+      const date = order.purchaseDate.split(", ")[0];
+      const monthAndDay = date.split("/")[0] + "/" + date.split("/")[1];
+      hash[monthAndDay] = hash[monthAndDay] + 1;
+    });
+    for (const key in hash) {
+      weeklyOrderData.push({ date: key, sales: hash[key] });
+    }
+  }
 
   useEffect(() => {
     function getPending(orders) {
@@ -27,10 +56,10 @@ const Dashboard = () => {
       const aWeekAgo = DateTime.now()
         .minus({ day: 7 })
         .toLocaleString(DateTime.DATE_SHORT);
-      console.log(aWeekAgo);
+
       return orders.orders.filter((order) => {
         const orderDate = order.purchaseDate.split(", ")[0];
-        return orderDate >= aWeekAgo;
+        return orderDate > aWeekAgo;
       });
     }
 
@@ -138,8 +167,40 @@ const Dashboard = () => {
       </div>
       <div className="row">
         <div className="col">
-          <div className="dialog">
+          <div className="dialog weekly-sales">
             <h2 className="fw-light">Sales this week</h2>
+            {weeklyOrderData.length && (
+              <div>
+                <VictoryChart>
+                  <VictoryAxis tickValues={[]} tickFormat={(x) => x} />
+
+                  <VictoryAxis
+                    dependentAxis
+                    label="sales"
+                    style={{
+                      axisLabel: { padding: 25 },
+                    }}
+                    // tickFormat specifies how ticks should be displayed
+                    tickFormat={(y) => {
+                      if (y === Math.round(y)) {
+                        return y;
+                      } else {
+                        return null;
+                      }
+                    }}
+                  />
+
+                  <VictoryLine
+                    style={{
+                      data: { stroke: "tomato" },
+                    }}
+                    data={weeklyOrderData}
+                    x="date"
+                    y="sales"
+                  />
+                </VictoryChart>
+              </div>
+            )}
           </div>
         </div>
       </div>
