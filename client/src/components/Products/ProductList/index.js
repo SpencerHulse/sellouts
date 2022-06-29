@@ -50,22 +50,24 @@ function ProductList() {
   }
 
   return (
-    <div className="d-flex flex-column justify-content-between home-products">
-      <div
-        className="d-flex flex-wrap justify-content-center mt-4"
-        id="top-of-products"
-      >
-        <div className="d-flex flex-wrap justify-content-evenly">
-          {visibleProducts.length ? (
-            visibleProducts.map((product) => {
-              return <ProductCard key={product._id} product={product} />;
-            })
-          ) : (
-            <div className="">There are no products here!</div>
-          )}
+    <div className="home-products">
+      <div className="container">
+        <div
+          className="mt-4"
+          id="top-of-products"
+        >
+          <div className="row row-cols-xl-5 row-cols-md-2 row-cols-sm-1 g-3">
+            {visibleProducts.length ? (
+              visibleProducts.map((product) => {
+                return <ProductCard key={product._id} product={product} />;
+              })
+            ) : (
+              <div className="">There are no products here!</div>
+            )}
+          </div>
         </div>
       </div>
-      <div className="d-flex justify-content-center align-items-baseline">
+      <div className="d-flex justify-content-center align-items-baseline mt-5">
         {page === 1 ? (
           <button className="disabled-btn disabled-prev" disabled>
             Prev

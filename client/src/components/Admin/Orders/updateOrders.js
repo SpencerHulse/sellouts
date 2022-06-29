@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Order from "./Order";
-import { useParams } from "react-router-dom";
 import { useGetOrders } from "../../../hooks/orderHooks";
 
 function UpdateOrders() {
@@ -52,7 +51,8 @@ function UpdateOrders() {
             <option value="delivered">Delivered</option>
           </select>
         </div>
-        <div className="d-flex flex-wrap justify-content-around">
+
+        <div className="row row-cols-xl-2 row-cols-md-1 gx-3">
           {filteredOrders.length ? (
             filteredOrders.map((order) => {
               return <Order order={order} options={options} key={order._id} />;

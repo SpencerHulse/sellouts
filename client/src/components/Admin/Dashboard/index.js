@@ -179,7 +179,7 @@ const Dashboard = () => {
                 )}
               </div>
             </div>
-            <h2 className="fw-light">Weekly totals</h2>
+            <h2 className="fw-light mb-4">Weekly totals</h2>
             <div className="dialog-section d-flex">
               <div className="me-5 d-flex justify-content-between statistic-box align-items-center">
                 <Icon.Clipboard color="black" size={40} className="stat-icon" />

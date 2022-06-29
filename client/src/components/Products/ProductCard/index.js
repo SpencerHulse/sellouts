@@ -44,15 +44,15 @@ function ProductCard({ product }) {
   }
 
   return (
-    <div className="pc-container mb-4 flex-xl-column p-md-2">
-      <Link to={`/product/${_id}`} className="me-md-3 me-xl-0">
+    <div className="pc-container d-flex flex-sm-nowrap flex-md-wrap">
+      <Link to={`/product/${_id}`} className="me-md-3 me-xl-0 mb-2 box">
         <img
-          className="pc-image mb-xl-2"
+          className="pc-image"
           src={mainImage}
           alt={`${name} ${category} ${mainImage}`}
         />
       </Link>
-      <div className="pc-details">
+      <div className="pc-details ms-3 ms-md-0">
         <Link to={`/product/${_id}`} className="pc-title">
           {name}
         </Link>

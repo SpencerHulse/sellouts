@@ -384,15 +384,13 @@ a:hover {
   border-color: var(--brand-color);
 }
 
-.admin-order {
+/* .admin-order {
   width: 100%;
   min-width: 300px;
   max-width: 500px;
-  border-radius: 15px;
-}
+} */
 
 .admin-order-id {
-  border-radius: 15px 15px 0 0;
   background-color: var(--brand-color);
   color: white !important;
 }
@@ -613,11 +611,18 @@ a:hover {
 }
 
 .pc-image {
-  background-color: rgb(236, 236, 236);
   object-fit: contain;
+  height: 100%;
+  width: 100%;
   padding: 10px;
-  width: 250px;
-  height: 250px;
+}
+
+.box {
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 1/1;
+  background-color: rgb(236, 236, 236);
 }
 
 .pc-priceblock {
@@ -906,7 +911,7 @@ a:hover {
   padding: 15px;
   width: 250px;
   background-color: #f1f1f1;
-}
+} 
 
 @media (min-width: 768px) {
   .hamburger-container {
