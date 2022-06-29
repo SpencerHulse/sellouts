@@ -1,9 +1,11 @@
 import { useProducts } from "../../../hooks/productHooks";
+import { useWindowWidth } from "../../../hooks/navHooks";
 import { capitalizeFirstLetter } from "../../../utils/helpers";
 import { Link } from "react-router-dom";
 
 function AllProducts() {
   const products = useProducts();
+  const width = useWindowWidth();
 
   return (
     <div className="dialog">
@@ -11,9 +13,9 @@ function AllProducts() {
       <table className="table table-hover">
         <thead>
           <tr>
-            <th scope="col">Image</th>
+            {width > 768 && <th scope="col">Image</th>}
             <th scope="col">Name</th>
-            <th scope="col">Category</th>
+            {width > 768 && <th scope="col">Category</th>}
             <th scope="col">Stock</th>
             <th scope="col">Price</th>
           </tr>
@@ -21,23 +23,27 @@ function AllProducts() {
         <tbody>
           {products.map((product) => (
             <tr key={product._id}>
-              <td>
-                <img
-                  className="orderlist-img"
-                  src={product.mainImage}
-                  alt={product.name}
-                />
-              </td>
+              {width > 768 && (
+                <td>
+                  <img
+                    className="orderlist-img"
+                    src={product.mainImage}
+                    alt={product.name}
+                  />
+                </td>
+              )}
               <td>
                 <Link to={`/product/${product._id}`}>
                   {capitalizeFirstLetter(product.name)}
                 </Link>
               </td>
-              <td>
-                {product.category
-                  ? capitalizeFirstLetter(product.category.name)
-                  : "Uncategorized"}
-              </td>
+              {width > 768 && (
+                <td>
+                  {product.category
+                    ? capitalizeFirstLetter(product.category.name)
+                    : "Uncategorized"}
+                </td>
+              )}
               <td>{product.inventory}</td>
               <td>${product.price}</td>
             </tr>

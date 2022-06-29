@@ -8,19 +8,19 @@ function AdminCategories() {
           to="/admin/categories/add-category"
           className="admin-submenu-button"
         >
-          Add Category
+          Add
         </NavLink>
         <NavLink
           to="/admin/categories/update-category"
           className="admin-submenu-button"
         >
-          Update Category
+          Update
         </NavLink>
         <NavLink
           to="/admin/categories/delete-category"
           className="admin-submenu-button"
         >
-          Delete Category
+          Delete
         </NavLink>
       </div>
       <Outlet />

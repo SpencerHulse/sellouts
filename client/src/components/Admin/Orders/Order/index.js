@@ -36,7 +36,9 @@ function Order({ order, options }) {
   return (
     <div className="mb-3 border admin-order shadow-sm" key={order._id}>
       <div className="h6 p-2 admin-order-id">Order #{order._id}</div>
-      <div className="px-2">
+      <div className="px-2 pb-2">
+        <div>Total: ${(order.total / 100).toFixed(2)}</div>
+
         <div>
           Status:
           <select
@@ -59,20 +61,20 @@ function Order({ order, options }) {
             })}
           </select>
         </div>
+
         <div>
           <div>User: {order.customer.username}</div>
           <div>Email: {order.customer.email}</div>
         </div>
+
         <div>
           <div>Shipping Address: {order.deliveryAddress}</div>
           <div>Shipping Type: {order.shippingType}</div>
-          <div>Shipping Cost: ${(order.shippingCost / 100).toFixed(2)}</div>
           <div>
             Expected Delivery:{" "}
             {deliveryDate(order.shippingType, order.purchaseDate)}
           </div>
         </div>
-        <div>Order Total: ${(order.total / 100).toFixed(2)}</div>
       </div>
     </div>
   );

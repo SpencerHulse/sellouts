@@ -390,7 +390,7 @@ a:hover {
 
 .admin-order {
   width: 100%;
-  min-width: 250px;
+  min-width: 300px;
   max-width: 500px;
   border-radius: 15px;
 }
@@ -929,7 +929,7 @@ a:hover {
   .admin-body {
     width: 100vw;
     padding: 0;
-    overflow: hidden;
+    overflow-x: hidden;
   }
 
   .admin-body-content {
