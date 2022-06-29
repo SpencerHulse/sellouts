@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { IoIosArrowRoundBack } from "react-icons/io";
+import Order from "../components/Order";
 import Auth from "../utils/auth";
-import { capitalizeFirstLetter, loggedOutRedirect } from "../utils/helpers";
+import { loggedOutRedirect } from "../utils/helpers";
 import { useGetOrders } from "../hooks/orderHooks";
 
 function OrderHistory() {
@@ -58,55 +59,7 @@ function OrderHistory() {
           <div className="pb-3">
             {updatedOrders.length ? (
               updatedOrders.map((order) => {
-                const { orderData } = order;
-                const { _id, status, purchaseDate, total, items } = orderData;
-                console.log(orderData);
-                return (
-                  <div className="order-item" key={_id}>
-                    <div>
-                      <div className="px-2">Order #{_id}</div>
-                      <div className="px-2">
-                        Status: {capitalizeFirstLetter(status)}
-                      </div>
-                    </div>
-                    <table className="table table-items">
-                      <thead>
-                        <tr>
-                          <th scope="col">Item</th>
-                          <th scope="col">Price</th>
-                          <th scope="col">Qty</th>
-                          <th scope="col">Total</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {items.map((item, index) => {
-                          const itemData = item.split("-*-");
-                          const name = itemData[0];
-                          const subtotal = (itemData[1] / 100).toFixed(2);
-                          const quantity = itemData[2];
-                          const unitPrice = (subtotal / quantity).toFixed(2);
-
-                          return (
-                            <tr key={`${_id}-item-${index}`}>
-                              <td className="row-cell">{name}</td>
-                              <td className="row-cell">${unitPrice}</td>
-                              <td className="row-cell">{quantity}</td>
-                              <td className="row-cell">${subtotal}</td>
-                            </tr>
-                          );
-                        })}
-                      </tbody>
-                    </table>
-                    <div className="container">
-                      <div className="row">
-                        <div className="col-9 px-2">{purchaseDate}</div>
-                        <div className="col-3 px-2 order-total">
-                          ${(total / 100).toFixed(2)}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                );
+                return <Order order={order} key={order.orderData._id} />;
               })
             ) : (
               <p>You have no orders yet!</p>
