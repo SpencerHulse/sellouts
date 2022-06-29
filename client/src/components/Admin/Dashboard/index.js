@@ -81,55 +81,102 @@ const Dashboard = () => {
     <div className="admin-body-content">
       <div className="row">
         <div className="col h-100">
-          <div className="dialog p-0 category-graph">
-            <div className="">
-              <VictoryChart
-                // adding the material theme provided with Victory
-                theme={VictoryTheme.material}
-                // domainPadding will add space to each side of VictoryBar to
-                // prevent it from overlapping the axis
-                domainPadding={20}
-              >
-                <VictoryAxis
-                  label="categories"
-                  style={{
-                    axisLabel: { padding: 30 },
-                  }}
-                  // tickValues specifies both the number of ticks and where
-                  // they are placed on the axis
-                  tickValues={[]}
-                  tickFormat={chartData.map((data) => data.categoryName)}
-                />
-                <VictoryAxis
-                  dependentAxis
-                  label="products"
-                  style={{
-                    axisLabel: { padding: 25 },
-                  }}
-                  // tickFormat specifies how ticks should be displayed
-                  tickFormat={(y) => {
-                    if (y === Math.round(y)) {
-                      return y;
-                    } else {
-                      return null;
-                    }
-                  }}
-                />
-                <VictoryBar
-                  style={{
-                    data: { fill: "#7f60db" },
-                  }}
-                  data={chartData}
-                  // data accessor for x values
-                  x="categoryName"
-                  // data accessor for y values
-                  y="productCount"
-                />
-              </VictoryChart>
+          <div className="dialog category-graph">
+            <div className="row">
+              <h2 className="fw-light">Statistics</h2>
+              <div className="col-sm-12 col-xl-4">
+                <h3 className="fw-light">Products per category</h3>
+                <VictoryChart
+                  // adding the material theme provided with Victory
+                  theme={VictoryTheme.material}
+                  height={250}
+                  // domainPadding will add space to each side of VictoryBar to
+                  // prevent it from overlapping the axis
+                  domainPadding={20}
+                >
+                  <VictoryAxis
+                    label="Categories"
+                    style={{
+                      axisLabel: { padding: 30, fontSize: 15 },
+                      tickLabels: { fontSize: 15 }
+                    }}
+                    // tickValues specifies both the number of ticks and where
+                    // they are placed on the axis
+                    tickValues={[]}
+                    tickFormat={chartData.map((data) => data.categoryName)}
+                  />
+                  <VictoryAxis
+                    dependentAxis
+                    label="Products"
+                    style={{
+                      axisLabel: { padding: 25, fontSize: 15 },
+                      tickLabels: { fontSize: 15 }
+                    }}
+                    // tickFormat specifies how ticks should be displayed
+                    tickFormat={(y) => {
+                      if (y === Math.round(y)) {
+                        return y;
+                      } else {
+                        return null;
+                      }
+                    }}
+                  />
+                  <VictoryBar
+                    style={{
+                      data: { fill: "#7f60db" },
+                    }}
+                    data={chartData}
+                    // data accessor for x values
+                    x="categoryName"
+                    // data accessor for y values
+                    y="productCount"
+                  />
+                </VictoryChart>
+              </div>
+              <div className="col-sm-12 col-xl-8">
+                <h3 className="fw-light">Sales this week</h3>
+                {weeklyOrderData.length && (
+                  <div>
+                    <VictoryChart height={200}>
+                      <VictoryAxis
+                        style={{ tickLabels: { fontSize: 10 } }}
+                        tickValues={[]} tickFormat={(x) => x} />
+
+                      <VictoryAxis
+                        dependentAxis
+                        label="Sales"
+                        style={{
+                          axisLabel: { padding: 25, fontSize: 10 },
+                          tickLabels: { fontSize: 10 }
+                        }}
+                        // tickFormat specifies how ticks should be displayed
+                        tickFormat={(y) => {
+                          if (y === Math.round(y)) {
+                            return y;
+                          } else {
+                            return null;
+                          }
+                        }}
+                      />
+
+                      <VictoryLine
+                        style={{
+                          data: { stroke: "#7f60db" },
+                          tickLabels: { fontSize: 10 }
+                        }}
+                        data={weeklyOrderData}
+                        x="date"
+                        y="sales"
+                      />
+                    </VictoryChart>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
+
         </div>
-        <div className="col h-100">
+        <div className="h-100">
           <div className="dialog pending-orders">
             <h2 className="fw-light">
               Pending orders{" "}
@@ -147,17 +194,17 @@ const Dashboard = () => {
                 <tbody>
                   {pendingOrders
                     ? pendingOrders.map((order) => {
-                        const { total, products, customer } = order;
-                        const { username } = customer;
-                        const quantity = products.length;
-                        return (
-                          <tr key={order._id}>
-                            <td>{username}</td>
-                            <td>{quantity}</td>
-                            <td>${(total / 100).toFixed(2)}</td>
-                          </tr>
-                        );
-                      })
+                      const { total, products, customer } = order;
+                      const { username } = customer;
+                      const quantity = products.length;
+                      return (
+                        <tr key={order._id}>
+                          <td>{username}</td>
+                          <td>{quantity}</td>
+                          <td>${(total / 100).toFixed(2)}</td>
+                        </tr>
+                      );
+                    })
                     : null}
                 </tbody>
               </table>
@@ -169,38 +216,7 @@ const Dashboard = () => {
         <div className="col">
           <div className="dialog weekly-sales">
             <h2 className="fw-light">Sales this week</h2>
-            {weeklyOrderData.length && (
-              <div>
-                <VictoryChart>
-                  <VictoryAxis tickValues={[]} tickFormat={(x) => x} />
 
-                  <VictoryAxis
-                    dependentAxis
-                    label="sales"
-                    style={{
-                      axisLabel: { padding: 25 },
-                    }}
-                    // tickFormat specifies how ticks should be displayed
-                    tickFormat={(y) => {
-                      if (y === Math.round(y)) {
-                        return y;
-                      } else {
-                        return null;
-                      }
-                    }}
-                  />
-
-                  <VictoryLine
-                    style={{
-                      data: { stroke: "#7f60db" },
-                    }}
-                    data={weeklyOrderData}
-                    x="date"
-                    y="sales"
-                  />
-                </VictoryChart>
-              </div>
-            )}
           </div>
         </div>
       </div>

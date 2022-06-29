@@ -13,7 +13,7 @@ export function useGetOrders(params) {
 
   // Query by Order ID
   if (params?._id) {
-    variables._id = params._id;
+    variables.id = params._id;
   }
   // Query by User ID
   if (params?.customerId) {

@@ -39,6 +39,7 @@ import AllUsers from "./components/Admin/Users/allUsers";
 import DeleteUser from "./components/Admin/Users/deleteUser";
 // Orders
 import AdminOrders from "./components/Admin/Orders";
+import SingleOrder from "./components/Admin/Orders/singleOrder";
 import UpdateOrders from "./components/Admin/Orders/updateOrders";
 
 // Apollo
@@ -104,6 +105,7 @@ function App() {
               <Route path="delete-user" element={<DeleteUser />} />
             </Route>
             <Route path="orders" element={<AdminOrders />}>
+              <Route path=":orderId" element={<SingleOrder />} />
               <Route path="update-orders" element={<UpdateOrders />} />
             </Route>
           </Route>
