@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import ProductCard from "../ProductCard";
-import { useProducts, useFilterProducts } from "../../../hooks/productHooks";
+import {
+  useProducts,
+  useFilterProducts,
+  useVisibleProducts,
+} from "../../../hooks/productHooks";
 import { numberOfPages } from "../../../utils/helpers";
 
 function ProductList() {
@@ -12,11 +16,16 @@ function ProductList() {
   const [page, setPage] = useState(1);
   const [pages, setPages] = useState(productData.length / itemsPP);
   const [filteredProducts, setFilteredProducts] = useState([...productData]);
-  const [visibleProducts, setVisibleProducts] = useState([
-    ...productData.slice(0, itemsPP),
-  ]);
 
+  // Custom hook that returns data based on the filter options
   const products = useFilterProducts(productData);
+  // Custom hook to determine products currently showing on the page
+  const visibleProducts = useVisibleProducts(
+    productData,
+    filteredProducts,
+    page,
+    itemsPP
+  );
 
   // Handles determining the number of pages
   useEffect(() => {
@@ -30,13 +39,6 @@ function ProductList() {
       setFilteredProducts(products);
     }
   }, [productData, products]);
-
-  // Handles determining the visible products from the filtered products array
-  useEffect(() => {
-    const start = (page - 1) * itemsPP;
-    const end = page * itemsPP;
-    setVisibleProducts(filteredProducts.slice(start, end));
-  }, [filteredProducts, page]);
 
   // Handles changing the page
   function changePage(direction) {

@@ -96,3 +96,18 @@ export function useFilterProducts(productData) {
 
   if (filteredProducts) return filteredProducts;
 }
+
+export function useVisibleProducts(products, filteredProducts, page, itemsPP) {
+  const [visibleProducts, setVisibleProducts] = useState([
+    ...products.slice(0, itemsPP),
+  ]);
+
+  // Handles determining the visible products from the filtered products array
+  useEffect(() => {
+    const start = (page - 1) * itemsPP;
+    const end = page * itemsPP;
+    setVisibleProducts(filteredProducts.slice(start, end));
+  }, [filteredProducts, itemsPP, page]);
+
+  return visibleProducts;
+}
