@@ -110,7 +110,7 @@ export function effectivePromotion(promotion, ends) {
 
 export function groupOrderData(orderData) {
   const updatedOrders = [];
-  console.log(orderData);
+
   const orders = orderData.orders;
   orders.forEach((order) => {
     const { products } = order;
@@ -144,6 +144,16 @@ export function groupOrderData(orderData) {
       products: orderSummary,
     });
   });
-  console.log(updatedOrders);
+
   return updatedOrders;
+}
+
+// Takes an array and items per page
+// Returns the number of pages needed for pagination
+export function numberOfPages(array, itemsPP) {
+  if (array.length % itemsPP === 0) {
+    return array.length / itemsPP;
+  } else {
+    return Math.floor(array.length / itemsPP) + 1;
+  }
 }

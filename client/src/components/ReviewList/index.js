@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ReactStars from "react-stars";
 import { useReviewList } from "../../hooks/reviewHooks";
-import { capitalizeFirstLetter } from "../../utils/helpers";
+import { capitalizeFirstLetter, numberOfPages } from "../../utils/helpers";
 
 function ReviewList({ currentProduct }) {
   // How many reviews per "page"
@@ -10,19 +10,10 @@ function ReviewList({ currentProduct }) {
   const [sort, setSort] = useState("newest");
   // The page currently shown
   const [page, setPage] = useState(1);
-  // Custom hook that handles sorting
+  // Custom hook that handles sorting (returns reviews)
   const visibleReviews = useReviewList({ page, sort, currentProduct, itemsPP });
 
-  // Returns the number of pages needed to get through the reviews
-  function numberOfPages() {
-    if (currentProduct.reviews.length % itemsPP === 0) {
-      return currentProduct.reviews.length / itemsPP;
-    } else {
-      return Math.floor(currentProduct.reviews.length / itemsPP) + 1;
-    }
-  }
-
-  const pages = numberOfPages();
+  const pages = numberOfPages(currentProduct.reviews, itemsPP);
 
   // Handles changing the page backward or forward
   function changePage(direction) {
@@ -32,8 +23,6 @@ function ReviewList({ currentProduct }) {
       setPage(page - 1);
     }
   }
-
-  // console.log(visibleReviews);
 
   function selectSortType(e) {
     setSort(e.target.attributes.value.value);

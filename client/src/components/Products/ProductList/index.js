@@ -1,14 +1,9 @@
 import { useState, useEffect } from "react";
 import ProductCard from "../ProductCard";
-import { useSelector } from "react-redux";
-import { useProducts } from "../../../hooks/productHooks";
-import { effectivePromotion } from "../../../utils/helpers";
+import { useProducts, useFilterProducts } from "../../../hooks/productHooks";
+import { numberOfPages } from "../../../utils/helpers";
 
 function ProductList() {
-  // Getting current filter options from Redux store
-  const { currentCategory } = useSelector((state) => state.categories);
-  const { currentSaleOption, currentPriceOption, currentRatingOption } =
-    useSelector((state) => state.filters);
   // Custom hook that handles retrieving product data
   const productData = useProducts();
   // The set items per page
@@ -21,6 +16,28 @@ function ProductList() {
     ...productData.slice(0, itemsPP),
   ]);
 
+  const products = useFilterProducts(productData);
+
+  // Handles determining the number of pages
+  useEffect(() => {
+    setPages(numberOfPages(filteredProducts, itemsPP));
+  }, [filteredProducts.length, filteredProducts]);
+
+  // Handles filtering products and resetting the page count when a new filter is added
+  useEffect(() => {
+    if (products) {
+      setPage(1);
+      setFilteredProducts(products);
+    }
+  }, [productData, products]);
+
+  // Handles determining the visible products from the filtered products array
+  useEffect(() => {
+    const start = (page - 1) * itemsPP;
+    const end = page * itemsPP;
+    setVisibleProducts(filteredProducts.slice(start, end));
+  }, [filteredProducts, page]);
+
   // Handles changing the page
   function changePage(direction) {
     if (page < pages && direction === "next") {
@@ -29,83 +46,6 @@ function ProductList() {
       setPage(page - 1);
     }
   }
-
-  // Handles determining the number of pages
-  useEffect(() => {
-    function numberOfPages() {
-      if (filteredProducts.length % itemsPP === 0) {
-        setPages(filteredProducts.length / itemsPP);
-      } else {
-        setPages(Math.floor(filteredProducts.length / itemsPP) + 1);
-      }
-    }
-
-    numberOfPages(filteredProducts);
-  }, [filteredProducts.length, filteredProducts]);
-
-  // Handles filtering products and resetting the page count when a new filter is added
-  useEffect(() => {
-    let products = [...productData];
-    if (currentCategory) {
-      products = products.filter((product) => {
-        const { name } = product?.category || "Uncategorized";
-        return name === currentCategory;
-      });
-    }
-
-    if (currentSaleOption.option === "yes") {
-      products = products.filter((product) => {
-        if (product.promotion) {
-          return (
-            effectivePromotion(product.promotion, product.promotion.ends) ===
-            true
-          );
-        } else {
-          return false;
-        }
-      });
-    }
-
-    if (currentPriceOption) {
-      if (currentPriceOption === 25) {
-        products = products.filter(
-          (product) => product.promotionPrice < currentPriceOption
-        );
-      } else if (currentPriceOption % 2) {
-        products = products.filter(
-          (product) => product.promotionPrice > currentPriceOption - 1
-        );
-      } else {
-        products = products.filter(
-          (product) =>
-            product.promotionPrice > currentPriceOption / 2 &&
-            product.promotionPrice < currentPriceOption
-        );
-      }
-    }
-
-    if (currentRatingOption) {
-      products = products.filter(
-        (product) => product.rating > currentRatingOption
-      );
-    }
-    setPage(1);
-    setFilteredProducts(products);
-  }, [
-    productData,
-    currentCategory,
-    currentSaleOption.option,
-    currentPriceOption,
-    currentRatingOption,
-  ]);
-
-  // Handles determining the visible products from the filtered products array
-  useEffect(() => {
-    const start = (page - 1) * itemsPP;
-    const end = page * itemsPP;
-
-    setVisibleProducts(filteredProducts.slice(start, end));
-  }, [filteredProducts, page]);
 
   return (
     <div className="d-flex flex-column justify-content-between home-products">
