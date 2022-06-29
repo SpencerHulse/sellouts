@@ -1,7 +1,9 @@
 import { usePromotions } from "../../../hooks/promotionHooks";
+import { useWindowWidth } from "../../../hooks/navHooks";
 
 function AllPromotions() {
   const promotions = usePromotions();
+  const width = useWindowWidth();
 
   return (
     <div className="dialog">
@@ -9,9 +11,9 @@ function AllPromotions() {
       <table className="table table-hover">
         <thead>
           <tr>
-            <th scope="col">Promotion name</th>
-            <th scope="col">Percentage off</th>
-            <th scope="col">Promotion ends</th>
+            <th scope="col">Name</th>
+            <th scope="col">Discount</th>
+            <th scope="col">Ends</th>
           </tr>
         </thead>
         <tbody>
@@ -20,7 +22,13 @@ function AllPromotions() {
               <tr key={promotion._id}>
                 <td>{promotion.name}</td>
                 <td>{promotion.percentage}%</td>
-                <td>{promotion.ends}</td>
+                <td>
+                  {width > 500
+                    ? promotion.ends
+                    : `${promotion.ends.split("/")[0]}/${
+                        promotion.ends.split("/")[1]
+                      }`}
+                </td>
               </tr>
             ))}
         </tbody>

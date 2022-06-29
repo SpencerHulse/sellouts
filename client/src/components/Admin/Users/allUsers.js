@@ -1,9 +1,9 @@
 import { useUsers } from "../../../hooks/userHooks";
+import { useWindowWidth } from "../../../hooks/navHooks";
 
 function AllUsers() {
   const users = useUsers();
-
-  console.log(users);
+  const width = useWindowWidth();
 
   return (
     <div className="dialog">
@@ -11,18 +11,30 @@ function AllUsers() {
       <table className="table table-hover">
         <thead>
           <tr>
-            <th scope="col">Username</th>
-            <th scope="col">Email</th>
-            <th scope="col">User type</th>
+            {width > 768 ? (
+              <>
+                <th scope="col">Username</th>
+                <th scope="col">Email</th>
+                <th scope="col">Type</th>
+              </>
+            ) : (
+              <th scope="col">Email</th>
+            )}
           </tr>
         </thead>
         <tbody>
           {users &&
             users.map((user) => (
               <tr key={user._id}>
-                <td>{user.username}</td>
-                <td>{user.email}</td>
-                <td>{user.admin ? "Admin" : "User"}</td>
+                {width > 768 ? (
+                  <>
+                    <td>{user.username}</td>
+                    <td>{user.email}</td>
+                    <td>{user.admin ? "Admin" : "User"}</td>
+                  </>
+                ) : (
+                  <td>{user.email}</td>
+                )}
               </tr>
             ))}
         </tbody>

@@ -334,7 +334,6 @@ a:hover {
   margin-top: 10px;
   transition: all 0.15s ease-in-out;
 }
-
 .admin-submenu-button:not(:first-child, :last-child) {
   border-left: 0;
   border-right: 0;
@@ -930,6 +929,11 @@ a:hover {
   .admin-body {
     width: 100vw;
     padding: 0;
+    overflow: hidden;
+  }
+
+  .admin-body-content {
+    padding: 10px;
   }
 
   .success-container {
@@ -945,5 +949,9 @@ a:hover {
 
   .category-graph {
     min-width: 300px;
+  }
+
+  .admin-submenu-button {
+    padding: 5px 15px 5px 15px;
   }
 }
