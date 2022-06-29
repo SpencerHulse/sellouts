@@ -21,35 +21,35 @@ db.once("open", async () => {
 
   await User.create({
     username: "Able",
-    email: "a@example.com",
+    email: "ablenotcain@example.com",
     password: "password",
     admin: false,
   });
 
   await User.create({
     username: "Barney",
-    email: "b@example.com",
+    email: "bigpurple@example.com",
     password: "password",
     admin: false,
   });
 
   await User.create({
     username: "Carol",
-    email: "c@example.com",
+    email: "carolallyear@example.com",
     password: "password",
     admin: false,
   });
 
   await User.create({
     username: "Daniel",
-    email: "d@example.com",
+    email: "dantheman@example.com",
     password: "password",
     admin: false,
   });
 
   await User.create({
     username: "Ellen",
-    email: "e@example.com",
+    email: "ethegen@example.com",
     password: "password",
     admin: false,
   });
