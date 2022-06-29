@@ -56,63 +56,63 @@ db.once("open", async () => {
 
   await User.create({
     username: "Francis",
-    email: "f@example.com",
+    email: "frankcastle@example.com",
     password: "password",
     admin: false,
   });
 
   await User.create({
     username: "Garrus",
-    email: "g@example.com",
+    email: "garrushasreach@example.com",
     password: "password",
     admin: false,
   });
 
   await User.create({
     username: "Helen",
-    email: "h@example.com",
+    email: "hoftroy@example.com",
     password: "password",
     admin: false,
   });
 
   await User.create({
     username: "Indigo",
-    email: "i@example.com",
+    email: "isacolor@example.com",
     password: "password",
     admin: false,
   });
 
   await User.create({
     username: "Jack",
-    email: "j@example.com",
+    email: "jacksparrow@example.com",
     password: "password",
     admin: false,
   });
 
   await User.create({
     username: "Kelly",
-    email: "k@example.com",
+    email: "kclarkson@example.com",
     password: "password",
     admin: false,
   });
 
   await User.create({
     username: "Larson",
-    email: "l@example.com",
+    email: "laquine@example.com",
     password: "password",
     admin: false,
   });
 
   await User.create({
     username: "Miranda",
-    email: "m@example.com",
+    email: "mirandalawson@example.com",
     password: "password",
     admin: false,
   });
 
   await User.create({
     username: "Nora",
-    email: "n@example.com",
+    email: "noraisnora@example.com",
     password: "password",
     admin: false,
   });
@@ -143,7 +143,7 @@ db.once("open", async () => {
     {
       name: "Smaller Blowout",
       percentage: 30,
-      ends: DateTime.now().plus({ days: 30 }).toFormat("M/dd/yyyy"),
+      ends: DateTime.now().plus({ days: 22 }).toFormat("M/dd/yyyy"),
     },
   ]);
 
@@ -157,7 +157,7 @@ db.once("open", async () => {
       review:
         "My name is Commander Shepard, and this is my favorite shop on the citadel.",
       createdAt: DateTime.now()
-        .plus({ days: 1 })
+        .minus({ days: 1 })
         .toFormat("M/dd/yyyy, hh/mm a"),
       rating: 5,
       upvotes: 27,
@@ -169,7 +169,7 @@ db.once("open", async () => {
       review:
         "Absolutely a great deal, and you will not regret grabbing one for yourself.",
       createdAt: DateTime.now()
-        .plus({ days: 2 })
+        .minus({ days: 2 })
         .toFormat("M/dd/yyyy, hh/mm a"),
       rating: 4,
       upvotes: 4,
@@ -227,7 +227,7 @@ db.once("open", async () => {
       review:
         "Not sure why they sell products that can't remain perfectly fine after an Amazon Jungle trip, but it's disappointing.",
       createdAt: DateTime.now()
-        .plus({ days: 10 })
+        .minus({ days: 10 })
         .toFormat("M/dd/yyyy, hh/mm a"),
       rating: 2,
       upvotes: 3,
@@ -289,11 +289,16 @@ db.once("open", async () => {
 
   const products = await Product.insertMany([
     {
-      name: "Hat One",
-      description: "A red hat.",
-      details: ["It's red", "It's big", "It's cheap"],
-      price: 9.99,
-      inventory: 100,
+      name: "Summer Hat",
+      description:
+        "This hat is the perfect choice for Summer, allowing you to take shade from the sun while also looking great in the process. It is made out of sturdy materials and is great for working outdoors.",
+      details: [
+        "The material is breathable and helps prevent excessive sweating.",
+        "The brim is the perfect size to offer shade while maximizing visibility.",
+        "It is a one-size-fits-most options.",
+      ],
+      price: 19.99,
+      inventory: 72,
       images: ["https://nsense-images.s3.amazonaws.com/hat1.png"],
       mainImage: "https://nsense-images.s3.amazonaws.com/hat1.png",
       category: categories[0],
@@ -314,95 +319,122 @@ db.once("open", async () => {
       ],
     },
     {
-      name: "Hat Two",
-      description: "A blue hat.",
-      details: ["It's blue", "It's small", "It's quality"],
-      price: 9.99,
-      inventory: 100,
+      name: "Casual Round Hat",
+      description:
+        "This product is the perfect accessory for someone going out for a casual stroll or day at the beach. It provides increased breathability for comfort and is made out of soft material that you can wear all day without discomfort.",
+      details: [
+        "The design goes with many different outfits and works on any occasion.",
+        "The material keeps you cool and prevents sweating.",
+      ],
+      price: 14.99,
+      inventory: 87,
       images: ["https://nsense-images.s3.amazonaws.com/hat2.png"],
       mainImage: "https://nsense-images.s3.amazonaws.com/hat2.png",
       category: categories[0],
+      promotion: promotions[0],
     },
     {
-      name: "Shirt One",
-      description: "A white shirt.",
-      details: ["It's white", "It comes in many sizes", "100% cotton"],
-      price: 19.99,
+      name: "Casual T-Shirt",
+      description:
+        "A black t-shirt that is made from 100% cotton. The material is fantastic, and it allows you full range of motion while wearing it.",
+      details: ["Only available in large size.", "Made from 100% cotton."],
+      price: 29.99,
       inventory: 100,
       images: ["https://nsense-images.s3.amazonaws.com/shirt1.png"],
       mainImage: "https://nsense-images.s3.amazonaws.com/shirt1.png",
       category: categories[1],
     },
     {
-      name: "Shirt Two",
-      description: "A plaid shirt.",
-      details: ["Cool design", "Soft fabric", "Made in China"],
-      price: 9.99,
+      name: "Moisture-Wicking Shirt",
+      description:
+        "The shirt is made with advanced material that keeps you cool and dry through the hottest days or most intense workouts. The material is a patented blend of materials that is sure to last a long time.",
+      details: [
+        "It only fits highly-athletic figures.",
+        "The material is tough but comfortable.",
+        "Made in China.",
+      ],
+      price: 49.99,
       inventory: 100,
       images: ["https://nsense-images.s3.amazonaws.com/shirt2.png"],
       mainImage: "https://nsense-images.s3.amazonaws.com/shirt2.png",
       category: categories[1],
     },
     {
-      name: "Pants One",
-      description: "Jeans.",
-      details: ["Tough", "Comfy", "Pockets"],
-      price: 59.99,
+      name: "Dark Jeans",
+      description:
+        "Jeans. The kind that will last you a lifetime. You throw them into a hard day's work, and you come out the other side a different man. No rips here. Just jeans.",
+      details: [
+        "Tough.",
+        "Ready to work.",
+        "Pockets.",
+        "Belt loops.",
+        "America.",
+      ],
+      price: 79.99,
       inventory: 100,
       images: ["https://nsense-images.s3.amazonaws.com/pants1.png"],
       mainImage: "https://nsense-images.s3.amazonaws.com/pants1.png",
       category: categories[2],
     },
     {
-      name: "Pants Two",
-      description: "Dress pants.",
-      details: ["Dressy", "Comfy", "Rip-resistant"],
-      price: 99.99,
-      inventory: 100,
+      name: "Casual Pants",
+      description:
+        "These pants are made to go with almost any outfit. The color is fantastic, and the fit is optimal for those with a 34 waist. It only comes in one size, but those who can wear them will love them.",
+      details: ["Absolutely great fit.", "Comfy.", "Rip-resistant."],
+      price: 59.99,
+      inventory: 112,
       images: ["https://nsense-images.s3.amazonaws.com/pants2.png"],
       mainImage: "https://nsense-images.s3.amazonaws.com/pants2.png",
       category: categories[2],
     },
     {
-      name: "Socks One",
-      description: "Black socks.",
+      name: "Orange socks.",
+      description:
+        "Orange socks made from 100% cotton. They are great at keeping your feet comfortable and dry all day.",
       details: [
-        "They are black",
-        "They are soft",
-        "They go great in formal settings",
+        "They are orange.",
+        "They are soft.",
+        "They go great in formal settings.",
       ],
-      price: 9.99,
-      inventory: 100,
+      price: 13.99,
+      inventory: 99,
       images: ["https://nsense-images.s3.amazonaws.com/socks1.png"],
       mainImage: "https://nsense-images.s3.amazonaws.com/socks1.png",
       category: categories[3],
     },
     {
-      name: "Socks Two",
-      description: "Knee-high socks.",
-      details: ["Lots of material", "Great price", "Four pairs in each set"],
+      name: "Festive Socks",
+      description:
+        "These festive socks are a great way to show your individuality. They can even be work with formal attire, hiding beneath your pants and showing the world how big a rebel you are.",
+      details: ["Lots of color.", "Great price.", "Four pairs in each set."],
       price: 9.99,
-      inventory: 100,
+      inventory: 14,
       images: ["https://nsense-images.s3.amazonaws.com/socks2.png"],
       mainImage: "https://nsense-images.s3.amazonaws.com/socks2.png",
       category: categories[3],
     },
     {
-      name: "Shoes One",
-      description: "Some fly shoes.",
-      details: ["Fly", "Arch support", "Steel toes"],
+      name: "Kick Into These Kicks",
+      description:
+        "Some fly shoes for a fly individual. Try them on today and wonder why you ever bought a reasonably-priced pair of shoes when these were right here.",
+      details: ["Fly.", "Arch support.", "Steel toes."],
       price: 269.99,
-      inventory: 100,
+      inventory: 1000,
       images: ["https://nsense-images.s3.amazonaws.com/shoes1.png"],
       mainImage: "https://nsense-images.s3.amazonaws.com/shoes1.png",
       category: categories[4],
     },
     {
-      name: "Shoes Two",
-      description: "White shoes.",
-      details: ["All white", "Many sizes", "Made in China"],
+      name: "Blue Shoes",
+      description:
+        "A pair of shoes made to give you the impression of stepping on clouds with every movement of your foot.",
+      details: [
+        "All white... soles.",
+        "Many sizes, but only one available here.",
+        "Made in China, so quality is assured.",
+      ],
       price: 129.99,
-      inventory: 100,
+      inventory: 34,
       images: ["https://nsense-images.s3.amazonaws.com/shoes2.png"],
       mainImage: "https://nsense-images.s3.amazonaws.com/shoes2.png",
       category: categories[4],
@@ -433,7 +465,7 @@ db.once("open", async () => {
         "Shirt Two-*-1998-*-2",
         "Pants One-*-11998-*-2",
       ],
-      customer: users[0]._id,
+      customer: users[1]._id,
       stripeId: "91219jasnadks",
       paymentStatus: "paid",
       deliveryAddress: "290 This Street Chattanooga, TN",
@@ -464,7 +496,7 @@ db.once("open", async () => {
         "Shirt Two-*-1998-*-2",
         "Pants One-*-11998-*-2",
       ],
-      customer: users[0]._id,
+      customer: users[2]._id,
       stripeId: "91219jasnadks",
       paymentStatus: "paid",
       deliveryAddress: "290 This Street Chattanooga, TN",
@@ -495,7 +527,7 @@ db.once("open", async () => {
         "Shirt Two-*-1998-*-2",
         "Pants One-*-11998-*-2",
       ],
-      customer: users[0]._id,
+      customer: users[2]._id,
       stripeId: "91219jasnadks",
       paymentStatus: "paid",
       deliveryAddress: "290 This Street Chattanooga, TN",
@@ -526,7 +558,7 @@ db.once("open", async () => {
         "Shirt Two-*-1998-*-2",
         "Pants One-*-11998-*-2",
       ],
-      customer: users[0]._id,
+      customer: users[5]._id,
       stripeId: "91219jasnadks",
       paymentStatus: "paid",
       deliveryAddress: "290 This Street Chattanooga, TN",
@@ -557,7 +589,7 @@ db.once("open", async () => {
         "Shirt Two-*-1998-*-2",
         "Pants One-*-11998-*-2",
       ],
-      customer: users[0]._id,
+      customer: users[6]._id,
       stripeId: "91219jasnadks",
       paymentStatus: "paid",
       deliveryAddress: "290 This Street Chattanooga, TN",

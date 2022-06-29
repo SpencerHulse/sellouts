@@ -52,10 +52,7 @@ function ProductList() {
   return (
     <div className="home-products">
       <div className="container">
-        <div
-          className="mt-4"
-          id="top-of-products"
-        >
+        <div className="mt-4" id="top-of-products">
           <div className="row row-cols-xl-5 row-cols-md-2 row-cols-sm-1 g-3">
             {visibleProducts.length ? (
               visibleProducts.map((product) => {
@@ -82,7 +79,7 @@ function ProductList() {
         <p>
           Page {page} of {pages || 1}
         </p>
-        {page === pages ? (
+        {page === pages || !pages ? (
           <button className="disabled-btn disabled-next" disabled>
             Next
           </button>

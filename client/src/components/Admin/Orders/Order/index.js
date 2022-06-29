@@ -2,7 +2,6 @@ import { DateTime } from "luxon";
 import { useMutation } from "@apollo/client";
 import { UPDATE_ORDER } from "../../../../graphql/mutations";
 import { capitalizeFirstLetter } from "../../../../utils/helpers";
-import { Link } from "react-router-dom";
 
 function Order({ order, options }) {
   const [updateOrder] = useMutation(UPDATE_ORDER);
