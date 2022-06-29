@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ReactStars from "react-stars";
+import { useReviewList } from "../../hooks/reviewHooks";
 import { capitalizeFirstLetter } from "../../utils/helpers";
 
 function ReviewList({ currentProduct }) {
   // How many reviews per "page"
   const itemsPP = 5;
-  // The items of the array that are visible, loading in from the start
-  const [visibleReviews, setVisibleReviews] = useState([
-    ...currentProduct.reviews.slice(0, itemsPP),
-  ]);
   // The type of sort being used
   const [sort, setSort] = useState("newest");
   // The page currently shown
   const [page, setPage] = useState(1);
+  // Custom hook that handles sorting
+  const visibleReviews = useReviewList({ page, sort, currentProduct, itemsPP });
 
   // Returns the number of pages needed to get through the reviews
   function numberOfPages() {
@@ -34,39 +33,7 @@ function ReviewList({ currentProduct }) {
     }
   }
 
-  // Handles sorting and returning relevant page of reviews
-  useEffect(() => {
-    let reviews = [...currentProduct.reviews];
-    const start = (page - 1) * itemsPP;
-    const end = page * itemsPP;
-    if (sort === "newest") {
-      reviews.sort(function (a, b) {
-        if (a.createdAt > b.createdAt) return -1;
-        if (a.createdAt < b.createdAt) return 1;
-        return 0;
-      });
-    } else if (sort === "oldest") {
-      reviews.sort(function (a, b) {
-        if (a.createdAt < b.createdAt) return -1;
-        if (a.createdAt > b.createdAt) return 1;
-        return 0;
-      });
-    } else if (sort === "high") {
-      reviews.sort(function (a, b) {
-        if (a.rating > b.rating) return -1;
-        if (a.rating < b.rating) return 1;
-        return 0;
-      });
-    } else if (sort === "low") {
-      reviews.sort(function (a, b) {
-        if (a.rating < b.rating) return -1;
-        if (a.rating > b.rating) return 1;
-        return 0;
-      });
-    }
-    // Sets with the new sorted and sliced array of reviews
-    setVisibleReviews(reviews.slice(start, end));
-  }, [currentProduct.reviews, page, sort]);
+  // console.log(visibleReviews);
 
   function selectSortType(e) {
     setSort(e.target.attributes.value.value);
@@ -97,36 +64,37 @@ function ReviewList({ currentProduct }) {
           </div>
         </div>
       </div>
-      {visibleReviews.map((review) => {
-        const {
-          _id,
-          createdAt,
-          title,
-          user,
-          review: userReview,
-          rating,
-        } = review;
-        return (
-          <div key={_id} className="mb-4 review">
-            <h3 className="fw-light review-title">{title}</h3>
-            <div className="d-flex justify-content-center">
-              <ReactStars
-                count={5}
-                value={rating}
-                size={24}
-                edit={false}
-                color2={"#7f60db"}
-                color1={"rgba(0, 0, 0, 0.19)"}
-              />
+      {visibleReviews &&
+        visibleReviews.map((review) => {
+          const {
+            _id,
+            createdAt,
+            title,
+            user,
+            review: userReview,
+            rating,
+          } = review;
+          return (
+            <div key={_id} className="mb-4 review">
+              <h3 className="fw-light review-title">{title}</h3>
+              <div className="d-flex justify-content-center">
+                <ReactStars
+                  count={5}
+                  value={rating}
+                  size={24}
+                  edit={false}
+                  color2={"#7f60db"}
+                  color1={"rgba(0, 0, 0, 0.19)"}
+                />
+              </div>
+              <p>{userReview}</p>
+              <p>
+                —written by {user?.username || "a retired user"} on{" "}
+                {createdAt.split(", ")[0]}
+              </p>
             </div>
-            <p>{userReview}</p>
-            <p>
-              —written by {user?.username || "a retired user"} on{" "}
-              {createdAt.split(", ")[0]}
-            </p>
-          </div>
-        );
-      })}
+          );
+        })}
       <div className="d-flex justify-content-center align-items-baseline">
         {page === 1 ? (
           <button className="disabled-btn disabled-prev" disabled>
