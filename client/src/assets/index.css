@@ -873,7 +873,8 @@ a:hover {
 
 .admin-mobile-menu ul li a {
   display: inline-block;
-  padding: 10px 30px;
+  padding: 10px;
+  transition: all 0.15s ease-in-out;
 }
 
 .admin-mobile-list {
@@ -888,6 +889,8 @@ a:hover {
 
 .admin-mobile-list li a.active {
   background-color: #f7f7f7;
+  padding: 10px 30px;
+  transition: all 0.15s ease-in-out;
 }
 
 .admin-icon-mobile {
