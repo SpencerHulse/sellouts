@@ -16,7 +16,7 @@ function ReviewForm({ currentProduct }) {
     title: "",
     review: "",
     rating: 0,
-    createdAt: DateTime.now().toLocaleString(DateTime.DATETIME_SHORT),
+    createdAt: DateTime.now().toFormat("M/dd/yyyy, hh/mm a"),
   });
 
   const windowWidth = useWindowWidth();
@@ -35,8 +35,6 @@ function ReviewForm({ currentProduct }) {
 
   function handleFormUpdate(event) {
     const { name, value } = event.target;
-    console.log(value.length);
-    console.log(name);
     setCharacterCount({ ...characterCount, [name]: value.length });
     setFormState({ ...formState, [name]: value });
   }

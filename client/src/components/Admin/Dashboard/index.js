@@ -30,9 +30,7 @@ const Dashboard = () => {
     const hash = {};
 
     for (let i = 6; i >= 0; i--) {
-      const fullDate = DateTime.now()
-        .minus({ day: i })
-        .toLocaleString(DateTime.DATE_SHORT);
+      const fullDate = DateTime.now().minus({ day: i }).toFormat("M/d/yyyy");
       const date = fullDate.split("/")[0] + "/" + fullDate.split("/")[1];
       hash[date] = 0;
     }
@@ -53,9 +51,8 @@ const Dashboard = () => {
     }
 
     function getWeekly(orders) {
-      const aWeekAgo = DateTime.now()
-        .minus({ day: 7 })
-        .toLocaleString(DateTime.DATE_SHORT);
+      const aWeekAgo = DateTime.now().minus({ day: 7 }).toFormat("M/d/yyyy");
+      console.log(aWeekAgo);
 
       return orders.orders.filter((order) => {
         const orderDate = order.purchaseDate.split(", ")[0];

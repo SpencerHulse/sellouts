@@ -129,8 +129,7 @@ const AddProduct = () => {
 
   function activePromotions() {
     return promotions.filter(
-      (promotion) =>
-        promotion.ends > DateTime.now().toLocaleString(DateTime.DATE_SHORT)
+      (promotion) => promotion.ends > DateTime.now().toFormat("M/dd/yyyy")
     );
   }
 

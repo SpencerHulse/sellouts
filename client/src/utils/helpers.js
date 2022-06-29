@@ -104,6 +104,6 @@ export function notAdminRedirect() {
 }
 
 export function effectivePromotion(promotion, ends) {
-  const date = DateTime.now().toLocaleString(DateTime.DATE_SHORT);
+  const date = DateTime.now().toFormat("M/dd/yyyy");
   return !promotion ? false : ends > date ? true : false;
 }

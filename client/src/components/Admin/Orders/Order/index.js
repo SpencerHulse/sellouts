@@ -20,11 +20,11 @@ function Order({ order, options }) {
     if (shippingType.toLowerCase() === "free shipping") {
       return DateTime.fromFormat(date, "M/dd/yyyy")
         .plus({ days: 6 + dateAdjustment })
-        .toLocaleString(DateTime.DATE_SHORT);
+        .toFormat("M/d/yyyy");
     } else {
       return DateTime.fromFormat(date, "M/dd/yyyy")
         .plus({ days: 1 + dateAdjustment })
-        .toLocaleString(DateTime.DATE_SHORT);
+        .toFormat("M/d/yyyy");
     }
   }
 

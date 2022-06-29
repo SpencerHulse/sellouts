@@ -138,16 +138,12 @@ db.once("open", async () => {
     {
       name: "Summer Blowout",
       percentage: 40,
-      ends: DateTime.now()
-        .plus({ days: 30 })
-        .toLocaleString(DateTime.DATE_SHORT),
+      ends: DateTime.now().plus({ days: 30 }).toFormat("M/dd/yyyy"),
     },
     {
       name: "Smaller Blowout",
       percentage: 30,
-      ends: DateTime.now()
-        .plus({ days: 30 })
-        .toLocaleString(DateTime.DATE_SHORT),
+      ends: DateTime.now().plus({ days: 30 }).toFormat("M/dd/yyyy"),
     },
   ]);
 
@@ -162,7 +158,7 @@ db.once("open", async () => {
         "My name is Commander Shepard, and this is my favorite shop on the citadel.",
       createdAt: DateTime.now()
         .plus({ days: 1 })
-        .toLocaleString(DateTime.DATETIME_SHORT),
+        .toFormat("M/dd/yyyy, hh/mm a"),
       rating: 5,
       upvotes: 27,
       downvotes: 2,
@@ -174,7 +170,7 @@ db.once("open", async () => {
         "Absolutely a great deal, and you will not regret grabbing one for yourself.",
       createdAt: DateTime.now()
         .plus({ days: 2 })
-        .toLocaleString(DateTime.DATETIME_SHORT),
+        .toFormat("M/dd/yyyy, hh/mm a"),
       rating: 4,
       upvotes: 4,
       downvotes: 1,
@@ -183,7 +179,7 @@ db.once("open", async () => {
     {
       title: "Ridiculous product",
       review: "This doesn't let me see smells. Waste of money.",
-      createdAt: DateTime.now().toLocaleString(DateTime.DATETIME_SHORT),
+      createdAt: DateTime.now().toFormat("M/dd/yyyy, hh/mm a"),
       rating: 1,
       upvotes: 3,
       downvotes: 120,
@@ -192,7 +188,7 @@ db.once("open", async () => {
     {
       title: "It's not bad",
       review: "Not the best, but it's not the worst, either.",
-      createdAt: DateTime.now().toLocaleString(DateTime.DATETIME_SHORT),
+      createdAt: DateTime.now().toFormat("M/dd/yyyy, hh/mm a"),
       rating: 4,
       upvotes: 3,
       downvotes: 120,
@@ -201,7 +197,7 @@ db.once("open", async () => {
     {
       title: "Looks great!",
       review: "Worth!",
-      createdAt: DateTime.now().toLocaleString(DateTime.DATETIME_SHORT),
+      createdAt: DateTime.now().toFormat("M/dd/yyyy, hh/mm a"),
       rating: 5,
       upvotes: 3,
       downvotes: 120,
@@ -211,7 +207,7 @@ db.once("open", async () => {
       title: "Not just a simple hat",
       review:
         "Few people know the history of this hat, which first made its appearance on French beaches in 1934. But since it's arrival, life as we know it has changed, with the sun no longer standing a change against its superior protection. It's stylish, too.",
-      createdAt: DateTime.now().toLocaleString(DateTime.DATETIME_SHORT),
+      createdAt: DateTime.now().toFormat("M/dd/yyyy, hh/mm a"),
       rating: 5,
       upvotes: 3,
       downvotes: 120,
@@ -220,7 +216,7 @@ db.once("open", async () => {
     {
       title: "Great deal",
       review: "I got mine on sale for two bucks.",
-      createdAt: DateTime.now().toLocaleString(DateTime.DATETIME_SHORT),
+      createdAt: DateTime.now().toFormat("M/dd/yyyy, hh/mm a"),
       rating: 4,
       upvotes: 3,
       downvotes: 120,
@@ -232,7 +228,7 @@ db.once("open", async () => {
         "Not sure why they sell products that can't remain perfectly fine after an Amazon Jungle trip, but it's disappointing.",
       createdAt: DateTime.now()
         .plus({ days: 10 })
-        .toLocaleString(DateTime.DATETIME_SHORT),
+        .toFormat("M/dd/yyyy, hh/mm a"),
       rating: 2,
       upvotes: 3,
       downvotes: 120,
@@ -241,7 +237,7 @@ db.once("open", async () => {
     {
       title: "Trash",
       review: "Already threw mine away.",
-      createdAt: DateTime.now().toLocaleString(DateTime.DATETIME_SHORT),
+      createdAt: DateTime.now().toFormat("M/dd/yyyy, hh/mm a"),
       rating: 1,
       upvotes: 3,
       downvotes: 120,
@@ -251,7 +247,7 @@ db.once("open", async () => {
       title: "Great product, odd fit.",
       review:
         "High quality hat, but it didn't fit my father's head. I'm the one wearing it now.",
-      createdAt: DateTime.now().toLocaleString(DateTime.DATETIME_SHORT),
+      createdAt: DateTime.now().toFormat("M/dd/yyyy, hh/mm a"),
       rating: 4,
       upvotes: 3,
       downvotes: 120,
@@ -260,7 +256,7 @@ db.once("open", async () => {
     {
       title: "Bald no more!",
       review: "Or so people may believe when I'm wearing this great hat.",
-      createdAt: DateTime.now().toLocaleString(DateTime.DATETIME_SHORT),
+      createdAt: DateTime.now().toFormat("M/dd/yyyy, hh/mm a"),
       rating: 4,
       upvotes: 3,
       downvotes: 120,
@@ -270,7 +266,7 @@ db.once("open", async () => {
       title: "FLAMMABLE!",
       review:
         "Caught fire while I was grilling! No warning and they won't offer me a refund. Garbage!",
-      createdAt: DateTime.now().toLocaleString(DateTime.DATETIME_SHORT),
+      createdAt: DateTime.now().toFormat("M/dd/yyyy, hh/mm a"),
       rating: 1,
       upvotes: 3,
       downvotes: 120,
@@ -279,7 +275,7 @@ db.once("open", async () => {
     {
       title: "Odd material",
       review: "It's a bit scratchy when worn for long periods.",
-      createdAt: DateTime.now().toLocaleString(DateTime.DATETIME_SHORT),
+      createdAt: DateTime.now().toFormat("M/dd/yyyy, hh/mm a"),
       rating: 3,
       upvotes: 3,
       downvotes: 120,
@@ -419,7 +415,7 @@ db.once("open", async () => {
 
   const orders = await Order.insertMany([
     {
-      purchaseDate: DateTime.now().toLocaleString(DateTime.DATETIME_SHORT),
+      purchaseDate: DateTime.now().toFormat("M/dd/yyyy, hh/mm a"),
       products: [
         products[0]._id,
         products[0]._id,
@@ -450,7 +446,7 @@ db.once("open", async () => {
     {
       purchaseDate: DateTime.now()
         .minus({ day: 6 })
-        .toLocaleString(DateTime.DATETIME_SHORT),
+        .toFormat("M/dd/yyyy, hh/mm a"),
       products: [
         products[0]._id,
         products[0]._id,
@@ -481,7 +477,7 @@ db.once("open", async () => {
     {
       purchaseDate: DateTime.now()
         .minus({ day: 8 })
-        .toLocaleString(DateTime.DATETIME_SHORT),
+        .toFormat("M/dd/yyyy, hh/mm a"),
       products: [
         products[0]._id,
         products[0]._id,
@@ -512,7 +508,7 @@ db.once("open", async () => {
     {
       purchaseDate: DateTime.now()
         .minus({ day: 4 })
-        .toLocaleString(DateTime.DATETIME_SHORT),
+        .toFormat("M/dd/yyyy, hh/mm a"),
       products: [
         products[0]._id,
         products[0]._id,
@@ -543,7 +539,7 @@ db.once("open", async () => {
     {
       purchaseDate: DateTime.now()
         .minus({ day: 9 })
-        .toLocaleString(DateTime.DATETIME_SHORT),
+        .toFormat("M/dd/yyyy, hh/mm a"),
       products: [
         products[0]._id,
         products[0]._id,
@@ -574,7 +570,7 @@ db.once("open", async () => {
     {
       purchaseDate: DateTime.now()
         .minus({ day: 7 })
-        .toLocaleString(DateTime.DATETIME_SHORT),
+        .toFormat("M/dd/yyyy, hh/mm a"),
       status: "delivered",
       products: [
         products[0]._id,
@@ -606,7 +602,7 @@ db.once("open", async () => {
     {
       purchaseDate: DateTime.now()
         .minus({ day: 6 })
-        .toLocaleString(DateTime.DATETIME_SHORT),
+        .toFormat("M/dd/yyyy, hh/mm a"),
       status: "shipped",
       products: [
         products[0]._id,

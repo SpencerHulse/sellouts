@@ -104,9 +104,7 @@ export function useSuccessfulPurchase(data) {
             variables: {
               input: {
                 products: products,
-                purchaseDate: DateTime.now().toLocaleString(
-                  DateTime.DATETIME_SHORT
-                ),
+                purchaseDate: DateTime.now().toFormat("M/dd/yyyy, hh/mm a"),
                 customer: Auth.getProfile().data._id,
                 stripeId: stripeId,
                 paymentStatus: payment_status,

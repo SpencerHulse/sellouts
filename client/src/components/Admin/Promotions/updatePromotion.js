@@ -22,9 +22,7 @@ function UpdatePromotion() {
     if (name === "ends") {
       setFormState({
         ...formState,
-        [name]: DateTime.now()
-          .plus({ days: value })
-          .toLocaleString(DateTime.DATE_SHORT),
+        [name]: DateTime.now().plus({ days: value }).toFormat("M/dd/yyyy"),
       });
     } else {
       setFormState({
