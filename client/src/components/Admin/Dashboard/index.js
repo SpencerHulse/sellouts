@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { DateTime } from "luxon";
+import * as Icon from "react-bootstrap-icons";
 import {
   VictoryBar,
   VictoryChart,
@@ -23,8 +24,8 @@ const Dashboard = () => {
 
   // console.log(orders);
   // console.log(pendingOrders);
-  console.log(weeklyOrders);
-  console.log(weeklyOrderData);
+  // console.log(weeklyOrders);
+  // console.log(weeklyOrderData);
 
   if (weeklyOrders) {
     const hash = {};
@@ -33,6 +34,11 @@ const Dashboard = () => {
       const fullDate = DateTime.now().minus({ day: i }).toFormat("M/d/yyyy");
       const date = fullDate.split("/")[0] + "/" + fullDate.split("/")[1];
       hash[date] = 0;
+    }
+
+    var weeklyTotal = 1;
+    for (let i = 0; i < weeklyOrders.length; i++) {
+      weeklyTotal = weeklyTotal + weeklyOrders[i].total;
     }
 
     weeklyOrders.forEach((order) => {
@@ -82,8 +88,8 @@ const Dashboard = () => {
       <div className="row">
         <div className="col h-100">
           <div className="dialog category-graph">
-            <div className="row">
-              <h2 className="fw-light">Statistics</h2>
+            <h2 className="fw-light mb-4">Statistics</h2>
+            <div className="row dialog-section">
               <div className="col-sm-12 col-xl-4">
                 <h3 className="fw-light">Products per category</h3>
                 <VictoryChart
@@ -173,6 +179,24 @@ const Dashboard = () => {
                 )}
               </div>
             </div>
+            <h2 className="fw-light">Weekly totals</h2>
+            <div className="dialog-section d-flex">
+              <div className="me-5 d-flex justify-content-between statistic-box align-items-center">
+                <Icon.Clipboard color="black" size={40} className="stat-icon" />
+                <div>
+                  <div className="fw-bold text-end">{weeklyOrders.length}</div>
+                  <div>Orders</div>
+                </div>
+              </div>
+
+              <div className="me-5 d-flex justify-content-between statistic-box align-items-center">
+                <Icon.CashStack color="black" size={40} className="stat-icon" />
+                <div>
+                  <div className="fw-bold text-end">${(weeklyTotal / 100).toFixed(2)}</div>
+                  <div>Income</div>
+                </div>
+              </div>
+            </div>
           </div>
 
         </div>
@@ -209,14 +233,6 @@ const Dashboard = () => {
                 </tbody>
               </table>
             </div>
-          </div>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col">
-          <div className="dialog weekly-sales">
-            <h2 className="fw-light">Sales this week</h2>
-
           </div>
         </div>
       </div>

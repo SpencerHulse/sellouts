@@ -353,11 +353,7 @@ a:hover {
 }
 
 /* Admin - Dashboard */
-.category-graph svg {
-  position: relative;
-  min-width: 300px;
-  min-height: 300px;
-}
+
 
 .pending-orders {
   min-width: 400px;
@@ -904,6 +900,12 @@ a:hover {
   position: absolute;
   top: 18px;
   right: 20px;
+}
+
+.statistic-box {
+  padding: 15px;
+  width: 250px;
+  background-color: #f1f1f1;
 }
 
 @media (min-width: 768px) {
