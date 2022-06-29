@@ -18,7 +18,7 @@ On the backend, Mongoose (MongoDB) and GraphQL take care of the heavy lifting. I
 
 **The site also features an admin side, where only admin accounts (which must be created manually) have access. If you are on the Heroku site, the email and password to access that account are admin@sellouts.com and admin.**
 
-![alt text](./assets/nsense.png)
+![alt text](./assets/Sellouts.png)
 
 ## Table of Contents
 
