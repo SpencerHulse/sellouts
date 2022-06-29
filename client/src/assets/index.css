@@ -334,6 +334,7 @@ a:hover {
   margin-top: 10px;
   transition: all 0.15s ease-in-out;
 }
+
 .admin-submenu-button:not(:first-child, :last-child) {
   border-left: 0;
   border-right: 0;
@@ -862,7 +863,17 @@ a:hover {
 }
 
 .admin-mobile-menu {
-  background-color: #f7f7f7;
+  background-color: #ffffff;
+}
+
+.admin-mobile-menu ul {
+  margin: 0 0 10px 0;
+  padding: 0px 10px;
+}
+
+.admin-mobile-menu ul li a {
+  display: inline-block;
+  padding: 10px 30px;
 }
 
 .admin-mobile-list {
@@ -872,11 +883,11 @@ a:hover {
 }
 
 .admin-mobile-list li {
-  padding: 8px;
+  height: 100%;
 }
 
-.admin-mobile-list li {
-  padding: 16px 0 0 8px;
+.admin-mobile-list li a.active {
+  background-color: #f7f7f7;
 }
 
 .admin-icon-mobile {
@@ -911,7 +922,7 @@ a:hover {
   width: 250px;
   min-width: 250px;
   background-color: #f1f1f1;
-} 
+}
 
 @media (min-width: 768px) {
   .hamburger-container {
@@ -940,7 +951,7 @@ a:hover {
   }
 
   .admin-body-content {
-    padding: 10px;
+    padding: 0 10px;
   }
 
   .success-container {
