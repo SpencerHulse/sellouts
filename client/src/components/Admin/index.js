@@ -1,5 +1,4 @@
 import { Outlet } from "react-router-dom";
-import * as Icon from "react-bootstrap-icons";
 import AdminNav from "./Nav/AdminNav";
 import MobileAdminNav from "./Nav/MobileAdminNav";
 import { notAdminRedirect } from "../../utils/helpers";
