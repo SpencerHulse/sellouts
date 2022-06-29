@@ -51,10 +51,10 @@ function UpdateOrders() {
             <option value="delivered">Delivered</option>
           </select>
         </div>
-        <div>
+        <div className="d-flex flex-wrap justify-content-around">
           {filteredOrders.length ? (
             filteredOrders.map((order) => {
-              return <Order order={order} options={options} />;
+              return <Order order={order} options={options} key={order._id} />;
             })
           ) : (
             <div>There are no orders available...</div>

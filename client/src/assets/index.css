@@ -380,11 +380,26 @@ a:hover {
   margin-right: 5px;
 }
 
-.admin-order-select {
+.admin-order-top {
+  text-align: right;
+}
+
+.admin-order-status {
+  width: 120px;
+  border-color: var(--brand-color);
 }
 
 .admin-order {
+  width: 100%;
+  min-width: 250px;
   max-width: 500px;
+  border-radius: 15px;
+}
+
+.admin-order-id {
+  border-radius: 15px 15px 0 0;
+  background-color: var(--brand-color);
+  color: white !important;
 }
 
 /* Pagination */
