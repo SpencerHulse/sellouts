@@ -107,3 +107,43 @@ export function effectivePromotion(promotion, ends) {
   const date = DateTime.now().toFormat("M/dd/yyyy");
   return !promotion ? false : ends > date ? true : false;
 }
+
+export function groupOrderData(orderData) {
+  const updatedOrders = [];
+  console.log(orderData);
+  const orders = orderData.orders;
+  orders.forEach((order) => {
+    const { products } = order;
+    const orderSummary = [];
+
+    products.forEach((product) => {
+      const { _id, name } = product;
+      let updated = false;
+
+      orderSummary.map((orderProduct) => {
+        if (orderProduct[0]._id === _id) {
+          orderProduct[0].quantityPurchased += 1;
+          updated = true;
+        }
+        return orderProduct;
+      });
+
+      if (!updated) {
+        const productSummary = [
+          {
+            _id,
+            name,
+            quantityPurchased: 1,
+          },
+        ];
+        orderSummary.push(productSummary);
+      }
+    });
+    updatedOrders.push({
+      orderData: order,
+      products: orderSummary,
+    });
+  });
+  console.log(updatedOrders);
+  return updatedOrders;
+}
