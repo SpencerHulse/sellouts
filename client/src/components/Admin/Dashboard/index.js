@@ -11,14 +11,12 @@ import {
 import { useCategories } from "../../../hooks/categoryHooks";
 import { useProducts } from "../../../hooks/productHooks";
 import { useGetOrders } from "../../../hooks/orderHooks";
-import { useWindowWidth } from "../../../hooks/navHooks";
 import { capitalizeFirstLetter } from "../../../utils/helpers";
 
 const Dashboard = () => {
   const categories = useCategories();
   const products = useProducts();
   const orders = useGetOrders();
-  const width = useWindowWidth();
 
   const [pendingOrders, setPendingOrders] = useState("");
   const [weeklyOrders, setWeeklyOrders] = useState("");
@@ -55,7 +53,6 @@ const Dashboard = () => {
 
     function getWeekly(orders) {
       const aWeekAgo = DateTime.now().minus({ day: 7 }).toFormat("M/d/yyyy");
-      console.log(aWeekAgo);
 
       return orders.orders.filter((order) => {
         const orderDate = order.purchaseDate.split(", ")[0];
@@ -72,13 +69,24 @@ const Dashboard = () => {
   // Get an array of category names and how many products they have
   const chartData = categories.map((category) => {
     const productData = products.filter(
-      (product) => product.category._id === category._id
+      (product) => product.category?._id === category._id
     );
     return {
       categoryName: capitalizeFirstLetter(category.name),
       productCount: productData.length,
     };
   });
+
+  const uncategorizedProducts = products.filter(
+    (product) => product?.category === null
+  );
+
+  if (uncategorizedProducts) {
+    chartData.push({
+      categoryName: "Other",
+      productCount: uncategorizedProducts.length,
+    });
+  }
 
   return (
     <div className="admin-body-content">
