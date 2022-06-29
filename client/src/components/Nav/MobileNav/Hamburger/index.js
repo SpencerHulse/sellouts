@@ -20,13 +20,13 @@ function Hamburger() {
         <ul className="hamburger-list">
           {Auth.getProfile().data.admin && (
             <li onClick={toggleHamburger}>
-              <Link to="/" className="hamburger-item">
+              <Link to="/admin/dashboard" className="hamburger-item">
                 Admin
               </Link>
             </li>
           )}
           <li onClick={toggleHamburger}>
-            <Link to="/" className="hamburger-item">
+            <Link to="/orders" className="hamburger-item">
               Orders
             </Link>
           </li>
