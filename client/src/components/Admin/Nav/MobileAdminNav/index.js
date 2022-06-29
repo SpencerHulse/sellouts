@@ -4,35 +4,51 @@ import * as Icon from "react-bootstrap-icons";
 function MobileAdminNav() {
   return (
     <div className="admin-mobile-menu">
-      <ul className="admin-mobile-list d-flex flex-wrap">
+      <ul className="admin-mobile-list d-flex flex-wrap justify-content-between">
         <li>
           <NavLink to="/admin/dashboard">
-            <Icon.Speedometer color="black" size={30} className="admin-icon" />
+            <Icon.Speedometer
+              color="black"
+              size={30}
+              className="admin-icon-mobile"
+            />
           </NavLink>
         </li>
         <li>
           <NavLink to="categories">
-            <Icon.Tag color="black" size={30} className="admin-icon" />
+            <Icon.Tag color="black" size={30} className="admin-icon-mobile" />
           </NavLink>
         </li>
         <li>
           <NavLink to="products">
-            <Icon.Archive color="black" size={30} className="admin-icon" />
+            <Icon.Archive
+              color="black"
+              size={30}
+              className="admin-icon-mobile"
+            />
           </NavLink>
         </li>
         <li>
           <NavLink to="promotions">
-            <Icon.Cash color="black" size={30} className="admin-icon" />
+            <Icon.Cash color="black" size={30} className="admin-icon-mobile" />
           </NavLink>
         </li>
         <li>
           <NavLink to="users">
-            <Icon.People color="black" size={30} className="admin-icon" />
+            <Icon.People
+              color="black"
+              size={30}
+              className="admin-icon-mobile"
+            />
           </NavLink>
         </li>
         <li>
           <NavLink to="/admin/orders/update-orders">
-            <Icon.Clipboard color="black" size={30} className="admin-icon" />
+            <Icon.Clipboard
+              color="black"
+              size={30}
+              className="admin-icon-mobile"
+            />
           </NavLink>
         </li>
       </ul>

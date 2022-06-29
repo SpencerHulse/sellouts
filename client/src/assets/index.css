@@ -868,12 +868,21 @@ a:hover {
 
 .admin-mobile-list {
   list-style: none;
-  padding: 0;
+  padding: 0 30px;
   margin: 0;
 }
 
 .admin-mobile-list li {
-  padding: 15px 0 0 0;
+  padding: 8px;
+}
+
+.admin-mobile-list li {
+  padding: 16px 0 0 8px;
+}
+
+.admin-icon-mobile {
+  width: 30px;
+  height: 30px;
 }
 
 .admin-icon {

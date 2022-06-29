@@ -13,8 +13,9 @@ function AdminDashboard() {
       {/* Stops any data from showing to non-admins */}
       {admin && (
         <div className="admin">
-          {width < 768 ? <MobileAdminNav /> : <AdminNav />}
+          {width > 768 && <AdminNav />}
           <div className="admin-body">
+            {width < 768 && <MobileAdminNav />}
             <Outlet />
           </div>
         </div>
