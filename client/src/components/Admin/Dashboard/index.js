@@ -11,12 +11,14 @@ import {
 import { useCategories } from "../../../hooks/categoryHooks";
 import { useProducts } from "../../../hooks/productHooks";
 import { useGetOrders } from "../../../hooks/orderHooks";
+import { useWindowWidth } from "../../../hooks/navHooks";
 import { capitalizeFirstLetter } from "../../../utils/helpers";
 
 const Dashboard = () => {
   const categories = useCategories();
   const products = useProducts();
   const orders = useGetOrders();
+  const width = useWindowWidth();
 
   const [pendingOrders, setPendingOrders] = useState("");
   const [weeklyOrders, setWeeklyOrders] = useState("");
@@ -183,7 +185,7 @@ const Dashboard = () => {
               </div>
             </div>
             <h2 className="fw-light">Weekly totals</h2>
-            <div className="dialog-section d-flex">
+            <div className="dialog-section d-flex flex-wrap">
               <div className="me-5 d-flex justify-content-between statistic-box align-items-center">
                 <Icon.Clipboard color="black" size={40} className="stat-icon" />
                 <div>
@@ -192,7 +194,7 @@ const Dashboard = () => {
                 </div>
               </div>
 
-              <div className="me-5 d-flex justify-content-between statistic-box align-items-center">
+              <div className="d-flex justify-content-between statistic-box align-items-center">
                 <Icon.CashStack color="black" size={40} className="stat-icon" />
                 <div>
                   <div className="fw-bold text-end">
