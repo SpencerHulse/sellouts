@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { ToastContainer, ToastHeader, Toast } from "react-bootstrap";
 import { useMutation, useLazyQuery } from "@apollo/client";
 import { UPDATE_PRODUCT } from "../../../graphql/mutations";
 import { QUERY_URL } from "../../../graphql/queries";
@@ -15,6 +16,7 @@ const UpdateProduct = () => {
   const products = useProducts();
   const promotions = usePromotions();
 
+  const [show, setShow] = useState(false);
   const [productData, setProductData] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState("");
   const [formState, setFormState] = useState({
@@ -175,8 +177,11 @@ const UpdateProduct = () => {
               },
             },
           });
+          setShow(true);
 
-          window.location.assign("/admin/products");
+          setTimeout(function () {
+            window.location.assign("/admin/products");
+          }, 1000);
         });
     } else {
       let promotionCheck;
@@ -196,13 +201,23 @@ const UpdateProduct = () => {
           },
         },
       });
+      setShow(true);
 
-      window.location.assign("/admin/products");
+      setTimeout(function () {
+        window.location.assign("/admin/products");
+      }, 1000);
     }
   }
 
   return (
     <>
+      <ToastContainer style={{ position: "fixed", top: 0, right: 0 }}>
+        <Toast onClose={() => setShow(false)} show={show} delay={2000} autohide>
+          <ToastHeader className="justify-content-between me-2">
+            <Toast.Body>Product successfully updated!</Toast.Body>
+          </ToastHeader>
+        </Toast>
+      </ToastContainer>
       <div>
         <div className="dialog">
           <form action="submit" onSubmit={handleSubmit}>
