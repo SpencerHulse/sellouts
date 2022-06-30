@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { ToastContainer, ToastHeader, Toast } from "react-bootstrap";
 import { useMutation, useQuery } from "@apollo/client";
 import { DELETE_USER } from "../../../graphql/mutations";
 import { QUERY_USERS } from "../../../graphql/queries";
 
 function DeleteUser() {
+  const [show, setShow] = useState(false);
   const [selectedUser, setSelectedUser] = useState("");
   const [deleteUser] = useMutation(DELETE_USER);
   const { loading, data: users } = useQuery(QUERY_USERS);
@@ -16,10 +18,12 @@ function DeleteUser() {
   function handleSubmit(event) {
     event.preventDefault();
     if (!selectedUser) return;
-
+    setShow(true);
     deleteUser({ variables: { id: selectedUser } });
 
-    window.location.assign("/admin/users");
+    setTimeout(function () {
+      window.location.assign("/admin/users");
+    }, 1000);
   }
 
   // Removes admins from the deletion list
@@ -29,6 +33,13 @@ function DeleteUser() {
 
   return (
     <>
+      <ToastContainer style={{ position: "fixed", top: 0, right: 0 }}>
+        <Toast onClose={() => setShow(false)} show={show} delay={2000} autohide>
+          <ToastHeader className="justify-content-between me-2">
+            <Toast.Body>User successfully deleted!</Toast.Body>
+          </ToastHeader>
+        </Toast>
+      </ToastContainer>
       {!loading && (
         <div>
           <div className="dialog">
