@@ -10,7 +10,9 @@ function Header() {
       <div className="row w-100">
         <div
           className={
-            useWindowWidth() < 768 ? "nav-p" : "d-flex justify-content-between"
+            useWindowWidth() < 768
+              ? "nav-p d-flex justify-content-between"
+              : "d-flex justify-content-between"
           }
         >
           {/* place non-mobile in null spot */}
