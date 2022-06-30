@@ -18,8 +18,9 @@ function DeleteUser() {
   function handleSubmit(event) {
     event.preventDefault();
     if (!selectedUser) return;
-    setShow(true);
+
     deleteUser({ variables: { id: selectedUser } });
+    setShow(true);
 
     setTimeout(function () {
       window.location.assign("/admin/users");
