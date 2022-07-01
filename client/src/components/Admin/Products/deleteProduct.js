@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { ToastContainer, ToastHeader, Toast } from "react-bootstrap";
 import { useMutation } from "@apollo/client";
 import { DELETE_PRODUCT } from "../../../graphql/mutations";
 import { useProducts } from "../../../hooks/productHooks";
 
 function DeleteProduct() {
+  const [show, setShow] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState("");
   const [deleteProduct] = useMutation(DELETE_PRODUCT);
 
@@ -20,12 +22,22 @@ function DeleteProduct() {
     if (!selectedProduct) return;
 
     deleteProduct({ variables: { id: selectedProduct } });
+    setShow(true);
 
-    window.location.assign("/admin/products");
+    setTimeout(function () {
+      window.location.assign("/admin/products");
+    }, 1000);
   }
 
   return (
     <>
+      <ToastContainer style={{ position: "fixed", top: 0, right: 0 }}>
+        <Toast onClose={() => setShow(false)} show={show} delay={2000} autohide>
+          <ToastHeader className="justify-content-between me-2">
+            <Toast.Body>Product successfully deleted!</Toast.Body>
+          </ToastHeader>
+        </Toast>
+      </ToastContainer>
       {products && (
         <div>
           <div className="dialog">

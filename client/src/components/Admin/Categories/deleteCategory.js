@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { ToastContainer, ToastHeader, Toast } from "react-bootstrap";
 import { useMutation } from "@apollo/client";
 import { DELETE_CATEGORY } from "../../../graphql/mutations";
 import { useCategories } from "../../../hooks/categoryHooks";
 import { capitalizeFirstLetter } from "../../../utils/helpers";
 
 function DeleteCategory() {
+  const [show, setShow] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [deleteCategory] = useMutation(DELETE_CATEGORY);
   const categories = useCategories();
@@ -20,12 +22,22 @@ function DeleteCategory() {
     if (!selectedCategory) return;
 
     deleteCategory({ variables: { id: selectedCategory } });
+    setShow(true);
 
-    window.location.assign("/admin/categories");
+    setTimeout(function () {
+      window.location.assign("/admin/categories");
+    }, 1000);
   }
 
   return (
     <>
+      <ToastContainer style={{ position: "fixed", top: 0, right: 0 }}>
+        <Toast onClose={() => setShow(false)} show={show} delay={2000} autohide>
+          <ToastHeader className="justify-content-between me-2">
+            <Toast.Body>Category successfully deleted!</Toast.Body>
+          </ToastHeader>
+        </Toast>
+      </ToastContainer>
       {categories && (
         <div>
           <div className="dialog">

@@ -788,6 +788,10 @@ a:hover {
   text-decoration: none;
 }
 
+.mobile-login-link {
+  font-size: 17px;
+}
+
 .nav-p {
   margin: 0 0 0 auto !important;
 }

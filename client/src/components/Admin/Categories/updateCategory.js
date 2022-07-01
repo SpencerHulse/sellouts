@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
+import { ToastContainer, ToastHeader, Toast } from "react-bootstrap";
 import { useMutation } from "@apollo/client";
 import { UPDATE_CATEGORY } from "../../../graphql/mutations";
 import { useCategories } from "../../../hooks/categoryHooks";
 import { capitalizeFirstLetter } from "../../../utils/helpers";
 
 function UpdateCategory() {
+  const [show, setShow] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [formState, setFormState] = useState({ name: "" });
   const [updateCategory] = useMutation(UPDATE_CATEGORY);
@@ -42,12 +44,22 @@ function UpdateCategory() {
     if (!name || !selectedCategory) return;
 
     updateCategory({ variables: { id: selectedCategory, name: name } });
+    setShow(true);
 
-    window.location.assign("/admin/categories");
+    setTimeout(function () {
+      window.location.assign("/admin/categories");
+    }, 1000);
   }
 
   return (
     <>
+      <ToastContainer style={{ position: "fixed", top: 0, right: 0 }}>
+        <Toast onClose={() => setShow(false)} show={show} delay={2000} autohide>
+          <ToastHeader className="justify-content-between me-2">
+            <Toast.Body>Category successfully updated!</Toast.Body>
+          </ToastHeader>
+        </Toast>
+      </ToastContainer>
       {formState && (
         <div>
           <div className="dialog">
